@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bxwojlhmoc1wk"]
+
+[ext_resource type="Texture2D" uid="uid://b2f7l2ukdhix5" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0000.png" id="1_pjm3o"]
+[ext_resource type="Script" uid="uid://beor5kojpuvxf" path="res://materials_effects/attackeffect/attackeffect.gd" id="2_3uqey"]
+[ext_resource type="Texture2D" uid="uid://y3o26b0kvn7x" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0001.png" id="2_q2gom"]
+[ext_resource type="Texture2D" uid="uid://bv37uiqetxq5i" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0002.png" id="3_kgixf"]
+[ext_resource type="Texture2D" uid="uid://dsiqafhylkslk" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0003.png" id="4_se6pv"]
+[ext_resource type="Texture2D" uid="uid://bcs10dne475di" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0004.png" id="5_5phvs"]
+[ext_resource type="Texture2D" uid="uid://b8535c4jr15d4" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0005.png" id="6_mmrkh"]
+[ext_resource type="Texture2D" uid="uid://dvcdivdnvwmky" path="res://assets/Tiny Swords (Free Pack)/Particle FX/symmetrical_impact_001_small_yellow/frame0006.png" id="7_mgej0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry4va"]
+atlas = ExtResource("1_pjm3o")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nla1y"]
+atlas = ExtResource("2_q2gom")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l566"]
+atlas = ExtResource("3_kgixf")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiind"]
+atlas = ExtResource("4_se6pv")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bic6r"]
+atlas = ExtResource("5_5phvs")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rn52"]
+atlas = ExtResource("6_mmrkh")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daaqd"]
+atlas = ExtResource("7_mgej0")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eaqyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry4va")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nla1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l566")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiind")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bic6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rn52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daaqd")
+}],
+"loop": true,
+"name": &"sp",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6qigt"]
+radius = 81.58431
+
+[node name="attackeffect" type="AnimatedSprite2D" unique_id=42690220]
+self_modulate = Color(1, 1, 1, 0)
+sprite_frames = SubResource("SpriteFrames_eaqyw")
+animation = &"sp"
+frame = 3
+frame_progress = 0.732187
+script = ExtResource("2_3uqey")
+
+[node name="attackeffect" type="Area2D" parent="." unique_id=814578119 groups=["attackeffect"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackeffect" unique_id=1790316163]
+visible = false
+shape = SubResource("CircleShape2D_6qigt")
+metadata/_edit_lock_ = true
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
