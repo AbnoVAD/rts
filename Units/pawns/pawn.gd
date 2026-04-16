@@ -259,7 +259,7 @@ func use_current_tool():
 #-------------------------------------
 #func to use tool
 #-------------------------------------
-func repeat_tool_action(Tool:tool,collect_type:String,tool_name:String,times:int)->void:
+func repeat_tool_action(Tool:tool,collect_type:String,_tool_name:String,times:int)->void:
 	busy=true
 	can_use_tool=false
 	Current_state=state.USE
@@ -295,7 +295,7 @@ func spawn_tool_effect()->void:
 #-------------------------------------
 #func to pick nearby resources
 #-------------------------------------
-func collect_nearby_resources(resource_type:String)->void:
+func collect_nearby_resources(_resource_type:String)->void:
 	if detector_zone==null:
 		return
 	
