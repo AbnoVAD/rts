@@ -139,13 +139,13 @@ func _on_resource_entered(area:Area2D)->void:
 #Input UI
 #-------------------------------------
 func _input(event: InputEvent) ->void:
-	if not active or current_tool==state.DEAD:
+	if not active or Current_state==state.DEAD:
 		return
 
-		#toggle toolbox with input key "T"
-		if event.is_action_pressed("tools"):
-			toolbox_panel.visible=!toolbox_panel.visible
-			get_viewport().set_input_as_handled()
+	#toggle toolbox with input key "T"
+	if event.is_action_pressed("tools"):
+		toolbox_panel.visible=!toolbox_panel.visible
+		get_viewport().set_input_as_handled()
 
 #tool usage
 	if event.is_action_pressed("use"):
