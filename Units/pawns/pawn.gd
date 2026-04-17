@@ -167,8 +167,8 @@ func _physics_process(delta: float) -> void:
 	if active==true:
 		GlobalPlayer.active_player_position=global_position
 	if active and not busy:
-		if Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_LEFT) or \
-		Input.is_key_pressed(KEY_DOWN) or Input.is_key_pressed(KEY_UP):
+		if Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or \
+		Input.is_action_pressed("move_down") or Input.is_action_pressed("move_up"):
 			hide_toolbox_if_visible()
 			
 			
@@ -193,8 +193,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if active and not busy:
-		#handle_movement()
-		pass
+		handle_movement()
 	else:
 		velocity=Vector2.ZERO
 		if not busy:
@@ -214,13 +213,13 @@ func handle_movement():
 	
 	var input_vector:=Vector2.ZERO
 	
-	if Input.is_key_pressed(KEY_RIGHT):
+	if Input.is_action_pressed("move_right"):
 		input_vector.x+=1
-	if Input.is_key_pressed(KEY_LEFT):
+	if Input.is_action_pressed("move_left"):
 		input_vector.x-=1
-	if Input.is_key_pressed(KEY_DOWN):
+	if Input.is_action_pressed("move_down"):
 		input_vector.y+=1
-	if Input.is_key_pressed(KEY_UP):
+	if Input.is_action_pressed("move_up"):
 		input_vector.y-=1
 
 	if input_vector==Vector2.ZERO:
@@ -515,7 +514,7 @@ func activate_this_pawn():
 	toolbox_panel.show()
 	update_selection_indicator()
 
-func deactive():
+func deactivate():
 	active=false
 	set_process(false)
 	toolbox_panel.hide()
