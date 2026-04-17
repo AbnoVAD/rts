@@ -277,7 +277,7 @@ func use_current_tool():
 		tool.KNIFE:
 			repeat_tool_action(tool.KNIFE,"meat","knife",2)
 		tool.HAND:
-			repeat_tool_action(tool.HAMMER,"","hand",1)
+			repeat_tool_action(tool.HAND,"","hand",1)
 			
 
 #-------------------------------------
@@ -299,7 +299,7 @@ func repeat_tool_action(Tool:tool,collect_type:String,_tool_name:String,times:in
 
 	update_animation()
 	
-	await get_tree().create_timber(tool_cooldown).timeout
+	await get_tree().create_timer(tool_cooldown).timeout
 
 	#reset after using x times
 	can_use_tool=true
@@ -309,11 +309,9 @@ func repeat_tool_action(Tool:tool,collect_type:String,_tool_name:String,times:in
 
 func spawn_tool_effect()->void:
 	if current_tool==tool.HAMMER:
-		pass
-		#spawn_repari_effect()
+		spawn_repair_effect()
 	else:
-		pass
-		#spawn_attack_effect()
+		spawn_attack_effect()
 
 
 #-------------------------------------
