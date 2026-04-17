@@ -167,8 +167,7 @@ func _physics_process(delta: float) -> void:
 	if active==true:
 		GlobalPlayer.active_player_position=global_position
 	if active and not busy:
-		if Input.is_action_pressed("move_right") or Input.is_action_pressed("move_left") or \
-		Input.is_action_pressed("move_down") or Input.is_action_pressed("move_up"):
+		if _is_any_move_pressed():
 			hide_toolbox_if_visible()
 			
 			
@@ -213,13 +212,13 @@ func handle_movement():
 	
 	var input_vector:=Vector2.ZERO
 	
-	if Input.is_action_pressed("move_right"):
+	if _is_move_right_pressed():
 		input_vector.x+=1
-	if Input.is_action_pressed("move_left"):
+	if _is_move_left_pressed():
 		input_vector.x-=1
-	if Input.is_action_pressed("move_down"):
+	if _is_move_down_pressed():
 		input_vector.y+=1
-	if Input.is_action_pressed("move_up"):
+	if _is_move_up_pressed():
 		input_vector.y-=1
 
 	if input_vector==Vector2.ZERO:
@@ -233,6 +232,32 @@ func handle_movement():
 	velocity=last_input_dir*speed
 	Current_state=state.RUN
 	flip_sprite(last_input_dir)
+
+func _is_move_right_pressed() -> bool:
+	return Input.is_action_pressed(INPUT_RIGHT) or \
+		Input.is_physical_key_pressed(KEY_D) or \
+		Input.is_physical_key_pressed(KEY_RIGHT)
+
+func _is_move_left_pressed() -> bool:
+	return Input.is_action_pressed(INPUT_LEFT) or \
+		Input.is_physical_key_pressed(KEY_A) or \
+		Input.is_physical_key_pressed(KEY_LEFT)
+
+func _is_move_down_pressed() -> bool:
+	return Input.is_action_pressed(INPUT_DOWN) or \
+		Input.is_physical_key_pressed(KEY_S) or \
+		Input.is_physical_key_pressed(KEY_DOWN)
+
+func _is_move_up_pressed() -> bool:
+	return Input.is_action_pressed(INPUT_UP) or \
+		Input.is_physical_key_pressed(KEY_W) or \
+		Input.is_physical_key_pressed(KEY_UP)
+
+func _is_any_move_pressed() -> bool:
+	return _is_move_right_pressed() or \
+		_is_move_left_pressed() or \
+		_is_move_down_pressed() or \
+		_is_move_up_pressed()
 	
 #-------------------------------------
 #Use current tool by pressing "SPACE"
