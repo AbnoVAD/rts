@@ -990,6 +990,7 @@ position = Vector2(0, 24)
 stream = ExtResource("29_gpihi")
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="timeout" from="UseTimer" to="." method="_on_use_timer_timeout"]
 [connection signal="pressed" from="Control/hammer" to="." method="_on_hammer_pressed"]
 [connection signal="pressed" from="Control/pickaxe" to="." method="_on_pickaxe_pressed"]

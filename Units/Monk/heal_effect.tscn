@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://b75486720016f"]
+
+[ext_resource type="Texture2D" uid="uid://dxuswaj1e0wdf" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Monk/Heal_Effect.png" id="1_0m6ki"]
+[ext_resource type="Script" uid="uid://byxqvl1ipeiig" path="res://Units/Monk/heal_effect.gd" id="1_x1f43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1f43"]
+radius = 134.01492
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uc3vp"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rh7xf"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4ij2"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3u4m"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eow52"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkcy4"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doixn"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1riso"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3ejq"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(1536, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1sat"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(1728, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hw4pe"]
+atlas = ExtResource("1_0m6ki")
+region = Rect2(1920, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mxdyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uc3vp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rh7xf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4ij2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3u4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eow52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkcy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doixn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1riso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3ejq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1sat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hw4pe")
+}],
+"loop": true,
+"name": &"sp",
+"speed": 10.0
+}]
+
+[node name="heal effect" type="Area2D" unique_id=2139173446]
+script = ExtResource("1_x1f43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1625052875]
+visible = false
+shape = SubResource("CircleShape2D_x1f43")
+metadata/_edit_lock_ = true
+
+[node name="animations" type="AnimatedSprite2D" parent="." unique_id=1712157435 groups=["heal"]]
+sprite_frames = SubResource("SpriteFrames_mxdyy")
+animation = &"sp"
+autoplay = "sp"
+
+[connection signal="animation_finished" from="animations" to="." method="_on_animations_animation_finished"]

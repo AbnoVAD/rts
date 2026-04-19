@@ -996,3 +996,4 @@ stream = ExtResource("29_luo64")
 [connection signal="pressed" from="Control/axe" to="." method="_on_axe_pressed"]
 [connection signal="pressed" from="Control/knife" to="." method="_on_knife_pressed"]
 [connection signal="pressed" from="Control/hand" to="." method="_on_hand_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
