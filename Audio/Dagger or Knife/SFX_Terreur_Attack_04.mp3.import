@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://db2fs1qi5amyb"
+path="res://.godot/imported/SFX_Terreur_Attack_04.mp3-bb18944736a74b24481c18c6d22c53e6.mp3str"
+
+[deps]
+
+source_file="res://Audio/Dagger or Knife/SFX_Terreur_Attack_04.mp3"
+dest_files=["res://.godot/imported/SFX_Terreur_Attack_04.mp3-bb18944736a74b24481c18c6d22c53e6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

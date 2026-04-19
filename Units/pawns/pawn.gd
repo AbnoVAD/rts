@@ -188,7 +188,7 @@ func _physics_process(delta: float) -> void:
 		velocity=knockback_velocity
 		knockback_velocity=knockback_velocity.move_toward(Vector2.ZERO,delta*900)
 		move_and_slide()
-		#update_animation()
+		update_animation()
 		return
 
 	if active and not busy:
@@ -199,10 +199,10 @@ func _physics_process(delta: float) -> void:
 			Current_state=state.IDLE
 
 	move_and_slide()
-	#update_animation()
+	update_animation()
 	
 #-------------------------------------
-#Movement logic manual input (arrow key)
+#Movement logic manual input (arrow key/WASD)
 #-------------------------------------
 func handle_movement():
 	if action_lock or is_guarding:
@@ -226,8 +226,6 @@ func handle_movement():
 		Current_state=state.IDLE
 		return
 
-
-# all the pawn movement comes from this block
 	last_input_dir=input_vector.normalized()
 	velocity=last_input_dir*speed
 	Current_state=state.RUN
@@ -277,7 +275,7 @@ func use_current_tool():
 		tool.KNIFE:
 			repeat_tool_action(tool.KNIFE,"meat","knife",2)
 		tool.HAND:
-			repeat_tool_action(tool.HAMMER,"","hand",1)
+			repeat_tool_action(tool.HAND,"","hand",1)
 			
 
 #-------------------------------------
@@ -299,7 +297,7 @@ func repeat_tool_action(Tool:tool,collect_type:String,_tool_name:String,times:in
 
 	update_animation()
 	
-	await get_tree().create_timber(tool_cooldown).timeout
+	await get_tree().create_timer(tool_cooldown).timeout
 
 	#reset after using x times
 	can_use_tool=true
@@ -309,12 +307,9 @@ func repeat_tool_action(Tool:tool,collect_type:String,_tool_name:String,times:in
 
 func spawn_tool_effect()->void:
 	if current_tool==tool.HAMMER:
-		pass
-		#spawn_repari_effect()
+		spawn_repair_effect()
 	else:
-		pass
-		#spawn_attack_effect()
-
+		spawn_attack_effect()
 
 #-------------------------------------
 #func to pick nearby resources

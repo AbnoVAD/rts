@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://doxpy7koavef6"
+path="res://.godot/imported/Sword Blocked 3.wav-7b2341ee28603be44e44dfd134ddbbc6.sample"
+
+[deps]
+
+source_file="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Blocked 3.wav"
+dest_files=["res://.godot/imported/Sword Blocked 3.wav-7b2341ee28603be44e44dfd134ddbbc6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhbxvr2bg8apk"
+path="res://.godot/imported/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3-48fdea0ecc3397625f4fb23c431eda91.mp3str"
+
+[deps]
+
+source_file="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3"
+dest_files=["res://.godot/imported/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3-48fdea0ecc3397625f4fb23c431eda91.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

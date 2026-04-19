@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bw56cqnv2vy44"
+path="res://.godot/imported/Bow Blocked 2.wav-9f67d294f7eb637ef0175f50b0812cf0.sample"
+
+[deps]
+
+source_file="res://Audio/Attacks/Bow Attacks Hits and Blocks/Bow Blocked 2.wav"
+dest_files=["res://.godot/imported/Bow Blocked 2.wav-9f67d294f7eb637ef0175f50b0812cf0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
