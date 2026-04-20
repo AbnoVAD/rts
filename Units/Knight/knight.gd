@@ -403,12 +403,12 @@ func take_damage(amount:int,dir:Vector2):
 			shield_audio.play()
 		update_bars()
 
-#apply kockback
-	velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
-	update_facing(-dir)
-	move_and_slide()
+#apply knockback
+		velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
+		update_facing(-dir)
+		move_and_slide()
 	
-	reset_random_shield_timer()
+		reset_random_shield_timer()
 	
 	if guard_stamina<=0:
 		guard_stamina=0
