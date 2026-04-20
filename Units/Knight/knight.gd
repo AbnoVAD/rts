@@ -200,7 +200,7 @@ func _physics_process(delta: float) -> void:
 	if random_shield_enabled and not guard_locked and state!=State.GUARD and state !=State.DEAD:
 		random_shield_timer+=delta
 		if random_shield_timer>=next_shield_time:
-			try_active_random_shield()
+			try_activate_random_shield()
 
 #auto hide UI
 	if ui_visible:
@@ -237,7 +237,7 @@ func state_idle():
 	animation.play("idle")
 	acquire_target()
 	if target:
-		start_attack
+		start_attack()
 
 func state_run():
 	animation.play("run")
@@ -413,7 +413,7 @@ func take_damage(amount:int,dir:Vector2):
 	if guard_stamina<=0:
 		guard_stamina=0
 		guard_timer=GUARD_DURATION
-	return
+		return
 
 #------------------------------------------
 #Low HP guard sequence faster
@@ -449,7 +449,7 @@ func start_guard_cooldown():
 #------------------------------------------
 #Attack/Effects
 #------------------------------------------
-func apply_adamage(enemy:Node2D):
+func apply_damage(enemy:Node2D):
 	if enemy.has_method("take_damage"):
 		enemy.take_damage(attack_damage,enemy.global_position-global_position)
 func apply_damage_building(enemy:Node2D):
@@ -520,8 +520,9 @@ func die():
 	hitbox.monitoring=false
 	set_selected(false)
 	
-	var skull:=preload("res://materials_effects/skull/skull.tscn")
-	get_parent().add_child("skull")
+	var skull_scene := preload("res://materials_effects/skull/skull.tscn")
+	var skull := skull_scene.instantiate()
+	get_parent().add_child(skull)
 	skull.global_position=global_position
 	skull.scale=Vector2(0.5,0.5)
 

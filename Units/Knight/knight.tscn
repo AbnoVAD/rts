@@ -291,13 +291,6 @@ corner_detail = 20
 
 [node name="knight" type="CharacterBody2D" unique_id=859446535 groups=["block_building", "player"]]
 script = ExtResource("1_ojxya")
-max_life = null
-life = null
-max_guard = null
-guard_stamina = null
-speed = null
-attack_damage = null
-attack_cooldown = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=158015088]
 sprite_frames = SubResource("SpriteFrames_3gm20")
