@@ -224,7 +224,7 @@ func _physics_process(delta: float) -> void:
 		State.GUARD:
 			state_guard(delta)
 func try_activate_random_shield():
-	if action_locked or guard_cooldown or guard<20:
+	if action_locked or guard_cooldown or guard_stamina<20:
 		return
 	if randf()<0.7:
 		start_guard()
@@ -297,7 +297,7 @@ func attack_loop()-> void:
 #cooldown
 		await get_tree().create_timer(attack_cooldown).timeout
 #attack finished
-	reset combat()
+	reset_combat()
 	change_state(State.IDLE)
 	attack_effect_active=false
 	
@@ -382,7 +382,7 @@ func _on_nav_velocity(v:Vector2):
 
 #separation
 	final_velocity+=apply_ally_separation()
-	velocity=final_velocity.limit_length(spped*1.2)
+	velocity=final_velocity.limit_length(speed*1.2)
 	move_and_slide()
 
 #------------------------------------------
@@ -418,7 +418,7 @@ func take_damage(amount:int,dir:Vector2):
 #------------------------------------------
 #Low HP guard sequence faster
 #------------------------------------------
-	if life <=max_life*LOW_HP_SHIELD_THRESHOLD\
+	if life <=max_life * LOW_HP_SHIELD_THRESHOLD\
 	and not action_locked\
 	and not guard_cooldown\
 	and guard_stamina>20:
@@ -436,7 +436,7 @@ func take_damage(amount:int,dir:Vector2):
 	move_and_slide()
 	
 	if random_shield_enabled:
-		reeset_random_shield_timer()
+		reset_random_shield_timer()
 	
 	if life<=0:
 		die()
@@ -445,3 +445,165 @@ func start_guard_cooldown():
 	guard_cooldown=true
 	await get_tree().create_timer(GUARD_COOLDOWN_TIME).timeout
 	guard_cooldown=false
+
+#------------------------------------------
+#Attack/Effects
+#------------------------------------------
+func apply_adamage(enemy:Node2D):
+	if enemy.has_method("take_damage"):
+		enemy.take_damage(attack_damage,enemy.global_position-global_position)
+func apply_damage_building(enemy:Node2D):
+	if enemy.has_method("take_damage"):
+		enemy.take_damage(attack_damage)
+
+func pick_attack_animation()->String:
+	return "attack1" if randf()<0.5 else "attack2" #sansa de 50% de a folosi una dintre cele doua animatii
+
+#------------------------------------------
+#Reset combat
+#------------------------------------------
+func reset_combat():
+	action_locked=false
+	target=null
+	guard_timer=0.0
+	resume_navigation()
+
+#visual effects
+func update_facing(dir:Vector2):
+	if abs(dir.x)>0.01:
+		animation.flip_h=dir.x<0
+
+func flash_red():
+	animation.modulate=Color(1,0.2,0.2)
+	await get_tree().create_timer(0.1).timeout
+	animation.modulate=Color.WHITE
+
+func update_bars():
+	hp_bar.value=life
+	shieldbar.value=guard_stamina
+
+#------------------------------------------
+#Selection
+#------------------------------------------
+func set_selected(v:bool):
+	selected=v
+	select_indicator.visible=v
+
+func _on_button_pressed() -> void:
+	set_selected(!selected)
+	click_audio.play()
+	if selected:
+		manual_mode=true
+
+#------------------------------------------
+#Hitbox
+#------------------------------------------
+func _on_hitbox_area_entered(area:Area2D) -> void:
+	if area.is_in_group("explo"):
+		take_damage(30,area.global_position-global_position)
+		if not hit_audio.playing:
+			hit_audio.play()
+	if area.is_in_group("heal"):
+		life=max_life
+		show_combat_ui()
+
+#------------------------------------------
+#Death
+#------------------------------------------
+signal died(knight:Node2D)
+func die():
+	emit_signal("died",self)
+	stop_navigation()
+	death_audio.play()	
+
+	shape.disabled=true
+	hitbox.monitoring=false
+	set_selected(false)
+	
+	var skull:=preload("res://materials_effects/skull/skull.tscn")
+	get_parent().add_child("skull")
+	skull.global_position=global_position
+	skull.scale=Vector2(0.5,0.5)
+
+	if not death_audio.playing:
+		death_audio.play()
+
+	var tween:=create_tween()
+	tween.tween_property(self,"modulate.a",0.0,1.0)
+	await tween.finished
+	queue_free()
+
+func can_use_navigation()->bool:
+	return(
+		nav!=null and 
+		is_instance_valid(nav) and 
+		state==State.RUN
+	)
+
+func check_stuck(delta):
+	var move_dist:=global_position.distance_to(last_position)
+	
+	if move_dist<MIN_MOVE_DIST and state==State.RUN:
+		stuck_timer+=delta
+	else:
+		stuck_timer=0.0
+	last_position=global_position
+	if stuck_timer>=STUCK_TIME:
+		resolve_stuck()
+		stuck_timer=0.0
+
+func resolve_stuck():
+	var axis:=Vector2.ZERO
+	if randf()<0.5:
+		axis.x=-1 if randf()<0.5 else 1
+	else:
+		axis.y=-1 if randf()<0.5 else 1
+	
+	velocity=axis*STUCK_PULSE_FORCE
+	move_and_slide()
+	nav.target_position+=axis * randf_range(24,48)
+
+var movement_priority:=false
+func _on_detector_zone_body_entered(body: Node2D) -> void:
+	if movement_priority or action_locked or state==State.DEAD:
+		return
+	if body.is_in_group("goblin") or body.is_in_group("goblinbuildings"):
+		target=body
+		manual_mode=false
+
+#start chasing the body
+		nav.target_position=body.global_position
+		change_state(State.RUN)
+
+#------------------------------------------
+#check for life below 80% before healing
+#------------------------------------------
+func get_health_percentage()->float:
+	return float(life)/float(max_life)
+
+func get_health()->int:
+	return life
+
+func get_max_health()->int:
+	return max_life
+
+func apply_ally_separation() ->Vector2:
+	var push:=Vector2.ZERO
+	for body in detector_zone.get_overlapping_bodies():
+		if body == self:
+			continue
+		if body.is_in_group("selectable"):
+			var diff:=global_position-body.global_position
+			var dist:=diff.length()
+			if dist>0 and dist<ALLY_PUSH_RADIUS:
+				push+=diff.normalized()*(ALLY_PUSH_FORCE/max(dist,4))
+	return push
+
+func show_combat_ui():
+	ui_visible=true
+	ui_timer=0.0
+	hp_bar.visible=true
+	shieldbar.visible=true
+	
+	hp_bar.modulate.a=1.0
+	shieldbar.modulate.a=1.0

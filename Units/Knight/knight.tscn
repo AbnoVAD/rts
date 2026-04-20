@@ -399,3 +399,6 @@ stream = ExtResource("7_ojxya")
 [node name="sword_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1738043621]
 
 [node name="shield_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2138918696]
+
+[connection signal="body_entered" from="detector zone" to="." method="_on_detector_zone_body_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
