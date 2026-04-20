@@ -237,7 +237,7 @@ func state_idle():
 	animation.play("idle")
 	acquire_target()
 	if target:
-		start_attack
+		start_attack()
 
 func state_run():
 	animation.play("run")
@@ -404,16 +404,16 @@ func take_damage(amount:int,dir:Vector2):
 		update_bars()
 
 #apply kockback
-	velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
-	update_facing(-dir)
-	move_and_slide()
-	
-	reset_random_shield_timer()
-	
-	if guard_stamina<=0:
-		guard_stamina=0
-		guard_timer=GUARD_DURATION
-	return
+		velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
+		update_facing(-dir)
+		move_and_slide()
+		
+		reset_random_shield_timer()
+		
+		if guard_stamina<=0:
+			guard_stamina=0
+			guard_timer=GUARD_DURATION
+		return
 
 #------------------------------------------
 #Low HP guard sequence faster
