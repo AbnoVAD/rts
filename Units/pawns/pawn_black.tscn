@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://b3f3wtneq0aiw" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Tools/Tool_01.png" id="15_c7spy"]
 [ext_resource type="Texture2D" uid="uid://0yqadh7qei0d" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Papers/RegularPaper.png" id="15_mo5i6"]
 [ext_resource type="Texture2D" uid="uid://ckb62qvl6gh4w" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Tools/Tool_04.png" id="16_q1vb2"]
+[ext_resource type="StyleBox" uid="uid://bbe05boqas5yh" path="res://Units/Monk/activation_buttons.tres" id="16_wqogo"]
 [ext_resource type="Texture2D" uid="uid://qb5y2m3g1s7w" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Tools/Tool_02.png" id="17_mk2cj"]
 [ext_resource type="Texture2D" uid="uid://brglh012lkno3" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Tools/Tool_03.png" id="18_wq4hv"]
 [ext_resource type="Texture2D" uid="uid://ccht0nguij18h" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Cursors/Cursor_02.png" id="19_6lw2g"]
@@ -28,7 +29,6 @@
 [ext_resource type="AudioStream" uid="uid://dhwn0237h8t0d" path="res://Audio/Equip/SFX_Equip_02.wav" id="26_br2l2"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="27_1m165"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="28_qkg1d"]
-[ext_resource type="AudioStream" uid="uid://bbguh1qxri7bx" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Attack 1.wav" id="29_gpihi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mph1"]
 atlas = ExtResource("1_jjxj0")
@@ -841,6 +841,12 @@ offset_left = -24.0
 offset_top = -40.0
 offset_right = 24.0
 offset_bottom = 32.0
+theme_override_styles/normal = ExtResource("16_wqogo")
+theme_override_styles/pressed = ExtResource("16_wqogo")
+theme_override_styles/hover = ExtResource("16_wqogo")
+theme_override_styles/hover_pressed = ExtResource("16_wqogo")
+theme_override_styles/disabled = ExtResource("16_wqogo")
+theme_override_styles/focus = ExtResource("16_wqogo")
 flat = true
 metadata/_edit_lock_ = true
 
@@ -987,7 +993,6 @@ stream = ExtResource("28_qkg1d")
 
 [node name="hit_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1674699472]
 position = Vector2(0, 24)
-stream = ExtResource("29_gpihi")
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

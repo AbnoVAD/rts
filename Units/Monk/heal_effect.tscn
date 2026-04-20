@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://byxqvl1ipeiig" path="res://Units/Monk/heal_effect.gd" id="1_x1f43"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x1f43"]
-radius = 134.01492
+radius = 287.00696
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uc3vp"]
 atlas = ExtResource("1_0m6ki")
@@ -86,12 +86,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hw4pe")
 }],
-"loop": true,
+"loop": false,
 "name": &"sp",
 "speed": 10.0
 }]
 
-[node name="heal effect" type="Area2D" unique_id=2139173446]
+[node name="heal effect" type="Area2D" unique_id=2139173446 groups=["heal"]]
 script = ExtResource("1_x1f43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1625052875]
