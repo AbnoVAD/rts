@@ -121,6 +121,7 @@ func _ready() -> void:
 	z_index=4
 	scale=Vector2(0.7,0.7)
 	add_to_group("selectable")
+	button.focus_mode=Control.FOCUS_NONE
 	hp_bar.visible=false
 	shieldbar.visible=false
 	
@@ -188,7 +189,6 @@ func issue_move(pos:Vector2):
 	)
 	nav.target_position=pos+offset
 	change_state(State.RUN)
-	set_selected(false)
 
 #-------------------------------------------
 #Process
@@ -196,8 +196,8 @@ func issue_move(pos:Vector2):
 func _physics_process(delta: float) -> void:
 	if state==State.ATTACK and is_instance_valid(target):
 		update_facing((target.global_position-global_position).normalized())
-		if state==State.RUN:
-			check_stuck(delta)
+	if state==State.RUN:
+		check_stuck(delta)
 
 #update random shield
 	if random_shield_enabled and not guard_locked and state!=State.GUARD and state !=State.DEAD:
@@ -359,7 +359,7 @@ func face_closest_goblin():
 				dist=d
 				closest=body
 	if closest:
-		update_facing((closest.global_position).normalized())
+		update_facing((closest.global_position-global_position).normalized())
 
 #------------------------------------------
 #Navigation
@@ -412,10 +412,9 @@ func take_damage(amount:int,dir:Vector2):
 		move_and_slide()
 	
 		reset_random_shield_timer()
-	
-	if guard_stamina<=0:
-		guard_stamina=0
-		guard_timer=GUARD_DURATION
+		if guard_stamina<=0:
+			guard_stamina=0
+			guard_timer=GUARD_DURATION
 		return
 
 #------------------------------------------
