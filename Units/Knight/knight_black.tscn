@@ -372,6 +372,7 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=823854988]
 zoom = Vector2(0.7, 0.7)
+position_smoothing_enabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1589705101]
 
@@ -379,7 +380,7 @@ zoom = Vector2(0.7, 0.7)
 visible = false
 shape = SubResource("CircleShape2D_umg22")
 target_position = Vector2(0, 15)
-max_results = 40
+max_results = 5
 collision_mask = 31
 
 [node name="sound fx" type="Node2D" parent="." unique_id=1164120243]

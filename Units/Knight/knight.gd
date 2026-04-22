@@ -92,7 +92,7 @@ const TARGET_LOCK_DURATION:=0.5
 #Control
 #-------------------------------------------
 var selected:=false
-var stop_distance:=5
+var stop_distance:=10
 
 #-------------------------------------------
 #Combat
