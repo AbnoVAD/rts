@@ -418,7 +418,8 @@ func take_damage(amount:int,dir:Vector2):
 #------------------------------------------
 #Low HP guard sequence faster
 #------------------------------------------
-	if life <=max_life * LOW_HP_SHIELD_THRESHOLD\
+	@warning_ignore("unreachable_code")
+	if life <= max_life * LOW_HP_SHIELD_THRESHOLD\
 	and not action_locked\
 	and not guard_cooldown\
 	and guard_stamina>20:

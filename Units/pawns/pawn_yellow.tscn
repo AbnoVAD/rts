@@ -29,7 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://dhwn0237h8t0d" path="res://Audio/Equip/SFX_Equip_02.wav" id="26_1q815"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="27_k7320"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="28_g0lva"]
-[ext_resource type="AudioStream" uid="uid://bbguh1qxri7bx" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Attack 1.wav" id="29_43x3x"]
+[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="30_8m5wc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_me8ev"]
 atlas = ExtResource("2_akrv4")
@@ -994,7 +994,7 @@ stream = ExtResource("28_g0lva")
 
 [node name="hit_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1674699472]
 position = Vector2(0, 24)
-stream = ExtResource("29_43x3x")
+stream = ExtResource("30_8m5wc")
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

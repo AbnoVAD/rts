@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpo3sll31n48k"
+path="res://.godot/imported/Shield Bloack Staff.mp3-81c324d609b4f4a4ff32ba4eda1ae927.mp3str"
+
+[deps]
+
+source_file="res://Audio/Shield/Shield Bloack Staff.mp3"
+dest_files=["res://.godot/imported/Shield Bloack Staff.mp3-81c324d609b4f4a4ff32ba4eda1ae927.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

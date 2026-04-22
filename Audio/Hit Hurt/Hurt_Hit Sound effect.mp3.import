@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dn3qi1c78n6rl"
+path="res://.godot/imported/Hurt_Hit Sound effect.mp3-f273338acb9f1854b1901200f7e7dca5.mp3str"
+
+[deps]
+
+source_file="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3"
+dest_files=["res://.godot/imported/Hurt_Hit Sound effect.mp3-f273338acb9f1854b1901200f7e7dca5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

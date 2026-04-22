@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dkmh8es4pa16p" path="res://assets/Tiny Swords (Free Pack)/Units/Blue Units/Monk/Run.png" id="4_t3p2f"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="5_bflb3"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="6_gxeku"]
-[ext_resource type="AudioStream" uid="uid://bbguh1qxri7bx" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Attack 1.wav" id="7_dvtnw"]
+[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="8_dfx4p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bflb3"]
 atlas = ExtResource("2_dfx4p")
@@ -303,7 +303,7 @@ stream = ExtResource("6_gxeku")
 
 [node name="hit_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1674699472]
 position = Vector2(0, 24)
-stream = ExtResource("7_dvtnw")
+stream = ExtResource("8_dfx4p")
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
