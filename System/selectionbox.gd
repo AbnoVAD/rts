@@ -4,7 +4,7 @@ var dragging:=false
 var drag_start:=Vector2.ZERO
 var drag_end:=Vector2.ZERO
 
-@onready var camera_2d: Camera2D = $Camera2D
+@onready var camera: Camera2D = $Camera2D
 
 var selection_rect:=Rect2()
 #use to call a camera shake function from anywhere in the units scripts
@@ -41,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #Drag
 #------------------------------------------
 func start_drag():
-	dragging=false
+	dragging=true
 	drag_start=get_global_mouse_position()
 	drag_end=drag_start
 func end_drag():
@@ -66,7 +66,7 @@ func _draw():
 		return
 	var color=Color.WHITE
 	draw_rect(selection_rect,color,false,2)
-	draw_rect(selection,Color(color.r,color.g,color.b,0.15),true)
+	draw_rect(selection_rect,Color(color.r,color.g,color.b,0.15),true)
 
 #------------------------------------------
 #GET color from the player menu
@@ -90,9 +90,9 @@ func _draw():
 #Unit selection box
 #------------------------------------------
 func select_units():
-	for unit in get_tree().get_first_node_in_group("selectable"):
+	for unit in get_tree().get_nodes_in_group("selectable"):
 		unit.set_selected(false)
-	for unit in get_tree().get_first_node_in_group("selectable"):
+	for unit in get_tree().get_nodes_in_group("selectable"):
 		if selection_rect.has_point(unit.global_position):
 			unit.set_selected(true)
 
