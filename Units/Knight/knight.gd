@@ -130,7 +130,8 @@ func _ready() -> void:
 	
 	select_indicator.visible=false
 	
-	button.pressed.connect(_on_button_pressed)
+	if not button.pressed.is_connected(_on_button_pressed):
+		button.pressed.connect(_on_button_pressed)
 	hitbox.area_zone.body_entered.connect(_on_hitbox_area_entered)
 	
 	nav.avoidance_enabled=true
