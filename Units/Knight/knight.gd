@@ -130,12 +130,15 @@ func _ready() -> void:
 	
 	select_indicator.visible=false
 	
-	button.pressed.connect(_on_button_pressed)
-	hitbox.area_zone.body_entered.connect(_on_hitbox_area_entered)
+	if not button.pressed.is_connected(_on_button_pressed):
+		button.pressed.connect(_on_button_pressed)
+	if not hitbox.area_zone.body_entered.is_connected(_on_hitbox_area_entered):
+		hitbox.area_zone.body_entered.connect(_on_hitbox_area_entered)
 	
 	nav.avoidance_enabled=true
 	nav.max_speed=speed
-	nav.velocity_computed.connect(_on_nav_velocity)
+	if not nav.velocity_computed.is_connected(_on_nav_velocity):
+		nav.velocity_computed.connect(_on_nav_velocity)
 	last_position=global_position
 
 #avoidance prediction
