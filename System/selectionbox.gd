@@ -90,9 +90,9 @@ func _draw():
 #Unit selection box
 #------------------------------------------
 func select_units():
-	for unit in get_tree().get_first_node_in_group("selectable"):
+	for unit in get_tree().get_nodes_in_group("selectable"):
 		unit.set_selected(false)
-	for unit in get_tree().get_first_node_in_group("selectable"):
+	for unit in get_tree().get_nodes_in_group("selectable"):
 		if selection_rect.has_point(unit.global_position):
 			unit.set_selected(true)
 
