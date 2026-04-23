@@ -172,7 +172,7 @@ func change_state(new_state:State)->void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not selected or state==State.DEAD:
 		return
-	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.is_pressed():
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT and event.is_pressed():
 		issue_move(get_global_mouse_position())
 
 func issue_move(pos:Vector2):

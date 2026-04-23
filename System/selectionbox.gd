@@ -26,16 +26,15 @@ func _physics_process(delta: float) -> void:
 #Inputs
 #------------------------------------------
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_RIGHT:
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			start_drag()
 		else:
 			end_drag()
-
-		if event is InputEventMouseMotion and dragging:
-			drag_end=get_global_mouse_position()
-			update_selection_rect()
-			queue_redraw()
+	elif event is InputEventMouseMotion and dragging:
+		drag_end=get_global_mouse_position()
+		update_selection_rect()
+		queue_redraw()
 
 #------------------------------------------
 #Drag
