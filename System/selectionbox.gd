@@ -31,11 +31,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			start_drag()
 		else:
 			end_drag()
-
-		if event is InputEventMouseMotion and dragging:
-			drag_end=get_global_mouse_position()
-			update_selection_rect()
-			queue_redraw()
+	elif event is InputEventMouseMotion and dragging:
+		drag_end=get_global_mouse_position()
+		update_selection_rect()
+		queue_redraw()
 
 #------------------------------------------
 #Drag
