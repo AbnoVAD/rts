@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cmm72vhq55sjy"
+path="res://.godot/imported/Bow Put Away 1.wav-958604bdc7fd1715c67ddbb2b68646a5.sample"
+
+[deps]
+
+source_file="res://Audio/Bow/Bow Put Away 1.wav"
+dest_files=["res://.godot/imported/Bow Put Away 1.wav-958604bdc7fd1715c67ddbb2b68646a5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

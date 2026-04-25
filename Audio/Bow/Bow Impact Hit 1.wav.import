@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c3u65ei1ws5f3"
+path="res://.godot/imported/Bow Impact Hit 1.wav-8e3c3078d6dcbb4090ccc8df5f333aef.sample"
+
+[deps]
+
+source_file="res://Audio/Bow/Bow Impact Hit 1.wav"
+dest_files=["res://.godot/imported/Bow Impact Hit 1.wav-8e3c3078d6dcbb4090ccc8df5f333aef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

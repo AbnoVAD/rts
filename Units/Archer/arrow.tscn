@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://t6s8g30tfeww"]
+
+[ext_resource type="Script" uid="uid://ja6m2p3xg5m8" path="res://Units/Archer/arrow.gd" id="1_c8cgl"]
+[ext_resource type="Texture2D" uid="uid://dhburtncp3yvq" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Arrow.png" id="1_uifa5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c8cgl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uifa5")
+}],
+"loop": true,
+"name": &"sp",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uifa5")
+}],
+"loop": true,
+"name": &"stuck",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdavp"]
+size = Vector2(26, 8)
+
+[node name="arrow" type="Area2D" unique_id=1818434497]
+script = ExtResource("1_c8cgl")
+stick_groups = null
+lifespan = null
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=350231132 groups=["arrow"]]
+sprite_frames = SubResource("SpriteFrames_c8cgl")
+animation = &"sp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1194358986]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_jdavp")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

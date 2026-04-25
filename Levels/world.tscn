@@ -17,11 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bjxwqwcicn4pr" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Bushes/Bushe4.png" id="15_dy3rw"]
 [ext_resource type="Texture2D" uid="uid://cub3hbpqqt58j" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner_Slots.png" id="16_c23wl"]
 [ext_resource type="Script" uid="uid://cfka4tff3iuy" path="res://Tiles/collider.gd" id="17_5stjl"]
-[ext_resource type="PackedScene" uid="uid://dx3adtjvsukqk" path="res://Units/Knight/knight_black.tscn" id="18_ikoig"]
-[ext_resource type="PackedScene" uid="uid://crqr76d4hnvha" path="res://Units/Knight/knight_blue.tscn" id="19_p3ug2"]
-[ext_resource type="PackedScene" uid="uid://mtgit71osg0t" path="res://Units/Knight/knight_purple.tscn" id="20_8mbvr"]
-[ext_resource type="PackedScene" uid="uid://ce0w6k5yn7v1f" path="res://Units/Knight/knight_red.tscn" id="21_pr8ms"]
-[ext_resource type="PackedScene" uid="uid://mkdyjmfdfj55" path="res://Units/Knight/knight_yellow.tscn" id="22_6m1pe"]
+[ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/pawns/pawn_black.tscn" id="18_pr8ms"]
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
@@ -873,20 +869,8 @@ tile_map_data = PackedByteArray("AAADACgAAAAEAAQAAAADACkAAAAEAAQAAAADACcAAAAEAAQ
 tile_set = SubResource("TileSet_2u3nc")
 script = ExtResource("17_5stjl")
 
-[node name="knight" parent="." unique_id=859446535 instance=ExtResource("18_ikoig")]
-position = Vector2(656, 664)
-
-[node name="knight2" parent="." unique_id=1525995291 instance=ExtResource("19_p3ug2")]
-position = Vector2(608, 784)
-
-[node name="knight3" parent="." unique_id=11814346 instance=ExtResource("20_8mbvr")]
-position = Vector2(400, 744)
-
-[node name="knight4" parent="." unique_id=658690014 instance=ExtResource("21_pr8ms")]
-position = Vector2(416, 856)
-
-[node name="knight5" parent="." unique_id=2108441131 instance=ExtResource("22_6m1pe")]
-position = Vector2(856, 752)
+[node name="pawn" parent="tiles" unique_id=505167057 instance=ExtResource("18_pr8ms")]
+position = Vector2(504, 680)
 
 [node name="selectionbox" type="Node2D" parent="." unique_id=427420427]
 script = ExtResource("23_8mbvr")
