@@ -374,8 +374,8 @@ func spawn_archer() -> void:
 	spawned_archer.global_position=marker_2d.global_position
 
 var last_collision_state:bool=false
-func update_collision_logic();
-var new_disabled=(state==STATE_CONSTRUCT) or (state==STATE_DESTROYED) or is_moving:
+func update_collision_logic():
+	var new_disabled=(state==STATE_CONSTRUCT) or (state==STATE_DESTROYED) or is_moving
 	if new_disabled!=collision_disabled:
 		collision_disabled=new_disabled
 		if collision:

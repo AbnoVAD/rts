@@ -105,7 +105,7 @@ func _physics_process(delta: float) -> void:
 		_pick_best_target()
 		return
 	
-	update_facing
+	update_facing()
 	
 	tracking_timer-=delta
 	cooldown_timer-=delta
@@ -124,7 +124,7 @@ func shoot()->void:
 
 	animation.play("shoot")
 	
-	var arrow:Node2D=arrow.scene.instantiate()
+	var arrow:Node2D=arrow_scene.instantiate()
 	get_parent().add_child(arrow)
 	arrow.global_position=marker_2d.global_position
 	arrow.z_index=5
