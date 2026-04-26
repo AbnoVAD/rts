@@ -181,7 +181,7 @@ func _reset_after_movement():
 		drop_fx.play()
 
 	placement_checker.monitoring=false
-	collision.disable=false
+	shape.disable=false
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
@@ -225,7 +225,7 @@ func enter_construct_state() -> void:
 	if not construct_fx.playing:
 		construct_fx.play()
 		scale=Vector2.ZERO
-		collision.disabled=true
+		shape.disabled=true
 		update_collision_logic()
 
 	tween=create_tween()
@@ -245,7 +245,7 @@ func enter_idle_state() -> void:
 	animation.play("idle")
 	construct_fx.stop()
 	scale=FINAL_SCALE
-	collision.disabled=false
+	shape.disabled=false
 	spawn_archer()
 
 signal died(building:Node2D)
@@ -308,14 +308,14 @@ func start_repair() -> void:
 #to show repair
 	flash_green_once()
 
-	state==STATE_CONSTRUCT
+	state=STATE_CONSTRUCT
 	animation.play("construct")
 	if not construct_fx.playing:
 		construct_fx.play()
 
-	repair_time=Timer.new()
-	repair_time.wait_time=repair_time
-	repair_time.one_shot=true
+	repair_timer=Timer.new()
+	repair_timer.wait_time=repair_time
+	repair_timer.one_shot=true
 	add_child(repair_timer)
 	repair_timer.timeout.connect(finish_repair)
 	repair_timer.start()	
@@ -332,7 +332,7 @@ func finish_repair() -> void:
 	
 	enter_idle_state()
 	
-	collision.disabled=false
+	shape.disabled=false
 	
 	add_to_group("building")
 	add_to_group("block_building")
@@ -378,5 +378,5 @@ func update_collision_logic():
 	var new_disabled=(state==STATE_CONSTRUCT) or (state==STATE_DESTROYED) or is_moving
 	if new_disabled!=collision_disabled:
 		collision_disabled=new_disabled
-		if collision:
-			collision.disabled=collision_disabled
+		if shape:
+			shape.disabled=collision_disabled
