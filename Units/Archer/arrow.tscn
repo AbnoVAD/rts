@@ -27,8 +27,6 @@ size = Vector2(26, 8)
 
 [node name="arrow" type="Area2D" unique_id=1818434497]
 script = ExtResource("1_c8cgl")
-stick_groups = null
-lifespan = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=350231132 groups=["arrow"]]
 sprite_frames = SubResource("SpriteFrames_c8cgl")

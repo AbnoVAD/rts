@@ -49,7 +49,7 @@ func _on_body_entered(body: Node2D) -> void:
 	stick_offset=global_position-body.global_position
 	if body.is_in_group("goblin"):
 		if body.has_method("take_damage"):
-			body.take_damage(1,arrow.global_position)
+			body.take_damage(1,global_position)
 	if body.is_in_group("goblinbuildings"):
 		if body.has_method("take_damage"):
 			body.take_damage(30)
