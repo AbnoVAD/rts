@@ -124,10 +124,6 @@ radius = 379.05145
 
 [node name="archer" type="CharacterBody2D" unique_id=1762118532 groups=["player"]]
 script = ExtResource("1_a5oqd")
-arrow_scene = null
-arrow_speed = null
-tracking_interval = null
-fire_cooldown = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=746903732]
 sprite_frames = SubResource("SpriteFrames_t3pld")
