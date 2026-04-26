@@ -197,7 +197,7 @@ func flip_sprite(dir:Vector2)->void:
 #Hitbox and damage
 #-------------------------------------
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("explo"):
+	if area.is_in_group("explosion"):
 		take_damage(10,area.global_position)
 		hit_audio.play()
 

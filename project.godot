@@ -29,6 +29,7 @@ window/stretch/mode="viewport"
 folder_colors={
 "res://Audio/": "green",
 "res://Levels/": "teal",
+"res://Unit_buildings/": "orange",
 "res://Units/": "orange"
 }
 
@@ -40,7 +41,6 @@ block_building=""
 building=""
 castle=""
 damaged_buildings=""
-explo=""
 goblin=""
 goblinbuildings=""
 ground_tilemap=""
@@ -54,6 +54,7 @@ sheep=""
 trees=""
 warrior=""
 repair_effect=""
+explosion=""
 
 [input]
 

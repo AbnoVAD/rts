@@ -48,9 +48,9 @@ func _ready() -> void:
 # Save/Load Colour
 #-------------------------------------
 func save_colour():
-	#var file:FileAccess=FileAccess.open(SAVE_COLOR,FileAccess.WRITE)
-	#file.store_string(chossed_colour)
-	#file.close()
+	var file:FileAccess=FileAccess.open(SAVE_COLOR,FileAccess.WRITE)
+	file.store_string(chossed_colour)
+	file.close()
 	pass
 func load_colour():
 	#var file:FileAccess=FileAccess.open(SAVE_COLOR,FileAccess.WRITE)

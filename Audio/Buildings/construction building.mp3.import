@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c55u3g23t7yui"
+path="res://.godot/imported/construction building.mp3-d97658ad799f36047f14434677a88ce9.mp3str"
+
+[deps]
+
+source_file="res://Audio/Buildings/construction building.mp3"
+dest_files=["res://.godot/imported/construction building.mp3-d97658ad799f36047f14434677a88ce9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

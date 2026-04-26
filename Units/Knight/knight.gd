@@ -502,7 +502,7 @@ func _on_button_pressed() -> void:
 #Hitbox
 #------------------------------------------
 func _on_hitbox_area_entered(area:Area2D) -> void:
-	if area.is_in_group("explo"):
+	if area.is_in_group("explosion"):
 		take_damage(30,area.global_position-global_position)
 		if not hit_audio.playing:
 			hit_audio.play()

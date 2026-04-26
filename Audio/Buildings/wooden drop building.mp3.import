@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cahhb1w8tckpp"
+path="res://.godot/imported/wooden drop building.mp3-d8ea62c623bcf0cc777f115d46c7b6d6.mp3str"
+
+[deps]
+
+source_file="res://Audio/Buildings/wooden drop building.mp3"
+dest_files=["res://.godot/imported/wooden drop building.mp3-d8ea62c623bcf0cc777f115d46c7b6d6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
