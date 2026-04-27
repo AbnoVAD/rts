@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cub3hbpqqt58j" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner_Slots.png" id="16_c23wl"]
 [ext_resource type="Script" uid="uid://cfka4tff3iuy" path="res://Tiles/collider.gd" id="17_5stjl"]
 [ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="18_pr8ms"]
+[ext_resource type="PackedScene" uid="uid://cnwh1y11vterv" path="res://Unit_buildings/Tower/tower.tscn" id="20_43wwi"]
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
@@ -879,3 +880,6 @@ script = ExtResource("23_8mbvr")
 zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
+
+[node name="tower" parent="." unique_id=1301632932 instance=ExtResource("20_43wwi")]
+position = Vector2(808, 616)

@@ -52,11 +52,11 @@ var hit_flash_timer:=0.0
 #--------------------------------------------------
 #Archer scenes "non_moving"
 #--------------------------------------------------
-var archer_black=preload("res://Units/Archer/archer_black.tscn")
-var archer_blue=preload("res://Units/Archer/archer_blue.tscn")
-var archer_red=preload("res://Units/Archer/archer_red.tscn")
-var archer_purple=preload("res://Units/Archer/archer_purple.tscn")
-var archer_yellow=preload("res://Units/Archer/archer_yellow.tscn")
+var archer_black=preload("res://Unit_buildings/Tower/Archer Tower/archer_black.tscn")
+var archer_blue=preload("res://Unit_buildings/Tower/Archer Tower/archer_blue.tscn")
+var archer_red=preload("res://Unit_buildings/Tower/Archer Tower/archer_red.tscn")
+var archer_purple=preload("res://Unit_buildings/Tower/Archer Tower/archer_purple.tscn")
+var archer_yellow=preload("res://Unit_buildings/Tower/Archer Tower/archer_yellow.tscn")
 
 var spawned_archer:Node2D=null
 

@@ -1,64 +1,64 @@
 [gd_scene format=3 uid="uid://b1j26pnmtiqhb"]
 
-[ext_resource type="Script" uid="uid://dbxbk3yplfvxt" path="res://Unit_buildings/Tower/Archer Tower/archer.gd" id="1_a5oqd"]
-[ext_resource type="Texture2D" uid="uid://dkolqt0tgoiif" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Idle.png" id="1_xgdw7"]
-[ext_resource type="Texture2D" uid="uid://beoibrcu6qyvr" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Shoot.png" id="2_a5oqd"]
-[ext_resource type="AudioStream" uid="uid://xbwks4wm77aa" path="res://Audio/Bow/Bow Attack 1.wav" id="3_bxue2"]
+[ext_resource type="Script" uid="uid://dbxbk3yplfvxt" path="res://Unit_buildings/Tower/Archer Tower/archer.gd" id="1_i7qe5"]
+[ext_resource type="Texture2D" uid="uid://dkolqt0tgoiif" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Idle.png" id="2_rtjwb"]
+[ext_resource type="Texture2D" uid="uid://beoibrcu6qyvr" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Shoot.png" id="3_4mwy0"]
+[ext_resource type="AudioStream" uid="uid://xbwks4wm77aa" path="res://Audio/Bow/Bow Attack 1.wav" id="4_e7ytv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urhbf"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4iciu"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjd6y"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6d3or"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_istys"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dsi1m"]
-atlas = ExtResource("1_xgdw7")
+atlas = ExtResource("2_rtjwb")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xe1wh"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ibct"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vhmq2"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqs83"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_csrqo"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6246s"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2fwmf"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(1152, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2nn5v"]
-atlas = ExtResource("2_a5oqd")
+atlas = ExtResource("3_4mwy0")
 region = Rect2(1344, 0, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t3pld"]
@@ -123,7 +123,7 @@ radius = 25.298222
 radius = 379.05145
 
 [node name="archer" type="CharacterBody2D" unique_id=1762118532 groups=["player"]]
-script = ExtResource("1_a5oqd")
+script = ExtResource("1_i7qe5")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=746903732]
 sprite_frames = SubResource("SpriteFrames_t3pld")
@@ -150,7 +150,7 @@ metadata/_edit_lock_ = true
 [node name="sound_fx" type="Node2D" parent="." unique_id=1694890306]
 
 [node name="shoot_audio" type="AudioStreamPlayer" parent="sound_fx" unique_id=2068864322]
-stream = ExtResource("3_bxue2")
+stream = ExtResource("4_e7ytv")
 pitch_scale = 2.0
 
 [connection signal="body_entered" from="attack zone" to="." method="_on_attack_zone_body_entered"]
