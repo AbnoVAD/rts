@@ -88,7 +88,7 @@ var last_click_time:=0.0
 #--------------------------------------------------
 func _ready() -> void:
 	z_index=5
-	scale=Vector2(0.7,0.7)
+	scale=Vector2(0.9,0.9)
 	Global.load_colour()
 	life=max_life
 	add_to_group("building")
@@ -125,7 +125,7 @@ func _process(delta:float) -> void:
 #--------------------------------------------------
 @warning_ignore("unused_parameter")
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouse\
+	if event is InputEventMouseButton\
 	and event.button_index==MOUSE_BUTTON_LEFT\
 	and event.pressed:
 
@@ -361,7 +361,7 @@ func spawn_archer() -> void:
 		return
 	
 	var scene:PackedScene
-	match Global.chossed_colour.to_lower():
+	match Global.choosed_colour.to_lower():
 		"black":scene=archer_black
 		"blue":scene=archer_blue
 		"red":scene=archer_red
@@ -371,6 +371,7 @@ func spawn_archer() -> void:
 
 	spawned_archer=scene.instantiate()
 	add_child(spawned_archer)
+	spawned_archer.scale=Vector2(0.9,0.9)
 	spawned_archer.global_position=marker_2d.global_position
 
 var last_collision_state:bool=false

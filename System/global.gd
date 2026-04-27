@@ -11,7 +11,7 @@ var Goblin_house =0
 #Player state / Resources
 #-------------------------------------
 var pawn_tool:String="hand"
-var chossed_colour:String="black"
+var choosed_colour:String="black"
 const SAVE_COLOR: String ="user://levels.save"
 
 #variables
@@ -49,7 +49,7 @@ func _ready() -> void:
 #-------------------------------------
 func save_colour():
 	var file:FileAccess=FileAccess.open(SAVE_COLOR,FileAccess.WRITE)
-	file.store_string(chossed_colour)
+	file.store_string(choosed_colour)
 	file.close()
 	pass
 func load_colour():
