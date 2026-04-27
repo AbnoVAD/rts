@@ -125,7 +125,7 @@ func _process(delta:float) -> void:
 #--------------------------------------------------
 @warning_ignore("unused_parameter")
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouse\
+	if event is InputEventMouseButton\
 	and event.button_index==MOUSE_BUTTON_LEFT\
 	and event.pressed:
 
