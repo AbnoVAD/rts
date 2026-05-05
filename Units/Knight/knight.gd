@@ -517,7 +517,6 @@ signal died(knight:Node2D)
 func die():
 	emit_signal("died",self)
 	stop_navigation()
-	death_audio.play()	
 
 	shape.disabled=true
 	hitbox.monitoring=false
@@ -529,8 +528,7 @@ func die():
 	skull.global_position=global_position
 	skull.scale=Vector2(0.5,0.5)
 
-	if not death_audio.playing:
-		death_audio.play()
+	death_audio.play()
 
 	var tween:=create_tween()
 	tween.tween_property(self,"modulate.a",0.0,1.0)

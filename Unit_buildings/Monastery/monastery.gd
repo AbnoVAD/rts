@@ -129,7 +129,7 @@ func _ready() -> void:
 #Process
 #--------------------------------------------------
 func _process(delta:float) -> void:
-	if state==STATE_IDLE and spawned_lancer.size()<lancer_capacity and Global.can_spawn_spawn():
+	if state==STATE_IDLE and spawned_lancer.size()<lancer_capacity and Global.can_spawn():
 		spawn_lancers()
 	if is_hit:
 		hit_flash_timer-=delta
@@ -246,7 +246,7 @@ func _on_placement_area_entered(area:Area2D) -> void:
 	if not is_moving:return
 	var parent=area.get_parent()
 	if parent and parent!=self:
-		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
+		if parent.is_in_group("building") or parent.is_in_group("block_building"):
 			overlapping_objects_count+=1
 			_update_collision_state()
 
@@ -254,21 +254,21 @@ func _on_placement_area_exited(area:Area2D) -> void:
 	if not is_moving:return
 	var parent=area.get_parent()
 	if parent and parent!=self:
-		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
+		if parent.is_in_group("building") or parent.is_in_group("block_building"):
 			overlapping_objects_count=max(0,overlapping_objects_count-1)
 			_update_collision_state()
 
 func _on_placement_body_entered(body:Node) -> void:
 	if not is_moving:return
 	if body !=self:
-		if body.is_in_group("buildings") or body.is_in_group("block_building"):
+		if body.is_in_group("building") or body.is_in_group("block_building"):
 			overlapping_objects_count+=1
 			_update_collision_state()
 
 func _on_placement_body_exited(body:Node) -> void:
 	if not is_moving:return
 	if body !=self:
-		if body.is_in_group("buildings") or body.is_in_group("block_building"):
+		if body.is_in_group("building") or body.is_in_group("block_building"):
 			overlapping_objects_count=max(0,overlapping_objects_count-1)
 			_update_collision_state()
 

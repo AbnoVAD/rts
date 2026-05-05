@@ -103,7 +103,7 @@ func _physics_process(delta: float) -> void:
 
 #handle combat UI auto hide
 	if ui_visible:
-		ui_timer=+delta
+		ui_timer+=delta
 		if ui_timer>=ui_hide_delay:
 			ui_visible=false
 			var tween:=create_tween()
@@ -282,8 +282,8 @@ func update_animation()->void:
 #-------------------------------------
 func activate_this_pawn():
 	if GlobalPlayer.active_player and GlobalPlayer.active_player!=self:
-		if GlobalPlayer.is_active_player.has_method("deactivate"):
-			GlobalPlayer.is_active_player.deactive()
+		if GlobalPlayer.active_player.has_method("deactivate"):
+			GlobalPlayer.active_player.deactivate()
 	GlobalPlayer.active_player=self
 
 	active=true

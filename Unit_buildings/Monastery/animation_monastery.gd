@@ -8,22 +8,19 @@ var image_yellow=preload("res://assets/Tiny Swords (Free Pack)/Buildings/Yellow 
 
 func _ready() -> void:
 	Global.load_colour()
-	if Global.choosed_colour=="black":
-		sprite_frames.clear("idle")
-		sprite_frames.add_frame("idle",image_black)
-	Global.load_colour()
-	if Global.choosed_colour=="blue":
-		sprite_frames.clear("idle")
-		sprite_frames.add_frame("idle",image_blue)
-	Global.load_colour()
-	if Global.choosed_colour=="red":
-		sprite_frames.clear("idle")
-		sprite_frames.add_frame("idle",image_red)
-	Global.load_colour()
-	if Global.choosed_colour=="purple":
-		sprite_frames.clear("idle")
-		sprite_frames.add_frame("idle",image_purple)
-	Global.load_colour()
-	if Global.choosed_colour=="yellow":
-		sprite_frames.clear("idle")
-		sprite_frames.add_frame("idle",image_yellow)
+	match Global.choosed_colour:
+		"black":
+			sprite_frames.clear("idle")
+			sprite_frames.add_frame("idle",image_black)
+		"blue":
+			sprite_frames.clear("idle")
+			sprite_frames.add_frame("idle",image_blue)
+		"red":
+			sprite_frames.clear("idle")
+			sprite_frames.add_frame("idle",image_red)
+		"purple":
+			sprite_frames.clear("idle")
+			sprite_frames.add_frame("idle",image_purple)
+		"yellow":
+			sprite_frames.clear("idle")
+			sprite_frames.add_frame("idle",image_yellow)

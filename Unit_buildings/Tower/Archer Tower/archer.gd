@@ -36,7 +36,7 @@ func _ready() -> void:
 	_scan_for_new_targets()
 
 func _on_attack_zone_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("goblin") or body.is_in_group("goblinbuildings"):
+	if not (body.is_in_group("goblin") or body.is_in_group("goblinbuildings")):
 		return
 	if body not in candidates:
 		candidates.append(body)
@@ -156,7 +156,7 @@ func _predict_target_position(target:Node2D,projectile_speed:float)->Vector2:
 	var t2=(-b-sqrt(discriminant))/(2*a)
 	var t=max(t1,t2,0.0)
 
-	return target.global_position.x+target_vel*t
+	return target.global_position + target_vel*t
 
 func update_facing()->void:
 	if target==null:

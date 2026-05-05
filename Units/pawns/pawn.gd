@@ -92,7 +92,7 @@ func _ready() -> void:
 	toolbox_panel.z_index=7
 	z_index=4
 	scale=Vector2(0.7,0.7)
-	life=50
+	life=max_life
 	progress_bar.max_value=max_life
 	progress_bar.value=life
 	
@@ -117,7 +117,7 @@ func pickup_resource(resource_node)->void:
 	if resource_type in collected:
 		collected[resource_type]+=1
 		#call the function
-		if resource_node.has_methode("collect"):
+		if resource_node.has_method("collect"):
 			resource_node.collect()
 		else:
 			resource_node.queue_free()
@@ -151,7 +151,7 @@ func _input(event: InputEvent) ->void:
 #tool usage
 	if event.is_action_pressed("use"):
 		use_current_tool()
-		hide_toolbox_if_visible
+		hide_toolbox_if_visible()
 
 #-------------------------------------
 #Hide toolbox in case of any input
@@ -172,7 +172,7 @@ func _physics_process(delta: float) -> void:
 
 #handle combat UI auto hide
 	if ui_visible:
-		ui_timer=+delta
+		ui_timer+=delta
 		if ui_timer>=ui_hide_delay:
 			ui_visible=false
 			var tween:=create_tween()
@@ -319,10 +319,9 @@ func collect_nearby_resources(_resource_type:String)->void:
 	
 	var overlapping_area=detector_zone.get_overlapping_areas()
 	for area in overlapping_area:
-		if area in overlapping_area:
-			if area.has_method("collect") and area.has_property("resource_type"):
-				pickup_resource(area)
-				return
+		if area.has_method("collect") and area.has_property("resource_type"):
+			pickup_resource(area)
+			return
 
 #-------------------------------------
 #pickup func
@@ -333,12 +332,11 @@ func pick_nearby_items()->void:
 
 	var overlapping_area=detector_zone.get_overlapping_areas()
 	for area in overlapping_area:
-		if area in overlapping_area:
-			if area.has_method("collect") and area.has_property("resource_type"):
-				if not area.collected:
-					var resource_type=area.resouce_type
-					if resource_type in collected:
-						pickup_resource(area)
+		if area.has_method("collect") and area.has_property("resource_type"):
+			if not area.collected:
+				var resource_type=area.resource_type
+				if resource_type in collected:
+					pickup_resource(area)
 
 #-------------------------------------
 #flip the anim
@@ -395,7 +393,7 @@ func spawn_attack_effect()->void:
 			fx.scale=Vector2(0.2,0.2)
 
 func spawn_repair_effect()->void:
-	var fx:=attack_effect_scene.instantiate()
+	var fx:=attack_repair_scene.instantiate()
 	fx.global_position=marker_2d.global_position
 	fx.scale=Vector2(0.2,0.2)
 	get_parent().add_child(fx)
@@ -523,8 +521,8 @@ func _on_hand_pressed() -> void:
 #-------------------------------------
 func activate_this_pawn():
 	if GlobalPlayer.active_player and GlobalPlayer.active_player!=self:
-		if GlobalPlayer.is_active_player.has_method("deactivate"):
-			GlobalPlayer.is_active_player.deactive()
+		if GlobalPlayer.active_player.has_method("deactivate"):
+			GlobalPlayer.active_player.deactivate()
 	GlobalPlayer.active_player=self
 
 	active=true
