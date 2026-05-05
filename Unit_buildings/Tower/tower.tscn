@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cetcv0lvbh3bb" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png" id="3_sdqr8"]
 [ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="4_nc1jm"]
 [ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="4_u5xae"]
-[ext_resource type="Script" uid="uid://cc0y71w64la4a" path="res://Unit_buildings/Tower/animation.gd" id="5_mbfqe"]
+[ext_resource type="Script" uid="uid://cc0y71w64la4a" path="res://Unit_buildings/Tower/animation_tower.gd" id="5_mbfqe"]
 [ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="5_sdqr8"]
 [ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="7_ief50"]
 

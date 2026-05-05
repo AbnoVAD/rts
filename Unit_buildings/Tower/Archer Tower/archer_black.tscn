@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkolqt0tgoiif" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Idle.png" id="2_rtjwb"]
 [ext_resource type="Texture2D" uid="uid://beoibrcu6qyvr" path="res://assets/Tiny Swords (Free Pack)/Units/Black Units/Archer/Archer_Shoot.png" id="3_4mwy0"]
 [ext_resource type="AudioStream" uid="uid://xbwks4wm77aa" path="res://Audio/Bow/Bow Attack 1.wav" id="4_e7ytv"]
+[ext_resource type="Script" uid="uid://c5xmt4hbp3dwd" path="res://Unit_buildings/Tower/Archer Tower/animation.gd" id="4_rtjwb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urhbf"]
 atlas = ExtResource("2_rtjwb")
@@ -129,6 +130,7 @@ script = ExtResource("1_i7qe5")
 sprite_frames = SubResource("SpriteFrames_t3pld")
 animation = &"idle"
 autoplay = "idle"
+script = ExtResource("4_rtjwb")
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1077578573]
 visible = false

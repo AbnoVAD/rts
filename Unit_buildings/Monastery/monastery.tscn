@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://dh2i8jr1xj06a"]
+
+[ext_resource type="Script" uid="uid://bkuut8mjpb10b" path="res://Unit_buildings/Monastery/monastery.gd" id="1_dm2n5"]
+[ext_resource type="Texture2D" uid="uid://u5tikdkfii6i" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Construction.png" id="2_p8fj2"]
+[ext_resource type="Texture2D" uid="uid://h8llrduqkyam" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Destroyed.png" id="3_g0isw"]
+[ext_resource type="Texture2D" uid="uid://bpi6w8ovlseps" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Monastery.png" id="4_dm2n5"]
+[ext_resource type="Script" uid="uid://cvqtuqtdmtivu" path="res://Unit_buildings/Monastery/animation_monastery.gd" id="5_dm2n5"]
+[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_ee3s2"]
+[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_676gi"]
+[ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_x1yxy"]
+[ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_eiudx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_af0i0"]
+atlas = ExtResource("4_dm2n5")
+region = Rect2(0, 0, 192, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nc1jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p8fj2")
+}],
+"loop": false,
+"name": &"construct",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g0isw")
+}],
+"loop": true,
+"name": &"destroyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_af0i0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm2n5"]
+size = Vector2(112, 144)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ek573"]
+radius = 40.792156
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u5xae"]
+radius = 64.0
+height = 176.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sdqr8"]
+radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af0i0"]
+size = Vector2(128, 32)
+
+[node name="monastery" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
+script = ExtResource("1_dm2n5")
+construction_time = null
+max_life = null
+repair_time = null
+lancer_capacity = null
+spawn_radius = null
+repair_gold_cost = null
+repair_wood_cost = null
+repair_health_amount = null
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
+sprite_frames = SubResource("SpriteFrames_nc1jm")
+animation = &"idle"
+autoplay = "construct"
+script = ExtResource("5_dm2n5")
+
+[node name="shape" type="CollisionShape2D" parent="." unique_id=1492661873]
+visible = false
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_dm2n5")
+metadata/_edit_lock_ = true
+
+[node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
+position = Vector2(64, 160)
+
+[node name="Marker2" type="Marker2D" parent="." unique_id=1011600140]
+position = Vector2(-64, 160)
+
+[node name="monastery" type="Area2D" parent="." unique_id=826380079]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="monastery" unique_id=1626908274]
+visible = false
+position = Vector2(0, 56)
+shape = SubResource("CircleShape2D_ek573")
+debug_color = Color(0, 0.64931995, 0.16058418, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="ExplosionDetector" type="Area2D" parent="." unique_id=1422784864]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=1155507561]
+visible = false
+position = Vector2(0, 56)
+shape = SubResource("CapsuleShape2D_u5xae")
+debug_color = Color(0.99386555, 0, 0.23811516, 0.41960785)
+
+[node name="RepairDetector" type="Area2D" parent="." unique_id=2068533861]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepairDetector" unique_id=57925926]
+visible = false
+position = Vector2(0, 72)
+shape = SubResource("CircleShape2D_sdqr8")
+
+[node name="PlacementChecker" type="Area2D" parent="." unique_id=1421693805]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementChecker" unique_id=1825084020]
+visible = false
+position = Vector2(0, 128)
+shape = SubResource("RectangleShape2D_af0i0")
+debug_color = Color(9.1448425e-07, 0.65070313, 0.09518888, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="sound fx" type="Node2D" parent="." unique_id=509742490]
+
+[node name="destroyed_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=717262668]
+stream = ExtResource("6_ee3s2")
+volume_db = -20.0
+pitch_scale = 3.0
+
+[node name="construct_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1598343038]
+stream = ExtResource("7_676gi")
+volume_db = -15.0
+pitch_scale = 2.5
+
+[node name="place_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1463329995]
+stream = ExtResource("8_x1yxy")
+pitch_scale = 2.0
+
+[node name="drop_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1221817837]
+stream = ExtResource("9_eiudx")
+volume_db = -5.0
+pitch_scale = 1.5
