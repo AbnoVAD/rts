@@ -172,7 +172,7 @@ func _ready() -> void:
 	target_check_timer.wait_time=0.3
 	target_check_timer.one_shot=false
 	target_check_timer.autostart=true
-	target_check_timer.connect("timeout",Callable(self,"_check_current_target"))
+	target_check_timer.connect("timeout",Callable(self,"check_current_target"))
 
 func reset_random_shield_timer():
 	random_shield_timer=0.0
@@ -211,7 +211,7 @@ func can_attack_target() -> bool:
 
 func check_current_target():
 	if target!=null and not can_attack_target():
-		target==null
+		target=null
 		if attack_timer and attack_timer.is_stopped()==false:
 			attack_timer.stop()
 		reset_combat()
@@ -418,7 +418,7 @@ func state_guard(delta):
 #Targeting
 #------------------------------------------
 func acquire_target(delta:=0.0):
-	if target!=null and can_attack_target():
+	if target!=null and not can_attack_target():
 		target=null
 
 
@@ -490,6 +490,50 @@ func take_damage(amount:int,dir:Vector2):
 	show_combat_ui()
 	if state==State.DEAD:
 		return
+
+#------------------------------------------
+#Shield absorbs damage
+#------------------------------------------
+	if state==State.GUARD and guard_stamina>0:
+		guard_stamina-=amount
+		if not shield_audio.playing:
+			shield_audio.play()
+		update_bars()
+		velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
+		update_facing(-dir)
+		move_and_slide()
+		reset_random_shield_timer()
+		if guard_stamina<=0:
+			guard_stamina=0
+			guard_timer=GUARD_DURATION
+		return
+
+#------------------------------------------
+#Low HP guard sequence faster
+#------------------------------------------
+	@warning_ignore("unreachable_code")
+	if life <= max_life * LOW_HP_SHIELD_THRESHOLD\
+	and not action_locked\
+	and not guard_cooldown\
+	and guard_stamina>20:
+			start_guard()
+			start_guard_cooldown()
+			return
+	life-=amount
+	if GlobalPlayer.camera_shake_func.is_valid():
+		GlobalPlayer.camera_shake_func.call()
+	update_bars()
+	flash_red()
+
+	velocity=-dir.normalized()*knockback_force
+	update_facing(-dir)
+	move_and_slide()
+
+	if random_shield_enabled:
+		reset_random_shield_timer()
+
+	if life<=0:
+		die()
 
 func start_guard_cooldown():
 	guard_cooldown=true

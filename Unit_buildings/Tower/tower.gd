@@ -103,7 +103,7 @@ func _ready() -> void:
 	placement_checker.body_exited.connect(_on_placement_body_exited)
 
 	explosion_detector.area_entered.connect(_on_explosion_area_entered)
-	explosion_detector.area_entered.connect(_on_repair_detector_area_entered)
+	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
 	
 	enter_construct_state()
 
@@ -181,7 +181,7 @@ func _reset_after_movement():
 		drop_fx.play()
 
 	placement_checker.monitoring=false
-	shape.disable=false
+	shape.disabled=false
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
@@ -201,13 +201,13 @@ func _handle_overlap(node:Node,entered:bool) -> void:
 		overlapping_objects_count=max(0,overlapping_objects_count)
 
 func _on_placement_area_entered(area:Area2D) -> void:
-	_handle_overlap(area.get_parents(),true)
+	_handle_overlap(area.get_parent(),true)
 func _on_placement_area_exited(area:Area2D) -> void:
-	_handle_overlap(area.get_parents(),false)
+	_handle_overlap(area.get_parent(),false)
 func _on_placement_body_entered(body:Node) -> void:
-	_handle_overlap(body.get_parents(),true)
+	_handle_overlap(body.get_parent(),true)
 func _on_placement_body_exited(body:Node) -> void:
-	_handle_overlap(body.get_parents(),false)
+	_handle_overlap(body.get_parent(),false)
 
 func _update_movement_color() -> void:
 	if not is_moving:
@@ -252,7 +252,6 @@ signal died(building:Node2D)
 func enter_destroyed_state() -> void:
 	update_collision_logic()
 	is_dead=true
-	emit_signal("died")
 	emit_signal("died",self)
 	if state == STATE_DESTROYED:
 		return
@@ -323,7 +322,7 @@ func start_repair() -> void:
 	show_repair_pulse()
 
 func finish_repair() -> void:
-	is_dead=true
+	is_dead=false
 	
 	flash_green_once()
 	
@@ -342,7 +341,7 @@ func flash_green_once():
 	if repair_tween and repair_tween.is_running():
 		repair_tween.kill()
 	repair_tween=create_tween()
-	repair_tween.tween_property(animation,"modulate",Color.RED,0.01)
+	repair_tween.tween_property(animation,"modulate",Color.GREEN,0.01)
 	repair_tween.tween_property(animation,"modulate",Color.WHITE,0.15) 
 
 func show_repair_pulse() -> void:

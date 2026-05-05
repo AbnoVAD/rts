@@ -5,9 +5,9 @@ extends AnimatedSprite2D
 func _ready() -> void:
 	z_index=4
 	skull.play("sp")
+	_start_fade_timer()
 
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
+func _start_fade_timer():
 	await get_tree().create_timer(2.5).timeout
 	fade()
 

@@ -63,8 +63,8 @@ func load_colour():
 #-------------------------------------
 func clamp_resources():
 	gold=clamp(gold,0,max_gold)
-	wood=clamp(gold,0,max_wood)
-	meat=clamp(gold,0,max_meat)
+	wood=clamp(wood,0,max_wood)
+	meat=clamp(meat,0,max_meat)
 
 func add_gold(amount:int):
 	gold=min(gold+amount,max_gold)
@@ -89,15 +89,8 @@ func consume_meat(amount:int):
 	meat-=amount
 	return true
 
-func can_spawn_spawn()->bool:
+func can_spawn()->bool:
 	return meat>0
-
-#-------------------------------------
-#process
-#-------------------------------------
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	pass
 
 #-------------------------------------
 #wave control
