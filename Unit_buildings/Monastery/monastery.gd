@@ -66,7 +66,7 @@ var lancer_red=preload("res://Units/Lancer/lancer_red.tscn")
 var lancer_purple=preload("res://Units/Lancer/lancer_purple.tscn")
 var lancer_yellow=preload("res://Units/Lancer/lancer_yellow.tscn")
 
-var spawned_lancer:Node2D=null
+var spawned_lancer:Array=[]
 
 #--------------------------------------------------
 #Timers and tweens
@@ -96,6 +96,11 @@ var last_click_time:=0.0
 var is_selected:=false
 
 #--------------------------------------------------
+#Signals
+#--------------------------------------------------
+signal died(building:Node2D)
+
+#--------------------------------------------------
 #Ready func
 #--------------------------------------------------
 func _ready() -> void:
@@ -105,7 +110,7 @@ func _ready() -> void:
 	life=max_life
 	add_to_group("building")
 	input_pickable=true
-	collision.disabled=true
+	shape.disabled=true
 
 	placement_checker.monitoring=false
 	placement_checker.monitorable=true
@@ -116,8 +121,8 @@ func _ready() -> void:
 	placement_checker.body_exited.connect(_on_placement_body_exited)
 
 	explosion_detector.area_entered.connect(_on_explosion_area_entered)
-	explosion_detector.area_entered.connect(_on_repair_detector_area_entered)
-	
+	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
+
 	enter_construct_state()
 
 #--------------------------------------------------
@@ -125,7 +130,7 @@ func _ready() -> void:
 #--------------------------------------------------
 func _process(delta:float) -> void:
 	if state==STATE_IDLE and spawned_lancer.size()<lancer_capacity and Global.can_spawn_spawn():
-		spawned_lancer()
+		spawn_lancers()
 	if is_hit:
 		hit_flash_timer-=delta
 		if hit_flash_timer<=0:
@@ -182,9 +187,9 @@ func start_moving() -> void:
 	movement_valid=true
 	is_awaiting_placement=false
 	movement_colliding=false
-	
-	collision.disabled=true
-	
+
+	shape.disabled=true
+
 	if not place_fx.playing:
 		place_fx.play()
 
@@ -212,16 +217,17 @@ func _reset_after_movement():
 	input_pickable=true
 
 	placement_checker.monitoring=false
-	shape.disable=false
+	shape.disabled=false
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
-		spawn_archer()
+		spawn_lancers()
 
-	func _cancel_movement()->void:
-		var return_tween=create_tween()
-		return_tween.tween_property(self,"global_position",original_position,0.2)
-		return_tween.tween_callback(_reset_after_movement)
+func _cancel_movement()->void:
+	var return_tween=create_tween()
+	return_tween.tween_property(self,"global_position",original_position,0.2)
+	return_tween.tween_callback(_reset_after_movement)
+
 #--------------------------------------------------
 #Placement checker
 #--------------------------------------------------
@@ -236,32 +242,35 @@ func _handle_overlap(node:Node,entered:bool) -> void:
 		overlapping_objects_count=max(0,overlapping_objects_count)
 
 #checker signal
-func _on_placement_area_exited(area:Area2D) -> void:
+func _on_placement_area_entered(area:Area2D) -> void:
 	if not is_moving:return
 	var parent=area.get_parent()
 	if parent and parent!=self:
 		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
 			overlapping_objects_count+=1
-			_update_collison_state()
+			_update_collision_state()
+
 func _on_placement_area_exited(area:Area2D) -> void:
 	if not is_moving:return
 	var parent=area.get_parent()
 	if parent and parent!=self:
 		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
-			overlapping_objects_count+=max(0,overlapping_objects_count-1)
-			_update_collison_state()
+			overlapping_objects_count=max(0,overlapping_objects_count-1)
+			_update_collision_state()
+
 func _on_placement_body_entered(body:Node) -> void:
 	if not is_moving:return
 	if body !=self:
-		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
+		if body.is_in_group("buildings") or body.is_in_group("block_building"):
 			overlapping_objects_count+=1
-			_update_collison_state()
+			_update_collision_state()
+
 func _on_placement_body_exited(body:Node) -> void:
 	if not is_moving:return
 	if body !=self:
-		if parent.is_in_group("buildings") or parent.is_in_group("block_building"):
-			overlapping_objects_count+=max(0,overlapping_objects_count-1)
-			_update_collison_state()
+		if body.is_in_group("buildings") or body.is_in_group("block_building"):
+			overlapping_objects_count=max(0,overlapping_objects_count-1)
+			_update_collision_state()
 
 func _update_collision_state():
 	if not is_moving:return
@@ -304,8 +313,9 @@ func _update_movement_color() -> void:
 func clear_timers_and_tweens() -> void:
 	if tween and tween.is_running():tween.kill()
 	tween=null
-	if construct_time:construct_time.queue_free();construct_timer=null
+	if construct_timer:construct_timer.queue_free();construct_timer=null
 	if repair_timer:repair_timer.queue_free();repair_timer=null
+
 #--------------------------------------------------
 #States
 #--------------------------------------------------
@@ -343,7 +353,7 @@ func enter_idle_state() -> void:
 	animation.play("idle")
 	construct_fx.stop()
 	scale=FINAL_SCALE
-	collision.disabled=false
+	shape.disabled=false
 	input_pickable=true
 	is_moving=false
 	is_awaiting_placement=false
@@ -354,13 +364,11 @@ func enter_idle_state() -> void:
 	if animation:
 		animation.modulate=Color.WHITE
 	spawned_lancer.clear()
-	spawn_lancer()
+	spawn_lancers()
 
-signal died(building:Node2D)
 func enter_destroyed_state() -> void:
 	update_collision_logic()
 	is_dead=true
-	emit_signal("died")
 	emit_signal("died",self)
 	if state == STATE_DESTROYED:
 		return
@@ -447,29 +455,29 @@ func _repair_destroyed():
 	repair_timer.one_shot=true
 	add_child(repair_timer)
 	repair_timer.timeout.connect(_on_destroyed_repair_finished)
-	repair.timer.start()
+	repair_timer.start()
 
 func _on_destroyed_repair_finished():
-	is_dead=true
+	is_dead=false
 	flash_green_once()
 	show_repair_pulse()
 	life=max_life
 	is_being_repaired=false
-	enter_idel_state()
-	collision.disabled=false
+	enter_idle_state()
+	shape.disabled=false
 
 func finish_repair() -> void:
-	is_dead=true
-	
+	is_dead=false
+
 	flash_green_once()
-	
+
 	if repair_timer:
 		repair_timer.queue_free()
-	
+
 	enter_idle_state()
-	
+
 	shape.disabled=false
-	
+
 	add_to_group("building")
 	add_to_group("block_building")
 	remove_from_group("damaged_buildings")
@@ -478,8 +486,8 @@ func flash_green_once():
 	if repair_tween and repair_tween.is_running():
 		repair_tween.kill()
 	repair_tween=create_tween()
-	repair_tween.tween_property(animation,"modulate",Color.RED,0.01)
-	repair_tween.tween_property(animation,"modulate",Color.WHITE,0.15) 
+	repair_tween.tween_property(animation,"modulate",Color.GREEN,0.01)
+	repair_tween.tween_property(animation,"modulate",Color.WHITE,0.15)
 
 func show_repair_pulse() -> void:
 	if repair_tween and repair_tween.is_running():
@@ -487,7 +495,7 @@ func show_repair_pulse() -> void:
 	repair_tween=create_tween()
 	repair_tween.tween_property(animation,"modulate",Color(0.6,1.0,0.6,1.0),0.3)
 	repair_tween.tween_property(animation,"modulate",Color.GREEN,0.3)
-	repair_tween.set_loops()	 
+	repair_tween.set_loops()
 
 #--------------------------------------------------
 #Death handler
@@ -534,26 +542,30 @@ func _spawn_lancers_around_marker(center:Vector2,count:int,lancer_scene:PackedSc
 		new_lancer.z_index=4
 		new_lancer.scale=Vector2(0.7,0.7)
 
-		var pos:Vector2
+		var pos:Vector2=center
 		var tries=0
-		while true:
+		while tries < 10:
 			var angle=randf()*TAU
 			var radius=randf()*spawn_radius
-			pos=center+Vector2(cos(angle),sin(angle))*radius
+			var candidate=center+Vector2(cos(angle),sin(angle))*radius
 			var overlapping=false
 			for other in spawned_lancer:
-				if pos.distance_to(other.global_position)<16.0:
+				if candidate.distance_to(other.global_position)<16.0:
 					overlapping=true
 					break
-				tries+=1
-			new_lancer.global_position=pos
-			spawned_lancer.append(new_lancer)
+			tries+=1
+			if not overlapping:
+				pos=candidate
+				break
+		new_lancer.global_position=pos
+		spawned_lancer.append(new_lancer)
 
-#death signal connected
-		new_lancer.died.connect(_on_lancer_died())
+		#death signal connected
+		new_lancer.died.connect(_on_lancer_died)
 
-#consume meat
+		#consume meat
 		Global.consume_meat(1)
+
 var last_collision_state:bool=false
 func update_collision_logic():
 	var new_disabled=(state==STATE_CONSTRUCT) or (state==STATE_DESTROYED) or is_moving
