@@ -3,8 +3,8 @@ extends StaticBody2D
 #node references
 @onready var animation: AnimatedSprite2D = $animation
 @onready var shape: CollisionShape2D = $shape
-@onready var marker_2d: Marker2D = $Marker2D
-@onready var tower: Area2D = $tower
+@onready var marker_2d: Marker2D = $Marker1
+@onready var monastery: Area2D = $monastery
 @onready var explosion_detector: Area2D = $ExplosionDetector
 @onready var repair_detector: Area2D = $RepairDetector
 @onready var placement_checker: Area2D = $PlacementChecker
@@ -57,7 +57,7 @@ var hit_flash_time:=0.15
 var is_being_repaired:=false
 
 #--------------------------------------------------
-#Archer scenes "non_moving"
+#Lancer scenes "non_moving"
 #--------------------------------------------------
 var lancer_black=preload("res://Units/Lancer/lancer_black.tscn")
 var lancer_blue=preload("res://Units/Lancer/lancer_blue.tscn")
@@ -369,11 +369,11 @@ func spawn_archer() -> void:
 	
 	var scene:PackedScene
 	match Global.choosed_colour.to_lower():
-		"black":scene=archer_black
-		"blue":scene=archer_blue
-		"red":scene=archer_red
-		"purple":scene=archer_purple
-		"yellow":scene=archer_yellow
+		"black":scene=lancer_black
+		"blue":scene=lancer_blue
+		"red":scene=lancer_red
+		"purple":scene=lancer_purple
+		"yellow":scene=lancer_yellow
 		_: return
 
 	spawned_archer=scene.instantiate()
