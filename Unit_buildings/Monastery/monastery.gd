@@ -81,7 +81,6 @@ var repair_tween:Tween
 #Drag and drop movement logic
 #--------------------------------------------------
 var is_moving:=false
-var is_awaiting_placement:=false
 var movement_colliding:=false
 var movement_collision_timer:=0.0
 var movement_valid:=true
@@ -141,9 +140,10 @@ func _process(delta:float) -> void:
 		if movement_collision_timer<=0:
 			movement_colliding=false
 			_update_movement_color()
-	if is_moving and not is_awaiting_placement:
-		var mouse_pos=get_global_mouse_position()
-		global_position=mouse_pos-drag_offset
+
+	# In move mode, follow mouse continuously until placed/cancelled.
+	if is_moving:
+		global_position=get_global_mouse_position()-drag_offset
 		_check_movement_collisions()
 
 #--------------------------------------------------
@@ -151,19 +151,13 @@ func _process(delta:float) -> void:
 #--------------------------------------------------
 @warning_ignore("unused_parameter")
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			var now=Time.get_ticks_msec()/1000.0
-			if now-last_click_time<=DOUBLE_CLICK_TIME:
-				_on_double_click()
-			else:
-				_on_single_click()
-			last_click_time=now
-	else:
-				if is_awaiting_placement:
-					finalize_movement()
-				elif  is_moving:
-					_cancel_movement()
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
+		var now=Time.get_ticks_msec()/1000.0
+		if now-last_click_time<=DOUBLE_CLICK_TIME:
+			_on_double_click()
+		else:
+			_on_single_click()
+		last_click_time=now
 
 func _on_single_click()->void:
 	is_selected=true
@@ -185,7 +179,6 @@ func start_moving() -> void:
 	drag_offset=get_global_mouse_position()-global_position
 	overlapping_objects_count=0
 	movement_valid=true
-	is_awaiting_placement=false
 	movement_colliding=false
 
 	shape.disabled=true
@@ -208,7 +201,6 @@ func finalize_movement() -> void:
 func _reset_after_movement():
 	update_collision_logic()
 	is_moving=false
-	is_awaiting_placement=false
 	overlapping_objects_count=0
 	movement_valid=true
 	if not drop_fx.playing:
@@ -283,21 +275,28 @@ func _update_collision_state():
 			animation.modulate=Color.RED
 
 func _check_movement_collisions()->void:
-	if not is_moving or is_awaiting_placement:return
+	if not is_moving:return
 	if animation:
 		animation.modulate=Color.GREEN if movement_valid else Color.RED
 
 func _unhandled_input(event:InputEvent) -> void:
-	if is_moving and event is InputEventMouseButton:
-		var mouse_event=event as InputEventMouseButton
-		if mouse_event.button_index==MOUSE_BUTTON_LEFT and not mouse_event.pressed:
-			if is_awaiting_placement:
-				finalize_movement()
-			else:
-				is_awaiting_placement=true
-				_update_movement_color()
-		#right click to cancel a placement or event ESC
-		elif mouse_event.button_index==MOUSE_BUTTON_RIGHT and mouse_event.pressed:
+	if not is_moving:
+		return
+
+	# Left click confirms placement
+	if event is InputEventMouseButton and event.pressed:
+		var mouse_event := event as InputEventMouseButton
+		if mouse_event.button_index==MOUSE_BUTTON_LEFT:
+			finalize_movement()
+			return
+		elif mouse_event.button_index==MOUSE_BUTTON_RIGHT:
+			_cancel_movement()
+			return
+
+	# Esc cancels movement
+	if event is InputEventKey and event.pressed:
+		var key_event := event as InputEventKey
+		if key_event.keycode == KEY_ESCAPE:
 			_cancel_movement()
 
 func _update_movement_color() -> void:
@@ -356,7 +355,6 @@ func enter_idle_state() -> void:
 	shape.disabled=false
 	input_pickable=true
 	is_moving=false
-	is_awaiting_placement=false
 	movement_valid=true
 	movement_colliding=false
 	overlapping_objects_count=0
@@ -375,7 +373,6 @@ func enter_destroyed_state() -> void:
 
 	input_pickable=false
 	is_moving=false
-	is_awaiting_placement=false
 	overlapping_objects_count=0
 	remove_from_group("building")
 	add_to_group("damaged_buildings")
