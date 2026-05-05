@@ -59,14 +59,6 @@ size = Vector2(128, 32)
 
 [node name="monastery" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
 script = ExtResource("1_dm2n5")
-construction_time = null
-max_life = null
-repair_time = null
-lancer_capacity = null
-spawn_radius = null
-repair_gold_cost = null
-repair_wood_cost = null
-repair_health_amount = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
 sprite_frames = SubResource("SpriteFrames_nc1jm")
@@ -81,9 +73,11 @@ shape = SubResource("RectangleShape2D_dm2n5")
 metadata/_edit_lock_ = true
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
+visible = false
 position = Vector2(64, 160)
 
 [node name="Marker2" type="Marker2D" parent="." unique_id=1011600140]
+visible = false
 position = Vector2(-64, 160)
 
 [node name="monastery" type="Area2D" parent="." unique_id=826380079]
