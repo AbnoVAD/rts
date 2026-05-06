@@ -4,7 +4,7 @@ extends StaticBody2D
 @onready var animation: AnimatedSprite2D = $animation
 @onready var shape: CollisionShape2D = $shape
 @onready var marker_1: Marker2D = $Marker1
-@onready var marker_2: Marker2D = $Marker2
+@onready var marker_2: Marker2D = $Marker1
 @onready var house_area: Area2D = $houses
 @onready var explosion_detector: Area2D = $ExplosionDetector
 @onready var repair_detector: Area2D = $RepairDetector
@@ -528,9 +528,8 @@ func spawn_pawns() -> void:
 		"yellow":pawn_scene=pawn_yellow
 		_: return
 
-	var half=int(ceil(spawn_count/2.0))
-	_spawn_pawns_around_marker(marker_1.global_position,half,pawn_scene)
-	_spawn_pawns_around_marker(marker_2.global_position,spawn_count-half,pawn_scene)
+	# House1 scene only has Marker1. Use it for all spawns.
+	_spawn_pawns_around_marker(marker_1.global_position,spawn_count,pawn_scene)
 
 func _spawn_pawns_around_marker(center:Vector2,count:int,pawn_scene:PackedScene) -> void:
 	for i in count:
