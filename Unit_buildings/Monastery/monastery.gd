@@ -4,7 +4,6 @@ extends StaticBody2D
 @onready var animation: AnimatedSprite2D = $animation
 @onready var shape: CollisionShape2D = $shape
 @onready var marker_1: Marker2D = $Marker1
-@onready var marker_2: Marker2D = $Marker2
 @onready var monastery: Area2D = $monastery
 @onready var explosion_detector: Area2D = $ExplosionDetector
 @onready var repair_detector: Area2D = $RepairDetector
@@ -530,7 +529,6 @@ func spawn_monks() -> void:
 
 	var half=int(ceil(spawn_count/2.0))
 	_spawn_monks_around_marker(marker_1.global_position,half,monk_scene)
-	_spawn_monks_around_marker(marker_2.global_position,spawn_count-half,monk_scene)
 
 func _spawn_monks_around_marker(center:Vector2,count:int,monk_scene:PackedScene) -> void:
 	for i in count:
