@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="18_pr8ms"]
 [ext_resource type="PackedScene" uid="uid://cnwh1y11vterv" path="res://Unit_buildings/Tower/tower.tscn" id="20_43wwi"]
 [ext_resource type="PackedScene" uid="uid://dh2i8jr1xj06a" path="res://Unit_buildings/Monastery/monastery.tscn" id="21_gtojq"]
+[ext_resource type="PackedScene" uid="uid://dk2yulusjm345" path="res://Unit_buildings/Barrack/barrack.tscn" id="22_p3ug2"]
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
@@ -883,7 +884,10 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [node name="tower" parent="." unique_id=1301632932 instance=ExtResource("20_43wwi")]
-position = Vector2(272, 696)
+position = Vector2(1064, 280)
 
 [node name="monastery" parent="." unique_id=1251873998 instance=ExtResource("21_gtojq")]
-position = Vector2(1136, 640)
+position = Vector2(1256, 264)
+
+[node name="barrack" parent="." unique_id=233361990 instance=ExtResource("22_p3ug2")]
+position = Vector2(832, 304)
