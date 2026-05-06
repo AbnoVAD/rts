@@ -25,7 +25,7 @@ var collision_disabled:bool=false
 @export var construction_time:float=2.0
 @export var max_life:int=6
 @export var repair_time:float=4.0
-@export var lancer_capacity:int=4
+@export var monk_capacity:int=1
 @export var spawn_radius:float=40.0
 @export var repair_gold_cost:=30
 @export var repair_wood_cost:=20
@@ -58,15 +58,15 @@ var hit_flash_time:=0.15
 var is_being_repaired:=false
 
 #--------------------------------------------------
-#Lancer scenes "non_moving"
+#Monk scenes "non_moving"
 #--------------------------------------------------
-var lancer_black=preload("res://Units/Lancer/lancer_black.tscn")
-var lancer_blue=preload("res://Units/Lancer/lancer_blue.tscn")
-var lancer_red=preload("res://Units/Lancer/lancer_red.tscn")
-var lancer_purple=preload("res://Units/Lancer/lancer_purple.tscn")
-var lancer_yellow=preload("res://Units/Lancer/lancer_yellow.tscn")
+var monk_black=preload("res://Units/Monk/monk_black.tscn")
+var monk_blue=preload("res://Units/Monk/monk_blue.tscn")
+var monk_red=preload("res://Units/Monk/monk_red.tscn")
+var monk_purple=preload("res://Units/Monk/monk_purple.tscn")
+var monk_yellow=preload("res://Units/Monk/monk_yellow.tscn")
 
-var spawned_lancer:Array=[]
+var spawned_monks:Array=[]
 
 #--------------------------------------------------
 #Timers and tweens
@@ -128,8 +128,8 @@ func _ready() -> void:
 #Process
 #--------------------------------------------------
 func _process(delta:float) -> void:
-	if state==STATE_IDLE and spawned_lancer.size()<lancer_capacity and Global.can_spawn():
-		spawn_lancers()
+	if state==STATE_IDLE and spawned_monks.size()<monk_capacity and Global.can_spawn():
+		spawn_monks()
 	if is_hit:
 		hit_flash_timer-=delta
 		if hit_flash_timer<=0:
@@ -213,7 +213,7 @@ func _reset_after_movement():
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
-		spawn_lancers()
+		spawn_monks()
 
 func _cancel_movement()->void:
 	var return_tween=create_tween()
@@ -361,8 +361,8 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring=false
 	if animation:
 		animation.modulate=Color.WHITE
-	spawned_lancer.clear()
-	spawn_lancers()
+	spawned_monks.clear()
+	spawn_monks()
 
 func enter_destroyed_state() -> void:
 	update_collision_logic()
@@ -497,47 +497,47 @@ func show_repair_pulse() -> void:
 #--------------------------------------------------
 #Death handler
 #--------------------------------------------------
-func _on_lancer_died(lancer)->void:
-	if spawned_lancer.has(lancer):
-		spawned_lancer.erase(lancer)
+func _on_monk_died(monk)->void:
+	if spawned_monks.has(monk):
+		spawned_monks.erase(monk)
 
 #--------------------------------------------------
-#Spawn lancer
+#Spawn monks
 #--------------------------------------------------
-func spawn_lancers() -> void:
-	if spawned_lancer.size()>=lancer_capacity:
+func spawn_monks() -> void:
+	if spawned_monks.size()>=monk_capacity:
 		return
 
-#meat availability
+	# meat availability
 	var meat_available=Global.meat
 	if meat_available<=0:
 		return
 
-#count max lancer capacity
-	var remaining_capacity=lancer_capacity-spawned_lancer.size()
+	# count max monk capacity
+	var remaining_capacity=monk_capacity-spawned_monks.size()
 	var spawn_count=min(remaining_capacity,meat_available)
 	if spawn_count<=0:
 		return
 
-	var lancer_scene:PackedScene
+	var monk_scene:PackedScene
 	match Global.choosed_colour.to_lower():
-		"black":lancer_scene=lancer_black
-		"blue":lancer_scene=lancer_blue
-		"red":lancer_scene=lancer_red
-		"purple":lancer_scene=lancer_purple
-		"yellow":lancer_scene=lancer_yellow
+		"black":monk_scene=monk_black
+		"blue":monk_scene=monk_blue
+		"red":monk_scene=monk_red
+		"purple":monk_scene=monk_purple
+		"yellow":monk_scene=monk_yellow
 		_: return
 
 	var half=int(ceil(spawn_count/2.0))
-	_spawn_lancers_around_marker(marker_1.global_position,half,lancer_scene)
-	_spawn_lancers_around_marker(marker_2.global_position,spawn_count-half,lancer_scene)
+	_spawn_monks_around_marker(marker_1.global_position,half,monk_scene)
+	_spawn_monks_around_marker(marker_2.global_position,spawn_count-half,monk_scene)
 
-func _spawn_lancers_around_marker(center:Vector2,count:int,lancer_scene:PackedScene) -> void:
+func _spawn_monks_around_marker(center:Vector2,count:int,monk_scene:PackedScene) -> void:
 	for i in count:
-		var new_lancer=lancer_scene.instantiate()
-		get_parent().add_child(new_lancer)
-		new_lancer.z_index=4
-		new_lancer.scale=Vector2(0.7,0.7)
+		var new_monk=monk_scene.instantiate()
+		get_parent().add_child(new_monk)
+		new_monk.z_index=4
+		new_monk.scale=Vector2(0.7,0.7)
 
 		var pos:Vector2=center
 		var tries=0
@@ -546,7 +546,7 @@ func _spawn_lancers_around_marker(center:Vector2,count:int,lancer_scene:PackedSc
 			var radius=randf()*spawn_radius
 			var candidate=center+Vector2(cos(angle),sin(angle))*radius
 			var overlapping=false
-			for other in spawned_lancer:
+			for other in spawned_monks:
 				if candidate.distance_to(other.global_position)<16.0:
 					overlapping=true
 					break
@@ -554,13 +554,13 @@ func _spawn_lancers_around_marker(center:Vector2,count:int,lancer_scene:PackedSc
 			if not overlapping:
 				pos=candidate
 				break
-		new_lancer.global_position=pos
-		spawned_lancer.append(new_lancer)
+		new_monk.global_position=pos
+		spawned_monks.append(new_monk)
 
-		#death signal connected
-		new_lancer.died.connect(_on_lancer_died)
+		# death signal connected
+		new_monk.died.connect(_on_monk_died)
 
-		#consume meat
+		# consume meat
 		Global.consume_meat(1)
 
 var last_collision_state:bool=false
