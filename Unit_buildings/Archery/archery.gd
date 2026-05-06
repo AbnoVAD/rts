@@ -5,7 +5,7 @@ extends StaticBody2D
 @onready var shape: CollisionShape2D = $shape
 @onready var marker_1: Marker2D = $Marker1
 @onready var marker_2: Marker2D = $Marker2
-@onready var barrack_area: Area2D = $archerys
+@onready var archery_area: Area2D = $archerys # TODO: consider renaming node to "archery" and update path
 @onready var explosion_detector: Area2D = $ExplosionDetector
 @onready var repair_detector: Area2D = $RepairDetector
 @onready var placement_checker: Area2D = $PlacementChecker
@@ -25,7 +25,7 @@ var collision_disabled:bool=false
 @export var construction_time:float=2.0
 @export var max_life:int=6
 @export var repair_time:float=4.0
-@export var knight_capacity:int=4
+@export var archer_capacity:int=4
 @export var spawn_radius:float=40.0
 @export var repair_gold_cost:=30
 @export var repair_wood_cost:=20
@@ -58,15 +58,15 @@ var hit_flash_time:=0.15
 var is_being_repaired:=false
 
 #--------------------------------------------------
-#Knight scenes "non_moving"
+#Archer scenes "non_moving"
 #--------------------------------------------------
-var knight_black=preload("res://Units/Knight/knight_black.tscn")
-var knight_blue=preload("res://Units/Knight/knight_blue.tscn")
-var knight_red=preload("res://Units/Knight/knight_red.tscn")
-var knight_purple=preload("res://Units/Knight/knight_purple.tscn")
-var knight_yellow=preload("res://Units/Knight/knight_yellow.tscn")
+var archer_black=preload("res://Units/Archer/archer_black.tscn")
+var archer_blue=preload("res://Units/Archer/archer_blue.tscn")
+var archer_red=preload("res://Units/Archer/archer_red.tscn")
+var archer_purple=preload("res://Units/Archer/archer_purple.tscn")
+var archer_yellow=preload("res://Units/Archer/archer_yellow.tscn")
 
-var spawned_knights:Array=[]
+var spawned_archers:Array=[]
 
 #--------------------------------------------------
 #Timers and tweens
@@ -128,8 +128,8 @@ func _ready() -> void:
 #Process
 #--------------------------------------------------
 func _process(delta:float) -> void:
-	if state==STATE_IDLE and spawned_knights.size()<knight_capacity and Global.can_spawn():
-		spawn_knights()
+	if state==STATE_IDLE and spawned_archers.size()<archer_capacity and Global.can_spawn():
+		spawn_archers()
 	if is_hit:
 		hit_flash_timer-=delta
 		if hit_flash_timer<=0:
@@ -213,7 +213,7 @@ func _reset_after_movement():
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
-		spawn_knights()
+		spawn_archers()
 
 func _cancel_movement()->void:
 	var return_tween=create_tween()
@@ -361,8 +361,8 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring=false
 	if animation:
 		animation.modulate=Color.WHITE
-	spawned_knights.clear()
-	spawn_knights()
+	spawned_archers.clear()
+	spawn_archers()
 
 func enter_destroyed_state() -> void:
 	update_collision_logic()
@@ -497,15 +497,15 @@ func show_repair_pulse() -> void:
 #--------------------------------------------------
 #Death handler
 #--------------------------------------------------
-func _on_knight_died(knight)->void:
-	if spawned_knights.has(knight):
-		spawned_knights.erase(knight)
+func _on_archer_died(archer)->void:
+	if spawned_archers.has(archer):
+		spawned_archers.erase(archer)
 
 #--------------------------------------------------
-#Spawn knights
+#Spawn archers
 #--------------------------------------------------
-func spawn_knights() -> void:
-	if spawned_knights.size()>=knight_capacity:
+func spawn_archers() -> void:
+	if spawned_archers.size()>=archer_capacity:
 		return
 
 	# meat availability (kept same resource as original Monastery)
@@ -513,31 +513,31 @@ func spawn_knights() -> void:
 	if meat_available<=0:
 		return
 
-	# count max knight capacity
-	var remaining_capacity=knight_capacity-spawned_knights.size()
+	# count max archer capacity
+	var remaining_capacity=archer_capacity-spawned_archers.size()
 	var spawn_count=min(remaining_capacity,meat_available)
 	if spawn_count<=0:
 		return
 
-	var knight_scene:PackedScene
+	var archer_scene:PackedScene
 	match Global.choosed_colour.to_lower():
-		"black":knight_scene=knight_black
-		"blue":knight_scene=knight_blue
-		"red":knight_scene=knight_red
-		"purple":knight_scene=knight_purple
-		"yellow":knight_scene=knight_yellow
+		"black":archer_scene=archer_black
+		"blue":archer_scene=archer_blue
+		"red":archer_scene=archer_red
+		"purple":archer_scene=archer_purple
+		"yellow":archer_scene=archer_yellow
 		_: return
 
 	var half=int(ceil(spawn_count/2.0))
-	_spawn_knights_around_marker(marker_1.global_position,half,knight_scene)
-	_spawn_knights_around_marker(marker_2.global_position,spawn_count-half,knight_scene)
+	_spawn_archers_around_marker(marker_1.global_position,half,archer_scene)
+	_spawn_archers_around_marker(marker_2.global_position,spawn_count-half,archer_scene)
 
-func _spawn_knights_around_marker(center:Vector2,count:int,knight_scene:PackedScene) -> void:
+func _spawn_archers_around_marker(center:Vector2,count:int,archer_scene:PackedScene) -> void:
 	for i in count:
-		var new_knight=knight_scene.instantiate()
-		get_parent().add_child(new_knight)
-		new_knight.z_index=4
-		new_knight.scale=Vector2(0.7,0.7)
+		var new_archer=archer_scene.instantiate()
+		get_parent().add_child(new_archer)
+		new_archer.z_index=4
+		new_archer.scale=Vector2(0.7,0.7)
 
 		var pos:Vector2=center
 		var tries=0
@@ -546,7 +546,7 @@ func _spawn_knights_around_marker(center:Vector2,count:int,knight_scene:PackedSc
 			var radius=randf()*spawn_radius
 			var candidate=center+Vector2(cos(angle),sin(angle))*radius
 			var overlapping=false
-			for other in spawned_knights:
+			for other in spawned_archers:
 				if candidate.distance_to(other.global_position)<16.0:
 					overlapping=true
 					break
@@ -554,11 +554,11 @@ func _spawn_knights_around_marker(center:Vector2,count:int,knight_scene:PackedSc
 			if not overlapping:
 				pos=candidate
 				break
-		new_knight.global_position=pos
-		spawned_knights.append(new_knight)
+		new_archer.global_position=pos
+		spawned_archers.append(new_archer)
 
 		# death signal connected
-		new_knight.died.connect(_on_knight_died)
+		new_archer.died.connect(_on_archer_died)
 
 		# consume meat
 		Global.consume_meat(1)
