@@ -116,7 +116,7 @@ pitch_scale = 3.0
 
 [node name="construct_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1598343038]
 stream = ExtResource("4_u5xae")
-volume_db = -15.0
+volume_db = -30.0
 pitch_scale = 2.5
 
 [node name="place_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1463329995]

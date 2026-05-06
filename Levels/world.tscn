@@ -874,9 +874,6 @@ tile_map_data = PackedByteArray("AAADACgAAAAEAAQAAAADACkAAAAEAAQAAAADACcAAAAEAAQ
 tile_set = SubResource("TileSet_2u3nc")
 script = ExtResource("17_5stjl")
 
-[node name="pawn" parent="tiles" unique_id=505167057 instance=ExtResource("18_pr8ms")]
-position = Vector2(504, 680)
-
 [node name="selectionbox" type="Node2D" parent="." unique_id=427420427]
 script = ExtResource("23_8mbvr")
 
@@ -895,7 +892,10 @@ position = Vector2(1256, 264)
 position = Vector2(832, 304)
 
 [node name="archery" parent="." unique_id=984344348 instance=ExtResource("23_pr8ms")]
-position = Vector2(1256, 800)
+position = Vector2(1248, 744)
 
 [node name="house" parent="." unique_id=299082772 instance=ExtResource("24_pr8ms")]
 position = Vector2(240, 664)
+
+[node name="pawn" parent="." unique_id=505167057 instance=ExtResource("18_pr8ms")]
+position = Vector2(456, 568)
