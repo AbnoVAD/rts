@@ -74,11 +74,7 @@ metadata/_edit_lock_ = true
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
 visible = false
-position = Vector2(64, 160)
-
-[node name="Marker2" type="Marker2D" parent="." unique_id=1011600140]
-visible = false
-position = Vector2(-64, 160)
+position = Vector2(0, 184)
 
 [node name="monastery" type="Area2D" parent="." unique_id=826380079]
 
