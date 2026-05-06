@@ -1,32 +1,20 @@
-[gd_scene format=3 uid="uid://cy8y5vvu6bfpx"]
+[gd_scene format=3 uid="uid://bnfawgslcw60f"]
 
-[ext_resource type="Script" uid="uid://cvgt7ui3oseav" path="res://Unit_buildings/Archery/archery.gd" id="1_h73io"]
-[ext_resource type="Texture2D" uid="uid://823qpl2l8dt" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Construction.png" id="2_h73io"]
-[ext_resource type="Texture2D" uid="uid://d0obp8unqeere" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Destroyed.png" id="3_2s20k"]
-[ext_resource type="Texture2D" uid="uid://d315xseuk7qpa" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Archery.png" id="4_h73io"]
-[ext_resource type="Script" uid="uid://cutbx3y6u4onv" path="res://Unit_buildings/Archery/animation_archery.gd" id="5_sjqn4"]
-[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_3f23m"]
-[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_yg1xb"]
-[ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_u06cp"]
-[ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_x6k77"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_01nb5"]
-atlas = ExtResource("2_h73io")
-region = Rect2(0, 0, 320, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_scv08"]
-atlas = ExtResource("3_2s20k")
-region = Rect2(0, 0, 320, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2s20k"]
-atlas = ExtResource("4_h73io")
-region = Rect2(0, 0, 192, 256)
+[ext_resource type="Script" uid="uid://ig4isma2xkqs" path="res://Unit_buildings/House1/house1.gd" id="1_cu3tm"]
+[ext_resource type="Texture2D" uid="uid://c3pito7uc4xxk" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Construction.png" id="2_5gypc"]
+[ext_resource type="Texture2D" uid="uid://26tais8n5blu" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Destroyed.png" id="3_wdemo"]
+[ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="4_jq6ir"]
+[ext_resource type="Script" uid="uid://cbk38k134cewg" path="res://Unit_buildings/House1/animation_house1.gd" id="5_rnm2j"]
+[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_0q4s2"]
+[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_mlaun"]
+[ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_5mq6o"]
+[ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_qv16y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nc1jm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_01nb5")
+"texture": ExtResource("2_5gypc")
 }],
 "loop": false,
 "name": &"construct",
@@ -34,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_scv08")
+"texture": ExtResource("3_wdemo")
 }],
 "loop": true,
 "name": &"destroyed",
@@ -42,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2s20k")
+"texture": ExtResource("4_jq6ir")
 }],
 "loop": true,
 "name": &"idle",
@@ -50,49 +38,46 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dm2n5"]
-size = Vector2(160, 152)
+size = Vector2(96, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ek573"]
-radius = 80.0
+radius = 56.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lkwq"]
-size = Vector2(152, 144)
+size = Vector2(96, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l2qs"]
-size = Vector2(152, 144)
+size = Vector2(96, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af0i0"]
-size = Vector2(168, 88)
+size = Vector2(80, 72)
 
-[node name="archery" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
-script = ExtResource("1_h73io")
+[node name="house" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
+script = ExtResource("1_cu3tm")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
 position = Vector2(16, -8)
 sprite_frames = SubResource("SpriteFrames_nc1jm")
 animation = &"idle"
 autoplay = "construct"
-script = ExtResource("5_sjqn4")
+script = ExtResource("5_rnm2j")
+metadata/_edit_lock_ = true
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1492661873]
 visible = false
-position = Vector2(8, 20)
+position = Vector2(16, -8)
 shape = SubResource("RectangleShape2D_dm2n5")
-metadata/_edit_lock_ = true
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
 visible = false
-position = Vector2(64, 160)
+position = Vector2(16, 88)
+metadata/_edit_lock_ = true
 
-[node name="Marker2" type="Marker2D" parent="." unique_id=1011600140]
+[node name="houses" type="Area2D" parent="." unique_id=826380079]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="houses" unique_id=1626908274]
 visible = false
-position = Vector2(-64, 160)
-
-[node name="archerys" type="Area2D" parent="." unique_id=826380079]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="archerys" unique_id=1626908274]
-visible = false
-position = Vector2(8, 16)
+position = Vector2(16, 0)
 shape = SubResource("CircleShape2D_ek573")
 debug_color = Color(0, 0.64931995, 0.16058418, 0.41960785)
 metadata/_edit_lock_ = true
@@ -101,7 +86,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=1155507561]
 visible = false
-position = Vector2(12, 16)
+position = Vector2(16, -4)
 shape = SubResource("RectangleShape2D_6lkwq")
 debug_color = Color(0.99386555, 0, 0.23811516, 0.41960785)
 metadata/_edit_lock_ = true
@@ -110,7 +95,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RepairDetector" unique_id=57925926]
 visible = false
-position = Vector2(12, 16)
+position = Vector2(16, -4)
 shape = SubResource("RectangleShape2D_6l2qs")
 metadata/_edit_lock_ = true
 
@@ -118,7 +103,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementChecker" unique_id=1825084020]
 visible = false
-position = Vector2(12, 52)
+position = Vector2(16, 20)
 shape = SubResource("RectangleShape2D_af0i0")
 debug_color = Color(9.1448425e-07, 0.65070313, 0.09518888, 0.41960785)
 metadata/_edit_lock_ = true
@@ -126,20 +111,20 @@ metadata/_edit_lock_ = true
 [node name="sound fx" type="Node2D" parent="." unique_id=509742490]
 
 [node name="destroyed_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=717262668]
-stream = ExtResource("6_3f23m")
+stream = ExtResource("6_0q4s2")
 volume_db = -20.0
 pitch_scale = 3.0
 
 [node name="construct_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1598343038]
-stream = ExtResource("7_yg1xb")
+stream = ExtResource("7_mlaun")
 volume_db = -15.0
 pitch_scale = 2.5
 
 [node name="place_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1463329995]
-stream = ExtResource("8_u06cp")
+stream = ExtResource("8_5mq6o")
 pitch_scale = 2.0
 
 [node name="drop_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1221817837]
-stream = ExtResource("9_x6k77")
+stream = ExtResource("9_qv16y")
 volume_db = -5.0
 pitch_scale = 1.5

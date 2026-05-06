@@ -1,14 +1,22 @@
 [gd_scene format=3 uid="uid://dk2yulusjm345"]
 
 [ext_resource type="Script" uid="uid://d1wa86amkcxwp" path="res://Unit_buildings/Barrack/barrack.gd" id="1_6lkwq"]
-[ext_resource type="Texture2D" uid="uid://u5tikdkfii6i" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Construction.png" id="2_2bojt"]
-[ext_resource type="Texture2D" uid="uid://h8llrduqkyam" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Destroyed.png" id="3_71ene"]
+[ext_resource type="Texture2D" uid="uid://823qpl2l8dt" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Construction.png" id="2_6lkwq"]
+[ext_resource type="Texture2D" uid="uid://d0obp8unqeere" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Destroyed.png" id="3_6l2qs"]
 [ext_resource type="Texture2D" uid="uid://vtbudvb7mfrp" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Barracks.png" id="4_6lkwq"]
 [ext_resource type="Script" uid="uid://b36y543wpqwh7" path="res://Unit_buildings/Barrack/animation_barrack.gd" id="5_6l2qs"]
 [ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_yl0fb"]
 [ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_nhd6u"]
 [ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_2fe2m"]
 [ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_g13lm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc7f4"]
+atlas = ExtResource("2_6lkwq")
+region = Rect2(0, 0, 320, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rked1"]
+atlas = ExtResource("3_6l2qs")
+region = Rect2(0, 0, 320, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6l2qs"]
 atlas = ExtResource("4_6lkwq")
@@ -18,7 +26,7 @@ region = Rect2(0, 0, 192, 256)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2bojt")
+"texture": SubResource("AtlasTexture_xc7f4")
 }],
 "loop": false,
 "name": &"construct",
@@ -26,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_71ene")
+"texture": SubResource("AtlasTexture_rked1")
 }],
 "loop": true,
 "name": &"destroyed",
