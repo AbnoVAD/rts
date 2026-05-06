@@ -1,20 +1,20 @@
-[gd_scene format=3 uid="uid://bnfawgslcw60f"]
+[gd_scene format=3 uid="uid://o3u4hveerrku"]
 
-[ext_resource type="Script" uid="uid://ig4isma2xkqs" path="res://Unit_buildings/House1/house1.gd" id="1_cu3tm"]
-[ext_resource type="Texture2D" uid="uid://c3pito7uc4xxk" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Construction.png" id="2_5gypc"]
-[ext_resource type="Texture2D" uid="uid://26tais8n5blu" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Destroyed.png" id="3_wdemo"]
-[ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="4_jq6ir"]
-[ext_resource type="Script" uid="uid://cbk38k134cewg" path="res://Unit_buildings/House1/animation_house1.gd" id="5_rnm2j"]
-[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_0q4s2"]
-[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_mlaun"]
-[ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_5mq6o"]
-[ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_qv16y"]
+[ext_resource type="Script" uid="uid://m1h2hu3wet17" path="res://Unit_buildings/House3/house3.gd" id="1_ktjnn"]
+[ext_resource type="Texture2D" uid="uid://c3pito7uc4xxk" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Construction.png" id="2_8kk1a"]
+[ext_resource type="Texture2D" uid="uid://26tais8n5blu" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Destroyed.png" id="3_lei4t"]
+[ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="4_emtxx"]
+[ext_resource type="Script" uid="uid://dlwa73sbcrlkg" path="res://Unit_buildings/House3/animation_house3.gd" id="5_hrxvv"]
+[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_xby30"]
+[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_04cbh"]
+[ext_resource type="AudioStream" uid="uid://bmpp7xlc5pe0g" path="res://Audio/Buildings/place building.mp3" id="8_efsdx"]
+[ext_resource type="AudioStream" uid="uid://cahhb1w8tckpp" path="res://Audio/Buildings/wooden drop building.mp3" id="9_hx006"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nc1jm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_5gypc")
+"texture": ExtResource("2_8kk1a")
 }],
 "loop": false,
 "name": &"construct",
@@ -22,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_wdemo")
+"texture": ExtResource("3_lei4t")
 }],
 "loop": true,
 "name": &"destroyed",
@@ -30,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_jq6ir")
+"texture": ExtResource("4_emtxx")
 }],
 "loop": true,
 "name": &"idle",
@@ -53,14 +53,14 @@ size = Vector2(96, 120)
 size = Vector2(80, 72)
 
 [node name="house" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
-script = ExtResource("1_cu3tm")
+script = ExtResource("1_ktjnn")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
 position = Vector2(16, -8)
 sprite_frames = SubResource("SpriteFrames_nc1jm")
 animation = &"idle"
 autoplay = "construct"
-script = ExtResource("5_rnm2j")
+script = ExtResource("5_hrxvv")
 metadata/_edit_lock_ = true
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1492661873]
@@ -110,20 +110,20 @@ metadata/_edit_lock_ = true
 [node name="sound fx" type="Node2D" parent="." unique_id=509742490]
 
 [node name="destroyed_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=717262668]
-stream = ExtResource("6_0q4s2")
+stream = ExtResource("6_xby30")
 volume_db = -20.0
 pitch_scale = 3.0
 
 [node name="construct_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1598343038]
-stream = ExtResource("7_mlaun")
+stream = ExtResource("7_04cbh")
 volume_db = -30.0
 pitch_scale = 2.5
 
 [node name="place_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1463329995]
-stream = ExtResource("8_5mq6o")
+stream = ExtResource("8_efsdx")
 pitch_scale = 2.0
 
 [node name="drop_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1221817837]
-stream = ExtResource("9_qv16y")
+stream = ExtResource("9_hx006")
 volume_db = -5.0
 pitch_scale = 1.5
