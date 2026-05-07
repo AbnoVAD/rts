@@ -47,15 +47,13 @@ animations = [{
 size = Vector2(144, 152)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lkwq"]
-size = Vector2(272, 168)
+size = Vector2(256, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af0i0"]
-size = Vector2(256, 136)
+size = Vector2(256, 64)
 
 [node name="castle" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
 script = ExtResource("1_d0npw")
-construction_time = null
-max_life = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
 position = Vector2(16, -8)
@@ -89,7 +87,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=1155507561]
 visible = false
-position = Vector2(16, 4)
+position = Vector2(16, 20)
 shape = SubResource("RectangleShape2D_6lkwq")
 debug_color = Color(0.99386555, 0, 0.23811516, 0.41960785)
 metadata/_edit_lock_ = true
@@ -98,7 +96,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementChecker" unique_id=1825084020]
 visible = false
-position = Vector2(16, 20)
+position = Vector2(16, 56)
 shape = SubResource("RectangleShape2D_af0i0")
 debug_color = Color(9.1448425e-07, 0.65070313, 0.09518888, 0.41960785)
 metadata/_edit_lock_ = true

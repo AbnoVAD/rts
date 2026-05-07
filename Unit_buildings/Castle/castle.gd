@@ -48,11 +48,11 @@ var hit_flah_time:=0.15
 #Scenes
 #--------------------------------------------------
 #Archers
-var archer_black=preload("res://Units/Archer/archer_black.tscn")
-var archer_blue=preload("res://Units/Archer/archer_blue.tscn")
-var archer_red=preload("res://Units/Archer/archer_red.tscn")
-var archer_purple=preload("res://Units/Archer/archer_purple.tscn")
-var archer_yellow=preload("res://Units/Archer/archer_yellow.tscn")
+var archer_black=preload("res://Unit_buildings/Tower/Archer Tower/archer_black.tscn")
+var archer_blue=preload("res://Unit_buildings/Tower/Archer Tower/archer_blue.tscn")
+var archer_red=preload("res://Unit_buildings/Tower/Archer Tower/archer_red.tscn")
+var archer_purple=preload("res://Unit_buildings/Tower/Archer Tower/archer_purple.tscn")
+var archer_yellow=preload("res://Unit_buildings/Tower/Archer Tower/archer_yellow.tscn")
 var spawned_archer1:Node2D=null
 var spawned_archer2:Node2D=null
 #Pawns
@@ -108,9 +108,6 @@ func _ready() -> void:
 	placement_checker.area_exited.connect(_on_placement_area_exited)
 	placement_checker.body_entered.connect(_on_placement_body_entered)
 	placement_checker.body_exited.connect(_on_placement_body_exited)
-
-	explosion_detector.area_entered.connect(_on_explosion_area_entered)
-	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
 
 	enter_construct_state()
 
@@ -382,7 +379,6 @@ func enter_destroyed_state() -> void:
 		spawned_archer2=null
 
 	is_moving=false
-	is_awaiting_placement=false
 	overlapping_objects_count=0
 
 func _on_explosion_detector_area_entered(area: Area2D) -> void:
@@ -433,8 +429,8 @@ func spawn_archer() -> void:
 	spawned_archer2.global_position=marker_2.global_position
 	spawned_archer1.z_index=5
 	spawned_archer2.z_index=5
-	spawned_archer1.scale=Vector2(0.7,0.7)
-	spawned_archer2.scale=Vector2(0.7,0.7)
+	spawned_archer1.scale=Vector2(0.8,0.8)
+	spawned_archer2.scale=Vector2(0.8,0.8)
 
 func spawn_pawn() -> void:
 	if spawned_pawn!=null:
@@ -450,7 +446,7 @@ func spawn_pawn() -> void:
 		_: return
 
 	spawned_pawn=pawn_scene.instantiate()
-	add_child(spawned_pawn)
+	get_parent().add_child(spawned_pawn)
 	spawned_pawn.global_position=marker_3.global_position
 	spawned_pawn.z_index=5
 	spawned_pawn.scale=Vector2(0.7,0.7)
