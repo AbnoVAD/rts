@@ -109,9 +109,6 @@ func _ready() -> void:
 	placement_checker.body_entered.connect(_on_placement_body_entered)
 	placement_checker.body_exited.connect(_on_placement_body_exited)
 
-	explosion_detector.area_entered.connect(_on_explosion_area_entered)
-	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
-
 	enter_construct_state()
 
 #--------------------------------------------------
@@ -382,7 +379,6 @@ func enter_destroyed_state() -> void:
 		spawned_archer2=null
 
 	is_moving=false
-	is_awaiting_placement=false
 	overlapping_objects_count=0
 
 func _on_explosion_detector_area_entered(area: Area2D) -> void:
