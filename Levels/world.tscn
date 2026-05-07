@@ -17,7 +17,52 @@
 [ext_resource type="Texture2D" uid="uid://bjxwqwcicn4pr" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Bushes/Bushe4.png" id="15_dy3rw"]
 [ext_resource type="Texture2D" uid="uid://cub3hbpqqt58j" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner_Slots.png" id="16_c23wl"]
 [ext_resource type="Script" uid="uid://cfka4tff3iuy" path="res://Tiles/collider.gd" id="17_5stjl"]
+[ext_resource type="PackedScene" uid="uid://btgepwvc0l40s" path="res://Unit_buildings/Castle/castle.tscn" id="19_oyb16"]
+[ext_resource type="StyleBox" uid="uid://bbe05boqas5yh" path="res://Units/Monk/activation_buttons.tres" id="20_pr8ms"]
+[ext_resource type="Texture2D" uid="uid://c24c53pei6kit" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_11.png" id="21_6m1pe"]
+[ext_resource type="Texture2D" uid="uid://b6720cnp4yubx" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_12.png" id="22_d21qu"]
+[ext_resource type="Texture2D" uid="uid://lxnyvnbk4ww6" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_09.png" id="23_3dlel"]
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
+[ext_resource type="Texture2D" uid="uid://68m2wcr4r8vt" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_10.png" id="24_kss01"]
+[ext_resource type="Texture2D" uid="uid://0yqadh7qei0d" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Papers/RegularPaper.png" id="25_6m1pe"]
+[ext_resource type="Script" uid="uid://dyunu6q4010le" path="res://Unit_buildings/system_scripts/buildbutton.gd" id="26_nraib"]
+[ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="26_w2dt3"]
+[ext_resource type="Texture2D" uid="uid://cl6lwvubsnv5i" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House1.png" id="27_nraib"]
+[ext_resource type="Texture2D" uid="uid://cy3nrabdfl0ms" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House1.png" id="28_fy421"]
+[ext_resource type="Texture2D" uid="uid://2iwvpuhk51tv" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House1.png" id="29_sbard"]
+[ext_resource type="Texture2D" uid="uid://cftuhlqh5e5uk" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House1.png" id="30_glkdj"]
+[ext_resource type="Texture2D" uid="uid://dhbms74opktf7" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House2.png" id="31_b76on"]
+[ext_resource type="Texture2D" uid="uid://bh4dn1gxyhto" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House2.png" id="32_a5o0p"]
+[ext_resource type="Script" uid="uid://vo4ni66ldo62" path="res://Unit_buildings/system_scripts/animation.gd" id="32_fy421"]
+[ext_resource type="Texture2D" uid="uid://c8m6ocf1elwau" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House2.png" id="33_ecjdc"]
+[ext_resource type="Texture2D" uid="uid://e8h7ilkamc3s" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House2.png" id="34_orv0x"]
+[ext_resource type="Texture2D" uid="uid://cm8vtynvark4v" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House2.png" id="35_dyk1g"]
+[ext_resource type="Texture2D" uid="uid://by1mav1kb4lue" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House3.png" id="36_dkqh0"]
+[ext_resource type="Texture2D" uid="uid://cxjdldbd35yo4" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House3.png" id="37_87tx4"]
+[ext_resource type="Texture2D" uid="uid://bo2rnafk5kiqe" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House3.png" id="38_t88gd"]
+[ext_resource type="Texture2D" uid="uid://dimd8yp7r38ew" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House3.png" id="39_8bj8g"]
+[ext_resource type="Texture2D" uid="uid://d026jcgurtpfp" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House3.png" id="40_ff1ef"]
+[ext_resource type="Texture2D" uid="uid://cetcv0lvbh3bb" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Tower.png" id="41_62tsw"]
+[ext_resource type="Texture2D" uid="uid://dxuvu6c2gunhi" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Tower.png" id="42_s4pbv"]
+[ext_resource type="Texture2D" uid="uid://beealqek38kpb" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/Tower.png" id="43_c3360"]
+[ext_resource type="Texture2D" uid="uid://dymxaqn0bbfnn" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png" id="44_tshjc"]
+[ext_resource type="Texture2D" uid="uid://8v82c2ujjkjb" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Tower.png" id="45_5d5mn"]
+[ext_resource type="Texture2D" uid="uid://vtbudvb7mfrp" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Barracks.png" id="46_26mxx"]
+[ext_resource type="Texture2D" uid="uid://cm7yluj4opr6h" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Barracks.png" id="47_i0uqm"]
+[ext_resource type="Texture2D" uid="uid://dtt8ax0l6t8wu" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/Barracks.png" id="48_6qkn7"]
+[ext_resource type="Texture2D" uid="uid://c07jnqbdrgld4" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Barracks.png" id="49_qy5gk"]
+[ext_resource type="Texture2D" uid="uid://dhk8tbb43rgmh" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Barracks.png" id="50_82yax"]
+[ext_resource type="Texture2D" uid="uid://bpi6w8ovlseps" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Monastery.png" id="51_s0y2e"]
+[ext_resource type="Texture2D" uid="uid://hhx01dskitfr" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Monastery.png" id="52_itf48"]
+[ext_resource type="Texture2D" uid="uid://cp83883imy5kn" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/Monastery.png" id="53_0b2ro"]
+[ext_resource type="Texture2D" uid="uid://qxidx71nvgx7" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Monastery.png" id="54_nk7yi"]
+[ext_resource type="Texture2D" uid="uid://c5g5i6rw6x0xd" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Monastery.png" id="55_2ycq6"]
+[ext_resource type="Texture2D" uid="uid://d315xseuk7qpa" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Archery.png" id="56_fqloe"]
+[ext_resource type="Texture2D" uid="uid://xafbvb3ipoog" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/Archery.png" id="57_vuvlg"]
+[ext_resource type="Texture2D" uid="uid://cj83l2385fnmc" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/Archery.png" id="58_564ss"]
+[ext_resource type="Texture2D" uid="uid://diwww1qpvhdpv" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Archery.png" id="59_b4m7t"]
+[ext_resource type="Texture2D" uid="uid://bsgkdkg5p1wpo" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Archery.png" id="60_82qwp"]
+[ext_resource type="Script" uid="uid://dbadskbdp2fv6" path="res://Unit_buildings/Build Manager/building_manager.gd" id="63_sbard"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -816,20 +861,357 @@ physics_layer_0/collision_layer = 31
 physics_layer_0/collision_mask = 31
 sources/0 = SubResource("TileSetAtlasSource_o3ebs")
 
+[sub_resource type="TileSet" id="TileSet_mgs3r"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d21qu"]
+texture = ExtResource("25_6m1pe")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+4:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3dlel"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_d21qu")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pd42k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_w2dt3")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_nraib")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_fy421")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_sbard")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_glkdj")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1uet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_b76on")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_a5o0p")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_ecjdc")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_orv0x")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_dyk1g")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oiwek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_dkqh0")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_87tx4")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_t88gd")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_8bj8g")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("40_ff1ef")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i2p53"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_62tsw")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_s4pbv")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("43_c3360")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_tshjc")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("45_5d5mn")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3go7w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_26mxx")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_i0uqm")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_6qkn7")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_qy5gk")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_82yax")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nklvi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("51_s0y2e")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("52_itf48")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("53_0b2ro")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("54_nk7yi")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_2ycq6")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5y2v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("56_fqloe")
+}],
+"loop": true,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("57_vuvlg")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("58_564ss")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("59_b4m7t")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("60_82qwp")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6m1pe"]
+texture = ExtResource("25_6m1pe")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+0:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+0:4/0 = 0
+2:4/0 = 0
+4:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_d21qu"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_6m1pe")
+
 [node name="level_stage" type="Node2D" unique_id=1022137402]
 
 [node name="sea" type="TextureRect" parent="." unique_id=1787671636]
 z_index = -10
-offset_left = -1160.0
+offset_left = -1152.0
 offset_top = -512.0
-offset_right = 2272.0
+offset_right = 2280.0
 offset_bottom = 1600.0
 texture = ExtResource("1_ikoig")
 
 [node name="tiles" type="Node2D" parent="." unique_id=1174837673]
 
 [node name="wintertile" type="TileMapLayer" parent="tiles" unique_id=1849625398 groups=["ground_tilemap"]]
-tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAACAAMAAAABAAAAAAABAAQAAAAAAAEAAAADAAMAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAHAAMAAAABAAAAAAABAAUAAAAAAAEAAAABAAYAAAAAAAEAAAABAAcAAAAAAAEAAAACAAQAAAABAAEAAAACAAUAAAABAAEAAAACAAYAAAABAAEAAAACAAcAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAADAAYAAAABAAEAAAADAAcAAAABAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAEAAcAAAABAAEAAAAFAAQAAAABAAEAAAAFAAUAAAABAAEAAAAFAAYAAAABAAEAAAAFAAcAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAGAAYAAAABAAEAAAAGAAcAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAAHAAYAAAABAAEAAAAHAAcAAAABAAEAAAABAAgAAAAAAAEAAAABAAkAAAAAAAEAAAACAAkAAAABAAEAAAADAAkAAAABAAEAAAAEAAkAAAABAAEAAAAFAAkAAAABAAEAAAAGAAkAAAABAAEAAAAHAAkAAAABAAEAAAACAAgAAAABAAEAAAADAAgAAAABAAEAAAAEAAgAAAABAAEAAAAFAAgAAAABAAEAAAAGAAgAAAABAAEAAAAHAAgAAAABAAEAAAAKAAkAAAABAAEAAAAIAAkAAAABAAEAAAAJAAkAAAABAAEAAAAIAAMAAAABAAAAAAAJAAMAAAABAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAEAAAAKAAUAAAABAAEAAAAKAAYAAAABAAEAAAAKAAcAAAABAAEAAAAKAAgAAAABAAEAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAIAAgAAAABAAEAAAAJAAQAAAABAAEAAAAJAAUAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAEAAAAJAAgAAAABAAEAAAD4////AAAAAAAAAAD4/wAAAAAAAAEAAAD4/wEAAAAAAAIAAAD4/wIAAAAFAAQAAAD5////AAABAAAAAAD5/wAAAAABAAEAAAD5/wEAAAABAAIAAAD5/wIAAAAGAAQAAAD6////AAABAAAAAAD6/wAAAAABAAEAAAD6/wEAAAABAAIAAAD6/wIAAAAGAAQAAAD7////AAACAAAAAAD7/wAAAAACAAEAAAD7/wEAAAACAAIAAAD7/wIAAAAHAAQAAAD6/woAAAAAAAAAAAD6/wsAAAAAAAEAAAD6/wwAAAAAAAIAAAD6/w0AAAAFAAQAAAD7/woAAAABAAAAAAD7/wsAAAABAAEAAAD7/wwAAAABAAIAAAD7/w0AAAAGAAQAAAD8/woAAAABAAAAAAD8/wsAAAABAAEAAAD8/wwAAAABAAIAAAD8/w0AAAAGAAQAAAD9/woAAAACAAAAAAD9/wsAAAACAAEAAAD9/wwAAAACAAIAAAD9/w0AAAAHAAQAAAARAAcAAAABAAEAAAARAAgAAAABAAEAAAARAAkAAAABAAEAAAARAAoAAAABAAEAAAASAAcAAAABAAEAAAASAAgAAAABAAEAAAASAAkAAAABAAEAAAASAAoAAAABAAEAAAATAAcAAAABAAEAAAATAAgAAAABAAEAAAATAAkAAAABAAEAAAATAAoAAAABAAEAAAAUAAcAAAABAAEAAAAUAAgAAAABAAEAAAAUAAkAAAABAAEAAAAUAAoAAAABAAEAAAALAAMAAAABAAAAAAAMAAMAAAABAAAAAAANAAMAAAABAAAAAAAOAAMAAAABAAAAAAAPAAMAAAABAAAAAAAQAAMAAAABAAAAAAARAAMAAAABAAAAAAARAAQAAAABAAEAAAARAAUAAAABAAEAAAARAAYAAAABAAEAAAARAAsAAAABAAEAAAARAAwAAAABAAEAAAARAA0AAAABAAEAAAARAA4AAAABAAIAAAABAA4AAAAAAAIAAAABAAoAAAAAAAEAAAABAAsAAAAAAAEAAAABAAwAAAAAAAEAAAABAA0AAAAAAAEAAAACAA4AAAABAAIAAAADAA4AAAABAAIAAAAEAA4AAAABAAIAAAAFAA4AAAABAAIAAAAGAA4AAAABAAIAAAAHAA4AAAABAAIAAAAIAA4AAAABAAIAAAAJAA4AAAABAAIAAAAKAA4AAAABAAIAAAALAA4AAAABAAIAAAAMAA4AAAABAAIAAAANAA4AAAABAAIAAAAOAA4AAAABAAIAAAAPAA4AAAABAAIAAAAQAA4AAAABAAIAAAALAAkAAAABAAEAAAAMAAkAAAABAAEAAAAMAAoAAAABAAEAAAANAAoAAAABAAEAAAAOAAoAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAPAAwAAAABAAEAAAAQAAwAAAABAAEAAAAQAA0AAAABAAEAAAACAAoAAAABAAEAAAACAAsAAAABAAEAAAACAAwAAAABAAEAAAACAA0AAAABAAEAAAADAAoAAAABAAEAAAADAAsAAAABAAEAAAADAAwAAAABAAEAAAADAA0AAAABAAEAAAAEAAoAAAABAAEAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAAEAA0AAAABAAEAAAAFAAoAAAABAAEAAAAFAAsAAAABAAEAAAAFAAwAAAABAAEAAAAFAA0AAAABAAEAAAAGAAoAAAABAAEAAAAGAAsAAAABAAEAAAAGAAwAAAABAAEAAAAGAA0AAAABAAEAAAAHAAoAAAABAAEAAAAHAAsAAAABAAEAAAAHAAwAAAABAAEAAAAHAA0AAAABAAEAAAAIAAoAAAABAAEAAAAIAAsAAAABAAEAAAAIAAwAAAABAAEAAAAIAA0AAAABAAEAAAAJAAoAAAABAAEAAAAJAAsAAAABAAEAAAAJAAwAAAABAAEAAAAJAA0AAAABAAEAAAAKAAoAAAABAAEAAAAKAAsAAAABAAEAAAAKAAwAAAABAAEAAAAKAA0AAAABAAEAAAALAAQAAAABAAEAAAALAAUAAAABAAEAAAALAAYAAAABAAEAAAALAAcAAAABAAEAAAALAAgAAAABAAEAAAALAAoAAAABAAEAAAALAAsAAAABAAEAAAALAAwAAAABAAEAAAALAA0AAAABAAEAAAAMAAQAAAABAAEAAAAMAAUAAAABAAEAAAAMAAYAAAABAAEAAAAMAAcAAAABAAEAAAAMAAgAAAABAAEAAAAMAAsAAAABAAEAAAAMAAwAAAABAAEAAAAMAA0AAAABAAEAAAANAAQAAAABAAEAAAANAAUAAAABAAEAAAANAAYAAAABAAEAAAANAAcAAAABAAEAAAANAAgAAAABAAEAAAANAAkAAAABAAEAAAANAAsAAAABAAEAAAANAAwAAAABAAEAAAANAA0AAAABAAEAAAAOAAQAAAABAAEAAAAOAAUAAAABAAEAAAAOAAYAAAABAAEAAAAOAAcAAAABAAEAAAAOAAgAAAABAAEAAAAOAAkAAAABAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAPAAQAAAABAAEAAAAPAAUAAAABAAEAAAAPAAYAAAABAAEAAAAPAAcAAAABAAEAAAAPAAgAAAABAAEAAAAPAAkAAAABAAEAAAAPAAoAAAABAAEAAAAPAA0AAAABAAEAAAAQAAQAAAABAAEAAAAQAAUAAAABAAEAAAAQAAYAAAABAAEAAAAQAAcAAAABAAEAAAAQAAgAAAABAAEAAAAQAAkAAAABAAEAAAAQAAoAAAABAAEAAAAQAAsAAAABAAEAAAASAAQAAAABAAEAAAASAAUAAAABAAEAAAASAAYAAAABAAEAAAASAAsAAAABAAEAAAASAAwAAAABAAEAAAASAA0AAAABAAEAAAATAAQAAAABAAEAAAATAAUAAAABAAEAAAATAAYAAAABAAEAAAATAAsAAAABAAEAAAATAAwAAAABAAEAAAATAA0AAAABAAEAAAAUAAQAAAABAAEAAAAUAAUAAAABAAEAAAAUAAYAAAABAAEAAAAUAAsAAAABAAEAAAAUAAwAAAABAAEAAAAUAA0AAAABAAEAAAAVAAQAAAACAAEAAAAVAAUAAAACAAEAAAAVAAYAAAACAAEAAAAVAAcAAAACAAEAAAAVAAgAAAACAAEAAAAVAAkAAAACAAEAAAAVAAoAAAACAAEAAAAVAAsAAAACAAEAAAAVAAwAAAACAAEAAAAVAA0AAAACAAEAAAASAA4AAAABAAIAAAATAA4AAAABAAIAAAAUAA4AAAABAAIAAAASAAMAAAABAAAAAAATAAMAAAABAAAAAAAUAAMAAAABAAAAAAAVAAMAAAACAAAAAAAVAA4AAAACAAIAAAA=")
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAAAAAACAAMAAAABAAAAAAABAAQAAAAAAAEAAAADAAMAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAHAAMAAAABAAAAAAABAAUAAAAAAAEAAAABAAYAAAAAAAEAAAABAAcAAAAAAAEAAAACAAQAAAABAAEAAAACAAUAAAABAAEAAAACAAYAAAABAAEAAAACAAcAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAADAAYAAAABAAEAAAADAAcAAAABAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAEAAcAAAABAAEAAAAFAAQAAAABAAEAAAAFAAUAAAABAAEAAAAFAAYAAAABAAEAAAAFAAcAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAGAAYAAAABAAEAAAAGAAcAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAAHAAYAAAABAAEAAAAHAAcAAAABAAEAAAABAAgAAAAAAAEAAAABAAkAAAAAAAEAAAACAAkAAAABAAEAAAADAAkAAAABAAEAAAAEAAkAAAABAAEAAAAFAAkAAAABAAEAAAAGAAkAAAABAAEAAAAHAAkAAAABAAEAAAACAAgAAAABAAEAAAADAAgAAAABAAEAAAAEAAgAAAABAAEAAAAFAAgAAAABAAEAAAAGAAgAAAABAAEAAAAHAAgAAAABAAEAAAAKAAkAAAABAAEAAAAIAAkAAAABAAEAAAAJAAkAAAABAAEAAAAIAAMAAAABAAAAAAAJAAMAAAABAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAEAAAAKAAUAAAABAAEAAAAKAAYAAAABAAEAAAAKAAcAAAABAAEAAAAKAAgAAAABAAEAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAIAAgAAAABAAEAAAAJAAQAAAABAAEAAAAJAAUAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAEAAAAJAAgAAAABAAEAAAD4////AAAAAAAAAAD4/wAAAAAAAAEAAAD4/wEAAAAAAAIAAAD4/wIAAAAFAAQAAAD5////AAABAAAAAAD5/wAAAAABAAEAAAD5/wEAAAABAAIAAAD5/wIAAAAGAAQAAAD6////AAABAAAAAAD6/wAAAAABAAEAAAD6/wEAAAABAAIAAAD6/wIAAAAGAAQAAAD7////AAACAAAAAAD7/wAAAAACAAEAAAD7/wEAAAACAAIAAAD7/wIAAAAHAAQAAAD6/woAAAAAAAAAAAD6/wsAAAAAAAEAAAD6/wwAAAAAAAIAAAD6/w0AAAAFAAQAAAD7/woAAAABAAAAAAD7/wsAAAABAAEAAAD7/wwAAAABAAIAAAD7/w0AAAAGAAQAAAD8/woAAAABAAAAAAD8/wsAAAABAAEAAAD8/wwAAAABAAIAAAD8/w0AAAAGAAQAAAD9/woAAAACAAAAAAD9/wsAAAACAAEAAAD9/wwAAAACAAIAAAD9/w0AAAAHAAQAAAARAAcAAAABAAEAAAARAAgAAAABAAEAAAARAAkAAAABAAEAAAARAAoAAAABAAEAAAASAAcAAAABAAEAAAASAAgAAAABAAEAAAASAAkAAAABAAEAAAASAAoAAAABAAEAAAATAAcAAAABAAEAAAATAAgAAAABAAEAAAATAAkAAAABAAEAAAATAAoAAAABAAEAAAAUAAcAAAABAAEAAAAUAAgAAAABAAEAAAAUAAkAAAABAAEAAAAUAAoAAAABAAEAAAALAAMAAAABAAAAAAAMAAMAAAABAAAAAAANAAMAAAABAAAAAAAOAAMAAAABAAAAAAAPAAMAAAABAAAAAAAQAAMAAAABAAAAAAARAAMAAAABAAAAAAARAAQAAAABAAEAAAARAAUAAAABAAEAAAARAAYAAAABAAEAAAARAAsAAAABAAEAAAARAAwAAAABAAEAAAARAA0AAAABAAEAAAARAA4AAAABAAEAAAABAA4AAAAAAAEAAAABAAoAAAAAAAEAAAABAAsAAAAAAAEAAAABAAwAAAAAAAEAAAABAA0AAAAAAAEAAAACAA4AAAABAAEAAAADAA4AAAABAAEAAAAEAA4AAAABAAEAAAAFAA4AAAABAAEAAAAGAA4AAAABAAEAAAAHAA4AAAABAAEAAAAIAA4AAAABAAEAAAAJAA4AAAABAAEAAAAKAA4AAAABAAEAAAALAA4AAAABAAEAAAAMAA4AAAABAAEAAAANAA4AAAABAAEAAAAOAA4AAAABAAEAAAAPAA4AAAABAAEAAAAQAA4AAAABAAEAAAALAAkAAAABAAEAAAAMAAkAAAABAAEAAAAMAAoAAAABAAEAAAANAAoAAAABAAEAAAAOAAoAAAABAAEAAAAOAAsAAAABAAEAAAAPAAsAAAABAAEAAAAPAAwAAAABAAEAAAAQAAwAAAABAAEAAAAQAA0AAAABAAEAAAACAAoAAAABAAEAAAACAAsAAAABAAEAAAACAAwAAAABAAEAAAACAA0AAAABAAEAAAADAAoAAAABAAEAAAADAAsAAAABAAEAAAADAAwAAAABAAEAAAADAA0AAAABAAEAAAAEAAoAAAABAAEAAAAEAAsAAAABAAEAAAAEAAwAAAABAAEAAAAEAA0AAAABAAEAAAAFAAoAAAABAAEAAAAFAAsAAAABAAEAAAAFAAwAAAABAAEAAAAFAA0AAAABAAEAAAAGAAoAAAABAAEAAAAGAAsAAAABAAEAAAAGAAwAAAABAAEAAAAGAA0AAAABAAEAAAAHAAoAAAABAAEAAAAHAAsAAAABAAEAAAAHAAwAAAABAAEAAAAHAA0AAAABAAEAAAAIAAoAAAABAAEAAAAIAAsAAAABAAEAAAAIAAwAAAABAAEAAAAIAA0AAAABAAEAAAAJAAoAAAABAAEAAAAJAAsAAAABAAEAAAAJAAwAAAABAAEAAAAJAA0AAAABAAEAAAAKAAoAAAABAAEAAAAKAAsAAAABAAEAAAAKAAwAAAABAAEAAAAKAA0AAAABAAEAAAALAAQAAAABAAEAAAALAAUAAAABAAEAAAALAAYAAAABAAEAAAALAAcAAAABAAEAAAALAAgAAAABAAEAAAALAAoAAAABAAEAAAALAAsAAAABAAEAAAALAAwAAAABAAEAAAALAA0AAAABAAEAAAAMAAQAAAABAAEAAAAMAAUAAAABAAEAAAAMAAYAAAABAAEAAAAMAAcAAAABAAEAAAAMAAgAAAABAAEAAAAMAAsAAAABAAEAAAAMAAwAAAABAAEAAAAMAA0AAAABAAEAAAANAAQAAAABAAEAAAANAAUAAAABAAEAAAANAAYAAAABAAEAAAANAAcAAAABAAEAAAANAAgAAAABAAEAAAANAAkAAAABAAEAAAANAAsAAAABAAEAAAANAAwAAAABAAEAAAANAA0AAAABAAEAAAAOAAQAAAABAAEAAAAOAAUAAAABAAEAAAAOAAYAAAABAAEAAAAOAAcAAAABAAEAAAAOAAgAAAABAAEAAAAOAAkAAAABAAEAAAAOAAwAAAABAAEAAAAOAA0AAAABAAEAAAAPAAQAAAABAAEAAAAPAAUAAAABAAEAAAAPAAYAAAABAAEAAAAPAAcAAAABAAEAAAAPAAgAAAABAAEAAAAPAAkAAAABAAEAAAAPAAoAAAABAAEAAAAPAA0AAAABAAEAAAAQAAQAAAABAAEAAAAQAAUAAAABAAEAAAAQAAYAAAABAAEAAAAQAAcAAAABAAEAAAAQAAgAAAABAAEAAAAQAAkAAAABAAEAAAAQAAoAAAABAAEAAAAQAAsAAAABAAEAAAASAAQAAAABAAEAAAASAAUAAAABAAEAAAASAAYAAAABAAEAAAASAAsAAAABAAEAAAASAAwAAAABAAEAAAASAA0AAAABAAEAAAATAAQAAAABAAEAAAATAAUAAAABAAEAAAATAAYAAAABAAEAAAATAAsAAAABAAEAAAATAAwAAAABAAEAAAATAA0AAAABAAEAAAAUAAQAAAABAAEAAAAUAAUAAAABAAEAAAAUAAYAAAABAAEAAAAUAAsAAAABAAEAAAAUAAwAAAABAAEAAAAUAA0AAAABAAEAAAAVAAQAAAACAAEAAAAVAAUAAAACAAEAAAAVAAYAAAACAAEAAAAVAAcAAAACAAEAAAAVAAgAAAACAAEAAAAVAAkAAAACAAEAAAAVAAoAAAACAAEAAAAVAAsAAAACAAEAAAAVAAwAAAACAAEAAAAVAA0AAAACAAEAAAASAA4AAAABAAEAAAATAA4AAAABAAEAAAAUAA4AAAABAAEAAAASAAMAAAABAAAAAAATAAMAAAABAAAAAAAUAAMAAAABAAAAAAAVAAMAAAACAAAAAAAVAA4AAAACAAEAAAABAA8AAAAAAAEAAAABABAAAAAAAAEAAAABABEAAAAAAAEAAAABABIAAAAAAAIAAAACABIAAAABAAIAAAADABIAAAABAAIAAAAEABIAAAABAAIAAAAFABIAAAABAAIAAAAGABIAAAABAAIAAAAHABIAAAABAAIAAAAIABIAAAABAAIAAAAJABIAAAABAAIAAAAKABIAAAABAAIAAAALABIAAAABAAIAAAAMABIAAAABAAIAAAANABIAAAABAAIAAAAOABIAAAABAAIAAAAPABIAAAABAAIAAAAQABIAAAABAAIAAAARABIAAAABAAIAAAASABIAAAABAAIAAAATABIAAAABAAIAAAAUABIAAAABAAIAAAAVAA8AAAACAAEAAAAVABAAAAACAAEAAAAVABEAAAACAAEAAAAVABIAAAACAAIAAAACAA8AAAABAAEAAAADAA8AAAABAAEAAAAEABAAAAABAAEAAAAFABAAAAABAAEAAAAGABAAAAABAAEAAAAHABAAAAABAAEAAAAIABAAAAABAAEAAAAJABAAAAABAAEAAAAKABAAAAABAAEAAAAKABEAAAABAAEAAAALABEAAAABAAEAAAAMABEAAAABAAEAAAANABEAAAABAAEAAAAOABEAAAABAAEAAAAPABEAAAABAAEAAAAUAA8AAAABAAEAAAAUABAAAAABAAEAAAAUABEAAAABAAEAAAATABEAAAABAAEAAAASABEAAAABAAEAAAARABEAAAABAAEAAAAQABEAAAABAAEAAAAJABEAAAABAAEAAAAIABEAAAABAAEAAAAHABEAAAABAAEAAAAGABEAAAABAAEAAAAFABEAAAABAAEAAAAEABEAAAABAAEAAAADABEAAAABAAEAAAACABEAAAABAAEAAAACABAAAAABAAEAAAADABAAAAABAAEAAAAFAA8AAAABAAEAAAAEAA8AAAABAAEAAAAGAA8AAAABAAEAAAAHAA8AAAABAAEAAAAIAA8AAAABAAEAAAAJAA8AAAABAAEAAAAKAA8AAAABAAEAAAALAA8AAAABAAEAAAAMAA8AAAABAAEAAAANAA8AAAABAAEAAAAOAA8AAAABAAEAAAAPAA8AAAABAAEAAAAQAA8AAAABAAEAAAARAA8AAAABAAEAAAASAA8AAAABAAEAAAATAA8AAAABAAEAAAATABAAAAABAAEAAAASABAAAAABAAEAAAARABAAAAABAAEAAAAQABAAAAABAAEAAAAPABAAAAABAAEAAAAOABAAAAABAAEAAAANABAAAAABAAEAAAAMABAAAAABAAEAAAALABAAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_bc84e")
 
 [node name="autumntile" type="TileMapLayer" parent="tiles" unique_id=1434542859 groups=["ground_tilemap"]]
@@ -875,3 +1257,458 @@ script = ExtResource("23_8mbvr")
 zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
+
+[node name="buildings" type="Node2D" parent="." unique_id=1469157176]
+
+[node name="castle" type="Node2D" parent="buildings" unique_id=304083275]
+
+[node name="castle" parent="buildings/castle" unique_id=1301632932 instance=ExtResource("19_oyb16")]
+position = Vector2(744, 648)
+
+[node name="UI" type="Node2D" parent="." unique_id=1170337383]
+
+[node name="ui" type="CanvasLayer" parent="UI" unique_id=249976713]
+
+[node name="Panel" type="Panel" parent="UI/ui" unique_id=1293930966]
+offset_left = 32.0
+offset_right = 1480.0
+offset_bottom = 1272.0
+theme_override_styles/panel = ExtResource("20_pr8ms")
+
+[node name="Info panel" type="TileMapLayer" parent="UI/ui/Panel" unique_id=1646896665]
+tile_set = SubResource("TileSet_mgs3r")
+
+[node name="Info label" type="Label" parent="UI/ui/Panel" unique_id=1935247282]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="sets button" type="Node2D" parent="UI/ui/Panel" unique_id=1481617248]
+metadata/_edit_lock_ = true
+
+[node name="Info button" type="Button" parent="UI/ui/Panel/sets button" unique_id=359963802]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.78431374)
+offset_left = 890.0
+offset_top = 16.0
+offset_right = 995.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+metadata/_edit_lock_ = true
+
+[node name="icon" type="Sprite2D" parent="UI/ui/Panel/sets button/Info button" unique_id=1770023866]
+position = Vector2(54, 32.000004)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("21_6m1pe")
+metadata/_edit_lock_ = true
+
+[node name="Mute button" type="Button" parent="UI/ui/Panel/sets button" unique_id=877812426]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.78431374)
+offset_left = 946.0
+offset_top = 16.0
+offset_right = 1051.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+metadata/_edit_lock_ = true
+
+[node name="icon" type="Sprite2D" parent="UI/ui/Panel/sets button/Mute button" unique_id=155668300]
+position = Vector2(52.00006, 30.999996)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("22_d21qu")
+metadata/_edit_lock_ = true
+
+[node name="Quit button" type="Button" parent="UI/ui/Panel/sets button" unique_id=511332441]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.78431374)
+offset_left = 1058.0
+offset_top = 16.0
+offset_right = 1163.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+metadata/_edit_lock_ = true
+
+[node name="icon" type="Sprite2D" parent="UI/ui/Panel/sets button/Quit button" unique_id=1897484974]
+position = Vector2(51.999966, 28.500004)
+scale = Vector2(0.8749989, 0.859375)
+texture = ExtResource("23_3dlel")
+metadata/_edit_lock_ = true
+
+[node name="Setting button" type="Button" parent="UI/ui/Panel/sets button" unique_id=1955543818]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.78431374)
+offset_left = 1002.0
+offset_top = 16.0
+offset_right = 1107.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+metadata/_edit_lock_ = true
+
+[node name="icon" type="Sprite2D" parent="UI/ui/Panel/sets button/Setting button" unique_id=976281497]
+position = Vector2(52, 29.5)
+scale = Vector2(0.875, 0.921875)
+texture = ExtResource("24_kss01")
+metadata/_edit_lock_ = true
+
+[node name="Player" type="Node2D" parent="UI/ui/Panel" unique_id=1150778150]
+
+[node name="Unit construction" type="Panel" parent="UI/ui/Panel/Player" unique_id=1140388265]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Next" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1472238727]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="InfoLabel" type="Label" parent="UI/ui/Panel/Player/Unit construction" unique_id=646118686]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="UnitConstruction" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit construction" unique_id=1969440039]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(32, -64)
+tile_map_data = PackedByteArray("AAAQAAIAAAAEAAAAAAAPAAcAAAAAAAIAAAAQAAcAAAAEAAIAAAAQAAYAAAAEAAIAAAAQAAUAAAAEAAIAAAAQAAQAAAAEAAIAAAAQAAMAAAAEAAIAAAAPAAMAAAAAAAIAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAIAAAAPAAYAAAAAAAIAAAAPAAIAAAAAAAAAAAAPAAgAAAAAAAQAAAAQAAgAAAAEAAQAAAA=")
+tile_set = SubResource("TileSet_3dlel")
+
+[node name="BuildHouse1Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=524670534]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 152.0
+offset_right = 1112.0
+offset_bottom = 232.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "house1"
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse1Button" unique_id=1971812587]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 40)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_pd42k")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse1Button" unique_id=1216008922]
+position = Vector2(39.999996, 39.999996)
+metadata/_edit_lock_ = true
+
+[node name="BuildHouse2Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=562137163]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 208.00002
+offset_right = 1112.0
+offset_bottom = 288.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "house2"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse2Button" unique_id=1173561438]
+position = Vector2(39.999996, 39.999996)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse2Button" unique_id=1615153551]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 40)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_s1uet")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="BuildHouse3Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=383546722]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 264.0
+offset_right = 1112.0
+offset_bottom = 344.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "house3"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse3Button" unique_id=1324086768]
+position = Vector2(40, 40)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse3Button" unique_id=1664815465]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40.00008, 40)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_oiwek")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="BuildTowerButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=20533656]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 96.0
+offset_right = 1112.0
+offset_bottom = 176.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "tower"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildTowerButton" unique_id=1124246076]
+position = Vector2(39.999996, 39.999996)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildTowerButton" unique_id=309759489]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 40)
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_i2p53")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="BuildBarrackButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1456967161]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 320.0
+offset_right = 1112.0
+offset_bottom = 400.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "barracks"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildBarrackButton" unique_id=1460425255]
+position = Vector2(40, 40)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildBarrackButton" unique_id=1737557146]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(39.999996, 31.999998)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_3go7w")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="BuildMonasteryButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1367747747]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 376.0
+offset_right = 1112.0
+offset_bottom = 456.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "monastery"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildMonasteryButton" unique_id=1087955492]
+position = Vector2(40, 40)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildMonasteryButton" unique_id=1046228766]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 35)
+scale = Vector2(0.28, 0.28)
+sprite_frames = SubResource("SpriteFrames_nklvi")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="BuildArcheryButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1020996665]
+process_mode = 3
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 432.0
+offset_right = 1112.0
+offset_bottom = 512.0
+scale = Vector2(0.6, 0.6)
+theme_override_styles/normal = ExtResource("20_pr8ms")
+theme_override_styles/pressed = ExtResource("20_pr8ms")
+theme_override_styles/hover = ExtResource("20_pr8ms")
+theme_override_styles/hover_pressed = ExtResource("20_pr8ms")
+theme_override_styles/disabled = ExtResource("20_pr8ms")
+theme_override_styles/focus = ExtResource("20_pr8ms")
+script = ExtResource("26_nraib")
+building_id = "archery"
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildArcheryButton" unique_id=495300100]
+position = Vector2(40, 38)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildArcheryButton" unique_id=2122302237]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 28)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_u5y2v")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("32_fy421")
+metadata/_edit_lock_ = true
+
+[node name="Unit resources" type="Panel" parent="UI/ui/Panel/Player" unique_id=2113705244]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Unit resource" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit resources" unique_id=980229420]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(160, 8)
+tile_map_data = PackedByteArray("AAAOAAgAAAAEAAAAAAAOAAkAAAAEAAQAAAANAAgAAAACAAAAAAAMAAgAAAACAAAAAAALAAgAAAACAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAQAAAALAAkAAAACAAQAAAAMAAkAAAACAAQAAAANAAkAAAACAAQAAAA=")
+tile_set = SubResource("TileSet_d21qu")
+
+[node name="Gold Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=439821124]
+
+[node name="Gold Label" type="Label" parent="UI/ui/Panel/Player/Unit resources/Gold Icon" unique_id=1120166874]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Meat Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=1387222296]
+
+[node name="Meat Label" type="Label" parent="UI/ui/Panel/Player/Unit resources/Meat Icon" unique_id=586567964]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Wood Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=2101480434]
+
+[node name="Wood Label" type="Label" parent="UI/ui/Panel/Player/Unit resources/Wood Icon" unique_id=387993959]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Timer Label" type="Label" parent="UI/ui/Panel" unique_id=1114785147]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Main panel" type="TileMapLayer" parent="UI/ui/Panel" unique_id=1892963246]
+
+[node name="Game over" type="Panel" parent="UI/ui/Panel" unique_id=502472219]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label Game Over" type="Label" parent="UI/ui/Panel/Game over" unique_id=1610429143]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Instruction" type="Label" parent="UI/ui/Panel/Game over" unique_id=647637519]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="UI/ui/Panel/Game over" unique_id=1300425827]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Label Retry" type="Label" parent="UI/ui/Panel/Game over/Button" unique_id=1458711914]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Pause" type="Panel" parent="UI/ui/Panel" unique_id=966053719]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Pause" type="Label" parent="UI/ui/Panel/Pause" unique_id=740541918]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Resume" type="Label" parent="UI/ui/Panel/Pause" unique_id=577528312]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 23.0
+
+[node name="Building Manager" type="Node2D" parent="UI/ui/Panel" unique_id=137064823]
+script = ExtResource("63_sbard")
+
+[node name="Ghosts" type="Node2D" parent="." unique_id=1170067067]
