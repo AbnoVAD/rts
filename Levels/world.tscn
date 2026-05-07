@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
 [ext_resource type="PackedScene" uid="uid://cy8y5vvu6bfpx" path="res://Unit_buildings/Archery/archery.tscn" id="23_pr8ms"]
 [ext_resource type="PackedScene" uid="uid://bnfawgslcw60f" path="res://Unit_buildings/House1/house1.tscn" id="24_pr8ms"]
+[ext_resource type="PackedScene" uid="uid://btgepwvc0l40s" path="res://Unit_buildings/Castle/castle.tscn" id="25_6m1pe"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -899,3 +900,6 @@ position = Vector2(240, 664)
 
 [node name="pawn" parent="." unique_id=505167057 instance=ExtResource("18_pr8ms")]
 position = Vector2(456, 568)
+
+[node name="castle" parent="." unique_id=136821405 instance=ExtResource("25_6m1pe")]
+position = Vector2(760, 664)
