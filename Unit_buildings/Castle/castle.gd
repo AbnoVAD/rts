@@ -1,0 +1,457 @@
+extends StaticBody2D
+
+#--------------------------------------------------
+#Nodes
+#--------------------------------------------------
+@onready var animation: AnimatedSprite2D = $animation
+@onready var shape: CollisionShape2D = $shape
+@onready var marker_1: Marker2D = $Marker1
+@onready var marker_2: Marker2D = $Marker2
+@onready var marker_3: Marker2D = $Marker3
+@onready var explosion_detector: Area2D = $ExplosionDetector
+@onready var placement_checker: Area2D = $PlacementChecker
+
+#sound fx
+@onready var destroyed_fx: AudioStreamPlayer = $"sound fx/destroyed_fx"
+@onready var construct_fx: AudioStreamPlayer = $"sound fx/construct_fx"
+
+#--------------------------------------------------
+#Exports
+#--------------------------------------------------
+@export var construction_time:float
+@export var max_life:int=10
+
+#--------------------------------------------------
+#Constants
+#--------------------------------------------------
+const FINAL_SCALE:=Vector2(0.8,0.8)
+const DOUBLE_CLICK_TIME:=0.3
+
+#--------------------------------------------------
+#States
+#--------------------------------------------------
+enum {
+	STATE_CONSTRUCT,
+	STATE_IDLE,
+	STATE_DESTROYED
+}
+var state:=STATE_CONSTRUCT
+#--------------------------------------------------
+#Life/Hit
+#--------------------------------------------------
+var life:int
+var is_hit:=false
+var hit_flash_timer:=0.0
+var hit_flah_time:=0.15
+
+#--------------------------------------------------
+#Scenes
+#--------------------------------------------------
+#Archers
+var archer_black=preload("res://Units/Archer/archer_black.tscn")
+var archer_blue=preload("res://Units/Archer/archer_blue.tscn")
+var archer_red=preload("res://Units/Archer/archer_red.tscn")
+var archer_purple=preload("res://Units/Archer/archer_purple.tscn")
+var archer_yellow=preload("res://Units/Archer/archer_yellow.tscn")
+var spawned_archer1:Node2D=null
+var spawned_archer2:Node2D=null
+#Pawns
+var pawn_black=preload("res://Units/Pawns/pawn_black.tscn")
+var pawn_blue=preload("res://Units/Pawns/pawn_blue.tscn")
+var pawn_red=preload("res://Units/Pawns/pawn_red.tscn")
+var pawn_purple=preload("res://Units/Pawns/pawn_purple.tscn")
+var pawn_yellow=preload("res://Units/Pawns/pawn_yellow.tscn")
+var spawned_pawn:Node2D=null
+
+#----------------------------------------------------------
+#Timers and tweens
+#----------------------------------------------------------
+var tween:Tween
+var construct_timer:Timer
+var spawn_timer:Timer
+
+#----------------------------------------------------------
+#Drag and drop movement logic
+#----------------------------------------------------------
+var is_moving:=false
+var movement_colliding:=false
+var movement_collision_timer:=0.0
+var movement_valid:=true
+var drag_offset:=Vector2.ZERO
+var original_position:Vector2=Vector2.ZERO
+var overlapping_objects_count:=0
+
+#----------------------------------------------------------
+#Double click
+#----------------------------------------------------------
+var last_click_time:=0.0
+var is_selected:=false
+
+#--------------------------------------------------
+#Ready func
+#--------------------------------------------------
+func _ready() -> void:
+	state=STATE_CONSTRUCT
+	GlobalPlayer.castle_position=global_position
+	z_index=4
+	scale=Vector2(0.8,0.8)
+	Global.load_colour()
+	life=max_life
+	add_to_group("building")
+	input_pickable=true
+	shape.disabled=true
+
+	placement_checker.monitoring=false
+	placement_checker.monitorable=true
+
+	placement_checker.area_entered.connect(_on_placement_area_entered)
+	placement_checker.area_exited.connect(_on_placement_area_exited)
+	placement_checker.body_entered.connect(_on_placement_body_entered)
+	placement_checker.body_exited.connect(_on_placement_body_exited)
+
+	explosion_detector.area_entered.connect(_on_explosion_area_entered)
+	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
+
+	enter_construct_state()
+
+#--------------------------------------------------
+#Process
+#--------------------------------------------------
+func _process(delta:float) -> void:
+	if is_hit:
+		hit_flash_timer-=delta
+		if hit_flash_timer<=0:
+			is_hit=false
+			animation.modulate=Color.WHITE
+	if movement_colliding:
+		movement_collision_timer-=delta
+		if movement_collision_timer<=0:
+			movement_colliding=false
+			_update_movement_color()
+
+	# In move mode, follow mouse continuously until placed/cancelled.
+	if is_moving:
+		global_position=get_global_mouse_position()-drag_offset
+		_check_movement_collisions()
+
+#--------------------------------------------------
+#Input from mouse
+#--------------------------------------------------
+@warning_ignore("unused_parameter")
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index==MOUSE_BUTTON_LEFT and event.pressed:
+		var now=Time.get_ticks_msec()/1000.0
+		if now-last_click_time<=DOUBLE_CLICK_TIME:
+			_on_double_click()
+		else:
+			_on_single_click()
+		last_click_time=now
+
+func _on_single_click()->void:
+	is_selected=true
+	if animation:
+		animation.modulate=Color(1,1,1,1)
+
+func _on_double_click()->void:
+	if state!=STATE_IDLE:
+		return
+	start_moving()
+
+#--------------------------------------------------
+#Movement
+#--------------------------------------------------
+func start_moving() -> void:
+	is_moving=true
+	original_position=global_position
+	drag_offset=get_global_mouse_position()-global_position
+	overlapping_objects_count=0
+	movement_valid=true
+	movement_colliding=false
+	shape.disabled=true
+
+	placement_checker.monitoring=true
+	if animation:
+		animation.modulate=Color.WHITE
+
+func finalize_movement() -> void:
+	if !movement_valid:
+		var return_tween=create_tween()
+		return_tween.tween_property(self,"global_position",original_position,0.2)
+		return_tween.tween_callback(_reset_after_movement)
+	else:
+		_reset_after_movement()
+
+func _reset_after_movement():
+	is_moving=false
+	overlapping_objects_count=0
+	movement_valid=true
+	movement_colliding=false
+	input_pickable=true
+
+	placement_checker.monitoring=false
+	shape.disabled=false
+	animation.modulate=Color.WHITE
+
+func _cancel_movement()->void:
+	var return_tween=create_tween()
+	return_tween.tween_property(self,"global_position",original_position,0.2)
+	return_tween.tween_callback(_reset_after_movement)
+
+#--------------------------------------------------
+#Placement checker
+#--------------------------------------------------
+func _handle_overlap(node:Node,entered:bool) -> void:
+	if not is_moving:
+		return
+	if node == self or is_ancestor_of(node):
+		return
+
+	if node.is_in_group("building") or node.is_in_group("block_building"):
+		overlapping_objects_count+=1 if entered else -1
+		overlapping_objects_count=max(0,overlapping_objects_count)
+
+#checker signal
+func _on_placement_area_entered(area:Area2D) -> void:
+	if not is_moving:return
+	var parent=area.get_parent()
+	if parent and parent!=self:
+		if parent.is_in_group("building") or parent.is_in_group("block_building"):
+			overlapping_objects_count+=1
+			_update_collision_state()
+
+func _on_placement_area_exited(area:Area2D) -> void:
+	if not is_moving:return
+	var parent=area.get_parent()
+	if parent and parent!=self:
+		if parent.is_in_group("building") or parent.is_in_group("block_building"):
+			overlapping_objects_count=max(0,overlapping_objects_count-1)
+			_update_collision_state()
+
+func _on_placement_body_entered(body:Node) -> void:
+	if not is_moving:return
+	if body !=self:
+		if body.is_in_group("building") or body.is_in_group("block_building"):
+			overlapping_objects_count+=1
+			_update_collision_state()
+
+func _on_placement_body_exited(body:Node) -> void:
+	if not is_moving:return
+	if body !=self:
+		if body.is_in_group("building") or body.is_in_group("block_building"):
+			overlapping_objects_count=max(0,overlapping_objects_count-1)
+			_update_collision_state()
+
+func _update_collision_state():
+	if not is_moving:return
+	movement_valid=(overlapping_objects_count==0)
+	_update_movement_color()
+	if not movement_valid and not movement_colliding:
+		movement_colliding=true
+		movement_collision_timer=0.2
+		if animation:
+			animation.modulate=Color.RED
+
+func _check_movement_collisions()->void:
+	if not is_moving:return
+	if animation:
+		animation.modulate=Color.GREEN if movement_valid else Color.RED
+
+func _unhandled_input(event:InputEvent) -> void:
+	if not is_moving:
+		return
+
+	# Left click confirms placement
+	if event is InputEventMouseButton and event.pressed:
+		var mouse_event := event as InputEventMouseButton
+		if mouse_event.button_index==MOUSE_BUTTON_LEFT:
+			finalize_movement()
+			return
+		elif mouse_event.button_index==MOUSE_BUTTON_RIGHT:
+			_cancel_movement()
+			return
+
+	# Esc cancels movement
+	if event is InputEventKey and event.pressed:
+		var key_event := event as InputEventKey
+		if key_event.keycode == KEY_ESCAPE:
+			_cancel_movement()
+
+func _update_movement_color() -> void:
+	if not is_moving:
+		return
+
+	movement_valid=overlapping_objects_count==0
+	animation.modulate=Color.GREEN if movement_valid else Color.RED
+
+#--------------------------------------------------
+#Timers and Tweens
+#--------------------------------------------------
+func clear_timers_and_tweens() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween=null
+
+	if construct_timer:
+		construct_timer.queue_free()
+		construct_timer=null
+	if spawn_timer:
+		spawn_timer.queue_free()
+		spawn_timer=null
+
+#--------------------------------------------------
+#States
+#--------------------------------------------------
+func enter_construct_state() -> void:
+	clear_timers_and_tweens()
+	state=STATE_CONSTRUCT
+	animation.play("construct")
+	if not construct_fx.playing:
+		construct_fx.play()
+		scale=Vector2.ZERO
+		shape.disabled=true
+		input_pickable=false
+
+	tween=create_tween()
+	tween.tween_property(self,"scale",FINAL_SCALE,construction_time)
+
+	construct_timer=Timer.new()
+	construct_timer.wait_time=construction_time
+	construct_timer.one_shot=true
+	add_child(construct_timer)
+	construct_timer.timeout.connect(enter_idle_state)
+	construct_timer.start()
+
+func _on_construct_finished():
+	enter_idle_state()
+	construct_fx.stop()
+
+func enter_idle_state() -> void:
+	clear_timers_and_tweens()
+	state=STATE_IDLE
+	life=max_life
+	animation.play("idle")
+	construct_fx.stop()
+	scale=FINAL_SCALE
+	shape.disabled=false
+	input_pickable=true
+	is_moving=false
+	movement_valid=true
+	movement_colliding=false
+	overlapping_objects_count=0
+	placement_checker.monitoring=false
+	if animation:
+		animation.modulate=Color.WHITE
+	spawn_archer()
+	spawn_pawn()
+
+func enter_destroyed_state() -> void:
+	if state==STATE_DESTROYED :#or Global.game_over:
+		return
+	#Global.game_over=true
+	shape.disabled=true
+	explosion_detector.monitoring=false
+	placement_checker.monitoring=false
+	placement_checker.monitorable=false
+	input_pickable=false
+	is_moving=false
+
+	emit_signal("died",self)
+
+	clear_timers_and_tweens()
+
+	state=STATE_DESTROYED
+	animation.play("destroyed")
+	if not destroyed_fx.playing:
+		destroyed_fx.play()
+
+	remove_from_group("castle")
+
+	if spawned_archer1 and spawned_archer1.has_node("CollisionShape2D"):
+		spawned_archer1.get_node("CollisionShape2D").disabled=true
+	if spawned_archer2 and spawned_archer2.has_node("CollisionShape2D"):
+		spawned_archer2.get_node("CollisionShape2D").disabled=true
+	#if spawned_pawn and spawned_pawn.has_node("CollisionShape2D"):
+		#spawned_pawn.get_node("CollisionShape2D").disabled=true
+
+#Kill the archers on top of the castle when it's destroyed
+	if spawned_archer1:
+		spawned_archer1.queue_free()
+		spawned_archer1=null
+	if spawned_archer2:
+		spawned_archer2.queue_free()
+		spawned_archer2=null
+
+	is_moving=false
+	is_awaiting_placement=false
+	overlapping_objects_count=0
+
+func _on_explosion_detector_area_entered(area: Area2D) -> void:
+	if state!=STATE_IDLE:
+		return
+	if area.is_in_group("explosion"):
+		take_damage(1)
+
+func take_damage(amount:int) -> void:
+	if state!=STATE_IDLE:
+		return
+	life-=amount
+	life=max(life,0)
+
+	is_hit=true
+	flash_red_once()
+	if life<=0:
+		enter_destroyed_state()
+
+var hit_tween:Tween
+func flash_red_once():
+	if hit_tween and hit_tween.is_running():
+		hit_tween.kill()
+	hit_tween=create_tween()
+	hit_tween.tween_property(animation,"modulate",Color.RED,0.05)
+	hit_tween.tween_property(animation,"modulate",Color.WHITE,0.08)
+
+func spawn_archer() -> void:
+	if spawned_archer1!=null:
+		return
+	if spawned_archer2!=null:
+		return
+	
+	var archer_scene:PackedScene
+	match Global.choosed_colour.to_lower():
+		"black":archer_scene=archer_black
+		"blue":archer_scene=archer_blue
+		"red":archer_scene=archer_red
+		"purple":archer_scene=archer_purple
+		"yellow":archer_scene=archer_yellow
+		_: return
+
+	spawned_archer1=archer_scene.instantiate()
+	spawned_archer2=archer_scene.instantiate()
+	add_child(spawned_archer1)
+	add_child(spawned_archer2)
+	spawned_archer1.global_position=marker_1.global_position
+	spawned_archer2.global_position=marker_2.global_position
+	spawned_archer1.z_index=5
+	spawned_archer2.z_index=5
+	spawned_archer1.scale=Vector2(0.7,0.7)
+	spawned_archer2.scale=Vector2(0.7,0.7)
+
+func spawn_pawn() -> void:
+	if spawned_pawn!=null:
+		return
+
+	var pawn_scene:PackedScene
+	match Global.choosed_colour.to_lower():
+		"black":pawn_scene=pawn_black
+		"blue":pawn_scene=pawn_blue
+		"red":pawn_scene=pawn_red
+		"purple":pawn_scene=pawn_purple
+		"yellow":pawn_scene=pawn_yellow
+		_: return
+
+	spawned_pawn=pawn_scene.instantiate()
+	add_child(spawned_pawn)
+	spawned_pawn.global_position=marker_3.global_position
+	spawned_pawn.z_index=5
+	spawned_pawn.scale=Vector2(0.7,0.7)
+	Global.consume_meat(1)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://m1h2hu3wet17" path="res://Unit_buildings/House3/house3.gd" id="1_ktjnn"]
 [ext_resource type="Texture2D" uid="uid://c3pito7uc4xxk" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Construction.png" id="2_8kk1a"]
 [ext_resource type="Texture2D" uid="uid://26tais8n5blu" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Destroyed.png" id="3_lei4t"]
-[ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="4_emtxx"]
+[ext_resource type="Texture2D" uid="uid://by1mav1kb4lue" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House3.png" id="4_14y0k"]
 [ext_resource type="Script" uid="uid://dlwa73sbcrlkg" path="res://Unit_buildings/House3/animation_house3.gd" id="5_hrxvv"]
 [ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_xby30"]
 [ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_04cbh"]
@@ -30,7 +30,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_emtxx")
+"texture": ExtResource("4_14y0k")
 }],
 "loop": true,
 "name": &"idle",
@@ -69,7 +69,8 @@ position = Vector2(16, -8)
 shape = SubResource("RectangleShape2D_dm2n5")
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
-position = Vector2(80, 96)
+visible = false
+position = Vector2(16, 104)
 metadata/_edit_lock_ = true
 
 [node name="houses" type="Area2D" parent="." unique_id=826380079]

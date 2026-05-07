@@ -30,6 +30,7 @@ folder_colors={
 "res://Audio/": "green",
 "res://Levels/": "teal",
 "res://Unit_buildings/": "orange",
+"res://Unit_buildings/Castle/": "green",
 "res://Units/": "orange"
 }
 

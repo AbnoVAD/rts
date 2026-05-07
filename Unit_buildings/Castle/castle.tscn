@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://btgepwvc0l40s"]
+
+[ext_resource type="Script" uid="uid://dwahj1han40mu" path="res://Unit_buildings/Castle/castle.gd" id="1_d0npw"]
+[ext_resource type="Texture2D" uid="uid://823qpl2l8dt" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Construction.png" id="2_wq7gt"]
+[ext_resource type="Texture2D" uid="uid://d0obp8unqeere" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Castle/Castle_Destroyed.png" id="3_mhi5i"]
+[ext_resource type="Texture2D" uid="uid://bv2yjpsvo5j0b" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/Castle.png" id="4_3o64e"]
+[ext_resource type="Script" uid="uid://1roakny24hnp" path="res://Unit_buildings/Castle/animation_castle.gd" id="5_3dcml"]
+[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_hfga2"]
+[ext_resource type="AudioStream" uid="uid://dhbxvr2bg8apk" path="res://Audio/Hammer/Hitting nails with Hammer #soundeffects #nocopyright #shorts.mp3" id="7_wnm72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc7f4"]
+atlas = ExtResource("2_wq7gt")
+region = Rect2(0, 0, 320, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rked1"]
+atlas = ExtResource("3_mhi5i")
+region = Rect2(0, 0, 320, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nc1jm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc7f4")
+}],
+"loop": false,
+"name": &"construct",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rked1")
+}],
+"loop": true,
+"name": &"destroyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3o64e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm2n5"]
+size = Vector2(144, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lkwq"]
+size = Vector2(272, 168)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af0i0"]
+size = Vector2(256, 136)
+
+[node name="castle" type="StaticBody2D" unique_id=1301632932 groups=["block_building", "building"]]
+script = ExtResource("1_d0npw")
+construction_time = null
+max_life = null
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=1213840266]
+position = Vector2(16, -8)
+sprite_frames = SubResource("SpriteFrames_nc1jm")
+animation = &"idle"
+autoplay = "construct"
+script = ExtResource("5_3dcml")
+
+[node name="shape" type="CollisionShape2D" parent="." unique_id=1492661873]
+visible = false
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_dm2n5")
+metadata/_edit_lock_ = true
+
+[node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]
+visible = false
+position = Vector2(120, -40)
+metadata/_edit_lock_ = true
+
+[node name="Marker2" type="Marker2D" parent="." unique_id=1011600140]
+visible = false
+position = Vector2(-80, -40)
+metadata/_edit_lock_ = true
+
+[node name="Marker3" type="Marker2D" parent="." unique_id=626651222]
+visible = false
+position = Vector2(16, 144)
+metadata/_edit_lock_ = true
+
+[node name="ExplosionDetector" type="Area2D" parent="." unique_id=1422784864]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionDetector" unique_id=1155507561]
+visible = false
+position = Vector2(16, 4)
+shape = SubResource("RectangleShape2D_6lkwq")
+debug_color = Color(0.99386555, 0, 0.23811516, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="PlacementChecker" type="Area2D" parent="." unique_id=1421693805]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementChecker" unique_id=1825084020]
+visible = false
+position = Vector2(16, 20)
+shape = SubResource("RectangleShape2D_af0i0")
+debug_color = Color(9.1448425e-07, 0.65070313, 0.09518888, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="sound fx" type="Node2D" parent="." unique_id=509742490]
+
+[node name="destroyed_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=717262668]
+stream = ExtResource("6_hfga2")
+volume_db = -20.0
+pitch_scale = 3.0
+
+[node name="construct_fx" type="AudioStreamPlayer" parent="sound fx" unique_id=1598343038]
+stream = ExtResource("7_wnm72")
+volume_db = -15.0
+pitch_scale = 2.5
+
+[connection signal="area_entered" from="ExplosionDetector" to="." method="_on_explosion_detector_area_entered"]
