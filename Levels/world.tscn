@@ -25,7 +25,8 @@
 [ext_resource type="Script" uid="uid://cpt5d76wn7gxq" path="res://System/selectionbox.gd" id="23_8mbvr"]
 [ext_resource type="Texture2D" uid="uid://68m2wcr4r8vt" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_10.png" id="24_kss01"]
 [ext_resource type="Texture2D" uid="uid://0yqadh7qei0d" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Papers/RegularPaper.png" id="25_6m1pe"]
-[ext_resource type="Script" uid="uid://dyunu6q4010le" path="res://Unit_buildings/system_scripts/buildbutton.gd" id="26_nraib"]
+[ext_resource type="Script" uid="uid://dgbxa7y6d5mfg" path="res://Unit_buildings/Build Manager/unit_construction.gd" id="25_glkdj"]
+[ext_resource type="Script" uid="uid://dyunu6q4010le" path="res://Unit_buildings/Build Manager/system_scripts/buildbutton.gd" id="26_nraib"]
 [ext_resource type="Texture2D" uid="uid://ce3qk8namx8fx" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House1.png" id="26_w2dt3"]
 [ext_resource type="Texture2D" uid="uid://cl6lwvubsnv5i" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House1.png" id="27_nraib"]
 [ext_resource type="Texture2D" uid="uid://cy3nrabdfl0ms" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House1.png" id="28_fy421"]
@@ -33,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cftuhlqh5e5uk" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House1.png" id="30_glkdj"]
 [ext_resource type="Texture2D" uid="uid://dhbms74opktf7" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House2.png" id="31_b76on"]
 [ext_resource type="Texture2D" uid="uid://bh4dn1gxyhto" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House2.png" id="32_a5o0p"]
-[ext_resource type="Script" uid="uid://vo4ni66ldo62" path="res://Unit_buildings/system_scripts/animation.gd" id="32_fy421"]
+[ext_resource type="Script" uid="uid://vo4ni66ldo62" path="res://Unit_buildings/Build Manager/system_scripts/animation.gd" id="32_fy421"]
 [ext_resource type="Texture2D" uid="uid://c8m6ocf1elwau" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House2.png" id="33_ecjdc"]
 [ext_resource type="Texture2D" uid="uid://e8h7ilkamc3s" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House2.png" id="34_orv0x"]
 [ext_resource type="Texture2D" uid="uid://cm8vtynvark4v" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House2.png" id="35_dyk1g"]
@@ -63,6 +64,7 @@
 [ext_resource type="Texture2D" uid="uid://diwww1qpvhdpv" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Archery.png" id="59_b4m7t"]
 [ext_resource type="Texture2D" uid="uid://bsgkdkg5p1wpo" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Archery.png" id="60_82qwp"]
 [ext_resource type="Script" uid="uid://dbadskbdp2fv6" path="res://Unit_buildings/Build Manager/building_manager.gd" id="63_sbard"]
+[ext_resource type="Texture2D" uid="uid://d3kw401rfalma" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Cursors/Cursor_04.png" id="64_b76on"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1262,7 +1264,7 @@ position_smoothing_speed = 3.0
 
 [node name="castle" type="Node2D" parent="buildings" unique_id=304083275]
 
-[node name="castle" parent="buildings/castle" unique_id=1301632932 instance=ExtResource("19_oyb16")]
+[node name="castle" parent="buildings/castle" unique_id=1301632932 groups=["castle"] instance=ExtResource("19_oyb16")]
 position = Vector2(744, 648)
 
 [node name="UI" type="Node2D" parent="." unique_id=1170337383]
@@ -1270,8 +1272,8 @@ position = Vector2(744, 648)
 [node name="ui" type="CanvasLayer" parent="UI" unique_id=249976713]
 
 [node name="Panel" type="Panel" parent="UI/ui" unique_id=1293930966]
-offset_left = 32.0
-offset_right = 1480.0
+offset_left = 8.0
+offset_right = 1456.0
 offset_bottom = 1272.0
 theme_override_styles/panel = ExtResource("20_pr8ms")
 
@@ -1383,6 +1385,7 @@ metadata/_edit_lock_ = true
 [node name="Unit construction" type="Panel" parent="UI/ui/Panel/Player" unique_id=1140388265]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("25_glkdj")
 
 [node name="Next" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1472238727]
 layout_mode = 0
@@ -1397,17 +1400,17 @@ offset_bottom = 23.0
 [node name="UnitConstruction" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit construction" unique_id=1969440039]
 modulate = Color(1, 1, 1, 0.39215687)
 position = Vector2(32, -64)
-tile_map_data = PackedByteArray("AAAQAAIAAAAEAAAAAAAPAAcAAAAAAAIAAAAQAAcAAAAEAAIAAAAQAAYAAAAEAAIAAAAQAAUAAAAEAAIAAAAQAAQAAAAEAAIAAAAQAAMAAAAEAAIAAAAPAAMAAAAAAAIAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAIAAAAPAAYAAAAAAAIAAAAPAAIAAAAAAAAAAAAPAAgAAAAAAAQAAAAQAAgAAAAEAAQAAAA=")
+tile_map_data = PackedByteArray("AAAPAAcAAAAAAAIAAAAQAAcAAAAEAAIAAAAQAAYAAAAEAAIAAAAQAAUAAAAEAAIAAAAQAAQAAAAEAAIAAAAQAAMAAAAEAAIAAAAPAAMAAAAAAAIAAAAPAAQAAAAAAAIAAAAPAAUAAAAAAAIAAAAPAAYAAAAAAAIAAAAPAAgAAAAAAAIAAAAQAAgAAAAEAAIAAAAPAAIAAAAAAAAAAAAQAAIAAAAEAAAAAAAPAAkAAAAAAAQAAAAQAAkAAAAEAAQAAAA=")
 tile_set = SubResource("TileSet_3dlel")
 
 [node name="BuildHouse1Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=524670534]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 152.0
-offset_right = 1112.0
-offset_bottom = 232.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 160.0
+offset_right = 1104.0
+offset_bottom = 240.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1436,11 +1439,11 @@ metadata/_edit_lock_ = true
 [node name="BuildHouse2Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=562137163]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 208.00002
-offset_right = 1112.0
-offset_bottom = 288.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 224.0
+offset_right = 1104.0
+offset_bottom = 304.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1469,11 +1472,11 @@ metadata/_edit_lock_ = true
 [node name="BuildHouse3Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=383546722]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 264.0
-offset_right = 1112.0
-offset_bottom = 344.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 288.0
+offset_right = 1104.0
+offset_bottom = 368.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1502,11 +1505,11 @@ metadata/_edit_lock_ = true
 [node name="BuildTowerButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=20533656]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
+offset_left = 1024.0
 offset_top = 96.0
-offset_right = 1112.0
+offset_right = 1104.0
 offset_bottom = 176.0
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1535,11 +1538,11 @@ metadata/_edit_lock_ = true
 [node name="BuildBarrackButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1456967161]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 320.0
-offset_right = 1112.0
-offset_bottom = 400.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 352.0
+offset_right = 1104.0
+offset_bottom = 432.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1568,11 +1571,11 @@ metadata/_edit_lock_ = true
 [node name="BuildMonasteryButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1367747747]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 376.0
-offset_right = 1112.0
-offset_bottom = 456.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 416.0
+offset_right = 1104.0
+offset_bottom = 496.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1601,11 +1604,11 @@ metadata/_edit_lock_ = true
 [node name="BuildArcheryButton" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1020996665]
 process_mode = 3
 layout_mode = 0
-offset_left = 1032.0
-offset_top = 432.0
-offset_right = 1112.0
-offset_bottom = 512.0
-scale = Vector2(0.6, 0.6)
+offset_left = 1024.0
+offset_top = 480.0
+offset_right = 1104.0
+offset_bottom = 560.0
+scale = Vector2(0.8, 0.8)
 theme_override_styles/normal = ExtResource("20_pr8ms")
 theme_override_styles/pressed = ExtResource("20_pr8ms")
 theme_override_styles/hover = ExtResource("20_pr8ms")
@@ -1631,6 +1634,13 @@ autoplay = "black"
 script = ExtResource("32_fy421")
 metadata/_edit_lock_ = true
 
+[node name="Selector" type="Sprite2D" parent="UI/ui/Panel/Player/Unit construction" unique_id=398064520]
+modulate = Color(1, 1, 1, 0.78431374)
+self_modulate = Color(1, 1, 1, 0.7058824)
+position = Vector2(1056, 128)
+scale = Vector2(0.5000003, 0.50000006)
+texture = ExtResource("64_b76on")
+
 [node name="Unit resources" type="Panel" parent="UI/ui/Panel/Player" unique_id=2113705244]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1638,7 +1648,6 @@ offset_bottom = 40.0
 [node name="Unit resource" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit resources" unique_id=980229420]
 modulate = Color(1, 1, 1, 0.39215687)
 position = Vector2(160, 8)
-tile_map_data = PackedByteArray("AAAOAAgAAAAEAAAAAAAOAAkAAAAEAAQAAAANAAgAAAACAAAAAAAMAAgAAAACAAAAAAALAAgAAAACAAAAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAQAAAALAAkAAAACAAQAAAAMAAkAAAACAAQAAAANAAkAAAACAAQAAAA=")
 tile_set = SubResource("TileSet_d21qu")
 
 [node name="Gold Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=439821124]

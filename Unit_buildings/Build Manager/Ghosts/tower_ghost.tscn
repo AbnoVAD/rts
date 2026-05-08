@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dsmng2ee5mxff"]
+
+[ext_resource type="Texture2D" uid="uid://u5tikdkfii6i" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/Tower/Tower_Construction.png" id="1_i7ng8"]
+[ext_resource type="Script" uid="uid://c8dylobulsdpx" path="res://Unit_buildings/Build Manager/Ghosts/animation.gd" id="2_h0bij"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ja7k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i7ng8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0bij"]
+radius = 24.0
+
+[node name="tower ghost" type="Area2D" unique_id=1210762292]
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=450698194]
+sprite_frames = SubResource("SpriteFrames_7ja7k")
+script = ExtResource("2_h0bij")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=905865242]
+visible = false
+position = Vector2(0, 64)
+shape = SubResource("CircleShape2D_h0bij")
+metadata/_edit_lock_ = true
