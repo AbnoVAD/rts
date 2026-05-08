@@ -78,8 +78,8 @@ func _flash_green(node) -> void:
 	var tween=create_tween()
 	var original=node.modulate
 	
-	tween.tween_property(node,"scale",Color.GREEN,0.15)
-	tween.tween_property(node,"scale",original,0.15)
+	tween.tween_property(node,"modulate",Color.GREEN,0.15)
+	tween.tween_property(node,"modulate",original,0.15)
 	
 	await tween.finished
 
@@ -87,7 +87,7 @@ func _flash_red(node) -> void:
 	var tween=create_tween()
 	var original=node.modulate
 	
-	tween.tween_property(node,"scale",Color.RED,0.15)
-	tween.tween_property(node,"scale",original,0.15)
+	tween.tween_property(node,"modulate",Color.RED,0.15)
+	tween.tween_property(node,"modulate",original,0.15)
 	
 	await tween.finished
