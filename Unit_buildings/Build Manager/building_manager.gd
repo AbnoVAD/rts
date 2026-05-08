@@ -76,7 +76,7 @@ func select_building(id:String) -> void:
 
 	current_id=id
 	ghost=ghost_scenes[id].instantiate()
-	ghost_parents.add_child(ghost)
+	get_parent().add_child(ghost)
 
 #------------------------------------------
 #Placement validation
@@ -168,7 +168,7 @@ func _get_ground_under_mouse() -> TileMapLayer:
 		var local_pos:Vector2=Node.to_local(mouse_pos)
 		var cell:Vector2i=Node.local_to_map(local_pos)
 
-		if Node.get_cell_source_ide(cell)!=-1:
+		if Node.get_cell_source_id(cell)!=-1:
 			return Node
 	return null
 
@@ -238,9 +238,9 @@ func _feedback_insufficient_ghosts()->void:
 	sprite.modulate=Color(1,0,0,0.8)
 	
 	var tween=ghost.create_tween()
-	tween.tween_property(ghost,"position:x",original_position.x+10,0.05)
-	tween.tween_property(ghost,"position:x",original_position.x-10,0.1)
-	tween.tween_property(ghost,"position:x",original_position.x,0.05)
+	tween.tween_property(ghost,"position:x",original_position.x + 2,0.05)
+	tween.tween_property(ghost,"position:x",original_position.x - 2,0.1)
+	tween.tween_property(ghost,"position:x",original_position.x, 0.05)
 
 	tween.tween_callback(func():
 		sprite.modulate=original_modulate)

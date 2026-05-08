@@ -18,6 +18,7 @@ animations = [{
 size = Vector2(144, 72)
 
 [node name="barrack ghost" type="Area2D" unique_id=1210762292]
+scale = Vector2(0.8, 0.8)
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=450698194]
 sprite_frames = SubResource("SpriteFrames_7ja7k")
