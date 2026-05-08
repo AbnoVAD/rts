@@ -199,10 +199,10 @@ func _get_or_create_ghost_parent() -> Node2D:
 	var current_scene=get_tree().current_scene
 	if not current_scene:
 		push_error("no scene")
-		var new_mode=Node2D.new()
+		var new_node=Node2D.new()
 		new_node.name="Ghosts"
 		get_tree().root.add_child(new_node)
-		return new_mode
+		return new_node
 	var node=current_scene.get_node_or_null("Ghosts")
 	if node:
 		return node as Node2D
