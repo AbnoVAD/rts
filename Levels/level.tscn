@@ -1275,6 +1275,7 @@ position = Vector2(744, 648)
 offset_left = 8.0
 offset_right = 1456.0
 offset_bottom = 1272.0
+mouse_filter = 1
 theme_override_styles/panel = ExtResource("20_oeejg")
 
 [node name="Info panel" type="TileMapLayer" parent="UI/ui/Panel" unique_id=1646896665]
@@ -1385,6 +1386,7 @@ metadata/_edit_lock_ = true
 [node name="Unit construction" type="Panel" parent="UI/ui/Panel/Player" unique_id=1140388265]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 script = ExtResource("25_2l68y")
 
 [node name="Next" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1472238727]
@@ -1651,10 +1653,13 @@ texture = ExtResource("64_lltlr")
 [node name="Unit resources" type="Panel" parent="UI/ui/Panel/Player" unique_id=2113705244]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="Unit resource" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit resources" unique_id=980229420]
 modulate = Color(1, 1, 1, 0.39215687)
 position = Vector2(160, 8)
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAD5/wcAAAAAAAAAAAD5/wgAAAAAAAQAAAD5/wkAAAAAAAAAAAD5/woAAAAAAAQAAAD5/wsAAAAAAAAAAAD5/wwAAAAAAAQAAAD6/wcAAAACAAAAAAD6/wgAAAACAAQAAAD6/wkAAAACAAAAAAD6/woAAAACAAQAAAD6/wsAAAACAAAAAAD6/wwAAAACAAQAAAD//wcAAAAEAAAAAAD//wgAAAAEAAQAAAD//wkAAAAEAAAAAAD//woAAAAEAAQAAAD//wsAAAAEAAAAAAD//wwAAAAEAAQAAAD7/wcAAAACAAAAAAD8/wcAAAACAAAAAAD9/wcAAAACAAAAAAD+/wcAAAACAAAAAAD7/wkAAAACAAAAAAD8/wkAAAACAAAAAAD9/wkAAAACAAAAAAD+/wkAAAACAAAAAAD7/wsAAAACAAAAAAD8/wsAAAACAAAAAAD9/wsAAAACAAAAAAD+/wsAAAACAAAAAAD7/wwAAAACAAQAAAD8/wwAAAACAAQAAAD9/wwAAAACAAQAAAD+/wwAAAACAAQAAAD7/woAAAACAAQAAAD8/woAAAACAAQAAAD9/woAAAACAAQAAAD+/woAAAACAAQAAAD7/wgAAAACAAQAAAD8/wgAAAACAAQAAAD9/wgAAAACAAQAAAD+/wgAAAACAAQAAAA=")
 tile_set = SubResource("TileSet_d21qu")
 
 [node name="Gold Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=439821124]
@@ -1687,6 +1692,8 @@ visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="Label Game Over" type="Label" parent="UI/ui/Panel/Game over" unique_id=1610429143]
 layout_mode = 0
@@ -1712,6 +1719,8 @@ offset_bottom = 23.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
+metadata/_edit_lock_ = true
 
 [node name="Pause" type="Label" parent="UI/ui/Panel/Pause" unique_id=740541918]
 layout_mode = 0

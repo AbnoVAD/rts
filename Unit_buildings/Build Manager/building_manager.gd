@@ -238,8 +238,8 @@ func _feedback_insufficient_ghosts()->void:
 	sprite.modulate=Color(1,0,0,0.8)
 	
 	var tween=ghost.create_tween()
-	tween.tween_property(ghost,"position:x",original_position.x + 2,0.05)
-	tween.tween_property(ghost,"position:x",original_position.x - 2,0.1)
+	tween.tween_property(ghost,"position:x",original_position.x + 5,0.05)
+	tween.tween_property(ghost,"position:x",original_position.x - 5,0.1)
 	tween.tween_property(ghost,"position:x",original_position.x, 0.05)
 
 	tween.tween_callback(func():
