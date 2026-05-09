@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ca02atfk8jddq"]
 
-[ext_resource type="Script" uid="uid://1pmn7ms40cy8" path="res://Units/Materials/trees/tree_1.gd" id="1_f5h2j"]
+[ext_resource type="Script" uid="uid://1pmn7ms40cy8" path="res://Units/Materials/trees/tree.gd" id="1_f5h2j"]
 [ext_resource type="Texture2D" uid="uid://ctwwnutilpj16" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Wood/Trees/Tree1.png" id="1_gtep4"]
 [ext_resource type="Texture2D" uid="uid://ofmjqloidkr8" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Wood/Trees/Stump 1.png" id="2_f5h2j"]
 [ext_resource type="AudioStream" uid="uid://tdhfj0f6hg1i" path="res://Audio/Chopping and Mining/chop 1.wav" id="3_fkovb"]
@@ -152,8 +152,10 @@ radius = 16.03122
 [sub_resource type="CircleShape2D" id="CircleShape2D_bafgt"]
 radius = 14.0
 
-[node name="tree" type="StaticBody2D" unique_id=1415981528]
+[node name="tree1" type="StaticBody2D" unique_id=1415981528 groups=["block_building", "trees"]]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_f5h2j")
+life = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=477008]
 sprite_frames = SubResource("SpriteFrames_ql2kg")
@@ -191,3 +193,5 @@ position = Vector2(1, 0)
 stream = ExtResource("3_fkovb")
 volume_db = 5.0
 pitch_scale = 2.0
+
+[connection signal="area_entered" from="tree_trunk" to="." method="_on_tree_trunk_area_entered"]

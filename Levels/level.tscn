@@ -69,6 +69,10 @@
 [ext_resource type="FontFile" uid="uid://c1m1618w3vkiq" path="res://assets/Text Font/splurge/SPLURGEB.TTF" id="66_alt0v"]
 [ext_resource type="Texture2D" uid="uid://d3k88b86aqu3o" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_04.png" id="67_n2og4"]
 [ext_resource type="Texture2D" uid="uid://dvx83j7go3rhi" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_02.png" id="68_0tv2o"]
+[ext_resource type="PackedScene" uid="uid://ca02atfk8jddq" path="res://Units/Materials/trees/tree1.tscn" id="70_sy5sx"]
+[ext_resource type="PackedScene" uid="uid://df4tu1jemgkuo" path="res://Units/Materials/trees/tree2.tscn" id="71_2h62v"]
+[ext_resource type="PackedScene" uid="uid://5j5bdvnr3jlv" path="res://Units/Materials/trees/tree3.tscn" id="72_oncvo"]
+[ext_resource type="PackedScene" uid="uid://kd3pdc2wo3hf" path="res://Units/Materials/trees/tree4.tscn" id="73_1upps"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1265,6 +1269,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
 [node name="buildings" type="Node2D" parent="." unique_id=1469157176]
+z_index = 6
 
 [node name="castle" type="Node2D" parent="buildings" unique_id=304083275]
 
@@ -1789,3 +1794,15 @@ position = Vector2(8, 0)
 script = ExtResource("65_ttbie")
 
 [node name="Ghosts" type="Node2D" parent="." unique_id=1170067067]
+
+[node name="tree1" parent="." unique_id=1415981528 instance=ExtResource("70_sy5sx")]
+position = Vector2(829, 212)
+
+[node name="tree2" parent="." unique_id=1251247524 instance=ExtResource("71_2h62v")]
+position = Vector2(1258, 306)
+
+[node name="tree3" parent="." unique_id=1861486841 instance=ExtResource("72_oncvo")]
+position = Vector2(1237, 699)
+
+[node name="tree4" parent="." unique_id=1569130621 instance=ExtResource("73_1upps")]
+position = Vector2(345, 740)
