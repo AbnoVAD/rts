@@ -132,7 +132,7 @@ func _on_resource_entered(area:Area2D)->void:
 			var resource_type=area.resouce_type
 			#check
 			if(resource_type=="wood" and current_tool==tool.AXE) or \
-			(resource_type=="stone" and current_tool==tool.PICKAXE) or \
+			(resource_type=="gold" and current_tool==tool.PICKAXE) or \
 			(resource_type=="meat" and current_tool==tool.KNIFE):
 				pickup_resource(area)
 
@@ -152,6 +152,38 @@ func _unhandled_input(event: InputEvent) ->void:
 	if event.is_action_pressed("use"):
 		use_current_tool()
 		hide_toolbox_if_visible()
+
+#Manual tool selection from keyboard 1/2/3/4/5
+	if event.is_action_pressed("tool_hand"):
+		set_tool_and_activate(tool.HAND)
+		hide_toolbox_if_visible()
+		Global.pawn_tool="hand"
+		if not equip_audio.playing:
+			equip_audio.play()
+	if event.is_action_pressed("tool_hammer"):
+		set_tool_and_activate(tool.HAMMER)
+		hide_toolbox_if_visible()
+		Global.pawn_tool="hammer"
+		if not equip_audio.playing:
+			equip_audio.play()
+	if event.is_action_pressed("tool_axe"):
+		set_tool_and_activate(tool.AXE)
+		hide_toolbox_if_visible()
+		Global.pawn_tool="axe"
+		if not equip_audio.playing:
+			equip_audio.play()
+	if event.is_action_pressed("tool_pickaxe"):
+		set_tool_and_activate(tool.PICKAXE)
+		hide_toolbox_if_visible()
+		Global.pawn_tool="pickaxe"
+		if not equip_audio.playing:
+			equip_audio.play()
+	if event.is_action_pressed("tool_knife"):
+		set_tool_and_activate(tool.KNIFE)
+		hide_toolbox_if_visible()
+		Global.pawn_tool="knife"
+		if not equip_audio.playing:
+			equip_audio.play()
 
 #-------------------------------------
 #Hide toolbox in case of any input

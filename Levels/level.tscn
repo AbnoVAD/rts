@@ -1797,12 +1797,16 @@ script = ExtResource("65_ttbie")
 
 [node name="tree1" parent="." unique_id=1415981528 instance=ExtResource("70_sy5sx")]
 position = Vector2(829, 212)
+life = 3
 
 [node name="tree2" parent="." unique_id=1251247524 instance=ExtResource("71_2h62v")]
 position = Vector2(1258, 306)
+life = 3
 
 [node name="tree3" parent="." unique_id=1861486841 instance=ExtResource("72_oncvo")]
 position = Vector2(1237, 699)
+life = 3
 
 [node name="tree4" parent="." unique_id=1569130621 instance=ExtResource("73_1upps")]
 position = Vector2(345, 740)
+life = 3
