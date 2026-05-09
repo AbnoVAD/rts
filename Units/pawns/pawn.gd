@@ -127,9 +127,9 @@ func pickup_resource(resource_node)->void:
 #-------------------------------------
 func _on_resource_entered(area:Area2D)->void:
 	#check if it's a resource
-	if area.has_method("collect") and area.has_property("resource_type"):
+	if area.has_method("collect") and "resource_type" in area:
 		if not area.collected:
-			var resource_type=area.resouce_type
+			var resource_type=area.resource_type
 			#check
 			if(resource_type=="wood" and current_tool==tool.AXE) or \
 			(resource_type=="gold" and current_tool==tool.PICKAXE) or \
@@ -351,7 +351,7 @@ func collect_nearby_resources(_resource_type:String)->void:
 	
 	var overlapping_area=detector_zone.get_overlapping_areas()
 	for area in overlapping_area:
-		if area.has_method("collect") and area.has_property("resource_type"):
+		if area.has_method("collect") and "resource_type" in area:
 			pickup_resource(area)
 			return
 
@@ -364,7 +364,7 @@ func pick_nearby_items()->void:
 
 	var overlapping_area=detector_zone.get_overlapping_areas()
 	for area in overlapping_area:
-		if area.has_method("collect") and area.has_property("resource_type"):
+		if area.has_method("collect") and "resource_type" in area:
 			if not area.collected:
 				var resource_type=area.resource_type
 				if resource_type in collected:
