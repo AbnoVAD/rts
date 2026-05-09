@@ -1264,7 +1264,7 @@ script = ExtResource("17_3mato")
 script = ExtResource("18_a1clg")
 
 [node name="Camera2D" type="Camera2D" parent="selectionbox" unique_id=12718925]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 
@@ -1795,18 +1795,22 @@ script = ExtResource("65_ttbie")
 
 [node name="Ghosts" type="Node2D" parent="." unique_id=1170067067]
 
-[node name="tree1" parent="." unique_id=1415981528 instance=ExtResource("70_sy5sx")]
+[node name="Decors" type="Node2D" parent="." unique_id=1213946829]
+
+[node name="trees" type="Node2D" parent="Decors" unique_id=511236668]
+z_index = 7
+
+[node name="tree1" parent="Decors/trees" unique_id=1415981528 instance=ExtResource("70_sy5sx")]
 position = Vector2(829, 212)
-life = 3
+life = 4
 
-[node name="tree2" parent="." unique_id=1251247524 instance=ExtResource("71_2h62v")]
+[node name="tree2" parent="Decors/trees" unique_id=1251247524 instance=ExtResource("71_2h62v")]
 position = Vector2(1258, 306)
-life = 3
+life = 4
 
-[node name="tree3" parent="." unique_id=1861486841 instance=ExtResource("72_oncvo")]
+[node name="tree3" parent="Decors/trees" unique_id=1861486841 instance=ExtResource("72_oncvo")]
 position = Vector2(1237, 699)
-life = 3
+life = 4
 
-[node name="tree4" parent="." unique_id=1569130621 instance=ExtResource("73_1upps")]
+[node name="tree4" parent="Decors/trees" unique_id=1569130621 instance=ExtResource("73_1upps")]
 position = Vector2(345, 740)
-life = 3

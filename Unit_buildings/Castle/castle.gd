@@ -448,6 +448,6 @@ func spawn_pawn() -> void:
 	spawned_pawn=pawn_scene.instantiate()
 	get_parent().add_child(spawned_pawn)
 	spawned_pawn.global_position=marker_3.global_position
-	spawned_pawn.z_index=5
+	spawned_pawn.z_index=4
 	spawned_pawn.scale=Vector2(0.7,0.7)
 	Global.consume_meat(1)

@@ -11,7 +11,7 @@ enum TreeState{
 }
 
 var state:TreeState=TreeState.IDLE
-@export var life=3
+@export var life=4
 
 #----------------------------------------
 #Nodes
@@ -35,7 +35,7 @@ const WOOD_SCENE:=preload("res://Units/Materials/wood/wood.tscn")
 #----------------------------------------
 func _ready() -> void:
 	scale=Vector2(1.5,1.5)
-	z_index=5
+	z_index=7
 	add_to_group("trees")
 	randomize()
 	set_state(TreeState.IDLE)
@@ -49,10 +49,9 @@ func _on_tree_trunk_area_entered(area: Area2D) -> void:
 		life-=1
 		red_flash()
 		area.queue_free()
-		if not cut_audio.playing:
-			cut_audio.play()
-			await get_tree().create_timer(1.95).timeout
-			cut_audio.stop()
+		cut_audio.play()
+		await get_tree().create_timer(1.95).timeout
+		cut_audio.stop()
 
 func set_state(new_state:TreeState)->void:
 	state=new_state
@@ -95,14 +94,15 @@ func try_chop()->void:
 #Spawn wood
 #----------------------------------------
 func spawn_wood()->void:
-	var wood_count:=randi_range(4,8)
+	var wood_count:=randi_range(3,6)
 	
 	for i in range(wood_count):
 		var wood=WOOD_SCENE.instantiate()
+		wood.scale=Vector2(0.6,0.6)
 		get_parent().add_child(wood)
 
 		var x_offset:=randf_range(-35,35)
-		var y_offset:=randf_range(35,-35)
+		var y_offset:=randf_range(-75,55)
 		
 		wood.global_position=global_position+Vector2(x_offset,y_offset)
 		wood.rotation=randf_range(-PI,PI)

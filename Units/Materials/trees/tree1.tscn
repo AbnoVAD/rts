@@ -153,6 +153,7 @@ radius = 16.03122
 radius = 14.0
 
 [node name="tree1" type="StaticBody2D" unique_id=1415981528 groups=["block_building", "trees"]]
+z_index = 7
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_f5h2j")
 life = null
