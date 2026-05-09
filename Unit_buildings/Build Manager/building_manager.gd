@@ -60,7 +60,8 @@ func _process(delta: float) -> void:
 	var tile_pos:=ground.local_to_map(ground.to_local(mouse_pos))
 	var world_pos:=ground.map_to_local(tile_pos)
 
-	ghost.global_position=ghost.global_position.lerp(world_pos,0.35)
+	ghost.global_position=ghost.global_position.lerp(ground.to_global(world_pos),0.35)
+	_validate_placement()
 
 #------------------------------------------
 #Build selection
@@ -139,7 +140,7 @@ func _place_building()->void:
 			building.play_building_animation()
 
 	ghost.queue_free()
-	ghost==null
+	ghost=null
 	current_id=""
 
 #------------------------------------------
@@ -216,7 +217,7 @@ func _has_enough_resources(id:String)->bool:
 	if not cost:
 		return false
 
-	return Global.gold>= cost.gold or Global.wood<cost.wood
+	return Global.gold >= cost.gold and Global.wood >= cost.wood
 
 func _substract_resources(id:String)->bool:
 	var cost=cost_map.get(id)

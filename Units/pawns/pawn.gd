@@ -139,7 +139,7 @@ func _on_resource_entered(area:Area2D)->void:
 #-------------------------------------
 #Input UI
 #-------------------------------------
-func _input(event: InputEvent) ->void:
+func _unhandled_input(event: InputEvent) ->void:
 	if not active or Current_state==state.DEAD:
 		return
 
