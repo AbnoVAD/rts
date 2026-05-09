@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*uid://q4p0ngx11ejb"
 GlobalPlayer="*uid://cybecakwyn6vf"
+TargetManager="*uid://cg2x3pgyoae8y"
 
 [display]
 

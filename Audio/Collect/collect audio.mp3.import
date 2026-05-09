@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4llt51w5leao"
+path="res://.godot/imported/collect audio.mp3-bdd33aa78322d08bbb2dc4364df72729.mp3str"
+
+[deps]
+
+source_file="res://Audio/Collect/collect audio.mp3"
+dest_files=["res://.godot/imported/collect audio.mp3-bdd33aa78322d08bbb2dc4364df72729.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
