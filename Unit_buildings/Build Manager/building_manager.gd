@@ -242,7 +242,7 @@ func _resolve_building_parent() -> Node2D:
 	if existing_fallback is Node2D:
 		return existing_fallback as Node2D
 
-	push_error("Building Manager: no suitable Node2D parent found")
+	push_error("Building Manager: no suitable Node2D parent found; assign Building Manager.building_parent or ensure the manager is under a Node2D scene")
 	return null
 
 func _has_enough_resources(id:String)->bool:
