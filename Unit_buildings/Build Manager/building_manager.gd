@@ -33,6 +33,10 @@ var ghost:Area2D=null
 var current_id:=""
 var can_place:=false
 
+func _ready() -> void:
+	if building_parent == null:
+		building_parent = _resolve_building_parent()
+
 #Cost mapping
 var cost_map:={
 	"house1":{"wood":1,"gold":1},
@@ -112,6 +116,12 @@ func _input(event: InputEvent) -> void:
 #Place building
 #------------------------------------------
 func _place_building()->void:
+	if not moving_building and building_parent == null:
+		building_parent = _resolve_building_parent()
+		if building_parent == null:
+			push_error("Building Manager: missing building parent, cannot place building")
+			return
+
 	if current_id!="":
 		if not _substract_resources(current_id):
 			return
@@ -211,6 +221,29 @@ func _get_or_create_ghost_parent() -> Node2D:
 	new_node.name="Ghosts"
 	current_scene.add_child(new_node)
 	return new_node
+
+func _resolve_building_parent() -> Node2D:
+	var tree := get_tree()
+	if tree == null:
+		return null
+
+	var current_scene := tree.current_scene
+	if current_scene is Node2D:
+		return current_scene as Node2D
+
+	var parent_node := get_parent()
+	if parent_node is Node2D:
+		return parent_node as Node2D
+
+	if tree.root == null:
+		return null
+
+	var existing_fallback := tree.root.get_node_or_null("Buildings")
+	if existing_fallback is Node2D:
+		return existing_fallback as Node2D
+
+	push_error("Building Manager: no suitable Node2D parent found; assign building_parent on BuildingManager or ensure it is under a Node2D scene")
+	return null
 
 func _has_enough_resources(id:String)->bool:
 	var cost = cost_map.get(id)
