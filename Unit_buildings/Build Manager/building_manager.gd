@@ -225,7 +225,11 @@ func _resolve_building_parent() -> Node2D:
 	if parent_node is Node2D:
 		return parent_node as Node2D
 
-	return null
+	push_error("Building Manager: no Node2D scene parent found, creating fallback Buildings node on root")
+	var fallback_node := Node2D.new()
+	fallback_node.name = "Buildings"
+	get_tree().root.add_child(fallback_node)
+	return fallback_node
 
 func _has_enough_resources(id:String)->bool:
 	var cost = cost_map.get(id)
