@@ -242,7 +242,7 @@ func _resolve_building_parent() -> Node2D:
 	if existing_fallback is Node2D:
 		return existing_fallback as Node2D
 
-	push_error("Building Manager: neither scene root nor parent is Node2D, creating fallback Buildings node")
+	push_error("Building Manager: no suitable Node2D parent found, creating fallback Buildings node")
 	var fallback_node := Node2D.new()
 	fallback_node.name = "Buildings"
 	tree.root.add_child(fallback_node)
