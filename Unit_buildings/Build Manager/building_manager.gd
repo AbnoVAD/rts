@@ -116,6 +116,12 @@ func _input(event: InputEvent) -> void:
 #Place building
 #------------------------------------------
 func _place_building()->void:
+	if not moving_building and building_parent == null:
+		building_parent = _resolve_building_parent()
+		if building_parent == null:
+			push_error("Building Manager: missing building parent, cannot place building")
+			return
+
 	if current_id!="":
 		if not _substract_resources(current_id):
 			return
@@ -217,7 +223,11 @@ func _get_or_create_ghost_parent() -> Node2D:
 	return new_node
 
 func _resolve_building_parent() -> Node2D:
-	var current_scene := get_tree().current_scene
+	var tree := get_tree()
+	if tree == null:
+		return null
+
+	var current_scene := tree.current_scene
 	if current_scene is Node2D:
 		return current_scene as Node2D
 
@@ -225,10 +235,8 @@ func _resolve_building_parent() -> Node2D:
 	if parent_node is Node2D:
 		return parent_node as Node2D
 
-	var tree := get_tree()
-	if tree == null or tree.root == null:
-		push_error("Building Manager: scene tree unavailable, using manager node as building parent fallback")
-		return self
+	if tree.root == null:
+		return null
 
 	var existing_fallback := tree.root.get_node_or_null("Buildings")
 	if existing_fallback is Node2D:
