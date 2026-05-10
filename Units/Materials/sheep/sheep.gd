@@ -163,7 +163,7 @@ func _update_pack_center():
 		return
 	var sum:=Vector2.ZERO
 	for s in pack_members:
-		sum+=s.global.position
+		sum+=s.global_position
 	pack_center=sum/pack_members.size()
 
 func _pack_pull()->Vector2:
@@ -193,7 +193,7 @@ func try_spawn_baby(delta):
 	if randf()>0.15*fertility:
 		return
 	var baby=baby_sheep_scene.instantiate()
-	baby.global	=global_position+Vector2(randf_range(-10,10),randf_range(-10,10))
+	baby.global_position=global_position+Vector2(randf_range(-10,10),randf_range(-10,10))
 
 	baby.body_size=clamp(body_size+randf_range(-0.1,0.1),0.7,1.5)
 	baby.agility=clamp(agility+randf_range(-0.1,0.1),0.5,1.5)
@@ -281,5 +281,5 @@ func _enter_wander():
 	
 	var radius:=randf_range(50,100)
 	var angle:=randf()*TAU
-	target_position=global_position*Vector2(cos(angle),sin(angle))*radius
+	target_position=global_position+Vector2(cos(angle),sin(angle))*radius
 	wander_time=randf_range(1.5,3.5)
