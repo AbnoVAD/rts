@@ -78,7 +78,7 @@ animations = [{
 radius = 11.368984
 height = 57.58014
 
-[node name="wood" type="Area2D" unique_id=209861925]
+[node name="wood" type="Area2D" unique_id=209861925 groups=["resource"]]
 script = ExtResource("1_65yod")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1020124633]

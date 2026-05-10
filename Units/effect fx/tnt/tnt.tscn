@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://diw8ebq7auxog"]
+
+[ext_resource type="Texture2D" uid="uid://74ynk8kpx0ww" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Troops/TNT/Dynamite/Dynamite.png" id="1_75rog"]
+[ext_resource type="Script" uid="uid://b0c8wixvx62el" path="res://Units/effect fx/tnt/tnt.gd" id="1_imij7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imij7"]
+atlas = ExtResource("1_75rog")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rnjg"]
+atlas = ExtResource("1_75rog")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hn7kr"]
+atlas = ExtResource("1_75rog")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6xbd"]
+atlas = ExtResource("1_75rog")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7011"]
+atlas = ExtResource("1_75rog")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osi1c"]
+atlas = ExtResource("1_75rog")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7qrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imij7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rnjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn7kr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6xbd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7011")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osi1c")
+}],
+"loop": true,
+"name": &"sp",
+"speed": 10.0
+}]
+
+[node name="tnt" type="Node2D" unique_id=1914054308]
+script = ExtResource("1_imij7")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=33663167]
+sprite_frames = SubResource("SpriteFrames_n7qrf")
+animation = &"sp"
+autoplay = "sp"

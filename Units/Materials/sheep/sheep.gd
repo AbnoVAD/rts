@@ -17,7 +17,7 @@ extends CharacterBody2D
 #-----------------------------------------------
 #Scenes
 #-----------------------------------------------
-@export var meat_scene=preload("res://Units/Materials/wood/wood.tscn") #temporary
+@export var meat_scene=preload("res://Units/Materials/meat/meat.tscn") 
 @export var baby_sheep_scene=preload("res://Units/Materials/sheep/sheep.tscn")
 
 #-----------------------------------------------

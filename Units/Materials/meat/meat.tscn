@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://o653ugpjc8hf"]
+
+[ext_resource type="Script" uid="uid://csf7glotcgk45" path="res://Units/Materials/meat/meat.gd" id="1_6snem"]
+[ext_resource type="Texture2D" uid="uid://bumwbahf7juik" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Resources/Resources/M_Idle.png" id="2_132ro"]
+[ext_resource type="Texture2D" uid="uid://5m62bsfribny" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Resources/Resources/M_Spawn.png" id="3_rbsg3"]
+[ext_resource type="AudioStream" uid="uid://b4llt51w5leao" path="res://Audio/Collect/collect audio.mp3" id="5_gl6xx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_baj4w"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t12ej"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2mlo"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp7pd"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gk01"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jitxt"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kt6v"]
+atlas = ExtResource("3_rbsg3")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdhoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_132ro")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_baj4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t12ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2mlo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hp7pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gk01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jitxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kt6v")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sd0ix"]
+radius = 11.368984
+height = 57.58014
+
+[node name="meat" type="Area2D" unique_id=209861925 groups=["resource"]]
+script = ExtResource("1_6snem")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=1020124633]
+sprite_frames = SubResource("SpriteFrames_vdhoq")
+animation = &"idle"
+autoplay = "spawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1943299205]
+visible = false
+position = Vector2(0, 22)
+rotation = 1.2287118
+shape = SubResource("CapsuleShape2D_sd0ix")
+metadata/_edit_lock_ = true
+
+[node name="collect_audio" type="AudioStreamPlayer" parent="." unique_id=618478325]
+stream = ExtResource("5_gl6xx")
+pitch_scale = 2.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
