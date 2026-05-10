@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7ee0615leik5"
+path="res://.godot/imported/sheep hit sound effect.mp3-69157a46408b1b410ae0653382e2e1aa.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sheep/sheep hit sound effect.mp3"
+dest_files=["res://.godot/imported/sheep hit sound effect.mp3-69157a46408b1b410ae0653382e2e1aa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dve34i5uswfv0"
+path="res://.godot/imported/Sheep sound effect.mp3-aa61cde987ec19824d76c35354be8a9f.mp3str"
+
+[deps]
+
+source_file="res://Audio/Sheep/Sheep sound effect.mp3"
+dest_files=["res://.godot/imported/Sheep sound effect.mp3-aa61cde987ec19824d76c35354be8a9f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

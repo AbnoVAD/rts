@@ -73,6 +73,7 @@
 [ext_resource type="PackedScene" uid="uid://df4tu1jemgkuo" path="res://Units/Materials/trees/tree2.tscn" id="71_2h62v"]
 [ext_resource type="PackedScene" uid="uid://5j5bdvnr3jlv" path="res://Units/Materials/trees/tree3.tscn" id="72_oncvo"]
 [ext_resource type="PackedScene" uid="uid://kd3pdc2wo3hf" path="res://Units/Materials/trees/tree4.tscn" id="73_1upps"]
+[ext_resource type="PackedScene" uid="uid://burefv6vhb22u" path="res://Units/Materials/sheep/sheep.tscn" id="74_2h62v"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1814,3 +1815,61 @@ life = 4
 
 [node name="tree4" parent="Decors/trees" unique_id=1569130621 instance=ExtResource("73_1upps")]
 position = Vector2(345, 740)
+
+[node name="sheep" type="Node2D" parent="Decors" unique_id=324693285]
+
+[node name="sheep" parent="Decors/sheep" unique_id=238742770 instance=ExtResource("74_2h62v")]
+position = Vector2(662, 938)
+body_size = 1.5
+agility = 1.5
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep2" parent="Decors/sheep" unique_id=74256170 instance=ExtResource("74_2h62v")]
+position = Vector2(354, 995)
+body_size = 1.5
+agility = 1.5
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep3" parent="Decors/sheep" unique_id=1155945125 instance=ExtResource("74_2h62v")]
+position = Vector2(708, 1003)
+body_size = 1.5
+agility = 1.5
+courage = 0.6
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep4" parent="Decors/sheep" unique_id=1904187223 instance=ExtResource("74_2h62v")]
+position = Vector2(1118, 950)
+body_size = 1.5
+agility = 1.5
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep5" parent="Decors/sheep" unique_id=7482312 instance=ExtResource("74_2h62v")]
+position = Vector2(1218, 1019)
+body_size = 1.5
+agility = 1.5
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep6" parent="Decors/sheep" unique_id=295207180 instance=ExtResource("74_2h62v")]
+position = Vector2(633, 1040)
+body_size = 1.5
+agility = 0.6
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5
+
+[node name="sheep7" parent="Decors/sheep" unique_id=121665276 instance=ExtResource("74_2h62v")]
+position = Vector2(787, 1041)
+body_size = 1.5
+agility = 1.5
+courage = 1.5
+fertility = 1.5
+growth_rate = 1.5

@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://burefv6vhb22u"]
 
 [ext_resource type="Texture2D" uid="uid://dup1aajlrorpq" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Meat/Sheep/Sheep_Grass.png" id="1_4rbhj"]
+[ext_resource type="Script" uid="uid://0v8wam0rfuv8" path="res://Units/Materials/sheep/sheep.gd" id="1_yab5p"]
 [ext_resource type="Texture2D" uid="uid://ceavvnikaxej1" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Meat/Sheep/Sheep_Idle.png" id="2_er61n"]
 [ext_resource type="Texture2D" uid="uid://c00uxn5jjg3ji" path="res://assets/Tiny Swords (Free Pack)/Terrain/Resources/Meat/Sheep/Sheep_Move.png" id="3_kotsg"]
+[ext_resource type="AudioStream" uid="uid://dve34i5uswfv0" path="res://Audio/Sheep/Sheep sound effect.mp3" id="4_kotsg"]
+[ext_resource type="AudioStream" uid="uid://b7ee0615leik5" path="res://Audio/Sheep/sheep hit sound effect.mp3" id="5_yab5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yab5p"]
 atlas = ExtResource("1_4rbhj")
@@ -182,7 +185,11 @@ radius = 20.024984
 [sub_resource type="CircleShape2D" id="CircleShape2D_4rbhj"]
 radius = 20.0
 
-[node name="sheep" type="CharacterBody2D" unique_id=238742770]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yab5p"]
+radius = 20.0
+
+[node name="sheep" type="CharacterBody2D" unique_id=238742770 groups=["block_building", "trees"]]
+script = ExtResource("1_yab5p")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1076703309]
 sprite_frames = SubResource("SpriteFrames_w1sac")
@@ -204,6 +211,15 @@ shape = SubResource("CircleShape2D_4rbhj")
 debug_color = Color(0.98051506, 0.0945491, 0.26674226, 0.41960785)
 metadata/_edit_lock_ = true
 
+[node name="danger zone" type="Area2D" parent="." unique_id=39430918]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="danger zone" unique_id=1481653562]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_yab5p")
+debug_color = Color(0.28415114, 0.6309328, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
 [node name="Marker2D" type="Marker2D" parent="." unique_id=346292919]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=188138771]
@@ -212,5 +228,9 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -2)
 
 [node name="sheep_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1951721348]
+stream = ExtResource("4_kotsg")
 
 [node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=839995629]
+stream = ExtResource("5_yab5p")
+
+[connection signal="area_entered" from="zone" to="." method="_on_zone_area_entered"]
