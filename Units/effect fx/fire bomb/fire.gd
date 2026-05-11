@@ -3,12 +3,16 @@ extends Node2D
 @export var move_time:=0.10
 @export var stop_time:=0.2
 @export var explosion_delay:=0.25
+@onready var fire_audio: AudioStreamPlayer = $fire_audio
+@onready var animation: AnimatedSprite2D = $animation
+
 
 var target_position:Vector2
 var direction:Vector2
 
 func _ready() -> void:
 	z_index=5
+	fire_audio.play()
 
 func throw(from_pos:Vector2,to_pos:Vector2)->void:
 	global_position=from_pos
@@ -43,4 +47,5 @@ func spawn_explosion()->void:
 	explosion.global_position=global_position
 	explosion.z_index=5
 	
+	fire_audio.stop()
 	queue_free()

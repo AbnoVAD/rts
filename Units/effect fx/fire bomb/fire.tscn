@@ -70,7 +70,7 @@ sprite_frames = SubResource("SpriteFrames_1dull")
 animation = &"sp"
 autoplay = "sp"
 
-[node name="fire" type="AudioStreamPlayer" parent="." unique_id=2008559536]
+[node name="fire_audio" type="AudioStreamPlayer" parent="." unique_id=2008559536]
 stream = ExtResource("3_akkl7")
 volume_db = -20.0
 pitch_scale = 2.0
