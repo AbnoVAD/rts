@@ -20,17 +20,17 @@ func update_labels():
 	label_wood.text=" : "+str(Global.wood)
 
 func check_resources():
-	check_resources(
+	check_resource(
 		label_gold,
 		Global.gold,
 		Global.max_gold
 	)
-	check_resources(
+	check_resource(
 		label_meat,
 		Global.meat,
 		Global.max_meat
 	)
-	check_resources(
+	check_resource(
 		label_wood,
 		Global.wood,
 		Global.max_wood

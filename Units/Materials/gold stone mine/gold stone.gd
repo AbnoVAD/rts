@@ -62,7 +62,7 @@ func setup_hit_cooldown()->void:
 	hit_cooldown_timer.timeout.connect(func():can_take_damage=true)
 
 func _on_mine_zone_area_entered(area: Area2D) -> void:
-	if can_take_damage:
+	if not can_take_damage:
 		return
 	if area.is_in_group("attackeffect") and Global.pawn_tool=="pickaxe":
 		take_damage()
