@@ -100,7 +100,7 @@ func _ready() -> void:
 func _assign_pack():
 	var nearby:=[]
 	for sheep in get_tree().get_nodes_in_group("sheep"):
-		if sheep!=self and sheep.global_position.distance_to(global_position)<pack_radius:
+		if sheep!=self and is_instance_valid(sheep) and sheep.global_position.distance_to(global_position)<pack_radius:
 			nearby.append(sheep)
 		if nearby.is_empty():
 			pack_id=get_instance_id()
@@ -160,6 +160,9 @@ func _physics_process(delta: float) -> void:
 #-----------------------------------------------
 func _update_pack_center():
 	if not is_leader:
+		return
+	pack_members = pack_members.filter(func(s): return is_instance_valid(s))
+	if pack_members.is_empty():
 		return
 	var sum:=Vector2.ZERO
 	for s in pack_members:
