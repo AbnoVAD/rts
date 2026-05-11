@@ -8,7 +8,7 @@ var collected:=false
 #Nodes
 #------------------------------------------
 @onready var animation: AnimatedSprite2D = $animation
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var collision_shape_2d: CollisionShape2D = $shape
 @onready var collect_audio: AudioStreamPlayer = $collect_audio
 
 func _ready() -> void:
