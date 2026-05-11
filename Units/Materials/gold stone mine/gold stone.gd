@@ -115,7 +115,7 @@ func spawn_gold()->void:
 			randf_range(75,105)
 		)
 		gold.global_position=marker_2d.global_position+offset
-		rotation=randf_range(-PI,PI)
+		gold.rotation=randf_range(-PI,PI)
 		gold.z_index=6
 
 func _on_restore_timer_timeout()->void:

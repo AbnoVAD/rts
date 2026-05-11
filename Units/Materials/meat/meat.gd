@@ -27,7 +27,7 @@ func _on_body_entered(body: Node2D) -> void:
 func collect():
 	if not collect_audio.playing:
 		collect_audio.play()
-	Global.add_gold(2)
+	Global.add_meat(2)
 	collision_shape_2d.disabled=true
 	
 	var tween:=create_tween()

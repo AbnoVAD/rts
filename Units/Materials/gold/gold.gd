@@ -8,7 +8,7 @@ var collected:=false
 #Nodes
 #------------------------------------------
 @onready var animation: AnimatedSprite2D = $animation
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var collision_shape_2d: CollisionShape2D = $shape
 @onready var collect_audio: AudioStreamPlayer = $collect_audio
 
 func _ready() -> void:
@@ -27,7 +27,7 @@ func _on_body_entered(body: Node2D) -> void:
 func collect():
 	if not collect_audio.playing:
 		collect_audio.play()
-	Global.add_wood(1)
+	Global.add_gold(2)
 	collision_shape_2d.disabled=true
 	
 	var tween:=create_tween()
