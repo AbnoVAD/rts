@@ -25,7 +25,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jdavp"]
 size = Vector2(26, 8)
 
-[node name="arrow" type="Area2D" unique_id=1818434497]
+[node name="arrow" type="Area2D" unique_id=1818434497 groups=["arrow"]]
 script = ExtResource("1_c8cgl")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=350231132 groups=["arrow"]]
