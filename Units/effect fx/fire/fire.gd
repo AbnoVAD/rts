@@ -18,8 +18,8 @@ func fade():
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_BACK)
 	
-	tween.tween.property(self,"modulate:a",0.0,0.5)
+	tween.tween_property(self,"modulate:a",0.0,0.5)
 	
-	tween.tween.property(self,"scale",Vector2(1.5,1.5),0.5)
+	tween.tween_property(self,"scale",Vector2(1.5,1.5),0.5)
 	
 	tween.finished.connect(queue_free)
