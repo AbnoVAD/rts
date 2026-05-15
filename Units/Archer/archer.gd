@@ -386,7 +386,7 @@ func spawn_arrow():
 	arrow.z_index=z_index+1
 #launch arrow to target
 	if arrow.has_method("launch"):
-		if not shootpoint.playing:
+		if not shoot_audio.playing:
 			shoot_audio.play()
 		arrow.launch(target.global_position,800) #speed of arrow 800
 
@@ -656,6 +656,18 @@ func resolve_stuck():
 	nav.target_position+=axis * randf_range(24,48)
 
 var movement_priority:=false
+func _on_detector_zone_area_entered(area: Area2D) -> void:
+	if movement_priority or action_locked or state==State.DEAD:
+		return
+	var body:=area.get_parent()
+	if body==null or not body.is_inside_tree():
+		return
+	if body.is_in_group("goblin") or body.is_in_group("goblinbuildings"):
+		target=body
+		manual_mode=false
+		nav.target_position=body.global_position
+		change_state(State.RUN)
+
 func _on_detector_zone_body_entered(body: Node2D) -> void:
 	if movement_priority or action_locked or state==State.DEAD:
 		return
