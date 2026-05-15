@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cm4ij1q41fs4l"]
+
+[ext_resource type="Texture2D" uid="uid://74ynk8kpx0ww" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Troops/TNT/Dynamite/Dynamite.png" id="1_7o51y"]
+[ext_resource type="Script" uid="uid://bjp5yeaoqira6" path="res://Units Goblins/Tower/Goblin Tower/tnt.gd" id="1_ckroy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckroy"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7hf1"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x64k"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeeh3"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4sg4"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i26ve"]
+atlas = ExtResource("1_7o51y")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_81mhl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckroy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7hf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x64k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeeh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4sg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i26ve")
+}],
+"loop": true,
+"name": &"sp",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ne6yj"]
+radius = 40.792156
+
+[node name="tnt" type="Area2D" unique_id=799413641]
+script = ExtResource("1_ckroy")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=1580193660]
+sprite_frames = SubResource("SpriteFrames_81mhl")
+animation = &"sp"
+autoplay = "sp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1310567823]
+visible = false
+shape = SubResource("CircleShape2D_ne6yj")
+debug_color = Color(0.99359185, 0.024518142, 0.203507, 0.41960785)

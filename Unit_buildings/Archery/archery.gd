@@ -35,7 +35,7 @@ var is_dead:bool=false
 #--------------------------------------------------
 #Constants
 #--------------------------------------------------
-const FINAL_SCALE:=Vector2(0.7,0.7)
+const FINAL_SCALE:=Vector2(1.2,1.2)
 const DOUBLE_CLICK_TIME:=0.3
 
 #--------------------------------------------------

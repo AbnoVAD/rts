@@ -159,7 +159,7 @@ animations = [{
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4xb65"]
-radius = 440.2908
+radius = 432.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e6bd1"]
 height = 50.0
@@ -226,6 +226,7 @@ debug_color = Color(0, 0, 0, 0.41960785)
 [node name="detector zone" type="Area2D" parent="." unique_id=370496920]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detector zone" unique_id=1908200251]
+visible = false
 shape = SubResource("CircleShape2D_4xb65")
 debug_color = Color(0.06482514, 0.649749, 0.033422377, 0.41960785)
 
