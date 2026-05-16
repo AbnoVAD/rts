@@ -160,14 +160,14 @@ animations = [{
 radius = 22.119135
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wysgj"]
-radius = 40.1995
+radius = 192.04166
 
 [node name="Goblin tower" type="CharacterBody2D" unique_id=979351680 groups=["block_building", "goblin"]]
 script = ExtResource("1_uvdca")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=648731224]
 sprite_frames = SubResource("SpriteFrames_va7uu")
-animation = &"idle"
+animation = &"shoot"
 autoplay = "idle"
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1936355107]

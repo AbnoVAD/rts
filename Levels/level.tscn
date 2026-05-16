@@ -83,6 +83,8 @@
 [ext_resource type="PackedScene" uid="uid://vk70cksxrgm4" path="res://Units/Materials/gold stone mine/gold stone.tscn" id="75_oncvo"]
 [ext_resource type="PackedScene" uid="uid://c762hx4xss01h" path="res://Units Goblins/Tower/Goblin Tower/goblin_tower.tscn" id="83_oeejg"]
 [ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="83_qgi8s"]
+[ext_resource type="PackedScene" uid="uid://b263c1iktalah" path="res://Units Goblins/Goblin torch/goblin_torch.tscn" id="84_luo2f"]
+[ext_resource type="PackedScene" uid="uid://bml5misy03g3r" path="res://Units Goblins/Goblin tnt/goblin_tnt.tscn" id="85_euja3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -2159,6 +2161,15 @@ position = Vector2(492, 817)
 position = Vector2(432, 648)
 
 [node name="Goblin tower" parent="." unique_id=979351680 instance=ExtResource("83_oeejg")]
-position = Vector2(200, 1016)
+position = Vector2(448, 1008)
+
+[node name="Goblin torch" parent="." unique_id=1148126027 instance=ExtResource("84_luo2f")]
+position = Vector2(888, 1024)
+
+[node name="Goblin tower2" parent="." unique_id=1834312227 instance=ExtResource("83_oeejg")]
+position = Vector2(224, 1048)
+
+[node name="Goblin tnt" parent="." unique_id=157065727 instance=ExtResource("85_euja3")]
+position = Vector2(248, 928)
 
 [connection signal="pressed" from="UI/ui/Panel/Pause/resume/resume btn" to="UI/ui/Panel/Pause" method="_on_resume_btn_pressed"]

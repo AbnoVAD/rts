@@ -10,6 +10,7 @@ const MAX_GOBLINS_PER_TARGET:int=4
 const STEAL_DISTANCE:float=80.0
 const SEPARATION_RADIUS:float=120.0
 const SEPARATION_FORCE:float=140.0
+const ATTACK_DELAY:=0.3
 
 #--------------------------------------------------
 #Nodes
@@ -21,37 +22,63 @@ const SEPARATION_FORCE:float=140.0
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 @onready var hurt_timer: Timer = $hurt
 @onready var flash_timer: Timer = $flash
+@onready var attack_timer: Timer = $attack_timer
+@onready var cooldown: Timer = $cooldown
 @onready var target_area: Area2D = $target_area
 @onready var predictcast: ShapeCast2D = $PredictCast
+@onready var up_marker: Marker2D = $"detect_area/up marker"
+@onready var down_marker: Marker2D = $"down marker"
+@onready var left_marker: Marker2D = $"left marker"
+@onready var right_marker: Marker2D = $"right marker"
+
 #fx sound
 @onready var throw_audio: AudioStreamPlayer = $"sound fx/throw_audio"
 @onready var hit_attack_audio: AudioStreamPlayer = $"sound fx/hit_attack_audio"
+@onready var death_audio: AudioStreamPlayer = $"sound fx/death_audio"
+
 
 #--------------------------------------------------
 #Constants
 #--------------------------------------------------
-const ATTACK_DISTANCE:float=40.0
+const ATTACK_DISTANCE:float=50.0
 const KNOCKBACK_FORCE:float=1000.0
 const KNOCKBACK_DECAY:float=0.85
 const DETOUR_DISTANCE:float=60.0
+const STOP_DISTANCE:float=130.0
+const PREDICTION_TIME:float=0.3
 
 #--------------------------------------------------
 #State machine
 #--------------------------------------------------
 enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 var state:State=State.IDLE
+var building_is_dead:=false
 
 #--------------------------------------------------
 #Variables
 #--------------------------------------------------
+var directional:Vector2=Vector2.ZERO
+var is_attacking:float=false
+var last_mov_dir:Vector2=Vector2.ZERO
+var attack_sound_played:=false
 @export var SPEED:float=200.0
 @export var health:int=6
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 
+var tnt_timer:float=0.0
+var body_in_range
+var tnt_cooldown:float=1.0
+
 var targets:Array[Node2D]=[]
 var current_target:Node2D=null
 var exploded:bool=false
+
+#--------------------------------------------------
+#Scenes
+#--------------------------------------------------
+static var TNT_scene=preload("res://Units/effect fx/tnt/tnt.tscn")
+static var skull_scene=preload("res://materials_effects/skull/skull.tscn")
 
 #--------------------------------------------------
 #Stuck and avoidance
@@ -79,6 +106,7 @@ func _exit_tree() -> void:
 	goblins.erase(self)
 	release_target()
 	rebalance_pack()
+	cleanup_reserved_targets()
 
 #--------------------------------------------------
 #Target / Pack logic
@@ -128,7 +156,6 @@ func choose_best_target()->void:
 				targets.append(best_target)
 	#step 3: For barrel if no targets explode
 	if best_target==null:
-		explode()
 		return
 	assign_target(best_target)
 
@@ -167,6 +194,12 @@ func rebalance_pack()->void:
 		if is_instance_valid(g) and g.state !=State.DEAD:
 			g.choose_best_target()
 
+func cleanup_reserved_targets()->void:
+	for target in reserved_targets.keys():
+		reserved_targets[target]=reserved_targets[target].filter(is_instance_valid)
+		if reserved_targets[target].is_empty():
+			reserved_targets.erase(targets)
+
 func validate_target()->bool:
 	if current_target==null:
 		state=State.IDLE
@@ -183,40 +216,28 @@ func validate_target()->bool:
 func _physics_process(delta: float) -> void:
 	if state==State.DEAD:
 		return
-	
+
+	tnt_timer=max(0.0,tnt_timer-delta)
+
 	#knock back decay
 	if knockback_velocity.length()>1:
 		velocity=knockback_velocity
 		knockback_velocity*=KNOCKBACK_DECAY
+	else:
+		knockback_velocity=Vector2.ZERO
+		
+	if state==State.IDLE:
+		recheck_players()
+	if state==State.ATTACK:
+		recheck_players()
 
 	validate_target()
 
 	match state:
-		State.IDLE:
-			if targets.is_empty():
-				animation.play("explode")
-				await get_tree().create_timer(0.2).timeout
-				explode()
-				return
-			idle_state()
-			if health <=0:
-				explode()
-
-		State.CHASE:
-			chase_state()
-			idle_state()
-			if health <=0:
-				explode()
-
-		State.ATTACK:
-			chase_state()
-			if health <=0:
-				explode()
-
-		State.HIT:
-			chase_state()
-			if health <=0:
-				explode()
+		State.IDLE:idle_state()
+		State.CHASE:chase_state()
+		State.ATTACK:attack_state()
+		State.HIT:hit_state()
 
 	#combine separtation and movement with knockback system
 	if state in [State.IDLE,State.CHASE]:
@@ -235,37 +256,79 @@ func _physics_process(delta: float) -> void:
 #--------------------------------------------------
 func idle_state()->void:
 	animation.play("idle")
+	velocity=separation_vector()*SEPARATION_FORCE
 
 func chase_state()->void:
+	var dist:=global_position.distance_to(current_target.global_position)
 	if not validate_target():
 		return
+	var distance_to_target:float=global_position.distance_to(current_target.global_position)
+	if distance_to_target<=STOP_DISTANCE:
+		state=State.ATTACK
+		return
+	if dist<=ATTACK_DISTANCE and not is_attacking:
+		is_attacking=true
+		state=State.ATTACK
+		attack_timer.start(ATTACK_DELAY)
+
 	nav.target_position=current_target.global_position
 	var next_point:Vector2=nav.get_next_path_position()
 	var dir:Vector2=(next_point-global_position).normalized()
+	last_mov_dir=dir
+	directional=dir
 	
 	velocity=dir*SPEED
 	animation.flip_h=dir.x<0
 	animation.play("run")
 
-	if global_position.distance_to(current_target.global_position)<=ATTACK_DISTANCE:
-		state=State.ATTACK
-
 func attack_state()->void:
-	if state==State.DEAD:
+	if building_is_dead:
+		state=State.IDLE
+		choose_best_target()
 		return
-	velocity=Vector2.ZERO
-	animation.play("explode")
-	await animation.animation_finished
-	_on_attack_finished()
 
-func _on_attack_finished()->void:
-	animation.play("explode" if animation.sprite_frames.has_animation("explode") else "hide")
-	hurt_timer.start()
-	
-	if health<=0:
-		explode()
+	velocity=Vector2.ZERO
+
+	if abs(last_mov_dir.x)>abs(last_mov_dir.y):
+		animation.play("attack side")
+		animation.flip_h=last_mov_dir.x<0
 	else:
-		state=State.CHASE if current_target else State.IDLE
+		if last_mov_dir.y<0:
+			animation.play("attack up")
+		else:
+			animation.play("attack down")
+
+	if tnt_timer<=0:
+		var target_velocity:Vector2=Vector2.ZERO
+		if current_target.has_method("velocity"):
+			target_velocity=current_target.velocity
+		var predicted_pos:Vector2=current_target.global_position+target_velocity*PREDICTION_TIME
+		if body_in_range==true and not building_is_dead==true:
+			throw_tnt(predicted_pos)
+		tnt_timer=tnt_cooldown
+	await get_tree().create_timer(0.2).timeout
+	if state!=State.DEAD:
+		validate_target()
+		if state!=State.ATTACK:
+			state=State.CHASE
+
+func _on_attack_timer_timeout() -> void:
+	if not validate_target():
+		exit_attack()
+		return
+	if not throw_audio.playing:
+		throw_audio.play()
+	do_attack()
+	exit_attack()
+	state=State.CHASE
+
+func hit_state()->void:
+	if animation.animation!="hit":
+		pass
+	if health<=0:
+		pass
+
+
 
 #--------------------------------------------------
 #Separation between the barrels (distance)
@@ -328,40 +391,30 @@ func _on_flash_timeout() -> void:
 
 #Detector area
 func _on_detect_area_body_entered(body: Node2D) -> void:
-	if exploded:
-		return
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("castle") or body.is_in_group("building"):
+		if body.has_method("is_destroyed"):
+			if body.is_destroyed():
+				return
 		add_target(body)
-		var t=Timer.new()
-		t.one_shot=true
-		t.wait_time=0.2
-		add_child(t)
-		t.timeout.connect(func()->void:
-			t.queue_free()
-			explode())
-		t.start()
+		body_in_range=true
 
 func _on_detect_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("castle") or body.is_in_group("building"):
 		remove_target(body)
+		body_in_range=false
 
 #--------------------------------------------------
 #Target area signals
 #--------------------------------------------------
 func _on_target_area_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		return
-	if current_target==null:
-		add_target(body)
-		return
-	var current_dist:float=global_position.distance_to(current_target.global_position)
-	var new_dist:float=global_position.distance_to(body.global_position)
-	
-	if new_dist+STEAL_DISTANCE<current_dist:
+	if body.is_in_group("player") or body.is_in_group("castle") or body.is_in_group("building"):
+		if body.has_method("is_destroyed"):
+			if body.is_destroyed():
+				return
 		add_target(body)
 
 func _on_target_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") or body.is_in_group("castle") or body.is_in_group("building"):
 		remove_target(body)
 
 #--------------------------------------------------
@@ -386,22 +439,37 @@ func avoid_obstacles():
 #--------------------------------------------------
 #Death/Explosion
 #--------------------------------------------------
-func explode():
-	if state==State.DEAD or exploded:
+func throw_tnt(target_pos:Vector2)->void:
+	if state==State.DEAD:
 		return
-	
-	exploded=true
+	var tnt=TNT_scene.instantiate()
+	get_parent().add_child(tnt)
+	tnt.scale=Vector2(0.6,0.6)
+	tnt.throw(global_position,target_pos)
+
+func skull()->void:
+	if state==State.DEAD:
+		return
 	state=State.DEAD
 	release_target()
 	rebalance_pack()
+	cleanup_reserved_targets()
 	
-	var e=preload("res://Units/effect fx/explosion/explosion.tscn").instantiate()
-	get_parent().add_child(e)
-	e.global_position=global_position
-	e.scale=Vector2(1.5,1.5)
-	e.z_index=6
+	if not hit_attack_audio.playing:
+		hit_attack_audio.play()
 
+	var s=skull_scene.instantiate()
+	get_parent().add_child(s)
+	s.global_position=global_position
+	s.scale=Vector2(0.5,0.5)
+	s.z_index=5
 	queue_free()
+
+func recheck_players()->void:
+	for p in get_tree().get_nodes_in_group("player")+get_tree().get_nodes_in_group("castle")+get_tree().get_nodes_in_group("building"):
+		if is_instance_valid(p):
+			add_target(p)
+
 func detect_stuck(delta:float)->void:
 	if last_position.distance_to(global_position)<1.0:
 		stuck_timer+=delta
@@ -426,3 +494,30 @@ func add_attacker(knight):
 		_attackers.append(knight)
 func remove_attacker(knight):
 	_attackers.erase(knight)
+func set_target(building:Node2D)->void:
+	building.died.connect(_on_building_died)
+func _on_building_died(building:Node2D)->void:
+	if building!=current_target:
+		return
+	building_is_dead=true
+
+	release_target()
+	targets.erase(building)
+	
+	state=State.IDLE
+	choose_best_target()
+
+func exit_attack():
+	is_attacking=false
+	attack_sound_played=false
+
+func do_attack():
+	if tnt_timer>0.0:
+		return
+	var target_velocity:=Vector2.ZERO
+	if current_target is CharacterBody2D:
+		target_velocity=current_target.velocity
+	
+	var predicted:=current_target.global_position+target_velocity*PREDICTION_TIME
+	throw_tnt(predicted)
+	tnt_timer=tnt_cooldown
