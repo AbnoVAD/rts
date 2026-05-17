@@ -92,7 +92,7 @@ func _spawn_waves_async()->void:
 		elapsed_time+=wave_interval
 	spawning=false
 	Global.wave_start=false
-	Global.unregistered_spawner()
+	Global.unregister_spawner()
 
 #-------------------------------------------
 #Spawn logic
@@ -137,7 +137,7 @@ func destroy_house():
 	collision_shape_2d.disabled=true
 	hitbox.monitoring=false
 	
-	Global.unregistered_spawner()
+	Global.unregister_spawner()
 	
 	await get_tree().create_timer(0.5).timeout
 	

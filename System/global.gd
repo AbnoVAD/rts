@@ -129,7 +129,7 @@ func start_wave():
 	wave_start=true
 	active_spawners=0
 	
-	emit_signal("wave_started+signal",current_wave)
+	emit_signal("wave_started_signal",current_wave)
 
 func register_spawner():
 	active_spawners+=1
