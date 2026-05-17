@@ -65,7 +65,6 @@ var last_position:Vector2=Vector2.ZERO
 #--------------------------------------------------
 func _ready() -> void:
 	z_index=4
-	scale=Vector2(0.8,0.8)
 	goblins.append(self)
 
 	nav.path_desired_distance=6.0

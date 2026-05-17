@@ -31,6 +31,7 @@ folder_colors={
 "res://Audio/": "green",
 "res://Levels/": "teal",
 "res://System/": "yellow",
+"res://Unit goblin buildings/": "purple",
 "res://Unit_buildings/": "orange",
 "res://Unit_buildings/Build Manager/Ghosts/": "red",
 "res://Unit_buildings/Castle/": "green",

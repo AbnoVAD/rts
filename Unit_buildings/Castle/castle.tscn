@@ -43,8 +43,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm2n5"]
-size = Vector2(144, 152)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3o64e"]
+radius = 92.0
+height = 304.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lkwq"]
 size = Vector2(256, 136)
@@ -64,8 +65,9 @@ script = ExtResource("5_3dcml")
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1492661873]
 visible = false
-position = Vector2(0, 20)
-shape = SubResource("RectangleShape2D_dm2n5")
+position = Vector2(16, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3o64e")
 metadata/_edit_lock_ = true
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=56160707 groups=["block_building", "building"]]

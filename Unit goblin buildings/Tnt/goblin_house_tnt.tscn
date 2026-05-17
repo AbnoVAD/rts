@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bc6veqe1ax0b6"]
+
+[ext_resource type="Script" uid="uid://ccbny00k3424v" path="res://Unit goblin buildings/Tnt/goblin_house_tnt.gd" id="1_uq7k3"]
+[ext_resource type="Texture2D" uid="uid://sobv5yie31t4" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Buildings/Wood_House/Goblin_House_Destroyed.png" id="2_l3hn2"]
+[ext_resource type="Texture2D" uid="uid://ci8026ai46mtu" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Buildings/Wood_House/Goblin_House.png" id="3_oh8w8"]
+[ext_resource type="AudioStream" uid="uid://b0t1ykmfxp5ni" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Blocked 2.wav" id="4_p5c6t"]
+[ext_resource type="AudioStream" uid="uid://dm1nohybhkayo" path="res://Audio/Bow/Bow Blocked 2.wav" id="5_flabg"]
+[ext_resource type="AudioStream" uid="uid://binyesr0jkcxi" path="res://Audio/Buildings/destroyed building 2.mp3" id="6_lfq3x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c2to"]
+atlas = ExtResource("3_oh8w8")
+region = Rect2(0, 0, 128, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26v2h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l3hn2")
+}],
+"loop": true,
+"name": &"destroyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5c2to")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyggu"]
+radius = 56.568542
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4milb"]
+radius = 48.259712
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hle4n"]
+radius = 80.399
+
+[node name="Goblin House Tnt" type="StaticBody2D" unique_id=779200880 groups=["block_building", "goblinbuildings"]]
+script = ExtResource("1_uq7k3")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=597046802]
+sprite_frames = SubResource("SpriteFrames_26v2h")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=882532782]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_vyggu")
+metadata/_edit_lock_ = true
+
+[node name="hitbox" type="Area2D" parent="." unique_id=2093332324]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1918405298]
+visible = false
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_4milb")
+debug_color = Color(1, 0, 0.10470045, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="detection" type="Area2D" parent="." unique_id=1067886903]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection" unique_id=1518970480]
+visible = false
+shape = SubResource("CircleShape2D_hle4n")
+debug_color = Color(0.2526965, 0.6354259, 0, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Marker1" type="Marker2D" parent="." unique_id=1440593408]
+position = Vector2(0, 96)
+
+[node name="Marker2" type="Marker2D" parent="." unique_id=1108301886]
+position = Vector2(104, 0)
+
+[node name="Marker3" type="Marker2D" parent="." unique_id=1694640289]
+position = Vector2(-104, 0)
+
+[node name="sound fx" type="Node2D" parent="." unique_id=481974844]
+
+[node name="hit_with_sword_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1384988308]
+stream = ExtResource("4_p5c6t")
+volume_db = -5.0
+pitch_scale = 1.5
+
+[node name="hit_with_arrow_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=36511699]
+stream = ExtResource("5_flabg")
+volume_db = -5.0
+pitch_scale = 2.0
+
+[node name="destroyed_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=995145150]
+stream = ExtResource("6_lfq3x")
+volume_db = -10.0
+pitch_scale = 3.0
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
