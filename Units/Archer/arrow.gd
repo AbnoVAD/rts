@@ -65,5 +65,5 @@ func _start_lifespan_timer() -> void:
 func _fade_and_die():
 	await get_tree().create_timer(0.15).timeout
 	var tween:=create_tween()
-	tween.tween_property(self,"modulate.a",0.0,0.25)
+	tween.tween_property(self,"modulate:a",0.0,0.25)
 	tween.finished.connect(queue_free)
