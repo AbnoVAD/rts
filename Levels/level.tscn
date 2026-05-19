@@ -1451,7 +1451,6 @@ tile_set = SubResource("TileSet_2u3nc")
 script = ExtResource("17_3mato")
 
 [node name="selectionbox" type="Node2D" parent="." unique_id=427420427]
-visible = false
 script = ExtResource("18_a1clg")
 
 [node name="Camera2D" type="Camera2D" parent="selectionbox" unique_id=12718925]
