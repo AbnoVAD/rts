@@ -224,9 +224,9 @@ shape = SubResource("CircleShape2D_su075")
 debug_color = Color(0, 0, 0, 0.41960785)
 
 [node name="detector zone" type="Area2D" parent="." unique_id=370496920]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detector zone" unique_id=1908200251]
-visible = false
 shape = SubResource("CircleShape2D_4xb65")
 debug_color = Color(0.06482514, 0.649749, 0.033422377, 0.41960785)
 
@@ -253,6 +253,7 @@ offset_left = -48.0
 offset_top = -72.0
 offset_right = 52.0
 offset_bottom = -64.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_fg80g")
 theme_override_styles/fill = SubResource("StyleBoxFlat_83gn5")
 value = 50.0

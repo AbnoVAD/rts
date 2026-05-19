@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bbrexsm8skj7q"]
 
 [ext_resource type="Texture2D" uid="uid://dpfy5ia8y4k03" path="res://assets/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="1_g5qva"]
+[ext_resource type="Script" uid="uid://b45ejcbt8bvpk" path="res://Levels/level.gd" id="1_oeejg"]
 [ext_resource type="Texture2D" uid="uid://dgo2a7wkl25et" path="res://assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color5.png" id="2_kqel0"]
 [ext_resource type="Texture2D" uid="uid://xobaakm8brei" path="res://assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color4.png" id="3_nf2ov"]
 [ext_resource type="Texture2D" uid="uid://dmkhqmnwkcgtd" path="res://assets/Tiny Swords (Free Pack)/Terrain/Tileset/Tilemap_color3.png" id="4_xc0q5"]
@@ -83,6 +84,9 @@
 [ext_resource type="Script" uid="uid://cyyxb4no16hhw" path="res://Unit_buildings/Build Manager/system_scripts/game_over.gd" id="74_3mato"]
 [ext_resource type="PackedScene" uid="uid://vk70cksxrgm4" path="res://Units/Materials/gold stone mine/gold stone.tscn" id="75_oncvo"]
 [ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="83_qgi8s"]
+[ext_resource type="PackedScene" uid="uid://bgr12sn0iupw8" path="res://Unit goblin buildings/Barrel/goblin_house_barrel.tscn" id="84_kdhhr"]
+[ext_resource type="PackedScene" uid="uid://bc6veqe1ax0b6" path="res://Unit goblin buildings/Tnt/goblin_house_tnt.tscn" id="85_mpma2"]
+[ext_resource type="PackedScene" uid="uid://dklbjvuw3xl0q" path="res://Unit goblin buildings/Torch/goblin_house_torch.tscn" id="86_2l68y"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1386,6 +1390,7 @@ sources/1 = SubResource("TileSetAtlasSource_qgi8s")
 sources/2 = SubResource("TileSetAtlasSource_oeejg")
 
 [node name="level" type="Node2D" unique_id=1022137402]
+script = ExtResource("1_oeejg")
 
 [node name="sea" type="TextureRect" parent="." unique_id=1787671636]
 z_index = -10
@@ -1479,8 +1484,10 @@ tile_set = SubResource("TileSet_mgs3r")
 
 [node name="Info label" type="Label" parent="UI/ui/Panel" unique_id=1935247282]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 304.0
+offset_top = 416.0
+offset_right = 344.0
+offset_bottom = 439.0
 
 [node name="sets button" type="Node2D" parent="UI/ui/Panel" unique_id=1481617248]
 metadata/_edit_lock_ = true
@@ -1580,7 +1587,8 @@ metadata/_edit_lock_ = true
 [node name="Player" type="Node2D" parent="UI/ui/Panel" unique_id=1150778150]
 
 [node name="Unit construction" type="Panel" parent="UI/ui/Panel/Player" unique_id=1140388265]
-offset_right = 40.0
+offset_left = -8.0
+offset_right = 32.0
 offset_bottom = 40.0
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("20_oeejg")
@@ -1596,11 +1604,16 @@ metadata/_edit_lock_ = true
 
 [node name="InfoLabel" type="Label" parent="UI/ui/Panel/Player/Unit construction" unique_id=646118686]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 16.0
-offset_right = 352.0
-offset_bottom = 39.0
-metadata/_edit_lock_ = true
+offset_left = 63.999996
+offset_top = 448.0
+offset_right = 272.0
+offset_bottom = 485.0
+scale = Vector2(0.2, 0.2)
+theme_override_colors/font_color = Color(1, 1, 1, 0.9019608)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 30
+text = "Info"
+horizontal_alignment = 1
 
 [node name="UnitConstruction" type="TileMapLayer" parent="UI/ui/Panel/Player/Unit construction" unique_id=1969440039]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -1922,11 +1935,51 @@ theme_override_font_sizes/font_size = 120
 text = ": 0"
 metadata/_edit_lock_ = true
 
+[node name="Next level" type="Button" parent="UI/ui/Panel/Player/Unit resources" unique_id=1279485876]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.2
+anchor_right = -0.2
+offset_left = 240.0
+offset_top = 520.0
+offset_right = 344.0
+offset_bottom = 576.0
+theme_override_styles/normal = ExtResource("20_oeejg")
+theme_override_styles/pressed = ExtResource("20_oeejg")
+theme_override_styles/hover = ExtResource("20_oeejg")
+theme_override_styles/hover_pressed = ExtResource("20_oeejg")
+theme_override_styles/disabled = ExtResource("20_oeejg")
+theme_override_styles/focus = ExtResource("20_oeejg")
+metadata/_edit_lock_ = true
+
+[node name="Next label" type="Label" parent="UI/ui/Panel/Player/Unit resources/Next level" unique_id=1879799059]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.423
+anchor_top = 2.707
+anchor_right = 2.423
+anchor_bottom = 2.707
+offset_left = -243.992
+offset_top = -143.592
+offset_right = 49.34131
+offset_bottom = 13.741379
+scale = Vector2(0.3, 0.3)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 120
+text = "Next"
+metadata/_edit_lock_ = true
+
 [node name="Timer Label" type="Label" parent="UI/ui/Panel" unique_id=1114785147]
 layout_mode = 0
-offset_top = 104.0
-offset_right = 40.0
-offset_bottom = 127.0
+offset_left = 112.0
+offset_top = 8.0
+offset_right = 1144.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="Main panel" type="TileMapLayer" parent="UI/ui/Panel" unique_id=1892963246]
 
@@ -2181,7 +2234,41 @@ position = Vector2(492, 817)
 
 [node name="Goblin Units" type="Node2D" parent="." unique_id=1206702033]
 
+[node name="Goblin House Barrel" parent="Goblin Units" unique_id=779200880 instance=ExtResource("84_kdhhr")]
+position = Vector2(-648, 168)
+spawn_duration = 10.0
+wave_interval = 5.0
+max_wave_size = 1
+
+[node name="Goblin House Tnt" parent="Goblin Units" unique_id=1414873776 instance=ExtResource("85_mpma2")]
+position = Vector2(224, 2328)
+spawn_duration = 10.0
+wave_interval = 5.0
+max_wave_size = 1
+
+[node name="Goblin House Torch" parent="Goblin Units" unique_id=776674395 instance=ExtResource("86_2l68y")]
+position = Vector2(3248, 1952)
+spawn_duration = 10.0
+wave_interval = 5.0
+max_wave_size = 1
+
 [node name="pawn" parent="." unique_id=505167057 instance=ExtResource("83_qgi8s")]
 position = Vector2(936, 160)
 
+[node name="Music and Fx" type="Node2D" parent="." unique_id=802498470]
+
+[node name="music" type="AudioStreamPlayer" parent="Music and Fx" unique_id=1648231311]
+
+[node name="click" type="AudioStreamPlayer" parent="Music and Fx" unique_id=1013150325]
+
+[node name="waves sea_fx" type="AudioStreamPlayer" parent="Music and Fx" unique_id=405555223]
+
+[node name="fight theme music" type="AudioStreamPlayer" parent="Music and Fx" unique_id=1908104787]
+
+[connection signal="pressed" from="UI/ui/Panel/sets button/Info button" to="." method="_on_info_button_pressed"]
+[connection signal="pressed" from="UI/ui/Panel/sets button/Mute button" to="." method="_on_mute_button_pressed"]
+[connection signal="pressed" from="UI/ui/Panel/sets button/Quit button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/ui/Panel/sets button/Setting button" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="UI/ui/Panel/Player/Unit resources/Next level" to="." method="_on_next_level_pressed"]
 [connection signal="pressed" from="UI/ui/Panel/Pause/resume/resume btn" to="UI/ui/Panel/Pause" method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="UI/ui/Panel/Game Over/Retry/retry btn" to="." method="_on_retry_btn_pressed"]
