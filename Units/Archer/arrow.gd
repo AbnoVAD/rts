@@ -15,7 +15,8 @@ var stick_offset:Vector2=Vector2.ZERO
 @export var lifespan:float=0.35
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
 	_start_lifespan_timer()
 
 #launch arrow
