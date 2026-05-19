@@ -85,6 +85,7 @@
 [ext_resource type="PackedScene" uid="uid://vk70cksxrgm4" path="res://Units/Materials/gold stone mine/gold stone.tscn" id="75_oncvo"]
 [ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="83_qgi8s"]
 [ext_resource type="PackedScene" uid="uid://bgr12sn0iupw8" path="res://Unit goblin buildings/Barrel/goblin_house_barrel.tscn" id="84_kdhhr"]
+[ext_resource type="PackedScene" uid="uid://c762hx4xss01h" path="res://Units Goblins/Tower/Goblin Tower/goblin_tower.tscn" id="84_mpma2"]
 [ext_resource type="PackedScene" uid="uid://bc6veqe1ax0b6" path="res://Unit goblin buildings/Tnt/goblin_house_tnt.tscn" id="85_mpma2"]
 [ext_resource type="PackedScene" uid="uid://dklbjvuw3xl0q" path="res://Unit goblin buildings/Torch/goblin_house_torch.tscn" id="86_2l68y"]
 
@@ -1469,7 +1470,6 @@ position = Vector2(1376, -192)
 [node name="UI" type="Node2D" parent="." unique_id=1170337383]
 
 [node name="ui" type="CanvasLayer" parent="UI" unique_id=249976713]
-visible = false
 
 [node name="Panel" type="Panel" parent="UI/ui" unique_id=1293930966]
 offset_left = 8.0
@@ -2074,6 +2074,7 @@ script = ExtResource("74_3mato")
 metadata/_edit_lock_ = true
 
 [node name="Game Over" type="Label" parent="UI/ui/Panel/Game Over" unique_id=672926486]
+visible = false
 z_index = 1
 layout_mode = 0
 offset_left = 456.0
@@ -2346,28 +2347,30 @@ position = Vector2(3536, 144)
 [node name="gold stone3" parent="Decors/mine" unique_id=416906321 instance=ExtResource("75_oncvo")]
 position = Vector2(3288, 216)
 
+[node name="Goblin tower" parent="Decors/mine" unique_id=979351680 instance=ExtResource("84_mpma2")]
+position = Vector2(630, 344)
+
 [node name="Goblin Units" type="Node2D" parent="." unique_id=1206702033]
 
 [node name="Goblin House Barrel" parent="Goblin Units" unique_id=779200880 instance=ExtResource("84_kdhhr")]
 position = Vector2(448, 248)
 spawn_duration = 10.0
 wave_interval = 5.0
-max_wave_size = 1
+max_wave_size = 3
 
 [node name="Goblin House Tnt" parent="Goblin Units" unique_id=1414873776 instance=ExtResource("85_mpma2")]
-position = Vector2(1432, 720)
+position = Vector2(2531, 1155)
 spawn_duration = 10.0
 wave_interval = 5.0
-max_wave_size = 1
+max_wave_size = 3
 
 [node name="Goblin House Torch" parent="Goblin Units" unique_id=776674395 instance=ExtResource("86_2l68y")]
-position = Vector2(2216, 736)
+position = Vector2(2594, 635)
 spawn_duration = 10.0
 wave_interval = 5.0
-max_wave_size = 1
+max_wave_size = 3
 
 [node name="pawn" parent="." unique_id=505167057 instance=ExtResource("83_qgi8s")]
-visible = false
 position = Vector2(936, 160)
 
 [node name="Music and Fx" type="Node2D" parent="." unique_id=802498470]

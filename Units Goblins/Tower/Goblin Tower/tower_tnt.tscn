@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Units Goblins/Tower/Goblin Tower/tower_tnt.gd" id="1_7y2wr"]
+[ext_resource type="Texture2D" uid="uid://dnjawcqeut17c" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_3k8ja"]
+[ext_resource type="AudioStream" uid="uid://bhhkc6ag2ukk7" path="res://Audio/Explosion/04_Fire_explosion_04_medium.wav" id="3_28yfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_0"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_1"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_2"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_3"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_4"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idle_5"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_0"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_1"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_2"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_3"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_4"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_5"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shoot_6"]
+atlas = ExtResource("2_3k8ja")
+region = Rect2(1152, 384, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7y2wr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idle_5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shoot_6")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_attack_zone"]
+radius = 192.0
+
+[node name="TowerTnt" type="Node2D"]
+script = ExtResource("1_7y2wr")
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_7y2wr")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="attack zone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack zone"]
+visible = false
+shape = SubResource("CircleShape2D_attack_zone")
+debug_color = Color(0.092888124, 0.64892554, 3.85046e-07, 0.41960785)
+
+[node name="sound fx" type="Node2D" parent="."]
+
+[node name="throw_audio" type="AudioStreamPlayer" parent="sound fx"]
+stream = ExtResource("3_28yfb")
+pitch_scale = 1.5
+
+[connection signal="body_entered" from="attack zone" to="." method="_on_attack_zone_body_entered"]
+[connection signal="body_exited" from="attack zone" to="." method="_on_attack_zone_body_exited"]
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]

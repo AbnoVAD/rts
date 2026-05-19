@@ -11,7 +11,7 @@ var stuck_body:Node2D=null
 var stick_offset:Vector2=Vector2.ZERO
 
 #variables of group affected by dynamite
-@export var stick_groups:Array=["player","goblinbuildings"]
+@export var stick_groups:Array=["player","building","castle"]
 
 #dynamite lifespan
 @export var lifespan:float=0.3

@@ -58,8 +58,8 @@ const ATTACK_RANGE:=10.0
 var last_position:Vector2
 var stuck_timer:=0.0
 
-const STUCK_TIME:=0.18
-const MIN_MOVE_DIST:=5.0
+const STUCK_TIME:=0.75
+const MIN_MOVE_DIST:=1.5
 
 var avoiding:=false
 var avoid_dir:=Vector2.ZERO
@@ -67,7 +67,7 @@ const AVOID_FORCE:=1.4
 
 const ALLY_PUSH_RADIUS:=20.0
 const ALLY_PUSH_FORCE:=950.0
-const STUCK_PULSE_FORCE:=1500.0
+const STUCK_PULSE_FORCE:=180.0
 
 #-------------------------------------------
 #target locker
@@ -182,12 +182,7 @@ func issue_move(pos:Vector2):
 	manual_mode=true
 	resume_navigation()
 	
-#destination
-	var offset:=Vector2(
-		randf_range(-20,20),
-		randf_range(-20,20)
-	)
-	nav.target_position=pos+offset
+	set_navigation_target(get_formation_target(pos))
 	change_state(State.RUN)
 
 #-------------------------------------------
@@ -246,7 +241,7 @@ func state_run():
 	animation.play("run")
 	
 	if is_instance_valid(target):
-		nav.target_position=target.global_position
+		set_navigation_target(target.global_position)
 		var dist:=global_position.distance_to(target.global_position)
 		if dist<= ATTACK_RANGE:
 			stop_navigation()
@@ -260,7 +255,12 @@ func state_run():
 		movement_priority=false
 		change_state(State.IDLE)
 		return
-	var dir:=(nav.get_next_path_position()-global_position).normalized()
+	var next_pos:=nav.get_next_path_position()
+	var dir:=(next_pos-global_position).normalized()
+	if dir==Vector2.ZERO:
+		velocity=Vector2.ZERO
+		return
+	avoid_cast.target_position=dir*18
 	update_facing(dir)
 	nav.set_velocity(dir*speed)
 
@@ -372,6 +372,49 @@ func stop_navigation():
 
 func resume_navigation():
 	nav.avoidance_enabled=true
+
+func set_navigation_target(pos:Vector2) -> void:
+	var map:=nav.get_navigation_map()
+	if map.is_valid():
+		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
+	else:
+		nav.target_position=pos
+
+func get_formation_target(pos:Vector2) -> Vector2:
+	var selected_units:=get_selected_formation_units()
+	var count:=selected_units.size()
+	if count<=1:
+		return pos
+	var index:=selected_units.find(self)
+	if index<0:
+		return pos
+	var columns:int=int(ceil(sqrt(float(count))))
+	var rows:int=int(ceil(float(count)/float(columns)))
+	var col:int=index % columns
+	var row:int=index / columns
+	var spacing:float=34.0
+	var local_offset:=Vector2(
+		(float(col)-(float(columns)-1.0)*0.5)*spacing,
+		(float(row)-(float(rows)-1.0)*0.5)*spacing
+	)
+	var center:=Vector2.ZERO
+	for unit in selected_units:
+		center+=unit.global_position
+	center/=count
+	var forward:=(pos-center).normalized()
+	if forward==Vector2.ZERO:
+		forward=Vector2.RIGHT
+	var right:=Vector2(forward.y,-forward.x)
+	var back:=-forward
+	return pos+right*local_offset.x+back*local_offset.y
+
+func get_selected_formation_units() -> Array:
+	var units:Array=[]
+	for unit in get_tree().get_nodes_in_group("selectable"):
+		if unit!=null and is_instance_valid(unit) and unit.get("selected")==true:
+			units.append(unit)
+	units.sort_custom(func(a,b): return a.get_instance_id()<b.get_instance_id())
+	return units
 
 func _on_nav_velocity(v:Vector2):
 	if state!=State.RUN:
@@ -555,15 +598,13 @@ func check_stuck(delta):
 		stuck_timer=0.0
 
 func resolve_stuck():
-	var axis:=Vector2.ZERO
-	if randf()<0.5:
-		axis.x=-1 if randf()<0.5 else 1
-	else:
-		axis.y=-1 if randf()<0.5 else 1
-	
-	velocity=axis*STUCK_PULSE_FORCE
+	var path_dir:=(nav.get_next_path_position()-global_position).normalized()
+	if path_dir==Vector2.ZERO:
+		path_dir=(nav.target_position-global_position).normalized()
+	var side:=Vector2(-path_dir.y,path_dir.x)
+	velocity=(path_dir+side*0.35).normalized()*STUCK_PULSE_FORCE
 	move_and_slide()
-	nav.target_position+=axis * randf_range(24,48)
+	set_navigation_target(nav.target_position)
 
 var movement_priority:=false
 func _on_detector_zone_body_entered(body: Node2D) -> void:
@@ -574,7 +615,7 @@ func _on_detector_zone_body_entered(body: Node2D) -> void:
 		manual_mode=false
 
 #start chasing the body
-		nav.target_position=body.global_position
+		set_navigation_target(body.global_position)
 		change_state(State.RUN)
 
 #------------------------------------------

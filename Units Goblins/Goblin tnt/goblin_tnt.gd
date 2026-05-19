@@ -8,8 +8,8 @@ static var goblins:Array[CharacterBody2D]
 
 const MAX_GOBLINS_PER_TARGET:int=4
 const STEAL_DISTANCE:float=80.0
-const SEPARATION_RADIUS:float=120.0
-const SEPARATION_FORCE:float=80.0
+const SEPARATION_RADIUS:float=44.0
+const SEPARATION_FORCE:float=45.0
 const ATTACK_DELAY:=0.3
 
 #--------------------------------------------------
@@ -43,9 +43,10 @@ const ATTACK_DELAY:=0.3
 const ATTACK_DISTANCE:float=50.0
 const KNOCKBACK_FORCE:float=1000.0
 const KNOCKBACK_DECAY:float=0.85
-const DETOUR_DISTANCE:float=60.0
+const DETOUR_DISTANCE:float=24.0
 const STOP_DISTANCE:float=130.0
 const PREDICTION_TIME:float=0.3
+const STUCK_DETOUR_DISTANCE:float=72.0
 
 #--------------------------------------------------
 #State machine
@@ -84,8 +85,10 @@ static var skull_scene=preload("res://materials_effects/skull/skull.tscn")
 #Stuck and avoidance
 #--------------------------------------------------
 var stuck_timer:float=0.0
-var stuck_threshold:float=0.3
+var stuck_threshold:float=0.8
 var last_position:Vector2=Vector2.ZERO
+var detour_timer:float=0.0
+var detour_target:Vector2=Vector2.ZERO
 
 #--------------------------------------------------
 #Ready
@@ -97,6 +100,9 @@ func _ready() -> void:
 
 	nav.path_desired_distance=6.0
 	nav.target_desired_distance=6.0
+	nav.max_speed=SPEED
+	predictcast.add_exception(self)
+	add_goblin_collision_exceptions()
 
 #add all target initially
 	for p in get_tree().get_nodes_in_group("player"):
@@ -217,6 +223,7 @@ func _physics_process(delta: float) -> void:
 	if state==State.DEAD:
 		return
 
+	detour_timer=max(0.0,detour_timer-delta)
 	tnt_timer=max(0.0,tnt_timer-delta)
 
 	#knock back decay
@@ -239,9 +246,10 @@ func _physics_process(delta: float) -> void:
 		State.ATTACK:attack_state()
 		State.HIT:hit_state()
 
-	#combine separtation and movement with knockback system
 	if state in [State.IDLE,State.CHASE]:
-		velocity+=separation_vector()*SEPARATION_FORCE
+		var sep:Vector2=separation_vector()
+		if sep.dot(velocity.normalized())>-0.45:
+			velocity+=sep*SEPARATION_FORCE
 	avoid_obstacles()
 
 #--------------------------------------------------
@@ -271,9 +279,15 @@ func chase_state()->void:
 		state=State.ATTACK
 		attack_timer.start(ATTACK_DELAY)
 
-	nav.target_position=current_target.global_position
+	if detour_timer>0.0:
+		set_navigation_target(detour_target)
+	else:
+		set_navigation_target(current_target.global_position)
 	var next_point:Vector2=nav.get_next_path_position()
 	var dir:Vector2=(next_point-global_position).normalized()
+	if dir==Vector2.ZERO:
+		velocity=Vector2.ZERO
+		return
 	last_mov_dir=dir
 	directional=dir
 	
@@ -300,7 +314,7 @@ func attack_state()->void:
 
 	if tnt_timer<=0:
 		var target_velocity:Vector2=Vector2.ZERO
-		if current_target.has_method("velocity"):
+		if current_target is CharacterBody2D:
 			target_velocity=current_target.velocity
 		var predicted_pos:Vector2=current_target.global_position+target_velocity*PREDICTION_TIME
 		if not building_is_dead:
@@ -335,7 +349,7 @@ func hit_state()->void:
 #--------------------------------------------------
 func separation_vector()->Vector2:
 	var force:Vector2=Vector2.ZERO
-	for g in goblins:
+	for g in get_tree().get_nodes_in_group("goblin"):
 		if g==self or not is_instance_valid(g):
 			continue
 		var dist:float=global_position.distance_to(g.global_position)
@@ -432,12 +446,15 @@ func avoid_obstacles():
 		predictcast.force_update_transform()
 
 		if predictcast.is_colliding():
+			var collider:Object=predictcast.get_collider(0)
+			if collider is Node and collider.is_in_group("goblin"):
+				return
 			var n:Vector2=predictcast.get_collision_normal(0)
 			var slide_dir:Vector2=velocity-n*velocity.dot(n)
 			
 			if slide_dir.length()<0.1:
-				slide_dir=Vector2(-n.y,n.x)*DETOUR_DISTANCE
-			velocity=slide_dir.normalized()*SPEED
+				slide_dir=velocity.normalized()+Vector2(-n.y,n.x)*0.25
+			velocity=velocity.move_toward(slide_dir.normalized()*SPEED,DETOUR_DISTANCE)
 
 #--------------------------------------------------
 #Death/Explosion
@@ -474,7 +491,7 @@ func recheck_players()->void:
 			add_target(p)
 
 func detect_stuck(delta:float)->void:
-	if last_position.distance_to(global_position)<1.0:
+	if last_position.distance_to(global_position)<0.5 and velocity.length()>1.0:
 		stuck_timer+=delta
 	else:
 		stuck_timer=0.0
@@ -485,8 +502,61 @@ func detect_stuck(delta:float)->void:
 		unstuck()
 
 func unstuck():
-	velocity=Vector2(-velocity.y,velocity.x).normalized()*SPEED
+	if is_instance_valid(current_target):
+		detour_target=find_detour_target()
+		detour_timer=0.8
+		set_navigation_target(detour_target)
+	var path_dir:Vector2=(nav.get_next_path_position()-global_position).normalized()
+	if path_dir==Vector2.ZERO:
+		path_dir=last_mov_dir
+	var side:Vector2=Vector2(-path_dir.y,path_dir.x)
+	velocity=(path_dir+side*0.25).normalized()*SPEED
 	stuck_timer=0.0
+
+func set_navigation_target(pos:Vector2) -> void:
+	var map:RID=nav.get_navigation_map()
+	if map.is_valid():
+		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
+	else:
+		nav.target_position=pos
+
+func find_detour_target() -> Vector2:
+	var base_dir:Vector2=last_mov_dir
+	if base_dir==Vector2.ZERO and is_instance_valid(current_target):
+		base_dir=(current_target.global_position-global_position).normalized()
+	if base_dir==Vector2.ZERO:
+		base_dir=Vector2.RIGHT
+	var side:Vector2=Vector2(-base_dir.y,base_dir.x)
+	var candidates:Array[Vector2]=[
+		global_position+side*STUCK_DETOUR_DISTANCE,
+		global_position-side*STUCK_DETOUR_DISTANCE,
+		global_position+(base_dir+side).normalized()*STUCK_DETOUR_DISTANCE,
+		global_position+(base_dir-side).normalized()*STUCK_DETOUR_DISTANCE,
+		global_position+base_dir*STUCK_DETOUR_DISTANCE
+	]
+	var best:Vector2=global_position+base_dir*STUCK_DETOUR_DISTANCE
+	var best_score:float=INF
+	for candidate in candidates:
+		var nav_point:Vector2=get_closest_nav_point(candidate)
+		var score:float=nav_point.distance_to(current_target.global_position)
+		if score<best_score:
+			best_score=score
+			best=nav_point
+	return best
+
+func get_closest_nav_point(pos:Vector2) -> Vector2:
+	var map:RID=nav.get_navigation_map()
+	if map.is_valid():
+		return NavigationServer2D.map_get_closest_point(map,pos)
+	return pos
+
+func add_goblin_collision_exceptions() -> void:
+	for goblin in get_tree().get_nodes_in_group("goblin"):
+		if goblin==self or not (goblin is PhysicsBody2D):
+			continue
+		add_collision_exception_with(goblin)
+		goblin.add_collision_exception_with(self)
+		predictcast.add_exception(goblin)
 
 var _attackers:Array=[]
 

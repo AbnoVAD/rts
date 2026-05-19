@@ -70,15 +70,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_uv4d6"]
 radius = 22.119135
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wysgj"]
-radius = 192.04166
-
-[node name="Goblin tower" type="CharacterBody2D" unique_id=979351680 groups=["block_building", "goblin"]]
+[node name="Goblin tower" type="StaticBody2D" unique_id=979351680 groups=["block_building", "goblinbuildings"]]
 script = ExtResource("1_uvdca")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=648731224]
 sprite_frames = SubResource("SpriteFrames_va7uu")
-animation = &"destroyed"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=1936355107]
@@ -89,17 +86,7 @@ shape = SubResource("CircleShape2D_uv4d6")
 metadata/_edit_lock_ = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2140301762]
-
-[node name="attack zone" type="Area2D" parent="." unique_id=1523582497]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack zone" unique_id=1846183511]
-visible = false
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_wysgj")
-debug_color = Color(0.092888124, 0.64892554, 3.85046e-07, 0.41960785)
-metadata/_edit_lock_ = true
-
-[node name="cooldown" type="Timer" parent="." unique_id=720177963]
+position = Vector2(0, -44)
 
 [node name="sound fx" type="Node2D" parent="." unique_id=83035987]
 
@@ -111,7 +98,3 @@ pitch_scale = 1.5
 stream = ExtResource("4_0m4tj")
 volume_db = -5.0
 pitch_scale = 1.5
-
-[connection signal="body_entered" from="attack zone" to="." method="_on_attack_zone_body_entered"]
-[connection signal="body_exited" from="attack zone" to="." method="_on_attack_zone_body_exited"]
-[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
