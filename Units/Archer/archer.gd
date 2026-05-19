@@ -522,8 +522,8 @@ func die():
 	stop_navigation()
 	death_audio.play()	
 
-	shape.disabled=true
-	hitbox.monitoring=false
+	shape.set_deferred("disabled", true)
+	hitbox.set_deferred("monitoring", false)
 	set_selected(false)
 	
 	var skull_scene := preload("res://materials_effects/skull/skull.tscn")
