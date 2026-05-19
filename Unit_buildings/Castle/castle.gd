@@ -349,10 +349,10 @@ func enter_destroyed_state() -> void:
 	if state==STATE_DESTROYED:
 		return
 	Global.game_over=true
-	shape.disabled=true
-	explosion_detector.monitoring=false
-	placement_checker.monitoring=false
-	placement_checker.monitorable=false
+	shape.set_deferred("disabled",true)
+	explosion_detector.set_deferred("monitoring",false)
+	placement_checker.set_deferred("monitoring",false)
+	placement_checker.set_deferred("monitorable",false)
 	input_pickable=false
 	is_moving=false
 
