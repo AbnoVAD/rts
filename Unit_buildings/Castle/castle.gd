@@ -56,11 +56,11 @@ var archer_yellow=preload("res://Unit_buildings/Tower/Archer Tower/archer_yellow
 var spawned_archer1:Node2D=null
 var spawned_archer2:Node2D=null
 #Pawns
-var pawn_black=preload("res://Units/Pawns/pawn_black.tscn")
-var pawn_blue=preload("res://Units/Pawns/pawn_blue.tscn")
-var pawn_red=preload("res://Units/Pawns/pawn_red.tscn")
-var pawn_purple=preload("res://Units/Pawns/pawn_purple.tscn")
-var pawn_yellow=preload("res://Units/Pawns/pawn_yellow.tscn")
+var pawn_black=preload("res://Units/pawns/pawn_black.tscn")
+var pawn_blue=preload("res://Units/pawns/pawn_blue.tscn")
+var pawn_red=preload("res://Units/pawns/pawn_red.tscn")
+var pawn_purple=preload("res://Units/pawns/pawn_purple.tscn")
+var pawn_yellow=preload("res://Units/pawns/pawn_yellow.tscn")
 var spawned_pawn:Node2D=null
 
 #----------------------------------------------------------

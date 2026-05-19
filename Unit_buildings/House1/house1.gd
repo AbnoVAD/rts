@@ -60,11 +60,11 @@ var is_being_repaired:=false
 #--------------------------------------------------
 #Pawn scenes "non_moving"
 #--------------------------------------------------
-var pawn_black=preload("res://Units/Pawns/pawn_black.tscn")
-var pawn_blue=preload("res://Units/Pawns/pawn_blue.tscn")
-var pawn_red=preload("res://Units/Pawns/pawn_red.tscn")
-var pawn_purple=preload("res://Units/Pawns/pawn_purple.tscn")
-var pawn_yellow=preload("res://Units/Pawns/pawn_yellow.tscn")
+var pawn_black=preload("res://Units/pawns/pawn_black.tscn")
+var pawn_blue=preload("res://Units/pawns/pawn_blue.tscn")
+var pawn_red=preload("res://Units/pawns/pawn_red.tscn")
+var pawn_purple=preload("res://Units/pawns/pawn_purple.tscn")
+var pawn_yellow=preload("res://Units/pawns/pawn_yellow.tscn")
 
 var spawned_pawns:Array=[]
 
