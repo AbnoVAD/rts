@@ -8,6 +8,9 @@ extends AnimatedSprite2D
 @export var unit_damage:=25
 @export var building_damage:=1
 
+const FIRE_SCENE:=preload("res://Units/effect fx/fire/fire.tscn")
+const FLAME_SCENE:=preload("res://Units/effect fx/fire/flame1.tscn")
+
 var pos
 var damaged_targets:={}
 
@@ -78,14 +81,14 @@ func is_direction_damage_target(target:Node) -> bool:
 	var target_name:=String(target.name).to_lower()
 	return target_name=="archer" or target_name=="knight" or target_name=="lancer"
 
-func spawn_effect(scene_path:String) -> void:
-	var effect:=load(scene_path).instantiate()
+func spawn_effect(scene:PackedScene) -> void:
+	var effect:=scene.instantiate()
 	effect.set_deferred("global_position",pos)
 	effect.set_deferred("z_index",10)
 	get_parent().add_child.call_deferred(effect)
 
 func fire():
-	spawn_effect("res://Units/effect fx/fire/fire.tscn")
+	spawn_effect(FIRE_SCENE)
 
 func flame():
-	spawn_effect("res://Units/effect fx/fire/flame1.tscn")
+	spawn_effect(FLAME_SCENE)

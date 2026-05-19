@@ -57,14 +57,14 @@ func unregistered_pawn(pawn:Node)-> void:
 #-------------------------------------
 #active pawn
 #-------------------------------------
-func set_active_pawn(pawn)-> void:
+func set_active_pawn(pawn:Object=null)-> void:
 	_prune_invalid_pawns()
 	if not _is_valid_pawn(pawn):
 		pawn=null
 	if active_player and active_player!=pawn:
 		if active_player.has_method("deactivate"):
 			active_player.deactivate()
-	active_player=pawn
+	active_player=pawn as Node
 	if active_player and active_player.has_method("activate_from_global"):
 		active_player.activate_from_global()
 
