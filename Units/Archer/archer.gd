@@ -33,21 +33,9 @@ var ui_hide_delay:=1.5 #when it's not attack
 var ui_timer:=0.0
 
 #-------------------------------------------
-#Random shielding
-#-------------------------------------------
-var random_shield_enabled:=true
-const MIN_RANDOM_SHIELD_TIME:=5.0
-const MAX_RANDOM_SHIELD_TIME:=10.0
-var random_shield_timer:=0.0
-var next_shield_time:=0.0
-
-#damage constant when the knight is using the shield
-const LOW_HP_SHIELD_THRESHOLD:=0.2
-
-#-------------------------------------------
 #State
 #-------------------------------------------
-enum State{IDLE,RUN,ATTACK,GUARD,DEAD}
+enum State{IDLE,RUN,ATTACK,DEAD}
 var state:State=State.IDLE
 
 const ATTACK_RANGE:=10.0
@@ -87,6 +75,7 @@ const TARGET_LOCK_DURATION:=0.5
 @export var speed:=700.0
 @export var attack_damage:=10
 @export var attack_cooldown:=1.0
+var knockback_force:=250.0
 
 #-------------------------------------------
 #Control
@@ -100,17 +89,6 @@ var stop_distance:=10
 var target:Node2D=null
 var action_locked:=false
 var facing_dir:=Vector2.RIGHT
-
-#-------------------------------------------
-#guard
-#-------------------------------------------
-const GUARD_DURATION:=2.5
-var guard_timer:=0.0
-var guard_locked:=false
-var knockback_force:=250.0
-var guard_knockback_multiplier:=0.4
-var guard_cooldown:=false
-const GUARD_COOLDOWN_TIME:=2.5
 
 var manual_mode:=false
 
@@ -155,9 +133,6 @@ func _ready() -> void:
 	nav.neighbor_distance=40
 	nav.max_neighbors=20
 	
-#random shield timer
-	reset_random_shield_timer()
-
 #attack timer logic
 	attack_timer=Timer.new()
 	add_child(attack_timer)
@@ -173,10 +148,6 @@ func _ready() -> void:
 	target_check_timer.one_shot=false
 	target_check_timer.autostart=true
 	target_check_timer.connect("timeout",Callable(self,"check_current_target"))
-
-func reset_random_shield_timer():
-	random_shield_timer=0.0
-	next_shield_time=randf_range(MIN_RANDOM_SHIELD_TIME,MAX_RANDOM_SHIELD_TIME)
 
 #-------------------------------------------
 #Target validation system
@@ -261,12 +232,6 @@ func _physics_process(delta: float) -> void:
 	if state==State.RUN:
 		check_stuck(delta)
 
-#update random shield
-	if random_shield_enabled and not guard_locked and state!=State.GUARD and state !=State.DEAD:
-		random_shield_timer+=delta
-		if random_shield_timer>=next_shield_time:
-			try_activate_random_shield()
-
 #auto hide UI
 	if ui_visible:
 		ui_timer+=delta
@@ -276,9 +241,6 @@ func _physics_process(delta: float) -> void:
 			var tween :=create_tween()
 			tween.tween_property(hp_bar,"modulate.a",0.0,0.3)
 
-	if guard_locked:
-		return
-
 	match state:
 		State.IDLE:
 			state_idle(delta)
@@ -286,14 +248,6 @@ func _physics_process(delta: float) -> void:
 			state_run(delta)
 		State.ATTACK:
 			pass
-		State.GUARD:
-			state_guard(delta)
-func try_activate_random_shield():
-	if action_locked or guard_cooldown or guard_stamina<20:
-		return
-	if randf()<0.7:
-		start_guard()
-		reset_random_shield_timer()
 
 #-------------------------------------------
 #States
@@ -391,30 +345,6 @@ func spawn_arrow():
 		arrow.launch(target.global_position,800) #speed of arrow 800
 
 #------------------------------------------
-#Guard
-#------------------------------------------
-func start_guard():
-	if action_locked:
-		return
-	action_locked=true
-	guard_timer=0.0
-	change_state(State.GUARD)
-	stop_navigation()
-	animation.play("guard")
-
-func state_guard(delta):
-	guard_timer+=delta
-	guard_stamina=min(guard_stamina+int(25*delta),max_guard)
-	update_bars()
-	
-	face_closest_goblin()
-	
-	if guard_timer>=GUARD_DURATION:
-		reset_combat()
-		reset_random_shield_timer()
-		change_state(State.IDLE)
-
-#------------------------------------------
 #Targeting
 #------------------------------------------
 func acquire_target(delta:=0.0):
@@ -439,22 +369,6 @@ func acquire_target(delta:=0.0):
 		if delta:
 			pass
 	target=closest
-
-func face_closest_goblin():
-	var closest:Node2D=null
-	var dist:=INF
-	for body in detector_zone.get_overlapping_bodies():
-		if body == null:
-			continue
-		if (body.is_in_group("goblin") or body.is_in_group("goblinbuildings")):
-			if not body.is_inside_tree():
-				continue
-			var d:=global_position.distance_to(body.global_position)
-			if d<dist:
-				dist=d
-				closest=body
-	if closest !=null:
-		update_facing((closest.global_position-global_position).normalized())
 
 #------------------------------------------
 #Navigation
@@ -491,34 +405,6 @@ func take_damage(amount:int,dir:Vector2):
 	if state==State.DEAD:
 		return
 
-#------------------------------------------
-#Shield absorbs damage
-#------------------------------------------
-	if state==State.GUARD and guard_stamina>0:
-		guard_stamina-=amount
-		if not shield_audio.playing:
-			shield_audio.play()
-		update_bars()
-		velocity=-dir.normalized()*knockback_force*guard_knockback_multiplier
-		update_facing(-dir)
-		move_and_slide()
-		reset_random_shield_timer()
-		if guard_stamina<=0:
-			guard_stamina=0
-			guard_timer=GUARD_DURATION
-		return
-
-#------------------------------------------
-#Low HP guard sequence faster
-#------------------------------------------
-	@warning_ignore("unreachable_code")
-	if life <= max_life * LOW_HP_SHIELD_THRESHOLD\
-	and not action_locked\
-	and not guard_cooldown\
-	and guard_stamina>20:
-			start_guard()
-			start_guard_cooldown()
-			return
 	life-=amount
 	if GlobalPlayer.camera_shake_func.is_valid():
 		GlobalPlayer.camera_shake_func.call()
@@ -529,16 +415,8 @@ func take_damage(amount:int,dir:Vector2):
 	update_facing(-dir)
 	move_and_slide()
 
-	if random_shield_enabled:
-		reset_random_shield_timer()
-
 	if life<=0:
 		die()
-
-func start_guard_cooldown():
-	guard_cooldown=true
-	await get_tree().create_timer(GUARD_COOLDOWN_TIME).timeout
-	guard_cooldown=false
 
 #------------------------------------------
 #Attack/Effects
@@ -556,7 +434,6 @@ func apply_damage_building(enemy:Node2D):
 func reset_combat():
 	action_locked=false
 	target=null
-	guard_timer=0.0
 	resume_navigation()
 
 #visual effects
