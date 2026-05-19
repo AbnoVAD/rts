@@ -134,8 +134,8 @@ func destroy_house():
 	animation.play("destroyed")
 	if not destroyed_audio.playing:
 		destroyed_audio.play()
-	collision_shape_2d.disabled=true
-	hitbox.monitoring=false
+	collision_shape_2d.set_deferred("disabled",true)
+	hitbox.set_deferred("monitoring",false)
 	
 	Global.unregister_spawner()
 	
