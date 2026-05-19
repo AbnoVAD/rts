@@ -9,7 +9,7 @@ static var goblins:Array[CharacterBody2D]
 const MAX_GOBLINS_PER_TARGET:int=4
 const STEAL_DISTANCE:float=80.0
 const SEPARATION_RADIUS:float=120.0
-const SEPARATION_FORCE:float=140.0
+const SEPARATION_FORCE:float=80.0
 const ATTACK_DELAY:=0.3
 
 #--------------------------------------------------
@@ -198,7 +198,7 @@ func cleanup_reserved_targets()->void:
 	for target in reserved_targets.keys():
 		reserved_targets[target]=reserved_targets[target].filter(is_instance_valid)
 		if reserved_targets[target].is_empty():
-			reserved_targets.erase(targets)
+			reserved_targets.erase(target)
 
 func validate_target()->bool:
 	if current_target==null:
@@ -303,7 +303,7 @@ func attack_state()->void:
 		if current_target.has_method("velocity"):
 			target_velocity=current_target.velocity
 		var predicted_pos:Vector2=current_target.global_position+target_velocity*PREDICTION_TIME
-		if body_in_range==true and not building_is_dead==true:
+		if not building_is_dead:
 			throw_tnt(predicted_pos)
 		tnt_timer=tnt_cooldown
 	await get_tree().create_timer(0.2).timeout
@@ -350,6 +350,9 @@ func take_damage(damage:int,source_pos:Vector2)->void:
 	if state==State.DEAD:
 		return
 	health-=damage
+	if health<=0:
+		skull()
+		return
 	if not hit_attack_audio.playing:
 		hit_attack_audio.play()
 	knockback_velocity=(global_position-source_pos).normalized()*KNOCKBACK_FORCE
