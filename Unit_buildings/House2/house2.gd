@@ -23,7 +23,7 @@ var collision_disabled:bool=false
 #Variables
 #--------------------------------------------------
 @export var construction_time:float=2.0
-@export var max_life:int=6
+@export var max_life:int=9
 @export var repair_time:float=4.0
 @export var pawn_capacity:int=2
 @export var spawn_radius:float=60.0
