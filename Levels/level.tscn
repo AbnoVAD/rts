@@ -1469,6 +1469,7 @@ position = Vector2(1376, -192)
 [node name="UI" type="Node2D" parent="." unique_id=1170337383]
 
 [node name="ui" type="CanvasLayer" parent="UI" unique_id=249976713]
+visible = false
 
 [node name="Panel" type="Panel" parent="UI/ui" unique_id=1293930966]
 offset_left = 8.0
@@ -2168,6 +2169,72 @@ metadata/_edit_lock_ = true
 position = Vector2(345, 740)
 metadata/_edit_lock_ = true
 
+[node name="tree5" parent="Decors/trees" unique_id=383833599 instance=ExtResource("70_sy5sx")]
+position = Vector2(3296, -56)
+
+[node name="tree6" parent="Decors/trees" unique_id=586101560 instance=ExtResource("73_1upps")]
+position = Vector2(3520, 472)
+
+[node name="tree7" parent="Decors/trees" unique_id=1501043204 instance=ExtResource("72_oncvo")]
+position = Vector2(2656, 872)
+
+[node name="tree8" parent="Decors/trees" unique_id=325094964 instance=ExtResource("71_2h62v")]
+position = Vector2(1592, 888)
+
+[node name="tree9" parent="Decors/trees" unique_id=32852567 instance=ExtResource("70_sy5sx")]
+position = Vector2(1712, 2200)
+
+[node name="tree10" parent="Decors/trees" unique_id=712042766 instance=ExtResource("73_1upps")]
+position = Vector2(2536, 1480)
+
+[node name="tree11" parent="Decors/trees" unique_id=1062431057 instance=ExtResource("72_oncvo")]
+position = Vector2(3104, 1832)
+
+[node name="tree12" parent="Decors/trees" unique_id=1115137339 instance=ExtResource("70_sy5sx")]
+position = Vector2(-64, 920)
+
+[node name="tree13" parent="Decors/trees" unique_id=2036761738 instance=ExtResource("71_2h62v")]
+position = Vector2(840, 1168)
+
+[node name="tree14" parent="Decors/trees" unique_id=196155491 instance=ExtResource("72_oncvo")]
+position = Vector2(1088, 1696)
+
+[node name="tree15" parent="Decors/trees" unique_id=1243761784 instance=ExtResource("73_1upps")]
+position = Vector2(80, 2184)
+
+[node name="tree16" parent="Decors/trees" unique_id=974935412 instance=ExtResource("72_oncvo")]
+position = Vector2(-832, 1216)
+
+[node name="tree17" parent="Decors/trees" unique_id=543589936 instance=ExtResource("71_2h62v")]
+position = Vector2(-568, 1656)
+
+[node name="tree18" parent="Decors/trees" unique_id=1277767591 instance=ExtResource("70_sy5sx")]
+position = Vector2(-672, 32)
+
+[node name="tree19" parent="Decors/trees" unique_id=221332446 instance=ExtResource("73_1upps")]
+position = Vector2(-496, 440)
+
+[node name="tree20" parent="Decors/trees" unique_id=1020409400 instance=ExtResource("71_2h62v")]
+position = Vector2(-192, 0)
+
+[node name="tree21" parent="Decors/trees" unique_id=1497607144 instance=ExtResource("70_sy5sx")]
+position = Vector2(-720, -568)
+
+[node name="tree22" parent="Decors/trees" unique_id=297244386 instance=ExtResource("72_oncvo")]
+position = Vector2(-568, -336)
+
+[node name="tree23" parent="Decors/trees" unique_id=1718861985 instance=ExtResource("72_oncvo")]
+position = Vector2(584, -336)
+
+[node name="tree24" parent="Decors/trees" unique_id=522351767 instance=ExtResource("73_1upps")]
+position = Vector2(136, -40)
+
+[node name="tree25" parent="Decors/trees" unique_id=1068435052 instance=ExtResource("73_1upps")]
+position = Vector2(3448, 168)
+
+[node name="tree26" parent="Decors/trees" unique_id=354549194 instance=ExtResource("71_2h62v")]
+position = Vector2(3056, 632)
+
 [node name="sheep" type="Node2D" parent="Decors" unique_id=324693285]
 
 [node name="sheep" parent="Decors/sheep" unique_id=238742770 instance=ExtResource("74_2h62v")]
@@ -2226,10 +2293,58 @@ courage = 1.5
 fertility = 1.5
 growth_rate = 1.5
 
+[node name="sheep8" parent="Decors/sheep" unique_id=4547915 instance=ExtResource("74_2h62v")]
+position = Vector2(-568, -456)
+
+[node name="sheep9" parent="Decors/sheep" unique_id=1407558378 instance=ExtResource("74_2h62v")]
+position = Vector2(-704, -352)
+
+[node name="sheep10" parent="Decors/sheep" unique_id=1992269631 instance=ExtResource("74_2h62v")]
+position = Vector2(-456, -368)
+
+[node name="sheep11" parent="Decors/sheep" unique_id=1847715347 instance=ExtResource("74_2h62v")]
+position = Vector2(-496, -264)
+
+[node name="sheep12" parent="Decors/sheep" unique_id=150520246 instance=ExtResource("74_2h62v")]
+position = Vector2(720, 1488)
+
+[node name="sheep13" parent="Decors/sheep" unique_id=1764089983 instance=ExtResource("74_2h62v")]
+position = Vector2(824, 1488)
+
+[node name="sheep14" parent="Decors/sheep" unique_id=2002650268 instance=ExtResource("74_2h62v")]
+position = Vector2(776, 1560)
+
+[node name="sheep15" parent="Decors/sheep" unique_id=962721092 instance=ExtResource("74_2h62v")]
+position = Vector2(2656, 1088)
+
+[node name="sheep16" parent="Decors/sheep" unique_id=1732529253 instance=ExtResource("74_2h62v")]
+position = Vector2(2560, 1120)
+
+[node name="sheep17" parent="Decors/sheep" unique_id=855919530 instance=ExtResource("74_2h62v")]
+position = Vector2(2728, 1504)
+
+[node name="sheep18" parent="Decors/sheep" unique_id=1678475398 instance=ExtResource("74_2h62v")]
+position = Vector2(2936, 1536)
+
+[node name="sheep19" parent="Decors/sheep" unique_id=1954335181 instance=ExtResource("74_2h62v")]
+position = Vector2(2768, 1664)
+
+[node name="sheep20" parent="Decors/sheep" unique_id=369576740 instance=ExtResource("74_2h62v")]
+position = Vector2(2888, 1616)
+
+[node name="sheep21" parent="Decors/sheep" unique_id=622079748 instance=ExtResource("74_2h62v")]
+position = Vector2(512, 216)
+
 [node name="mine" type="Node2D" parent="Decors" unique_id=1859582908]
 
 [node name="gold stone" parent="Decors/mine" unique_id=2058937722 instance=ExtResource("75_oncvo")]
 position = Vector2(492, 817)
+
+[node name="gold stone2" parent="Decors/mine" unique_id=1126614474 instance=ExtResource("75_oncvo")]
+position = Vector2(3536, 144)
+
+[node name="gold stone3" parent="Decors/mine" unique_id=416906321 instance=ExtResource("75_oncvo")]
+position = Vector2(3288, 216)
 
 [node name="Goblin Units" type="Node2D" parent="." unique_id=1206702033]
 
@@ -2252,6 +2367,7 @@ wave_interval = 5.0
 max_wave_size = 1
 
 [node name="pawn" parent="." unique_id=505167057 instance=ExtResource("83_qgi8s")]
+visible = false
 position = Vector2(936, 160)
 
 [node name="Music and Fx" type="Node2D" parent="." unique_id=802498470]
