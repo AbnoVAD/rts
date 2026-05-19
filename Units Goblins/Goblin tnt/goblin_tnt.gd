@@ -172,6 +172,7 @@ func assign_target(t:Node2D)->void:
 	release_target()
 	
 	if t !=null:
+		building_is_dead=false
 		if not reserved_targets.has(t):
 			reserved_targets[t]=[]
 		var arr:Array=reserved_targets[t] as Array
@@ -193,6 +194,7 @@ func release_target()->void:
 			reserved_targets.erase(current_target)
 		else:
 			reserved_targets[current_target]=arr
+	current_target=null
 
 func rebalance_pack()->void:
 	for g in goblins:

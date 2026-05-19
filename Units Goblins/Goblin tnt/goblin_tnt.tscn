@@ -261,3 +261,12 @@ pitch_scale = 2.0
 stream = ExtResource("5_6uvq5")
 volume_db = -10.0
 pitch_scale = 1.5
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="detect_area" to="." method="_on_detect_area_body_entered"]
+[connection signal="body_exited" from="detect_area" to="." method="_on_detect_area_body_exited"]
+[connection signal="timeout" from="hurt" to="." method="_on_hurt_timeout"]
+[connection signal="timeout" from="flash" to="." method="_on_flash_timeout"]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="target_area" to="." method="_on_target_area_body_entered"]
+[connection signal="body_exited" from="target_area" to="." method="_on_target_area_body_exited"]
