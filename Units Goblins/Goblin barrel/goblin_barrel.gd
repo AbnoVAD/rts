@@ -31,6 +31,7 @@ const SEPARATION_FORCE:float=55.0
 #Constants
 #--------------------------------------------------
 const ATTACK_DISTANCE:float=40.0
+const CASTLE_ATTACK_DISTANCE:float=175.0
 const KNOCKBACK_FORCE:float=1000.0
 const KNOCKBACK_DECAY:float=0.85
 const DETOUR_DISTANCE:float=24.0
@@ -260,8 +261,13 @@ func chase_state()->void:
 	animation.flip_h=dir.x<0
 	animation.play("run")
 
-	if global_position.distance_to(current_target.global_position)<=ATTACK_DISTANCE:
+	if global_position.distance_to(current_target.global_position)<=get_attack_distance(current_target):
 		state=State.ATTACK
+
+func get_attack_distance(target:Node2D)->float:
+	if is_instance_valid(target) and target.is_in_group("castle"):
+		return CASTLE_ATTACK_DISTANCE
+	return ATTACK_DISTANCE
 
 func attack_state()->void:
 	if state==State.DEAD:

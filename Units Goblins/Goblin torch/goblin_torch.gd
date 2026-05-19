@@ -45,6 +45,7 @@ const KNOCKBACK_FORCE:float=1000.0
 const KNOCKBACK_DECAY:float=0.85
 const DETOUR_DISTANCE:float=24.0
 const STOP_DISTANCE:float=130.0
+const CASTLE_STOP_DISTANCE:float=175.0
 const PREDICTION_TIME:float=0.3
 const STUCK_DETOUR_DISTANCE:float=72.0
 
@@ -271,7 +272,7 @@ func chase_state()->void:
 	if not validate_target():
 		return
 	var distance_to_target:float=global_position.distance_to(current_target.global_position)
-	if distance_to_target<=STOP_DISTANCE:
+	if distance_to_target<=get_stop_distance(current_target):
 		state=State.ATTACK
 		return
 	if dist<=ATTACK_DISTANCE and not is_attacking:
@@ -294,6 +295,11 @@ func chase_state()->void:
 	velocity=dir*SPEED
 	animation.flip_h=dir.x<0
 	animation.play("run")
+
+func get_stop_distance(target:Node2D)->float:
+	if is_instance_valid(target) and target.is_in_group("castle"):
+		return CASTLE_STOP_DISTANCE
+	return STOP_DISTANCE
 
 func attack_state()->void:
 	if building_is_dead:
