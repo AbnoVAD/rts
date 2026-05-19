@@ -290,13 +290,13 @@ func attack_state()->void:
 	velocity=Vector2.ZERO
 
 	if abs(last_mov_dir.x)>abs(last_mov_dir.y):
-		animation.play("attack side")
+		animation.play("shoot")
 		animation.flip_h=last_mov_dir.x<0
 	else:
 		if last_mov_dir.y<0:
-			animation.play("attack up")
+			animation.play("shoot")
 		else:
-			animation.play("attack down")
+			animation.play("shoot")
 
 	if tnt_timer<=0:
 		var target_velocity:Vector2=Vector2.ZERO

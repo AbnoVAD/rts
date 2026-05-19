@@ -176,7 +176,7 @@ script = ExtResource("1_piu38")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=648731224]
 sprite_frames = SubResource("SpriteFrames_va7uu")
-animation = &"idle"
+animation = &"shoot"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1727983033]
