@@ -234,7 +234,7 @@ func _physics_process(delta: float) -> void:
 			ui_visible=false
 
 			var tween :=create_tween()
-			tween.tween_property(hp_bar,"modulate.a",0.0,0.3)
+			tween.tween_property(hp_bar,"modulate:a",0.0,0.3)
 
 	match state:
 		State.IDLE:
@@ -536,7 +536,7 @@ func die():
 		death_audio.play()
 
 	var tween:=create_tween()
-	tween.tween_property(self,"modulate.a",0.0,1.0)
+	tween.tween_property(self,"modulate:a",0.0,1.0)
 	await tween.finished
 	queue_free()
 

@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://rjsqt45dv83"]
 
-[ext_resource type="Script" path="res://Units Goblins/Tower/Goblin Tower/tower_tnt.gd" id="1_7y2wr"]
+[ext_resource type="Script" uid="uid://bpo30g41vdu7a" path="res://Units Goblins/Tower/Goblin Tower/tower_tnt.gd" id="1_7y2wr"]
 [ext_resource type="Texture2D" uid="uid://dnjawcqeut17c" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Goblins/Troops/TNT/Red/TNT_Red.png" id="2_3k8ja"]
 [ext_resource type="AudioStream" uid="uid://bhhkc6ag2ukk7" path="res://Audio/Explosion/04_Fire_explosion_04_medium.wav" id="3_28yfb"]
 
@@ -111,31 +111,31 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_attack_zone"]
 radius = 192.0
 
-[node name="TowerTnt" type="Node2D"]
+[node name="TowerTnt" type="Node2D" unique_id=921972574]
 script = ExtResource("1_7y2wr")
 
-[node name="animation" type="AnimatedSprite2D" parent="."]
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=330786821]
 scale = Vector2(0.45, 0.45)
 sprite_frames = SubResource("SpriteFrames_7y2wr")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1408723941]
 position = Vector2(0, -10)
 
-[node name="attack zone" type="Area2D" parent="."]
+[node name="attack zone" type="Area2D" parent="." unique_id=844586119]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack zone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack zone" unique_id=207564670]
 visible = false
 shape = SubResource("CircleShape2D_attack_zone")
 debug_color = Color(0.092888124, 0.64892554, 3.85046e-07, 0.41960785)
 
-[node name="sound fx" type="Node2D" parent="."]
+[node name="sound fx" type="Node2D" parent="." unique_id=130647369]
 
-[node name="throw_audio" type="AudioStreamPlayer" parent="sound fx"]
+[node name="throw_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1532186692]
 stream = ExtResource("3_28yfb")
 pitch_scale = 1.5
 
+[connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]
 [connection signal="body_entered" from="attack zone" to="." method="_on_attack_zone_body_entered"]
 [connection signal="body_exited" from="attack zone" to="." method="_on_attack_zone_body_exited"]
-[connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]
