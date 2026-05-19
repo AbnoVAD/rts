@@ -81,12 +81,12 @@ func is_direction_damage_target(target:Node) -> bool:
 func fire():
 	var scene=preload("res://Units/effect fx/fire/fire.tscn")
 	var _scene=scene.instantiate()
-	get_parent().add_child(_scene)
 	_scene.global_position=pos
 	_scene.z_index=10
+	get_parent().add_child.call_deferred(_scene)
 func flame():
 	var scene=preload("res://Units/effect fx/fire/flame1.tscn")
 	var _scene=scene.instantiate()
-	get_parent().add_child(_scene)
 	_scene.global_position=pos
 	_scene.z_index=10
+	get_parent().add_child.call_deferred(_scene)
