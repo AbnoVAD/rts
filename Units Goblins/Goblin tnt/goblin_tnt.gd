@@ -121,6 +121,8 @@ func _exit_tree() -> void:
 func add_target(t:Node2D)->void:
 	if not is_instance_valid(t):
 		return
+	if t.has_signal("died") and not t.is_connected("died",Callable(self,"_on_target_died")):
+		t.connect("died",Callable(self,"_on_target_died"))
 	if not targets.has(t):
 		targets.append(t)
 		choose_best_target()
@@ -216,6 +218,13 @@ func validate_target()->bool:
 	if not is_instance_valid(current_target):
 		release_target()
 		state=State.IDLE
+		return false
+	if current_target.has_method("is_destroyed") and current_target.is_destroyed():
+		var destroyed_target:=current_target
+		release_target()
+		targets.erase(destroyed_target)
+		state=State.IDLE
+		choose_best_target()
 		return false
 	return true
 
@@ -585,6 +594,14 @@ func _on_building_died(building:Node2D)->void:
 	release_target()
 	targets.erase(building)
 	
+	state=State.IDLE
+	choose_best_target()
+
+func _on_target_died(target_node:Node2D)->void:
+	targets.erase(target_node)
+	if current_target!=target_node:
+		return
+	release_target()
 	state=State.IDLE
 	choose_best_target()
 
