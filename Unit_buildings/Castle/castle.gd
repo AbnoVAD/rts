@@ -346,9 +346,9 @@ func enter_idle_state() -> void:
 	spawn_pawn()
 
 func enter_destroyed_state() -> void:
-	if state==STATE_DESTROYED :#or Global.game_over:
+	if state==STATE_DESTROYED:
 		return
-	#Global.game_over=true
+	Global.game_over=true
 	shape.disabled=true
 	explosion_detector.monitoring=false
 	placement_checker.monitoring=false
