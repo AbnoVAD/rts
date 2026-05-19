@@ -71,7 +71,7 @@ func _ready() -> void:
 	nav.target_desired_distance=6.0
 
 #add all target initially
-	for p in get_tree().get_nodes_in_group("player"):
+	for p in get_initial_targets():
 		add_target(p)
 
 func _exit_tree() -> void:
@@ -208,7 +208,7 @@ func _physics_process(delta: float) -> void:
 				explode()
 
 		State.ATTACK:
-			chase_state()
+			attack_state()
 			if health <=0:
 				explode()
 
@@ -329,7 +329,7 @@ func _on_flash_timeout() -> void:
 func _on_detect_area_body_entered(body: Node2D) -> void:
 	if exploded:
 		return
-	if body.is_in_group("player"):
+	if is_valid_target(body):
 		add_target(body)
 		var t=Timer.new()
 		t.one_shot=true
@@ -341,14 +341,14 @@ func _on_detect_area_body_entered(body: Node2D) -> void:
 		t.start()
 
 func _on_detect_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if is_valid_target(body):
 		remove_target(body)
 
 #--------------------------------------------------
 #Target area signals
 #--------------------------------------------------
 func _on_target_area_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
+	if not is_valid_target(body):
 		return
 	if current_target==null:
 		add_target(body)
@@ -360,8 +360,18 @@ func _on_target_area_body_entered(body: Node2D) -> void:
 		add_target(body)
 
 func _on_target_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if is_valid_target(body):
 		remove_target(body)
+
+func get_initial_targets() -> Array:
+	var result:Array=[]
+	result.append_array(get_tree().get_nodes_in_group("player"))
+	result.append_array(get_tree().get_nodes_in_group("castle"))
+	result.append_array(get_tree().get_nodes_in_group("building"))
+	return result
+
+func is_valid_target(body:Node2D) -> bool:
+	return body.is_in_group("player") or body.is_in_group("castle") or body.is_in_group("building")
 
 #--------------------------------------------------
 #Obstacles avoidance system

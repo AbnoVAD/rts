@@ -40,6 +40,7 @@ func start_throw()->void:
 func spawn_explosion()->void:
 	await get_tree().create_timer(explosion_delay).timeout
 	var explosion:=preload("res://Units/effect fx/explosion/explosion.tscn").instantiate()
+	get_parent().add_child(explosion)
 	explosion.global_position=global_position
 	explosion.z_index=5
 	
