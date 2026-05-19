@@ -1465,7 +1465,7 @@ z_index = 6
 [node name="castle" type="Node2D" parent="buildings" unique_id=304083275]
 
 [node name="castle" parent="buildings/castle" unique_id=1301632932 groups=["castle"] instance=ExtResource("19_qgi8s")]
-position = Vector2(1376, -192)
+position = Vector2(1379, -31)
 
 [node name="UI" type="Node2D" parent="." unique_id=1170337383]
 
@@ -2062,7 +2062,6 @@ tile_map_data = PackedByteArray("AAANAP//AAAAAAAAAAANAAAAAAAAAAEAAAAOAP//AAABAAA
 tile_set = SubResource("TileSet_luo2f")
 
 [node name="Game Over" type="Panel" parent="UI/ui/Panel" unique_id=1383513934]
-visible = false
 z_index = 10
 layout_mode = 0
 offset_left = -8.0
@@ -2359,13 +2358,13 @@ wave_interval = 5.0
 max_wave_size = 3
 
 [node name="Goblin House Tnt" parent="Goblin Units" unique_id=1414873776 instance=ExtResource("85_mpma2")]
-position = Vector2(2531, 1155)
+position = Vector2(1225, 575)
 spawn_duration = 10.0
 wave_interval = 5.0
 max_wave_size = 3
 
 [node name="Goblin House Torch" parent="Goblin Units" unique_id=776674395 instance=ExtResource("86_2l68y")]
-position = Vector2(2594, 635)
+position = Vector2(1420, 713)
 spawn_duration = 10.0
 wave_interval = 5.0
 max_wave_size = 3
