@@ -44,8 +44,8 @@ var state:State=State.IDLE
 #--------------------------------------------------
 #Variables
 #--------------------------------------------------
-@export var SPEED:float=200.0
-@export var health:int=6
+@export var SPEED:float=185.0
+@export var health:int=7
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 

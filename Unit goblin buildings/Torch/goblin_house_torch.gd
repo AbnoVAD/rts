@@ -30,7 +30,7 @@ const FIRE_SCENE:PackedScene=preload("res://Units/effect fx/fire/fire.tscn")
 #-------------------------------------------
 #Life
 #-------------------------------------------
-@export var max_life:int=300
+@export var max_life:int=180
 var life:int=0
 var destroyed:bool=false
 

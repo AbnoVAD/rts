@@ -79,14 +79,14 @@ const TARGET_LOCK_DURATION:=0.5
 #-------------------------------------------
 #Stats
 #-------------------------------------------
-@export var max_life:=300
-@export var life:=300
+@export var max_life:=230
+@export var life:=230
 
-@export var max_guard:=200
-@export var guard_stamina:=200
+@export var max_guard:=140
+@export var guard_stamina:=140
 
 @export var speed:=700.0
-@export var attack_damage:=15
+@export var attack_damage:=14
 @export var attack_cooldown:=0.8
 
 #-------------------------------------------

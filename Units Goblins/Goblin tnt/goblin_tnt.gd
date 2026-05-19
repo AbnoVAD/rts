@@ -61,14 +61,14 @@ var directional:Vector2=Vector2.ZERO
 var is_attacking:float=false
 var last_mov_dir:Vector2=Vector2.ZERO
 var attack_sound_played:=false
-@export var SPEED:float=200.0
-@export var health:int=6
+@export var SPEED:float=190.0
+@export var health:int=8
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 
 var tnt_timer:float=0.0
 var body_in_range
-var tnt_cooldown:float=1.0
+var tnt_cooldown:float=1.2
 
 var targets:Array[Node2D]=[]
 var current_target:Node2D=null

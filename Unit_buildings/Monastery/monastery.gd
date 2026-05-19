@@ -22,7 +22,7 @@ var collision_disabled:bool=false
 #Variables
 #--------------------------------------------------
 @export var construction_time:float=2.0
-@export var max_life:int=6
+@export var max_life:int=10
 @export var repair_time:float=4.0
 @export var monk_capacity:int=1
 @export var spawn_radius:float=40.0
