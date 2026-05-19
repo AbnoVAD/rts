@@ -38,7 +38,7 @@ func start_throw()->void:
 	tween.tween_callback(spawn_explosion)
 
 func spawn_explosion()->void:
-	await get_tree().add_child(explosion_delay).timeout
+	await get_tree().create_timer(explosion_delay).timeout
 	var explosion:=preload("res://Units/effect fx/explosion/explosion.tscn").instantiate()
 	explosion.global_position=global_position
 	explosion.z_index=5

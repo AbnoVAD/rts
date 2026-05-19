@@ -308,11 +308,15 @@ func enter_construct_state() -> void:
 		shape.disabled=true
 		input_pickable=false
 
+	var build_time:=construction_time
+	if not is_finite(build_time) or build_time<=0.0:
+		build_time=0.01
+
 	tween=create_tween()
-	tween.tween_property(self,"scale",FINAL_SCALE,construction_time)
+	tween.tween_property(self,"scale",FINAL_SCALE,build_time)
 
 	construct_timer=Timer.new()
-	construct_timer.wait_time=construction_time
+	construct_timer.wait_time=build_time
 	construct_timer.one_shot=true
 	add_child(construct_timer)
 	construct_timer.timeout.connect(enter_idle_state)
