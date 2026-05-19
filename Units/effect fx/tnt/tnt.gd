@@ -28,7 +28,7 @@ func start_throw()->void:
 		"global_position",
 		target_position,
 		move_time
-	).set_trans(Tween.TRANS_SINE).set_erase(Tween.EASE_OUT)
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 	tween.tween_interval(stop_time)
 	
