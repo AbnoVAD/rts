@@ -78,15 +78,14 @@ func is_direction_damage_target(target:Node) -> bool:
 	var target_name:=String(target.name).to_lower()
 	return target_name=="archer" or target_name=="knight" or target_name=="lancer"
 
+func spawn_effect(scene_path:String) -> void:
+	var effect:=load(scene_path).instantiate()
+	effect.set_deferred("global_position",pos)
+	effect.set_deferred("z_index",10)
+	get_parent().add_child.call_deferred(effect)
+
 func fire():
-	var scene=preload("res://Units/effect fx/fire/fire.tscn")
-	var _scene=scene.instantiate()
-	_scene.global_position=pos
-	_scene.z_index=10
-	get_parent().add_child.call_deferred(_scene)
+	spawn_effect("res://Units/effect fx/fire/fire.tscn")
+
 func flame():
-	var scene=preload("res://Units/effect fx/fire/flame1.tscn")
-	var _scene=scene.instantiate()
-	_scene.global_position=pos
-	_scene.z_index=10
-	get_parent().add_child.call_deferred(_scene)
+	spawn_effect("res://Units/effect fx/fire/flame1.tscn")

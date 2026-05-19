@@ -12,7 +12,7 @@ func _is_valid_pawn(pawn:Variant) -> bool:
 	return pawn is Node and is_instance_valid(pawn)
 
 func _prune_invalid_pawns() -> void:
-	for i in range(pawns.size()-1,-1,-1):
+	for i in range(pawns.size() - 1, -1, -1):
 		if not _is_valid_pawn(pawns[i]):
 			pawns.remove_at(i)
 	if active_player and not is_instance_valid(active_player):
