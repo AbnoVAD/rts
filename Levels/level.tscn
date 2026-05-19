@@ -2235,19 +2235,19 @@ position = Vector2(492, 817)
 [node name="Goblin Units" type="Node2D" parent="." unique_id=1206702033]
 
 [node name="Goblin House Barrel" parent="Goblin Units" unique_id=779200880 instance=ExtResource("84_kdhhr")]
-position = Vector2(-648, 168)
+position = Vector2(448, 248)
 spawn_duration = 10.0
 wave_interval = 5.0
 max_wave_size = 1
 
 [node name="Goblin House Tnt" parent="Goblin Units" unique_id=1414873776 instance=ExtResource("85_mpma2")]
-position = Vector2(224, 2328)
+position = Vector2(1432, 720)
 spawn_duration = 10.0
 wave_interval = 5.0
 max_wave_size = 1
 
 [node name="Goblin House Torch" parent="Goblin Units" unique_id=776674395 instance=ExtResource("86_2l68y")]
-position = Vector2(3248, 1952)
+position = Vector2(2216, 736)
 spawn_duration = 10.0
 wave_interval = 5.0
 max_wave_size = 1
