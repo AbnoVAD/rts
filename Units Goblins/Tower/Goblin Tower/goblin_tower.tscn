@@ -72,6 +72,8 @@ radius = 22.119135
 
 [node name="Goblin tower" type="StaticBody2D" unique_id=979351680 groups=["block_building", "goblinbuildings"]]
 script = ExtResource("1_uvdca")
+override_tnt_scale = true
+tnt_scale = Vector2(1, 1)
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=648731224]
 sprite_frames = SubResource("SpriteFrames_va7uu")

@@ -10,6 +10,8 @@ extends StaticBody2D
 @export var construction_time:float=2.0
 @export var max_life:int=180
 @export var final_scale:Vector2=Vector2.ONE
+@export var override_tnt_scale:bool=true
+@export var tnt_scale:Vector2=Vector2.ONE
 
 enum {
 	STATE_CONSTRUCT,
@@ -103,6 +105,8 @@ func spawn_tnt() -> void:
 	spawned_tnt=tower_tnt_scene.instantiate()
 	add_child(spawned_tnt)
 	spawned_tnt.position=marker_2d.position
+	if override_tnt_scale:
+		spawned_tnt.scale=tnt_scale
 	spawned_tnt.z_index=5
 
 func flash_red_once() -> void:
