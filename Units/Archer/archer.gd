@@ -72,7 +72,7 @@ const TARGET_LOCK_DURATION:=0.5
 @export var max_guard:=90
 @export var guard_stamina:=90
 
-@export var speed:=700.0
+@export var speed:=400.0
 @export var attack_damage:=9
 @export var attack_cooldown:=0.85
 var knockback_force:=250.0

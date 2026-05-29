@@ -78,7 +78,7 @@ func set_state(new_state:TreeState)->void:
 			chopped.disabled=true
 
 func try_chop()->void:
-	if life<0:
+ 	if life<0:
 		if state!=TreeState.IDLE:
 			return
 		

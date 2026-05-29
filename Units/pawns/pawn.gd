@@ -9,7 +9,7 @@ enum state {IDLE,RUN,USE,DEAD}
 #-----------------------------------
 #Exported variables
 #-----------------------------------
-@export var speed:=300.0
+@export var speed:=400.0
 @export var max_life:=120
 @export var knockback_force:=320.0
 @export var use_duration:=0.5

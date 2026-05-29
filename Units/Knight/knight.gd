@@ -84,7 +84,7 @@ const TARGET_LOCK_DURATION:=0.5
 @export var max_guard:=150
 @export var guard_stamina:=150
 
-@export var speed:=700.0
+@export var speed:=400.0
 @export var attack_damage:=12
 @export var attack_cooldown:=0.9
 
@@ -207,7 +207,7 @@ func _physics_process(delta: float) -> void:
 			ui_visible=false
 
 			var tween :=create_tween()
-			tween.tween_property(hp_bar,"modulate.a",0.0,0.3)
+			tween.tween_property(hp_bar,"modulate:a",0.0,0.3)
 
 	if guard_locked:
 		return

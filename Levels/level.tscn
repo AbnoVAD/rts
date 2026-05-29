@@ -2140,21 +2140,19 @@ z_index = 7
 
 [node name="tree1" parent="Decors/trees" unique_id=1415981528 instance=ExtResource("70_sy5sx")]
 position = Vector2(872, 248.00002)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree2" parent="Decors/trees" unique_id=1251247524 instance=ExtResource("71_2h62v")]
 position = Vector2(1258, 306)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree3" parent="Decors/trees" unique_id=1861486841 instance=ExtResource("72_oncvo")]
 position = Vector2(1237, 699)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree4" parent="Decors/trees" unique_id=1569130621 instance=ExtResource("73_1upps")]
 position = Vector2(345, 740)
+life = null
 metadata/_edit_lock_ = true
 
 [node name="tree5" parent="Decors/trees" unique_id=383833599 instance=ExtResource("70_sy5sx")]
@@ -2162,6 +2160,7 @@ position = Vector2(3296, -56)
 
 [node name="tree6" parent="Decors/trees" unique_id=586101560 instance=ExtResource("73_1upps")]
 position = Vector2(3520, 472)
+life = null
 
 [node name="tree7" parent="Decors/trees" unique_id=1501043204 instance=ExtResource("72_oncvo")]
 position = Vector2(2656, 872)
@@ -2174,6 +2173,7 @@ position = Vector2(1712, 2200)
 
 [node name="tree10" parent="Decors/trees" unique_id=712042766 instance=ExtResource("73_1upps")]
 position = Vector2(2536, 1480)
+life = null
 
 [node name="tree11" parent="Decors/trees" unique_id=1062431057 instance=ExtResource("72_oncvo")]
 position = Vector2(3104, 1832)
@@ -2189,6 +2189,7 @@ position = Vector2(1088, 1696)
 
 [node name="tree15" parent="Decors/trees" unique_id=1243761784 instance=ExtResource("73_1upps")]
 position = Vector2(80, 2184)
+life = null
 
 [node name="tree16" parent="Decors/trees" unique_id=974935412 instance=ExtResource("72_oncvo")]
 position = Vector2(-832, 1216)
@@ -2201,6 +2202,7 @@ position = Vector2(-672, 32)
 
 [node name="tree19" parent="Decors/trees" unique_id=221332446 instance=ExtResource("73_1upps")]
 position = Vector2(-496, 440)
+life = null
 
 [node name="tree20" parent="Decors/trees" unique_id=1020409400 instance=ExtResource("71_2h62v")]
 position = Vector2(-192, 0)
@@ -2216,9 +2218,11 @@ position = Vector2(584, -336)
 
 [node name="tree24" parent="Decors/trees" unique_id=522351767 instance=ExtResource("73_1upps")]
 position = Vector2(136, -40)
+life = null
 
 [node name="tree25" parent="Decors/trees" unique_id=1068435052 instance=ExtResource("73_1upps")]
 position = Vector2(3448, 168)
+life = null
 
 [node name="tree26" parent="Decors/trees" unique_id=354549194 instance=ExtResource("71_2h62v")]
 position = Vector2(3056, 632)
