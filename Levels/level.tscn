@@ -83,11 +83,6 @@
 [ext_resource type="PackedScene" uid="uid://burefv6vhb22u" path="res://Units/Materials/sheep/sheep.tscn" id="74_2h62v"]
 [ext_resource type="Script" uid="uid://cyyxb4no16hhw" path="res://Unit_buildings/Build Manager/system_scripts/game_over.gd" id="74_3mato"]
 [ext_resource type="PackedScene" uid="uid://vk70cksxrgm4" path="res://Units/Materials/gold stone mine/gold stone.tscn" id="75_oncvo"]
-[ext_resource type="PackedScene" uid="uid://c0muhhuq64a6t" path="res://Units/Pawns/pawn_black.tscn" id="83_qgi8s"]
-[ext_resource type="PackedScene" uid="uid://bgr12sn0iupw8" path="res://Unit goblin buildings/Barrel/goblin_house_barrel.tscn" id="84_kdhhr"]
-[ext_resource type="PackedScene" uid="uid://c762hx4xss01h" path="res://Units Goblins/Tower/Goblin Tower/goblin_tower.tscn" id="84_mpma2"]
-[ext_resource type="PackedScene" uid="uid://bc6veqe1ax0b6" path="res://Unit goblin buildings/Tnt/goblin_house_tnt.tscn" id="85_mpma2"]
-[ext_resource type="PackedScene" uid="uid://dklbjvuw3xl0q" path="res://Unit goblin buildings/Torch/goblin_house_torch.tscn" id="86_2l68y"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ikoig"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -1395,9 +1390,9 @@ script = ExtResource("1_oeejg")
 
 [node name="sea" type="TextureRect" parent="." unique_id=1787671636]
 z_index = -10
-offset_left = -2432.0
+offset_left = -2368.0
 offset_top = -2000.0
-offset_right = 5328.0
+offset_right = 5392.0
 offset_bottom = 3736.0
 texture = ExtResource("1_g5qva")
 
@@ -1593,14 +1588,6 @@ offset_bottom = 40.0
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("20_oeejg")
 script = ExtResource("25_2l68y")
-
-[node name="Next" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1472238727]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 600.0
-offset_right = 280.0
-offset_bottom = 632.0
-metadata/_edit_lock_ = true
 
 [node name="InfoLabel" type="Label" parent="UI/ui/Panel/Player/Unit construction" unique_id=646118686]
 layout_mode = 0
@@ -1880,6 +1867,7 @@ position = Vector2(224, 168)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAD5/w0AAAAAAAAAAAD5/w4AAAAAAAQAAAD6/w0AAAACAAAAAAD6/w4AAAACAAQAAAD7/w0AAAACAAAAAAD7/w4AAAACAAQAAAD8/w0AAAACAAAAAAD8/w4AAAACAAQAAAD9/w0AAAACAAAAAAD9/w4AAAACAAQAAAD+/w0AAAACAAAAAAD+/w4AAAACAAQAAAD//w0AAAAEAAAAAAD//w4AAAAEAAQAAAD5/wkAAAAAAAAAAAD5/woAAAAAAAQAAAD6/wkAAAACAAAAAAD6/woAAAACAAQAAAD7/wkAAAACAAAAAAD7/woAAAACAAQAAAD8/wkAAAACAAAAAAD8/woAAAACAAQAAAD9/wkAAAACAAAAAAD9/woAAAACAAQAAAD+/wkAAAACAAAAAAD+/woAAAACAAQAAAD//wkAAAAEAAAAAAD//woAAAAEAAQAAAD5/wsAAAAAAAAAAAD5/wwAAAAAAAQAAAD6/wsAAAACAAAAAAD6/wwAAAACAAQAAAD7/wsAAAACAAAAAAD7/wwAAAACAAQAAAD8/wsAAAACAAAAAAD8/wwAAAACAAQAAAD9/wsAAAACAAAAAAD9/wwAAAACAAQAAAD+/wsAAAACAAAAAAD+/wwAAAACAAQAAAD//wsAAAAEAAAAAAD//wwAAAAEAAQAAAA=")
 tile_set = SubResource("TileSet_d21qu")
+metadata/_edit_lock_ = true
 
 [node name="Gold Icon" type="Sprite2D" parent="UI/ui/Panel/Player/Unit resources" unique_id=439821124]
 position = Vector2(32, 488)
@@ -1984,6 +1972,7 @@ horizontal_alignment = 1
 [node name="Main panel" type="TileMapLayer" parent="UI/ui/Panel" unique_id=1892963246]
 
 [node name="Pause" type="Panel" parent="UI/ui/Panel" unique_id=966053719]
+visible = false
 z_index = 10
 layout_mode = 0
 offset_left = -8.0
@@ -2061,6 +2050,7 @@ tile_map_data = PackedByteArray("AAANAP//AAAAAAAAAAANAAAAAAAAAAEAAAAOAP//AAABAAA
 tile_set = SubResource("TileSet_luo2f")
 
 [node name="Game Over" type="Panel" parent="UI/ui/Panel" unique_id=1383513934]
+visible = false
 z_index = 10
 layout_mode = 0
 offset_left = -8.0
@@ -2336,7 +2326,7 @@ position = Vector2(512, 216)
 [node name="mine" type="Node2D" parent="Decors" unique_id=1859582908]
 
 [node name="gold stone" parent="Decors/mine" unique_id=2058937722 instance=ExtResource("75_oncvo")]
-position = Vector2(492, 817)
+position = Vector2(1728, 208)
 
 [node name="gold stone2" parent="Decors/mine" unique_id=1126614474 instance=ExtResource("75_oncvo")]
 position = Vector2(3536, 144)
@@ -2344,31 +2334,7 @@ position = Vector2(3536, 144)
 [node name="gold stone3" parent="Decors/mine" unique_id=416906321 instance=ExtResource("75_oncvo")]
 position = Vector2(3288, 216)
 
-[node name="Goblin tower" parent="Decors/mine" unique_id=979351680 instance=ExtResource("84_mpma2")]
-position = Vector2(630, 344)
-
 [node name="Goblin Units" type="Node2D" parent="." unique_id=1206702033]
-
-[node name="Goblin House Barrel" parent="Goblin Units" unique_id=779200880 instance=ExtResource("84_kdhhr")]
-position = Vector2(448, 248)
-spawn_duration = 10.0
-wave_interval = 5.0
-max_wave_size = 3
-
-[node name="Goblin House Tnt" parent="Goblin Units" unique_id=1414873776 instance=ExtResource("85_mpma2")]
-position = Vector2(1225, 575)
-spawn_duration = 10.0
-wave_interval = 5.0
-max_wave_size = 3
-
-[node name="Goblin House Torch" parent="Goblin Units" unique_id=776674395 instance=ExtResource("86_2l68y")]
-position = Vector2(1420, 713)
-spawn_duration = 10.0
-wave_interval = 5.0
-max_wave_size = 3
-
-[node name="pawn" parent="." unique_id=505167057 instance=ExtResource("83_qgi8s")]
-position = Vector2(936, 160)
 
 [node name="Music and Fx" type="Node2D" parent="." unique_id=802498470]
 
