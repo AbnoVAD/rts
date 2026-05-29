@@ -16,7 +16,7 @@ enum state {IDLE,RUN,USE,DEAD}
 @export var tool_cooldown:=0.5 # timpul de apasare la fiecare buton
 
 @export var attack_effect_scene= preload("res://materials_effects/attackeffect/attackeffect.tscn")
-@export var attack_repair_scene= preload("res://materials_effects/repaireffect/repaireffect.tscn")
+@export var attack_repair_scene= preload("res://Units/Monk/heal_effect.tscn")
 @export var skull_scene= preload("res://materials_effects/skull/skull.tscn")
 
 
@@ -426,6 +426,8 @@ func spawn_attack_effect()->void:
 
 func spawn_repair_effect()->void:
 	var fx:=attack_repair_scene.instantiate()
+	fx.remove_from_group("heal")
+	fx.add_to_group("repair_effect")
 	fx.global_position=marker_2d.global_position
 	fx.scale=Vector2(0.2,0.2)
 	get_parent().add_child(fx)
