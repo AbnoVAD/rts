@@ -11,7 +11,8 @@ enum TreeState{
 }
 
 var state:TreeState=TreeState.IDLE
-@export var life=4
+const DEFAULT_LIFE:=4
+@export var life=DEFAULT_LIFE
 
 #----------------------------------------
 #Nodes
@@ -35,7 +36,7 @@ const WOOD_SCENE:=preload("res://Units/Materials/wood/wood.tscn")
 #----------------------------------------
 func _ready() -> void:
 	if life == null:
-		life = 4
+		life = DEFAULT_LIFE
 	scale=Vector2(1.5,1.5)
 	z_index=7
 	add_to_group("trees")
