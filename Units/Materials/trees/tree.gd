@@ -126,7 +126,7 @@ func start_growing()->void:
 	tween.set_ease(Tween.EASE_OUT)
 	
 	tween.parallel().tween_property(self,"scale",Vector2(1.5,1.5),GROW_TIME)
-	tween.parallel().tween_property(self,"modulate.a",1.0,GROW_TIME)
+	tween.parallel().tween_property(self,"modulate:a",1.0,GROW_TIME)
 
 	await tween.finished
 	set_state(TreeState.IDLE)
