@@ -426,9 +426,8 @@ func spawn_attack_effect()->void:
 
 func spawn_repair_effect()->void:
 	var fx:=attack_repair_scene.instantiate()
-	if fx is Node:
-		fx.remove_from_group("heal")
-		fx.add_to_group("repair_effect")
+	fx.remove_from_group("heal")
+	fx.add_to_group("repair_effect")
 	fx.global_position=marker_2d.global_position
 	fx.scale=Vector2(0.2,0.2)
 	get_parent().add_child(fx)
