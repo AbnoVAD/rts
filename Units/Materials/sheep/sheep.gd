@@ -88,6 +88,7 @@ var pack_members:Array=[]
 func _ready() -> void:
 	z_index=4
 	add_to_group("sheep")
+	sheep_sound_timer=sheep_sound_interval
 	_apply_genes()
 	_assign_pack()
 	
@@ -169,7 +170,7 @@ func _update_sheep_sound_timer(delta:float):
 
 func _is_player_nearby()->bool:
 	for player in get_tree().get_nodes_in_group("player"):
-		if is_instance_valid(player) and player is Node2D and player.global_position.distance_to(global_position)<=sheep_sound_near_range:
+		if is_instance_valid(player) and player is Node2D and player.global_position.distance_to(global_position) <= sheep_sound_near_range:
 			return true
 	return false
 
