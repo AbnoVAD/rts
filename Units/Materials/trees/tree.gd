@@ -34,6 +34,8 @@ const WOOD_SCENE:=preload("res://Units/Materials/wood/wood.tscn")
 #Ready
 #----------------------------------------
 func _ready() -> void:
+	if life == null:
+		life = 4
 	scale=Vector2(1.5,1.5)
 	z_index=7
 	add_to_group("trees")
