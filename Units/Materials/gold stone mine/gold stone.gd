@@ -6,6 +6,7 @@ extends StaticBody2D
 const GOLD_SCENE:=preload("res://Units/Materials/gold/gold.tscn")
 const RESTORE_TIME:=20.0
 const HIT_COOLDOWN:=0.5
+const GOLD_Z_INDEX:=6
 
 #------------------------------------------------
 #Nodes
@@ -106,6 +107,8 @@ func handle_depletion():
 func spawn_gold()->void:
 	var gold_count:=randi_range(min_gold,max_gold)
 	var parent_node:=get_parent()
+	if not is_instance_valid(parent_node) or not is_instance_valid(marker_2d):
+		return
 	
 	for i in range(gold_count):
 		var gold=GOLD_SCENE.instantiate()
@@ -113,10 +116,20 @@ func spawn_gold()->void:
 			randf_range(-35,35),
 			randf_range(75,105)
 		)
-		gold.position=parent_node.to_local(marker_2d.global_position+offset)
-		gold.rotation=randf_range(-PI,PI)
-		gold.z_index=6
-		parent_node.call_deferred("add_child", gold)
+		var spawn_position:=marker_2d.global_position+offset
+		var spawn_rotation:=randf_range(-PI,PI)
+		call_deferred("_spawn_gold_deferred", parent_node, gold, spawn_position, spawn_rotation)
+
+func _spawn_gold_deferred(parent_node: Node, gold: Node2D, spawn_position: Vector2, spawn_rotation: float)->void:
+	if not is_instance_valid(gold):
+		return
+	if not is_instance_valid(parent_node):
+		gold.queue_free()
+		return
+	parent_node.add_child(gold)
+	gold.global_position=spawn_position
+	gold.rotation=spawn_rotation
+	gold.z_index=GOLD_Z_INDEX
 
 func _on_restore_timer_timeout()->void:
 	current_life=max_life
