@@ -60,6 +60,9 @@ var flee_dir:=Vector2.ZERO
 #-----------------------------------------------
 var graze_time:=0.0
 var wander_time:=0.0
+var sheep_sound_timer:=60.0
+@export var sheep_sound_interval:=60.0
+@export var sheep_sound_near_range:=320.0
 
 #-----------------------------------------------
 #Growth
@@ -129,6 +132,7 @@ func _physics_process(delta: float) -> void:
 		return
 	if is_bady:
 		_grow(delta)
+	_update_sheep_sound_timer(delta)
 	_update_pack_center()
 	
 	match state:
@@ -154,6 +158,20 @@ func _physics_process(delta: float) -> void:
 				velocity=flee_dir*flee_speed
 	move_and_slide()
 	_update_flip_direction()
+
+func _update_sheep_sound_timer(delta:float):
+	sheep_sound_timer-=delta
+	if sheep_sound_timer>0:
+		return
+	sheep_sound_timer=sheep_sound_interval
+	if _is_player_nearby() and not sheep_audio.playing:
+		sheep_audio.play()
+
+func _is_player_nearby()->bool:
+	for player in get_tree().get_nodes_in_group("player"):
+		if is_instance_valid(player) and player is Node2D and player.global_position.distance_to(global_position)<=sheep_sound_near_range:
+			return true
+	return false
 
 #-----------------------------------------------
 #Pack logic
@@ -274,8 +292,6 @@ func _flash_red():
 func _enter_graze():
 	state=GRAZE
 	animation.play("grass")
-	if not sheep_audio.playing:
-		sheep_audio.play()
 	graze_time=randf_range(1.5,3.5)
 
 func _enter_wander():
