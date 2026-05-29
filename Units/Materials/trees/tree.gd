@@ -63,22 +63,22 @@ func set_state(new_state:TreeState)->void:
 			animation.play("idle")
 			scale=Vector2(1.5,1.5)
 			modulate.a=1.0
-			shape.disabled=false
-			chopped.disabled=true
+			shape.set_deferred("disabled", false)
+			chopped.set_deferred("disabled", true)
 		TreeState.CHOPPING:
 			animation.play("chop")
-			shape.disabled=false
-			chopped.disabled=true
+			shape.set_deferred("disabled", false)
+			chopped.set_deferred("disabled", true)
 		TreeState.CHOPPED:
 			animation.play("chopped")
-			shape.disabled=true
-			chopped.disabled=false
+			shape.set_deferred("disabled", true)
+			chopped.set_deferred("disabled", false)
 		TreeState.GROWING:
 			animation.play("idle")
 			scale=Vector2(1.5,1.5)
 			modulate.a=1.0
-			shape.disabled=true
-			chopped.disabled=true
+			shape.set_deferred("disabled", true)
+			chopped.set_deferred("disabled", true)
 
 func try_chop()->void:
 	if life<0:
