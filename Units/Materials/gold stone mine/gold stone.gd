@@ -105,18 +105,18 @@ func handle_depletion():
 
 func spawn_gold()->void:
 	var gold_count:=randi_range(min_gold,max_gold)
+	var parent_node:=get_parent()
 	
 	for i in range(gold_count):
 		var gold=GOLD_SCENE.instantiate()
-		get_parent().add_child(gold)
-		
 		var offset:=Vector2(
 			randf_range(-35,35),
 			randf_range(75,105)
 		)
-		gold.global_position=marker_2d.global_position+offset
+		gold.position=parent_node.to_local(marker_2d.global_position+offset)
 		gold.rotation=randf_range(-PI,PI)
 		gold.z_index=6
+		parent_node.call_deferred("add_child", gold)
 
 func _on_restore_timer_timeout()->void:
 	current_life=max_life
