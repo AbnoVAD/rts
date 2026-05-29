@@ -152,7 +152,6 @@ radius = 12.0415945
 z_index = 7
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_7nrnj")
-life = null
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=477008]
 sprite_frames = SubResource("SpriteFrames_ql2kg")
