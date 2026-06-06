@@ -991,6 +991,80 @@ sources/0 = SubResource("TileSetAtlasSource_uewpw")
 sources/1 = SubResource("TileSetAtlasSource_1yn0m")
 sources/2 = SubResource("TileSetAtlasSource_muj6m")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_panel"]
+bg_color = Color(0.152941, 0.176471, 0.247059, 0.94)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.290196, 0.32549, 0.431373, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title_ribbon"]
+bg_color = Color(0.321569, 0.356863, 0.443137, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.180392, 0.207843, 0.278431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button"]
+bg_color = Color(0.882353, 0.858824, 0.772549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.470588, 0.431373, 0.360784, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button_hover"]
+bg_color = Color(0.941176, 0.913725, 0.819608, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.552941, 0.505882, 0.423529, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button_pressed"]
+bg_color = Color(0.8, 0.772549, 0.686275, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.427451, 0.388235, 0.317647, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon_button"]
+bg_color = Color(0.239216, 0.266667, 0.352941, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.152941, 0.176471, 0.243137, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Menu" type="Node2D" unique_id=1022137402]
 script = ExtResource("1_ygykb")
 
@@ -1089,61 +1163,161 @@ position = Vector2(1136, 688)
 [node name="click" type="AudioStreamPlayer" parent="sound fx" unique_id=198196332]
 stream = ExtResource("23_dahya")
 
-[node name="UI" type="Node2D" parent="." unique_id=1996588881]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1996588881]
 
-[node name="start" type="Button" parent="UI" unique_id=1107501467]
-offset_left = 920.0
-offset_top = 656.0
-offset_right = 1224.0
-offset_bottom = 736.0
-theme_override_styles/normal = ExtResource("25_rgw77")
-theme_override_styles/pressed = ExtResource("25_rgw77")
-theme_override_styles/hover = ExtResource("25_rgw77")
-theme_override_styles/hover_pressed = ExtResource("25_rgw77")
-theme_override_styles/disabled = ExtResource("25_rgw77")
-theme_override_styles/focus = ExtResource("25_rgw77")
-metadata/_edit_lock_ = true
+[node name="Root" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="quit" type="Button" parent="UI" unique_id=958708180]
-offset_left = 1432.0
-offset_top = 376.0
-offset_right = 1544.0
-offset_bottom = 432.0
-theme_override_styles/normal = ExtResource("25_rgw77")
-theme_override_styles/pressed = ExtResource("25_rgw77")
-theme_override_styles/hover = ExtResource("25_rgw77")
-theme_override_styles/hover_pressed = ExtResource("25_rgw77")
-theme_override_styles/disabled = ExtResource("25_rgw77")
-theme_override_styles/focus = ExtResource("25_rgw77")
-metadata/_edit_lock_ = true
-
-[node name="Labels" type="Node2D" parent="." unique_id=103458123]
-
-[node name="Start" type="Label" parent="Labels" unique_id=74342738]
-z_index = 1
-offset_left = 926.0
-offset_top = 656.0
-offset_right = 1224.0
-offset_bottom = 736.0
+[node name="music" type="Button" parent="UI/Root" unique_id=185437512]
+layout_mode = 1
+offset_left = 428.0
+offset_top = 98.0
+offset_right = 532.0
+offset_bottom = 158.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
 theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 60
-text = "Start"
-horizontal_alignment = 1
-metadata/_edit_lock_ = true
+theme_override_font_sizes/font_size = 36
+text = "♪"
+flat = true
 
-[node name="Quit" type="Label" parent="Labels" unique_id=2068021221]
-z_index = 1
-offset_left = 1424.0
-offset_top = 380.0
-offset_right = 1552.0
-offset_bottom = 481.0
+[node name="quit" type="Button" parent="UI/Root" unique_id=958708180]
+layout_mode = 1
+offset_left = 1740.0
+offset_top = 98.0
+offset_right = 1844.0
+offset_bottom = 158.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_icon_button")
+theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
+theme_override_colors/font_color = Color(0.92549, 0.513726, 0.513726, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 40
-text = "Quit
-"
+theme_override_font_sizes/font_size = 48
+text = "X"
+flat = true
+
+[node name="TitleRibbon" type="Panel" parent="UI/Root" unique_id=1700275441]
+layout_mode = 1
+offset_left = 780.0
+offset_top = 170.0
+offset_right = 1364.0
+offset_bottom = 250.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_title_ribbon")
+
+[node name="Title" type="Label" parent="UI/Root/TitleRibbon" unique_id=162740307]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 576.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 56
+text = "SELECT"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
+
+[node name="MenuPanel" type="Panel" parent="UI/Root" unique_id=401193004]
+layout_mode = 1
+offset_left = 798.0
+offset_top = 260.0
+offset_right = 1346.0
+offset_bottom = 972.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_menu_panel")
+
+[node name="start" type="Button" parent="UI/Root/MenuPanel" unique_id=1107501467]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 72.0
+offset_right = 424.0
+offset_bottom = 154.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 44
+text = "Start"
+flat = true
+
+[node name="practice" type="Button" parent="UI/Root/MenuPanel" unique_id=910172341]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 184.0
+offset_right = 424.0
+offset_bottom = 266.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
+text = "Practice"
+flat = true
+
+[node name="load" type="Button" parent="UI/Root/MenuPanel" unique_id=483072866]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 296.0
+offset_right = 424.0
+offset_bottom = 378.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
+text = "Load"
+flat = true
+
+[node name="info" type="Button" parent="UI/Root/MenuPanel" unique_id=732193541]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 408.0
+offset_right = 424.0
+offset_bottom = 490.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
+text = "Info"
+flat = true
+
+[node name="setting" type="Button" parent="UI/Root/MenuPanel" unique_id=1320475859]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 520.0
+offset_right = 424.0
+offset_bottom = 602.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
+text = "Setting"
+flat = true
 
 [node name="design" type="TileMapLayer" parent="." unique_id=1571586800]
 position = Vector2(-16, -8)
@@ -1152,5 +1326,5 @@ tile_map_data = PackedByteArray("AAAzADUAAAABAAMAAAAzADYAAAABAAQAAAAzADcAAAABAAU
 tile_set = SubResource("TileSet_qdtp8")
 metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="UI/start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="UI/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Root/MenuPanel/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Root/quit" to="." method="_on_quit_pressed"]
