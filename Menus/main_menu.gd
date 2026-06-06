@@ -5,16 +5,21 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var ui_root: Control = $UI/Root
 
-var level=preload("res://Levels/level.tscn")
+var level = preload("res://Levels/level.tscn")
 const BASE_UI_SIZE := Vector2(1920, 1080)
 
 func _ready() -> void:
 	music.play()
 	camera.make_current()
 	_fit_ui_to_viewport()
-	get_viewport().size_changed.connect(_fit_ui_to_viewport)
+	var viewport := get_viewport()
+	if not viewport.size_changed.is_connected(_fit_ui_to_viewport):
+		viewport.size_changed.connect(_fit_ui_to_viewport)
 
 func _exit_tree() -> void:
+	var viewport := get_viewport()
+	if viewport.size_changed.is_connected(_fit_ui_to_viewport):
+		viewport.size_changed.disconnect(_fit_ui_to_viewport)
 	music.stop()
 
 func _on_start_pressed() -> void:
