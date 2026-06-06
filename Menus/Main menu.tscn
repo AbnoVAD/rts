@@ -1166,12 +1166,8 @@ stream = ExtResource("23_dahya")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1996588881]
 
 [node name="Root" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
 
 [node name="music" type="Button" parent="UI/Root" unique_id=185437512]
 layout_mode = 1
