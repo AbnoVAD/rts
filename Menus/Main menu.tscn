@@ -21,10 +21,6 @@
 [ext_resource type="Script" uid="uid://cfka4tff3iuy" path="res://Tiles/collider.gd" id="18_140bu"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="23_dahya"]
 [ext_resource type="FontFile" uid="uid://dgsompp213qfa" path="res://assets/Text Font/ringbearer/RINGM___.TTF" id="25_d7ulf"]
-[ext_resource type="StyleBox" uid="uid://bbe05boqas5yh" path="res://Units/Monk/activation_buttons.tres" id="25_rgw77"]
-[ext_resource type="Texture2D" uid="uid://dxlvc7m5u7tom" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Swords/Swords.png" id="26_olhc2"]
-[ext_resource type="Texture2D" uid="uid://bwlijd6klmikw" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="28_bny8e"]
-[ext_resource type="Texture2D" uid="uid://clkfhjhpt4487" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/SmallRibbons.png" id="29_y3gbr"]
 [ext_resource type="PackedScene" uid="uid://ca02atfk8jddq" path="res://Units/Materials/trees/tree1.tscn" id="77_lrgj2"]
 [ext_resource type="PackedScene" uid="uid://df4tu1jemgkuo" path="res://Units/Materials/trees/tree2.tscn" id="78_c0nwo"]
 [ext_resource type="PackedScene" uid="uid://5j5bdvnr3jlv" path="res://Units/Materials/trees/tree3.tscn" id="79_2rqba"]
@@ -843,153 +839,29 @@ physics_layer_0/collision_layer = 31
 physics_layer_0/collision_mask = 31
 sources/0 = SubResource("TileSetAtlasSource_o3ebs")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uewpw"]
-texture = ExtResource("26_olhc2")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-1:0/0 = 0
-3:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-3:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-3:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-3:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-3:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-3:5/0 = 0
-5:5/0 = 0
-6:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-3:6/0 = 0
-5:6/0 = 0
-6:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-3:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-3:8/0 = 0
-5:8/0 = 0
-6:8/0 = 0
-0:9/0 = 0
-1:9/0 = 0
-3:9/0 = 0
-5:9/0 = 0
-6:9/0 = 0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon_button"]
+bg_color = Color(0.239216, 0.266667, 0.352941, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.152941, 0.176471, 0.243137, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yn0m"]
-texture = ExtResource("28_bny8e")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-1:0/0 = 0
-3:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-3:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-3:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-3:3/0 = 0
-5:3/0 = 0
-6:3/0 = 0
-0:4/0 = 0
-1:4/0 = 0
-3:4/0 = 0
-5:4/0 = 0
-6:4/0 = 0
-0:5/0 = 0
-1:5/0 = 0
-3:5/0 = 0
-5:5/0 = 0
-6:5/0 = 0
-0:6/0 = 0
-1:6/0 = 0
-3:6/0 = 0
-5:6/0 = 0
-6:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-3:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-3:8/0 = 0
-5:8/0 = 0
-6:8/0 = 0
-0:9/0 = 0
-1:9/0 = 0
-3:9/0 = 0
-5:9/0 = 0
-6:9/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_muj6m"]
-texture = ExtResource("29_y3gbr")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-2:0/0 = 0
-4:0/0 = 0
-0:1/0 = 0
-2:1/0 = 0
-4:1/0 = 0
-0:2/0 = 0
-2:2/0 = 0
-4:2/0 = 0
-0:3/0 = 0
-2:3/0 = 0
-4:3/0 = 0
-0:4/0 = 0
-2:4/0 = 0
-4:4/0 = 0
-0:5/0 = 0
-2:5/0 = 0
-4:5/0 = 0
-0:6/0 = 0
-2:6/0 = 0
-4:6/0 = 0
-0:7/0 = 0
-2:7/0 = 0
-4:7/0 = 0
-0:8/0 = 0
-2:8/0 = 0
-4:8/0 = 0
-0:9/0 = 0
-2:9/0 = 0
-4:9/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_qdtp8"]
-tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_uewpw")
-sources/1 = SubResource("TileSetAtlasSource_1yn0m")
-sources/2 = SubResource("TileSetAtlasSource_muj6m")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title_ribbon"]
+bg_color = Color(0.321569, 0.356863, 0.443137, 0.96)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.180392, 0.207843, 0.278431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_panel"]
 bg_color = Color(0.152941, 0.176471, 0.247059, 0.94)
@@ -1005,18 +877,6 @@ corner_radius_bottom_left = 8
 shadow_color = Color(0, 0, 0, 0.35)
 shadow_size = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title_ribbon"]
-bg_color = Color(0.321569, 0.356863, 0.443137, 0.96)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.180392, 0.207843, 0.278431, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button"]
 bg_color = Color(0.882353, 0.858824, 0.772549, 1)
 border_width_left = 2
@@ -1024,18 +884,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.470588, 0.431373, 0.360784, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button_hover"]
-bg_color = Color(0.941176, 0.913725, 0.819608, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.552941, 0.505882, 0.423529, 1)
 corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
@@ -1053,17 +901,17 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_icon_button"]
-bg_color = Color(0.239216, 0.266667, 0.352941, 0.96)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.152941, 0.176471, 0.243137, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menu_button_hover"]
+bg_color = Color(0.941176, 0.913725, 0.819608, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.552941, 0.505882, 0.423529, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="Menu" type="Node2D" unique_id=1022137402]
 script = ExtResource("1_ygykb")
@@ -1072,10 +920,10 @@ script = ExtResource("1_ygykb")
 
 [node name="sea" type="TextureRect" parent="." unique_id=1787671636]
 z_index = -10
-offset_left = -2432.0
-offset_top = -2000.0
-offset_right = 5328.0
-offset_bottom = 3736.0
+offset_left = -2248.0
+offset_top = -1816.0
+offset_right = 5512.0
+offset_bottom = 3920.0
 texture = ExtResource("1_tp04k")
 
 [node name="Tiles" type="Node2D" parent="." unique_id=1174837673]
@@ -1129,24 +977,20 @@ tile_set = SubResource("TileSet_2u3nc")
 script = ExtResource("18_140bu")
 
 [node name="Decors" type="Node2D" parent="." unique_id=1213946829]
-visible = false
 
 [node name="trees" type="Node2D" parent="Decors" unique_id=511236668]
 z_index = 7
 
 [node name="tree1" parent="Decors/trees" unique_id=1415981528 instance=ExtResource("77_lrgj2")]
 position = Vector2(872, 248.00002)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree2" parent="Decors/trees" unique_id=1251247524 instance=ExtResource("78_c0nwo")]
 position = Vector2(1258, 306)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree3" parent="Decors/trees" unique_id=1861486841 instance=ExtResource("79_2rqba")]
 position = Vector2(1237, 699)
-life = 4
 metadata/_edit_lock_ = true
 
 [node name="tree4" parent="Decors/trees" unique_id=1569130621 instance=ExtResource("80_vrmxp")]
@@ -1154,7 +998,7 @@ position = Vector2(345, 740)
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=664401909]
-position = Vector2(1136, 688)
+position = Vector2(1144, 320)
 
 [node name="sound fx" type="Node2D" parent="." unique_id=235647721]
 
@@ -1165,27 +1009,30 @@ stream = ExtResource("23_dahya")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1996588881]
 
-[node name="Root" type="Control" parent="UI"]
+[node name="Root" type="Control" parent="UI" unique_id=781051031]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 600.0
+offset_right = 600.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="music" type="Button" parent="UI/Root" unique_id=185437512]
 layout_mode = 1
-offset_left = 428.0
-offset_top = 98.0
-offset_right = 532.0
-offset_bottom = 158.0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 120.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 36
 text = "♪"
 flat = true
 
@@ -1195,31 +1042,36 @@ offset_left = 1740.0
 offset_top = 98.0
 offset_right = 1844.0
 offset_bottom = 158.0
+theme_override_colors/font_color = Color(0.92549, 0.513726, 0.513726, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_icon_button")
 theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
-theme_override_colors/font_color = Color(0.92549, 0.513726, 0.513726, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 48
 text = "X"
 flat = true
 
 [node name="TitleRibbon" type="Panel" parent="UI/Root" unique_id=1700275441]
 layout_mode = 1
-offset_left = 780.0
-offset_top = 170.0
-offset_right = 1364.0
-offset_bottom = 250.0
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.093
+anchor_right = 0.507
+anchor_bottom = 0.093
+offset_left = -296.06403
+offset_top = -40.168
+offset_right = 287.93597
+offset_bottom = 39.832
 theme_override_styles/panel = SubResource("StyleBoxFlat_title_ribbon")
 
-[node name="Title" type="Label" parent="UI/Root/TitleRibbon" unique_id=162740307]
+[node name="select" type="Label" parent="UI/Root/TitleRibbon" unique_id=162740307]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 7.0
-offset_right = 576.0
-offset_bottom = 72.0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 572.0
+offset_bottom = 74.0
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 56
 text = "SELECT"
@@ -1227,27 +1079,34 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MenuPanel" type="Panel" parent="UI/Root" unique_id=401193004]
+z_index = 1
 layout_mode = 1
-offset_left = 798.0
-offset_top = 260.0
-offset_right = 1346.0
-offset_bottom = 972.0
+anchors_preset = -1
+anchor_left = 0.514
+anchor_top = 0.5
+anchor_right = 0.514
+anchor_bottom = 0.5
+offset_left = -280.128
+offset_top = -252.0
+offset_right = 267.872
+offset_bottom = 356.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_menu_panel")
 
 [node name="start" type="Button" parent="UI/Root/MenuPanel" unique_id=1107501467]
+z_index = 1
 layout_mode = 0
-offset_left = 124.0
+offset_left = 120.0
 offset_top = 72.0
-offset_right = 424.0
+offset_right = 420.0
 offset_bottom = 154.0
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 44
 text = "Start"
 flat = true
 
@@ -1257,14 +1116,14 @@ offset_left = 124.0
 offset_top = 184.0
 offset_right = 424.0
 offset_bottom = 266.0
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 40
 text = "Practice"
 flat = true
 
@@ -1274,14 +1133,14 @@ offset_left = 124.0
 offset_top = 296.0
 offset_right = 424.0
 offset_bottom = 378.0
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 40
 text = "Load"
 flat = true
 
@@ -1291,14 +1150,14 @@ offset_left = 124.0
 offset_top = 408.0
 offset_right = 424.0
 offset_bottom = 490.0
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 40
 text = "Info"
 flat = true
 
@@ -1308,23 +1167,16 @@ offset_left = 124.0
 offset_top = 520.0
 offset_right = 424.0
 offset_bottom = 602.0
+theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+theme_override_fonts/font = ExtResource("25_d7ulf")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_menu_button_hover")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 40
 text = "Settings"
 flat = true
 
-[node name="design" type="TileMapLayer" parent="." unique_id=1571586800]
-position = Vector2(-16, -8)
-rotation = -0.0017453292
-tile_map_data = PackedByteArray("AAAzADUAAAABAAMAAAAzADYAAAABAAQAAAAzADcAAAABAAUAAAA0ADQAAAACAAIAAAA0ADUAAAACAAMAAAA0ADYAAAACAAQAAAA0ADcAAAACAAUAAAA1ADQAAAADAAIAAAA1ADUAAAADAAMAAAA1ADYAAAADAAQAAAA1ADcAAAADAAUAAAA2ADIAAAAEAAAAAAA2ADMAAAAEAAEAAAA2ADQAAAAEAAIAAAA2ADUAAAAEAAMAAAA2ADYAAAAEAAQAAAA2ADcAAAAEAAUAAAA2ADgAAAAEAAYAAAA2ADkAAAAEAAcAAAA3ADIAAAAFAAAAAAA3ADMAAAAFAAEAAAA3ADQAAAAFAAIAAAA3ADUAAAAFAAMAAAA3ADYAAAAFAAQAAAA3ADcAAAAFAAUAAAA3ADgAAAAFAAYAAAA3ADkAAAAFAAcAAAA4ADIAAAAGAAAAAAA4ADMAAAAGAAEAAAA4ADQAAAAGAAIAAAA4ADUAAAAGAAMAAAA4ADYAAAAGAAQAAAA4ADcAAAAGAAUAAAA4ADgAAAAGAAYAAAA4ADkAAAAGAAcAAAA5ADMAAAAHAAEAAAA5ADQAAAAHAAIAAAA5ADUAAAAHAAMAAAA5ADYAAAAHAAQAAAA5ADcAAAAHAAUAAAA5ADgAAAAHAAYAAAA6ADMAAAAMAAEAAAA6ADQAAAAMAAIAAAA6ADUAAAAMAAMAAAA6ADYAAAAMAAQAAAA6ADcAAAAMAAUAAAA6ADgAAAAMAAYAAAA7ADMAAAANAAEAAAA7ADQAAAANAAIAAAA7ADUAAAANAAMAAAA7ADYAAAANAAQAAAA7ADcAAAANAAUAAAA7ADgAAAANAAYAAAA8ADMAAAAOAAEAAAA8ADQAAAAOAAIAAAA8ADUAAAAOAAMAAAA8ADYAAAAOAAQAAAA8ADcAAAAOAAUAAAA8ADgAAAAOAAYAAAA9ADMAAAAPAAEAAAA9ADQAAAAPAAIAAAA9ADUAAAAPAAMAAAA9ADYAAAAPAAQAAAA9ADcAAAAPAAUAAAA9ADgAAAAPAAYAAAA+ADMAAAAMAAEAAAA+ADQAAAAMAAIAAAA+ADUAAAAMAAMAAAA+ADYAAAAMAAQAAAA+ADcAAAAMAAUAAAA+ADgAAAAMAAYAAAA/ADMAAAANAAEAAAA/ADQAAAANAAIAAAA/ADUAAAANAAMAAAA/ADYAAAANAAQAAAA/ADcAAAANAAUAAAA/ADgAAAANAAYAAABAADMAAAAOAAEAAABAADQAAAAOAAIAAABAADUAAAAOAAMAAABAADYAAAAOAAQAAABAADcAAAAOAAUAAABAADgAAAAOAAYAAABBADMAAAAPAAEAAABBADQAAAAPAAIAAABBADUAAAAPAAMAAABBADYAAAAPAAQAAABBADcAAAAPAAUAAABBADgAAAAPAAYAAABCADMAAAAMAAEAAABCADQAAAAMAAIAAABCADUAAAAMAAMAAABCADYAAAAMAAQAAABCADcAAAAMAAUAAABCADgAAAAMAAYAAABDADMAAAANAAEAAABDADUAAAANAAMAAABDADYAAAANAAQAAABDADcAAAANAAUAAABDADgAAAANAAYAAABEADgAAAAOAAYAAABDADQAAAANAAIAAABEADQAAAAOAAIAAABEADUAAAAOAAMAAABEADcAAAAOAAUAAABEADYAAAAOAAQAAABEADMAAAAOAAEAAABFADgAAAAHAAEAADBFADcAAAAHAAIAADBFADYAAAAHAAMAADBFADUAAAAHAAQAADBFADQAAAAHAAUAADBFADMAAAAHAAYAADBGADkAAAAGAAAAADBGADgAAAAGAAEAADBGADcAAAAGAAIAADBGADYAAAAGAAMAADBGADUAAAAGAAQAADBGADQAAAAGAAUAADBGADMAAAAGAAYAADBGADIAAAAGAAcAADBHADkAAAAFAAAAADBHADgAAAAFAAEAADBHADcAAAAFAAIAADBHADYAAAAFAAMAADBHADUAAAAFAAQAADBHADQAAAAFAAUAADBHADMAAAAFAAYAADBHADIAAAAFAAcAADBIADkAAAAEAAAAADBIADgAAAAEAAEAADBIADcAAAAEAAIAADBIADYAAAAEAAMAADBIADUAAAAEAAQAADBIADQAAAAEAAUAADBIADMAAAAEAAYAADBIADIAAAAEAAcAADBJADcAAAADAAIAADBJADYAAAADAAMAADBJADUAAAADAAQAADBJADQAAAADAAUAADBKADcAAAACAAIAADBKADYAAAACAAMAADBKADUAAAACAAQAADBKADQAAAACAAUAADBLADYAAAABAAMAADBLADUAAAABAAQAADBLADQAAAABAAUAADANAAoAAAAAAAAAAAANAAsAAAAAAAEAAAAOAAoAAAABAAAAAAAOAAsAAAABAAEAAAAPAAoAAAADAAQAAAAPAAsAAAADAAUAAAAQAAoAAAADAAQAAAAQAAsAAAADAAUAAAARAAoAAAADAAQAAAARAAsAAAADAAUAAAASAAoAAAADAAAAAAASAAsAAAADAAEAAAATAAoAAAABAAAAABATAAsAAAABAAEAABAUAAoAAAAAAAAAABAUAAsAAAAAAAEAABAWAAYAAgAAAAIAAAAXAAYAAgACAAIAAAAYAAYAAgAEAAIAAAA=")
-tile_set = SubResource("TileSet_qdtp8")
-metadata/_edit_lock_ = true
-
-[connection signal="pressed" from="UI/Root/MenuPanel/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="UI/Root/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/Root/MenuPanel/start" to="." method="_on_start_pressed"]
