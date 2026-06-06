@@ -5,7 +5,7 @@ extends Node2D
 @onready var camera: Camera2D = $Camera2D
 @onready var ui_root: Control = $UI/Root
 
-var level = preload("res://Levels/level.tscn")
+var level_scene = preload("res://Levels/level.tscn")
 const BASE_UI_SIZE := Vector2(1920, 1080)
 
 func _ready() -> void:
@@ -25,7 +25,7 @@ func _exit_tree() -> void:
 func _on_start_pressed() -> void:
 	click.play()
 	await get_tree().create_timer(0.2).timeout
-	get_tree().change_scene_to_packed(level)
+	get_tree().change_scene_to_packed(level_scene)
 
 func _on_quit_pressed() -> void:
 	click.play()
