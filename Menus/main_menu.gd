@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	var viewport := get_viewport()
-	if viewport.size_changed.is_connected(_fit_ui_to_viewport):
+	if viewport and viewport.size_changed.is_connected(_fit_ui_to_viewport):
 		viewport.size_changed.disconnect(_fit_ui_to_viewport)
 	music.stop()
 
