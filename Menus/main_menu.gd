@@ -7,9 +7,14 @@ extends Node2D
 
 const LEVEL_SCENE := preload("res://Levels/level.tscn")
 const BASE_UI_SIZE := Vector2(1920, 1080)
+const MENU_CAMERA_POSITION := Vector2(1144, 320)
+const MENU_CAMERA_ZOOM := Vector2.ONE
 
 func _ready() -> void:
 	music.play()
+	camera.enabled = true
+	camera.position = MENU_CAMERA_POSITION
+	camera.zoom = MENU_CAMERA_ZOOM
 	camera.make_current()
 	_fit_ui_to_viewport()
 	get_viewport().size_changed.connect(_fit_ui_to_viewport)
@@ -34,5 +39,7 @@ func _fit_ui_to_viewport() -> void:
 	var viewport_size := get_viewport_rect().size
 	var scale_factor := min(viewport_size.x / BASE_UI_SIZE.x, viewport_size.y / BASE_UI_SIZE.y)
 	var scaled_size := BASE_UI_SIZE * scale_factor
+	ui_root.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	ui_root.size = BASE_UI_SIZE
 	ui_root.scale = Vector2.ONE * scale_factor
 	ui_root.position = (viewport_size - scaled_size) * 0.5
