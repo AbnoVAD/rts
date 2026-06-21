@@ -13,20 +13,23 @@ const FLAME_SCENE:=preload("res://Units/effect fx/fire/flame1.tscn")
 
 var pos
 var damaged_targets:={}
+var cleanup_started:bool=false
+const EXPLOSION_LIFETIME: float = 1.25
 
 func _ready() -> void:
+	explosion.play("sp")
 	if not explosion_audio.playing:
 		explosion_audio.play()
-		explosion.play("sp")
-		scale=Vector2(2,2)
+	scale=Vector2(2,2)
 	if not explo.body_entered.is_connected(_on_explo_body_entered):
 		explo.body_entered.connect(_on_explo_body_entered)
 	if not explo.area_entered.is_connected(_on_explo_area_entered):
 		explo.area_entered.connect(_on_explo_area_entered)
 	call_deferred("apply_initial_damage")
+	_start_cleanup_timer()
 
 func _on_animation_finished() -> void:
-	queue_free()
+	_cleanup()
 
 func _on_explo_body_entered(body: Node2D) -> void:
 	apply_damage_to_target(body)
@@ -92,3 +95,13 @@ func fire():
 
 func flame():
 	spawn_effect(FLAME_SCENE)
+
+func _start_cleanup_timer() -> void:
+	await get_tree().create_timer(EXPLOSION_LIFETIME).timeout
+	_cleanup()
+
+func _cleanup() -> void:
+	if cleanup_started:
+		return
+	cleanup_started = true
+	queue_free()

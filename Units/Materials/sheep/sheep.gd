@@ -17,8 +17,10 @@ extends CharacterBody2D
 #-----------------------------------------------
 #Scenes
 #-----------------------------------------------
-@export var meat_scene=preload("res://Units/Materials/meat/meat.tscn") 
-@export var baby_sheep_scene=preload("res://Units/Materials/sheep/sheep.tscn")
+@export var meat_scene:PackedScene=preload("res://Units/Materials/meat/meat.tscn") 
+@export var baby_sheep_scene:PackedScene=preload("res://Units/Materials/sheep/sheep.tscn")
+@export var source_type:="meat"
+var reserved_by:Node2D=null
 
 #-----------------------------------------------
 #Genes
@@ -65,11 +67,21 @@ var sheep_sound_timer:=60.0
 @export var sheep_sound_near_range:=320.0
 
 #-----------------------------------------------
+#Reproduction
+#-----------------------------------------------
+@export_range(30.0,180.0,1.0) var reproduction_interval:=75.0
+@export_range(64.0,320.0,1.0) var reproduction_radius:=180.0
+@export_range(2,10,1) var reproduction_max_nearby:=5
+@export_range(1,20,1) var reproduction_population_cap:=20
+@export_range(0.0,1.0,0.01) var reproduction_chance:=0.45
+var reproduction_timer:=0.0
+
+#-----------------------------------------------
 #Growth
 #-----------------------------------------------
 var is_bady:=false
 var age:=0.0
-@export var adult_age:=18.0
+@export var adult_age:=60.0
 
 #-----------------------------------------------
 #Pack system
@@ -88,7 +100,13 @@ var pack_members:Array=[]
 func _ready() -> void:
 	z_index=4
 	add_to_group("sheep")
+	add_to_group("resource_source")
+	if meat_scene==null:
+		meat_scene=load("res://Units/Materials/meat/meat.tscn") as PackedScene
+	if baby_sheep_scene==null:
+		baby_sheep_scene=load("res://Units/Materials/sheep/sheep.tscn") as PackedScene
 	sheep_sound_timer=sheep_sound_interval
+	reproduction_timer=randf_range(reproduction_interval*0.75,reproduction_interval*1.25)
 	_apply_genes()
 	_assign_pack()
 	
@@ -119,10 +137,7 @@ func _assign_pack():
 #Apply genes
 #-----------------------------------------------
 func _apply_genes():
-	life=int(BASE_LIFE*body_size)
-	walk_speed=BASE_WALK*agility/body_size
-	flee_speed=BASE_FLEE*agility
-	meat_amount=max(1,int(BASE_MEAT*body_size*2))
+	_refresh_stats()
 	scale*=body_size
 
 #-----------------------------------------------
@@ -133,6 +148,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if is_bady:
 		_grow(delta)
+	else:
+		_update_reproduction_timer(delta)
 	_update_sheep_sound_timer(delta)
 	_update_pack_center()
 	
@@ -204,16 +221,70 @@ func _grow(delta):
 	var t = clamp(age/adult_age,0,1)
 	scale=Vector2.ONE*lerp(0.5,body_size,t)
 	if age>=adult_age:
-		is_bady=false
+		_mature()
+
+func _mature() -> void:
+	if not is_bady:
+		return
+	is_bady=false
+	_apply_maturation_bonuses()
+	_refresh_stats()
+	scale=Vector2.ONE*body_size
+
+func _apply_maturation_bonuses() -> void:
+	body_size=clamp(body_size+randf_range(0.00,0.08),0.7,1.5)
+	agility=clamp(agility+randf_range(0.00,0.10),0.5,1.5)
+	courage=clamp(courage+randf_range(0.00,0.08),0.6,1.5)
+	fertility=clamp(fertility+randf_range(0.00,0.06),0.6,1.5)
+	growth_rate=clamp(growth_rate+randf_range(0.00,0.04),0.7,1.5)
+
+func _refresh_stats() -> void:
+	life=int(BASE_LIFE*body_size)
+	walk_speed=BASE_WALK*agility/body_size
+	flee_speed=BASE_FLEE*agility
+	meat_amount=max(1,int(BASE_MEAT*body_size*2))
 
 #-----------------------------------------------
 #Reproduction
 #-----------------------------------------------
-func try_spawn_baby(delta):
-	if is_bady or baby_sheep_scene==null:
+func _update_reproduction_timer(delta:float) -> void:
+	if baby_sheep_scene==null:
 		return
-	if randf()>0.15*fertility:
+	if is_bady:
 		return
+
+	reproduction_timer-=delta
+	if reproduction_timer>0:
+		return
+
+	if not _can_reproduce():
+		reproduction_timer=5.0
+		return
+	if randf()>clamp(reproduction_chance*fertility,0.15,0.85):
+		reproduction_timer=12.0
+		return
+
+	_spawn_baby()
+	var fertility_bonus:float=clamp(fertility,0.6,1.5)
+	reproduction_timer=reproduction_interval/fertility_bonus
+
+func _can_reproduce() -> bool:
+	if get_tree().get_nodes_in_group("sheep").size()>=reproduction_population_cap:
+		return false
+
+	var nearby_adults:=0
+	for sheep in get_tree().get_nodes_in_group("sheep"):
+		if sheep==self or not is_instance_valid(sheep):
+			continue
+		if sheep.is_bady:
+			continue
+		if sheep.global_position.distance_to(global_position)<=reproduction_radius:
+			nearby_adults+=1
+			if nearby_adults>=reproduction_max_nearby:
+				return false
+	return nearby_adults>0
+
+func _spawn_baby() -> void:
 	var baby=baby_sheep_scene.instantiate()
 	baby.global_position=global_position+Vector2(randf_range(-10,10),randf_range(-10,10))
 
@@ -222,7 +293,6 @@ func try_spawn_baby(delta):
 	baby.courage=clamp(courage+randf_range(-0.1,0.1),0.6,1.5)
 	baby.fertility=clamp(fertility+randf_range(-0.1,0.1),0.6,1.5)
 	baby.growth_rate=clamp(growth_rate+randf_range(-0.1,0.1),0.7,1.5)
-	
 	baby.is_bady=true
 	get_parent().add_child(baby)
 
@@ -235,8 +305,43 @@ func _on_zone_area_entered(area: Area2D) -> void:
 
 	if area.is_in_group("explosion") or area.is_in_group("arrow"):
 		take_damage(area.global_position)
-	if area.is_in_group("attackeffect") and Global.pawn_tool=="knife":
-		take_damage(area.global_position)
+	if area.is_in_group("attackeffect"):
+		var effect:=area.get_parent()
+		if effect!=null and str(effect.get("tool_type"))=="knife":
+			take_damage(area.global_position)
+
+func is_available_for_gathering() -> bool:
+	return state!=DEAD
+
+func get_worker_target_position() -> Vector2:
+	return global_position
+
+func can_be_reserved_by(worker:Node2D) -> bool:
+	return is_instance_valid(worker) and is_available_for_gathering() and (reserved_by==null or reserved_by==worker)
+
+func reserve_for(worker:Node2D) -> bool:
+	if not can_be_reserved_by(worker):
+		return false
+	reserved_by=worker
+	return true
+
+func release_reservation(worker:Node2D=null) -> void:
+	if worker==null or reserved_by==worker or not is_instance_valid(reserved_by):
+		reserved_by=null
+
+func is_reserved_by(worker:Node2D) -> bool:
+	return reserved_by!=null and reserved_by==worker
+
+func perform_auto_work(tool_name:String, worker:Node2D) -> bool:
+	if tool_name!="knife":
+		return false
+	if not is_available_for_gathering():
+		return false
+	if reserved_by!=null and reserved_by!=worker:
+		return false
+
+	take_damage(global_position)
+	return true
 
 func take_damage(attack_pos:Vector2):
 	life-=1
@@ -259,6 +364,7 @@ func _panic(threat_pos:Vector2):
 #-----------------------------------------------
 func die():
 	state=DEAD
+	release_reservation()
 	animation.play("idle")
 	await get_tree().create_timer(0.2).timeout
 	for i in meat_amount:
@@ -269,6 +375,8 @@ func die():
 #Spawn meat
 #-----------------------------------------------
 func spawn_meat():
+	if meat_scene==null:
+		return
 	var meat=meat_scene.instantiate()
 	meat.global_position=global_position+Vector2(randf_range(-3,3),randf_range(-3,3))
 	get_parent().add_child(meat)

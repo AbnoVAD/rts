@@ -151,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ih4rr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack down",
 "speed": 10.0
 }, {
@@ -174,7 +174,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_004b2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack side",
 "speed": 10.0
 }, {
@@ -197,7 +197,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bkw6p")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack up",
 "speed": 10.0
 }, {
@@ -223,7 +223,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_liref")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -246,7 +246,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ca4st")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }]
@@ -261,7 +261,7 @@ radius = 16.492422
 radius = 80.09994
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pwllj"]
-radius = 200.0
+radius = 152.21039
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6fh2"]
 

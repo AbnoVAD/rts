@@ -60,11 +60,11 @@ var is_being_repaired:=false
 #--------------------------------------------------
 #Pawn scenes "non_moving"
 #--------------------------------------------------
-var pawn_black=preload("res://Units/pawns/pawn_black.tscn")
-var pawn_blue=preload("res://Units/pawns/pawn_blue.tscn")
-var pawn_red=preload("res://Units/pawns/pawn_red.tscn")
-var pawn_purple=preload("res://Units/pawns/pawn_purple.tscn")
-var pawn_yellow=preload("res://Units/pawns/pawn_yellow.tscn")
+var pawn_black=preload("res://Units/Pawns/pawn_black.tscn")
+var pawn_blue=preload("res://Units/Pawns/pawn_blue.tscn")
+var pawn_red=preload("res://Units/Pawns/pawn_red.tscn")
+var pawn_purple=preload("res://Units/Pawns/pawn_purple.tscn")
+var pawn_yellow=preload("res://Units/Pawns/pawn_yellow.tscn")
 
 var spawned_pawns:Array=[]
 
@@ -127,16 +127,16 @@ func _ready() -> void:
 #--------------------------------------------------
 #Process
 #--------------------------------------------------
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	if state==STATE_IDLE and spawned_pawns.size()<pawn_capacity and Global.can_spawn():
 		spawn_pawns()
 	if is_hit:
-		hit_flash_timer-=delta
+		hit_flash_timer-=_delta
 		if hit_flash_timer<=0:
 			is_hit=false
 			animation.modulate=Color.WHITE
 	if movement_colliding:
-		movement_collision_timer-=delta
+		movement_collision_timer-=_delta
 		if movement_collision_timer<=0:
 			movement_colliding=false
 			_update_movement_color()

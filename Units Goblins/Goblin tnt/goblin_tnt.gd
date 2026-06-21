@@ -48,6 +48,7 @@ const STOP_DISTANCE:float=130.0
 const CASTLE_STOP_DISTANCE:float=175.0
 const PREDICTION_TIME:float=0.3
 const STUCK_DETOUR_DISTANCE:float=72.0
+const PATH_REFRESH_INTERVAL:float=0.18
 
 #--------------------------------------------------
 #State machine
@@ -75,6 +76,7 @@ var tnt_cooldown:float=1.2
 var targets:Array[Node2D]=[]
 var current_target:Node2D=null
 var exploded:bool=false
+var registered_as_active:bool=false
 
 #--------------------------------------------------
 #Scenes
@@ -90,6 +92,7 @@ var stuck_threshold:float=0.8
 var last_position:Vector2=Vector2.ZERO
 var detour_timer:float=0.0
 var detour_target:Vector2=Vector2.ZERO
+var path_refresh_timer:float=0.0
 
 #--------------------------------------------------
 #Ready
@@ -97,11 +100,19 @@ var detour_target:Vector2=Vector2.ZERO
 func _ready() -> void:
 	z_index=4
 	scale=Vector2(0.8,0.8)
+	if not Global.register_goblin_unit():
+		queue_free()
+		return
+	registered_as_active=true
+	if not tree_exited.is_connected(_on_tree_exited):
+		tree_exited.connect(_on_tree_exited)
 	goblins.append(self)
 
-	nav.path_desired_distance=6.0
-	nav.target_desired_distance=6.0
+	nav.path_desired_distance=10.0
+	nav.target_desired_distance=16.0
 	nav.max_speed=SPEED
+	nav.radius=14.0
+	nav.neighbor_distance=48.0
 	predictcast.add_exception(self)
 	add_goblin_collision_exceptions()
 
@@ -114,6 +125,12 @@ func _exit_tree() -> void:
 	release_target()
 	rebalance_pack()
 	cleanup_reserved_targets()
+
+func _on_tree_exited() -> void:
+	if not registered_as_active:
+		return
+	registered_as_active=false
+	Global.unregister_goblin_unit()
 
 #--------------------------------------------------
 #Target / Pack logic
@@ -182,6 +199,7 @@ func assign_target(t:Node2D)->void:
 		reserved_targets[t]=arr
 		
 		current_target=t
+		path_refresh_timer=0.0
 		state=State.CHASE
 	else:
 		state=State.IDLE
@@ -237,6 +255,7 @@ func _physics_process(delta: float) -> void:
 
 	detour_timer=max(0.0,detour_timer-delta)
 	tnt_timer=max(0.0,tnt_timer-delta)
+	path_refresh_timer=max(0.0,path_refresh_timer-delta)
 
 	#knock back decay
 	if knockback_velocity.length()>1:
@@ -291,10 +310,12 @@ func chase_state()->void:
 		state=State.ATTACK
 		attack_timer.start(ATTACK_DELAY)
 
-	if detour_timer>0.0:
-		set_navigation_target(detour_target)
-	else:
-		set_navigation_target(current_target.global_position)
+	if path_refresh_timer<=0.0:
+		if detour_timer>0.0:
+			set_navigation_target(detour_target)
+		else:
+			set_navigation_target(get_target_navigation_point(current_target,get_stop_distance(current_target)))
+		path_refresh_timer=PATH_REFRESH_INTERVAL
 	var next_point:Vector2=nav.get_next_path_position()
 	var dir:Vector2=(next_point-global_position).normalized()
 	if dir==Vector2.ZERO:
@@ -531,11 +552,24 @@ func unstuck():
 	stuck_timer=0.0
 
 func set_navigation_target(pos:Vector2) -> void:
+	var travel_distance:=global_position.distance_to(pos)
+	NavigationRouteHelper.tune_navigation_agent(nav,travel_distance,10.0,28.0,16.0,36.0,14.0,18.0)
 	var map:RID=nav.get_navigation_map()
 	if map.is_valid():
 		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
 	else:
 		nav.target_position=pos
+
+func get_target_navigation_point(target_node:Node2D,preferred_distance:float) -> Vector2:
+	if target_node==null or not is_instance_valid(target_node):
+		return global_position
+	return NavigationRouteHelper.get_best_approach_point(nav,global_position,target_node.global_position,preferred_distance)
+
+func get_closest_nav_point(pos:Vector2) -> Vector2:
+	var map:RID=nav.get_navigation_map()
+	if map.is_valid():
+		return NavigationServer2D.map_get_closest_point(map,pos)
+	return pos
 
 func find_detour_target() -> Vector2:
 	var base_dir:Vector2=last_mov_dir
@@ -560,12 +594,6 @@ func find_detour_target() -> Vector2:
 			best_score=score
 			best=nav_point
 	return best
-
-func get_closest_nav_point(pos:Vector2) -> Vector2:
-	var map:RID=nav.get_navigation_map()
-	if map.is_valid():
-		return NavigationServer2D.map_get_closest_point(map,pos)
-	return pos
 
 func add_goblin_collision_exceptions() -> void:
 	for goblin in get_tree().get_nodes_in_group("goblin"):

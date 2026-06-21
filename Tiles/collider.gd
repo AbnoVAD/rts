@@ -1,4 +1,4 @@
 extends TileMapLayer
 
-func _process(delta: float) -> void:
+func _ready() -> void:
 	modulate.a=0

@@ -8,11 +8,15 @@ extends Panel
 @onready var label_wood: Label = $"Wood Icon/Label Wood"
 
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	if not Global.resources_changed.is_connected(_on_resources_changed):
+		Global.resources_changed.connect(_on_resources_changed)
 	update_labels()
 	check_resources()
-	if delta:
-		pass
+
+func _on_resources_changed() -> void:
+	update_labels()
+	check_resources()
 
 func update_labels():
 	label_gold.text=" : "+str(Global.gold)

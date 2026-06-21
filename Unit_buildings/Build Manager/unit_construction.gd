@@ -5,7 +5,6 @@ extends Panel
 @onready var buttons=[
 	$BuildHouse1Button,
 	$BuildHouse2Button,
-	$BuildHouse3Button,
 	$BuildTowerButton,
 	$BuildBarrackButton,
 	$BuildMonasteryButton,
@@ -16,7 +15,6 @@ extends Panel
 @onready var markers=[
 	$BuildHouse1Button/Marker2D, 
 	$BuildHouse2Button/Marker2D, 
-	$BuildHouse3Button/Marker2D, 
 	$BuildTowerButton/Marker2D, 
 	$BuildBarrackButton/Marker2D, 
 	$BuildMonasteryButton/Marker2D, 
@@ -27,7 +25,6 @@ extends Panel
 @onready var icons=[
 	$BuildHouse1Button/animation, 
 	$BuildHouse2Button/animation, 
-	$BuildHouse3Button/animation, 
 	$BuildTowerButton/animation, 
 	$BuildBarrackButton/animation, 
 	$BuildMonasteryButton/animation, 
@@ -38,7 +35,6 @@ extends Panel
 var cost=[
 	{"gold":20,"wood":30},
 	{"gold":25,"wood":35},
-	{"gold":30,"wood":40},
 	{"gold":40,"wood":60},
 	{"gold":35,"wood":500},
 	{"gold":45,"wood":70},

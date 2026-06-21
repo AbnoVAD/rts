@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bmakipj7tlun3"]
+
+[ext_resource type="Script" uid="uid://bfnurr2rnw4n1" path="res://Units Goblins/WizardBoss/wizard_spell.gd" id="1_script"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_syir3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spell"]
+radius = 12.0
+
+[node name="wizard_spell" type="Area2D" unique_id=150649200 groups=["spell"]]
+script = ExtResource("1_script")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=131883710]
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_syir3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1369142527]
+visible = false
+shape = SubResource("CircleShape2D_spell")
+metadata/_edit_lock_ = true
+
+[node name="impact_audio" type="AudioStreamPlayer" parent="." unique_id=1081707201]
+volume_db = -10.0
+pitch_scale = 1.1
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
 @onready var attackeffect: AnimatedSprite2D = $"."
+var tool_type:String="hand"
 
 
 func _ready() -> void:

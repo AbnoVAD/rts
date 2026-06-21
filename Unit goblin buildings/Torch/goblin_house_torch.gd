@@ -33,15 +33,16 @@ const FIRE_SCENE:PackedScene=preload("res://Units/effect fx/fire/fire.tscn")
 @export var max_life:int=180
 var life:int=0
 var destroyed:bool=false
+var registered_as_active:bool=false
 
 #-------------------------------------------
 #Spawn vars
 #-------------------------------------------
-@export var spawn_duration:float=20.0
-@export var wave_interval:float=2.5
+@export var spawn_duration:float=8.0
+@export var wave_interval:float=4.0
 @export var spawn_radius:float=24.0
 @export var base_wave_size:int=1
-@export var max_wave_size:int=2
+@export var max_wave_size:int=1
 
 var elapsed_time:float=0.0
 var spawning:bool=false
@@ -52,7 +53,15 @@ var spawning:bool=false
 func _ready() -> void:
 	z_index=4
 	life=max_life
+	if not Global.register_goblin_house():
+		queue_free()
+		return
+	registered_as_active=true
+	if not tree_exited.is_connected(_on_tree_exited):
+		tree_exited.connect(_on_tree_exited)
 	Global.connect("wave_started_signal",_on_wave_started)
+	if Global.wave_active:
+		_begin_wave_spawning()
 
 #-------------------------------------------
 #Damage handling
@@ -76,6 +85,11 @@ func _hit_flash()->void:
 #-------------------------------------------
 func _on_wave_started(_wave_number:int)->void:
 	if destroyed:return
+	_begin_wave_spawning()
+
+func _begin_wave_spawning() -> void:
+	if destroyed or spawning:
+		return
 	spawning=true
 	Global.wave_start=true
 	elapsed_time=0.0
@@ -141,7 +155,7 @@ func destroy_house():
 	
 	await get_tree().create_timer(0.5).timeout
 	
-	for i in range(5):
+	for i in range(3):
 		var fire=FIRE_SCENE.instantiate() as Node2D
 		fire.global_position=global_position+Vector2(
 			randf_range(-32,32),
@@ -153,6 +167,12 @@ func destroy_house():
 	await tween.finished
 	Global.Goblin_house+=1
 	queue_free()
+
+func _on_tree_exited() -> void:
+	if not registered_as_active:
+		return
+	registered_as_active=false
+	Global.unregister_goblin_house()
 
 func take_damage(damage:int):
 	if destroyed:

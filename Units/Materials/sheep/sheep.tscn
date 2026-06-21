@@ -180,13 +180,13 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ku86"]
-radius = 20.024984
+radius = 28.01785
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4rbhj"]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yab5p"]
-radius = 20.0
+radius = 28.01785
 
 [node name="sheep" type="CharacterBody2D" unique_id=238742770 groups=["block_building", "trees"]]
 script = ExtResource("1_yab5p")

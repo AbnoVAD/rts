@@ -6,6 +6,8 @@ extends Node
 var level=1
 var current_level_id: int=2
 var Goblin_house =0
+var active_goblin_houses:int=0
+var active_goblin_units:int=0
 
 #-------------------------------------
 #Player state / Resources
@@ -33,9 +35,11 @@ const LEVEL_SCENES:={
 # Global goblin wave system
 #-------------------------------------
 var wave_timer:float=0.0
-var wave_interval:float=10  #Time between waves
+var initial_wave_delay:float=30.0
+var wave_interval:float=10.0  #Time between waves
 var current_wave:int=0
-var max_waves:int=3 #Max number of waves
+var max_waves:int=5 #Max number of waves
+var boss_spawned:bool=false
 
 var wave_active:bool=false
 var wave_started:bool=false
@@ -48,11 +52,13 @@ signal wave_ended(wave_number:int)
 
 #game over logic
 var game_over:bool=false
+signal resources_changed
 
 #-------------------------------------
 #Ready func
 #-------------------------------------
 func _ready() -> void:
+	randomize()
 	Global.Goblin_house=0
 	load_colour()
 	clamp_resources()
@@ -82,25 +88,31 @@ func clamp_resources():
 
 func add_gold(amount:int):
 	gold=min(gold+amount,max_gold)
+	resources_changed.emit()
 func add_wood(amount:int):
 	wood=min(wood+amount,max_wood)
+	resources_changed.emit()
 func add_meat(amount:int):
 	meat=min(meat+amount,max_meat)
+	resources_changed.emit()
 
 func consume_gold(amount:int):
 	if gold<amount:
 		return false
 	gold-=amount
+	resources_changed.emit()
 	return true
 func consume_wood(amount:int):
 	if wood<amount:
 		return false
 	wood-=amount
+	resources_changed.emit()
 	return true
 func consume_meat(amount:int):
 	if meat<amount:
 		return false
 	meat-=amount
+	resources_changed.emit()
 	return true
 
 func can_spawn()->bool:
@@ -116,7 +128,7 @@ func _process(delta: float) -> void:
 	if current_wave>=max_waves:
 		return
 	wave_timer+=delta
-	if wave_timer>=wave_interval:
+	if wave_timer>=get_current_wave_delay():
 		wave_timer=0.0
 		start_wave()
 #-------------------------------------
@@ -124,6 +136,7 @@ func _process(delta: float) -> void:
 #-------------------------------------
 func start_wave():
 	current_wave+=1
+	wave_timer=0.0
 	wave_active=true
 	wave_started=true
 	wave_start=true
@@ -135,6 +148,9 @@ func register_spawner():
 	active_spawners+=1
 
 func unregister_spawner():
+	if active_spawners<=0:
+		active_spawners=0
+		return
 	active_spawners-=1
 	if active_spawners<=0:
 		end_wave()
@@ -156,6 +172,9 @@ func reset_game():
 	wave_started=false
 	wave_start=false
 	active_spawners=0
+	boss_spawned=false
+	active_goblin_houses=0
+	active_goblin_units=0
 	
 	game_over=false
 
@@ -200,6 +219,7 @@ func load_game():
 	wood=int(data["wood"])
 
 	clamp_resources()
+	resources_changed.emit()
 	if not LEVEL_SCENES.has(current_level_id):
 		push_error("invalid level id in save :%s"%current_level_id)
 		return
@@ -215,6 +235,50 @@ func init_level_state():
 	wave_started=false
 	wave_start=false
 	active_spawners=0
+	boss_spawned=false
 
 	Goblin_house=0
+	active_goblin_houses=0
+	active_goblin_units=0
 	game_over=false
+	resources_changed.emit()
+
+func get_current_wave_delay() -> float:
+	if current_wave<=0:
+		return initial_wave_delay
+	return wave_interval
+
+func get_wave_countdown() -> float:
+	return max(0.0,get_current_wave_delay()-wave_timer)
+
+func try_spawn_final_boss() -> bool:
+	if boss_spawned:
+		return false
+	if current_wave<max_waves:
+		return false
+	boss_spawned=true
+	return true
+
+func register_goblin_house() -> bool:
+	if active_goblin_houses>=3:
+		return false
+	active_goblin_houses+=1
+	return true
+
+func unregister_goblin_house() -> void:
+	if active_goblin_houses<=0:
+		active_goblin_houses=0
+		return
+	active_goblin_houses-=1
+
+func register_goblin_unit() -> bool:
+	if active_goblin_units>=12:
+		return false
+	active_goblin_units+=1
+	return true
+
+func unregister_goblin_unit() -> void:
+	if active_goblin_units<=0:
+		active_goblin_units=0
+		return
+	active_goblin_units-=1

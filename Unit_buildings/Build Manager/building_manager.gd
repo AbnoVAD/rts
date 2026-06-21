@@ -4,6 +4,8 @@ extends Node2D
 @export var ground_tilemap_group:="ground_tilemap"
 @export var building_parent:Node2D
 
+var cached_ground_tilemaps:Array[TileMapLayer]=[]
+
 var moving_building:StaticBody2D=null
 var moving_original_position:Vector2
 
@@ -11,7 +13,6 @@ var moving_original_position:Vector2
 @export var ghost_scenes={
 	"house1":preload("res://Unit_buildings/Build Manager/Ghosts/house1_ghost.tscn"),
 	"house2":preload("res://Unit_buildings/Build Manager/Ghosts/house2_ghost.tscn"),
-	"house3":preload("res://Unit_buildings/Build Manager/Ghosts/house3_ghost.tscn"),
 	"archery_tower":preload("res://Unit_buildings/Build Manager/Ghosts/archery_ghost.tscn"),
 	"barracks":preload("res://Unit_buildings/Build Manager/Ghosts/barrack_ghost.tscn"),
 	"tower":preload("res://Unit_buildings/Build Manager/Ghosts/tower_ghost.tscn"),
@@ -22,7 +23,6 @@ var moving_original_position:Vector2
 @export var building_scenes:={
 	"house1":preload("res://Unit_buildings/House1/house1.tscn"),
 	"house2":preload("res://Unit_buildings/House2/house2.tscn"),
-	"house3":preload("res://Unit_buildings/House3/house3.tscn"),
 	"archery_tower":preload("res://Unit_buildings/Archery/archery.tscn"),
 	"barracks":preload("res://Unit_buildings/Barrack/barrack.tscn"),
 	"tower":preload("res://Unit_buildings/Tower/tower.tscn"),
@@ -36,12 +36,12 @@ var can_place:=false
 func _ready() -> void:
 	if building_parent == null:
 		building_parent = _resolve_building_parent()
+	_refresh_ground_tilemaps()
 
 #Cost mapping
 var cost_map:={
 	"house1":{"wood":1,"gold":1},
 	"house2":{"wood":2,"gold":2},
-	"house3":{"wood":3,"gold":3},
 	"archery_tower":{"wood":10,"gold":6},
 	"barracks":{"wood":10,"gold":5},
 	"tower":{"wood":6,"gold":3},
@@ -172,15 +172,16 @@ func _cancel_building()->void:
 func _get_ground_under_mouse() -> TileMapLayer:
 	var mouse_pos:Vector2=get_global_mouse_position()
 
-	for Node in get_tree().get_nodes_in_group(ground_tilemap_group):
-		if not Node is TileMapLayer:
+	if cached_ground_tilemaps.is_empty():
+		_refresh_ground_tilemaps()
+
+	for ground in cached_ground_tilemaps:
+		if not is_instance_valid(ground):
 			continue
-
-		var local_pos:Vector2=Node.to_local(mouse_pos)
-		var cell:Vector2i=Node.local_to_map(local_pos)
-
-		if Node.get_cell_source_id(cell)!=-1:
-			return Node
+		var local_pos:Vector2=ground.to_local(mouse_pos)
+		var cell:Vector2i=ground.local_to_map(local_pos)
+		if ground.get_cell_source_id(cell)!=-1:
+			return ground
 	return null
 
 #------------------------------------------
@@ -244,6 +245,12 @@ func _resolve_building_parent() -> Node2D:
 
 	push_error("Building Manager: no suitable Node2D parent found; assign building_parent on BuildingManager or ensure it is under a Node2D scene")
 	return null
+
+func _refresh_ground_tilemaps() -> void:
+	cached_ground_tilemaps.clear()
+	for node in get_tree().get_nodes_in_group(ground_tilemap_group):
+		if node is TileMapLayer:
+			cached_ground_tilemaps.append(node)
 
 func _has_enough_resources(id:String)->bool:
 	var cost = cost_map.get(id)

@@ -379,4 +379,4 @@ func update_collision_logic():
 	if new_disabled!=collision_disabled:
 		collision_disabled=new_disabled
 		if shape:
-			shape.disabled=collision_disabled
+			shape.set_deferred("disabled", collision_disabled)

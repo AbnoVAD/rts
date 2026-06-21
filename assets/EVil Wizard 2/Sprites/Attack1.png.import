@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d026jcgurtpfp"
-path="res://.godot/imported/House3.png-c17432a6a0995294ba0625ddcd66dcf9.ctex"
+uid="uid://vol4bmlpmia6"
+path="res://.godot/imported/Attack1.png-3f4cdb47c69770559f24f37236a442d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House3.png"
-dest_files=["res://.godot/imported/House3.png-c17432a6a0995294ba0625ddcd66dcf9.ctex"]
+source_file="res://assets/EVil Wizard 2/Sprites/Attack1.png"
+dest_files=["res://.godot/imported/Attack1.png-3f4cdb47c69770559f24f37236a442d6.ctex"]
 
 [params]
 

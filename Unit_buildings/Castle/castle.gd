@@ -56,11 +56,11 @@ var archer_yellow=preload("res://Unit_buildings/Tower/Archer Tower/archer_yellow
 var spawned_archer1:Node2D=null
 var spawned_archer2:Node2D=null
 #Pawns
-var pawn_black=preload("res://Units/pawns/pawn_black.tscn")
-var pawn_blue=preload("res://Units/pawns/pawn_blue.tscn")
-var pawn_red=preload("res://Units/pawns/pawn_red.tscn")
-var pawn_purple=preload("res://Units/pawns/pawn_purple.tscn")
-var pawn_yellow=preload("res://Units/pawns/pawn_yellow.tscn")
+var pawn_black=preload("res://Units/Pawns/pawn_black.tscn")
+var pawn_blue=preload("res://Units/Pawns/pawn_blue.tscn")
+var pawn_red=preload("res://Units/Pawns/pawn_red.tscn")
+var pawn_purple=preload("res://Units/Pawns/pawn_purple.tscn")
+var pawn_yellow=preload("res://Units/Pawns/pawn_yellow.tscn")
 var spawned_pawn:Node2D=null
 
 #----------------------------------------------------------
@@ -98,6 +98,7 @@ func _ready() -> void:
 	Global.load_colour()
 	life=max_life
 	add_to_group("building")
+	add_to_group("castle")
 	input_pickable=true
 	shape.disabled=true
 
@@ -114,14 +115,14 @@ func _ready() -> void:
 #--------------------------------------------------
 #Process
 #--------------------------------------------------
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	if is_hit:
-		hit_flash_timer-=delta
+		hit_flash_timer-=_delta
 		if hit_flash_timer<=0:
 			is_hit=false
 			animation.modulate=Color.WHITE
 	if movement_colliding:
-		movement_collision_timer-=delta
+		movement_collision_timer-=_delta
 		if movement_collision_timer<=0:
 			movement_colliding=false
 			_update_movement_color()
@@ -455,3 +456,24 @@ func spawn_pawn() -> void:
 	spawned_pawn.z_index=4
 	spawned_pawn.scale=Vector2(0.7,0.7)
 	Global.consume_meat(1)
+
+func deposit_worker_resources(payload:Dictionary) -> bool:
+	if payload.is_empty():
+		return false
+
+	var wood:=int(payload.get("wood",0))
+	var gold:=int(payload.get("gold",0))
+	var meat:=int(payload.get("meat",0))
+
+	if wood>0:
+		Global.add_wood(wood)
+	if gold>0:
+		Global.add_gold(gold)
+	if meat>0:
+		Global.add_meat(meat)
+	return true
+
+func get_worker_deposit_position() -> Vector2:
+	if is_instance_valid(marker_3):
+		return marker_3.global_position
+	return global_position

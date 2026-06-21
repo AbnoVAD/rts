@@ -13,6 +13,7 @@ var collected:=false
 
 func _ready() -> void:
 	z_index=5
+	add_to_group("gatherable_resource")
 	animation.play('spawn')
 	await animation.animation_finished
 	animation.play('idle')
@@ -20,14 +21,16 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if collected:
 		return
-	if body.is_in_group("pawn"):
+	if body.is_in_group("pawn") and body.has_method("can_collect_resource") and body.can_collect_resource(resource_type):
 		collected=true
-		collect()
+		if body.has_method("pickup_resource"):
+			body.pickup_resource(self)
+		else:
+			collect()
 
 func collect():
 	if not collect_audio.playing:
 		collect_audio.play()
-	Global.add_meat(2)
 	collision_shape_2d.disabled=true
 	
 	var tween:=create_tween()

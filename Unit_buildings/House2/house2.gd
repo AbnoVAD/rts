@@ -58,15 +58,15 @@ var hit_flash_time:=0.15
 var is_being_repaired:=false
 
 #--------------------------------------------------
-#Pawn scenes "non_moving"
+#Lancer scenes "non_moving"
 #--------------------------------------------------
-var pawn_black=preload("res://Units/pawns/pawn_black.tscn")
-var pawn_blue=preload("res://Units/pawns/pawn_blue.tscn")
-var pawn_red=preload("res://Units/pawns/pawn_red.tscn")
-var pawn_purple=preload("res://Units/pawns/pawn_purple.tscn")
-var pawn_yellow=preload("res://Units/pawns/pawn_yellow.tscn")
+var lancer_black=preload("res://Units/Lancer/lancer_black.tscn")
+var lancer_blue=preload("res://Units/Lancer/lancer_blue.tscn")
+var lancer_red=preload("res://Units/Lancer/lancer_red.tscn")
+var lancer_purple=preload("res://Units/Lancer/lancer_purple.tscn")
+var lancer_yellow=preload("res://Units/Lancer/lancer_yellow.tscn")
 
-var spawned_pawns:Array=[]
+var spawned_lancers:Array=[]
 
 #--------------------------------------------------
 #Timers and tweens
@@ -128,8 +128,8 @@ func _ready() -> void:
 #Process
 #--------------------------------------------------
 func _process(delta:float) -> void:
-	if state==STATE_IDLE and spawned_pawns.size()<pawn_capacity and Global.can_spawn():
-		spawn_pawns()
+	if state==STATE_IDLE and spawned_lancers.size()<pawn_capacity and Global.can_spawn():
+		spawn_lancers()
 	if is_hit:
 		hit_flash_timer-=delta
 		if hit_flash_timer<=0:
@@ -213,7 +213,7 @@ func _reset_after_movement():
 	animation.modulate=Color.WHITE
 
 	if state==STATE_IDLE:
-		spawn_pawns()
+		spawn_lancers()
 
 func _cancel_movement()->void:
 	var return_tween=create_tween()
@@ -361,8 +361,8 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring=false
 	if animation:
 		animation.modulate=Color.WHITE
-	spawned_pawns.clear()
-	spawn_pawns()
+	spawned_lancers.clear()
+	spawn_lancers()
 
 func enter_destroyed_state() -> void:
 	update_collision_logic()
@@ -497,15 +497,15 @@ func show_repair_pulse() -> void:
 #--------------------------------------------------
 #Death handler
 #--------------------------------------------------
-func _on_pawn_died(pawn)->void:
-	if spawned_pawns.has(pawn):
-		spawned_pawns.erase(pawn)
+func _on_lancer_died(lancer)->void:
+	if spawned_lancers.has(lancer):
+		spawned_lancers.erase(lancer)
 
 #--------------------------------------------------
-#Spawn pawns
+#Spawn lancers
 #--------------------------------------------------
-func spawn_pawns() -> void:
-	if spawned_pawns.size()>=pawn_capacity:
+func spawn_lancers() -> void:
+	if spawned_lancers.size()>=pawn_capacity:
 		return
 
 	# meat availability (kept consistent with other buildings)
@@ -513,30 +513,30 @@ func spawn_pawns() -> void:
 	if meat_available<=0:
 		return
 
-	# count max pawn capacity
-	var remaining_capacity=pawn_capacity-spawned_pawns.size()
+	# count max lancer capacity
+	var remaining_capacity=pawn_capacity-spawned_lancers.size()
 	var spawn_count=min(remaining_capacity,meat_available)
 	if spawn_count<=0:
 		return
 
-	var pawn_scene:PackedScene
+	var lancer_scene:PackedScene
 	match Global.choosed_colour.to_lower():
-		"black":pawn_scene=pawn_black
-		"blue":pawn_scene=pawn_blue
-		"red":pawn_scene=pawn_red
-		"purple":pawn_scene=pawn_purple
-		"yellow":pawn_scene=pawn_yellow
+		"black":lancer_scene=lancer_black
+		"blue":lancer_scene=lancer_blue
+		"red":lancer_scene=lancer_red
+		"purple":lancer_scene=lancer_purple
+		"yellow":lancer_scene=lancer_yellow
 		_: return
 
-	# House1 scene only has Marker1. Use it for all spawns.
-	_spawn_pawns_around_marker(marker_1.global_position,spawn_count,pawn_scene)
+	# House2 scene only has Marker1. Use it for all spawns.
+	_spawn_lancers_around_marker(marker_1.global_position,spawn_count,lancer_scene)
 
-func _spawn_pawns_around_marker(center:Vector2,count:int,pawn_scene:PackedScene) -> void:
+func _spawn_lancers_around_marker(center:Vector2,count:int,lancer_scene:PackedScene) -> void:
 	for i in count:
-		var new_pawn=pawn_scene.instantiate()
-		get_parent().add_child(new_pawn)
-		new_pawn.z_index=4
-		new_pawn.scale=Vector2(0.7,0.7)
+		var new_lancer=lancer_scene.instantiate()
+		get_parent().add_child(new_lancer)
+		new_lancer.z_index=4
+		new_lancer.scale=Vector2(0.7,0.7)
 
 		var pos:Vector2=center
 		var tries=0
@@ -545,7 +545,7 @@ func _spawn_pawns_around_marker(center:Vector2,count:int,pawn_scene:PackedScene)
 			var radius=randf()*spawn_radius
 			var candidate=center+Vector2(cos(angle),sin(angle))*radius
 			var overlapping=false
-			for other in spawned_pawns:
+			for other in spawned_lancers:
 				if candidate.distance_to(other.global_position)<16.0:
 					overlapping=true
 					break
@@ -553,11 +553,11 @@ func _spawn_pawns_around_marker(center:Vector2,count:int,pawn_scene:PackedScene)
 			if not overlapping:
 				pos=candidate
 				break
-		new_pawn.global_position=pos
-		spawned_pawns.append(new_pawn)
+		new_lancer.global_position=pos
+		spawned_lancers.append(new_lancer)
 
 		# death signal connected
-		new_pawn.died.connect(_on_pawn_died)
+		new_lancer.died.connect(_on_lancer_died)
 
 		# consume meat
 		Global.consume_meat(1)

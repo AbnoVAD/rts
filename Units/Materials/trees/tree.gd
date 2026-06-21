@@ -13,6 +13,7 @@ enum TreeState{
 var state:TreeState=TreeState.IDLE
 const DEFAULT_LIFE:=4
 @export var life=DEFAULT_LIFE
+var reserved_by:Node2D=null
 
 #----------------------------------------
 #Nodes
@@ -30,6 +31,7 @@ const CHOP_TIME:=1.0
 const REGROW_TIME:=10.0
 const GROW_TIME:=1.5
 const WOOD_SCENE:=preload("res://Units/Materials/wood/wood.tscn")
+@export var source_type:="wood"
 
 #----------------------------------------
 #Ready
@@ -40,6 +42,7 @@ func _ready() -> void:
 	scale=Vector2(1.5,1.5)
 	z_index=7
 	add_to_group("trees")
+	add_to_group("resource_source")
 	randomize()
 	set_state(TreeState.IDLE)
 
@@ -47,14 +50,58 @@ func _ready() -> void:
 #Pawn interaction
 #----------------------------------------
 func _on_tree_trunk_area_entered(area: Area2D) -> void:
-	if area.is_in_group("attackeffect") and Global.pawn_tool=="axe":
-		try_chop()
+	if area.is_in_group("attackeffect"):
+		var effect:=area.get_parent()
+		if effect==null or str(effect.get("tool_type"))!="axe":
+			return
 		life-=1
 		red_flash()
+		if life<=0:
+			try_chop()
+			release_reservation()
 		area.queue_free()
 		cut_audio.play()
 		await get_tree().create_timer(1.95).timeout
 		cut_audio.stop()
+
+func is_available_for_gathering() -> bool:
+	return state==TreeState.IDLE
+
+func get_worker_target_position() -> Vector2:
+	if is_instance_valid(tree_trunk):
+		return tree_trunk.global_position
+	return global_position
+
+func can_be_reserved_by(worker:Node2D) -> bool:
+	return is_instance_valid(worker) and is_available_for_gathering() and (reserved_by==null or reserved_by==worker)
+
+func reserve_for(worker:Node2D) -> bool:
+	if not can_be_reserved_by(worker):
+		return false
+	reserved_by=worker
+	return true
+
+func release_reservation(worker:Node2D=null) -> void:
+	if worker==null or reserved_by==worker or not is_instance_valid(reserved_by):
+		reserved_by=null
+
+func is_reserved_by(worker:Node2D) -> bool:
+	return reserved_by!=null and reserved_by==worker
+
+func perform_auto_work(tool_name:String, worker:Node2D) -> bool:
+	if tool_name!="axe":
+		return false
+	if not is_available_for_gathering():
+		return false
+	if reserved_by!=null and reserved_by!=worker:
+		return false
+
+	life-=1
+	red_flash()
+	if life<=0:
+		try_chop()
+		release_reservation(worker)
+	return true
 
 func set_state(new_state:TreeState)->void:
 	state=new_state
@@ -81,12 +128,13 @@ func set_state(new_state:TreeState)->void:
 			chopped.set_deferred("disabled", true)
 
 func try_chop()->void:
-	if life<0:
+	if life<=0:
 		if state!=TreeState.IDLE:
 			return
 		
 		
 		set_state(TreeState.CHOPPING)
+		release_reservation()
 		await get_tree().create_timer(CHOP_TIME).timeout
 		set_state(TreeState.CHOPPED)
 		

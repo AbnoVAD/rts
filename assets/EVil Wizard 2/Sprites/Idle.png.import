@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by1mav1kb4lue"
-path="res://.godot/imported/House3.png-e95246c58e619b09d73fc72ce57494b8.ctex"
+uid="uid://c702s2pxf0ley"
+path="res://.godot/imported/Idle.png-a7b725dafb6587ef807deb929669dc5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House3.png"
-dest_files=["res://.godot/imported/House3.png-e95246c58e619b09d73fc72ce57494b8.ctex"]
+source_file="res://assets/EVil Wizard 2/Sprites/Idle.png"
+dest_files=["res://.godot/imported/Idle.png-a7b725dafb6587ef807deb929669dc5a.ctex"]
 
 [params]
 

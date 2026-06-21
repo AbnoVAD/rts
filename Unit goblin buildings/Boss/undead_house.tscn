@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://bpqoxuefdknpf"]
+
+[ext_resource type="Script" uid="uid://dfm3kv624p2f6" path="res://Unit goblin buildings/Boss/undead_house.gd" id="1_3scx8"]
+[ext_resource type="Texture2D" uid="uid://do6hfvwt1172h" path="res://assets/undead_house.png" id="2_ynmg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3tj3"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(0, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yuei"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(96, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m11f"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(192, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yep6l"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(288, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xs44"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(384, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paaid"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(480, 0, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl465"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(0, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygx16"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(96, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5sdm"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(192, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ua8q1"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(288, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs611"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(384, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tuur"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(480, 112, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltfuu"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(0, 224, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t31cn"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(96, 224, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msx4o"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(192, 224, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j48l3"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(288, 224, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr5lr"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(384, 224, 96, 112)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h0e0"]
+atlas = ExtResource("2_ynmg1")
+region = Rect2(480, 224, 96, 112)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3xd07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3tj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yuei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4m11f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yep6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xs44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paaid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl465")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygx16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5sdm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ua8q1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs611")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tuur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltfuu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t31cn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msx4o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j48l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr5lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2h0e0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(96, 112)
+
+[node name="Undead House" type="StaticBody2D" unique_id=1194012063 groups=["block_building", "goblinbuildings"]]
+script = ExtResource("1_3scx8")
+
+[node name="animation" type="AnimatedSprite2D" parent="." unique_id=1242900264]
+sprite_frames = SubResource("SpriteFrames_3xd07")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1081127087]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Marker1" type="Marker2D" parent="." unique_id=812471565]
+position = Vector2(0, 96)
+
+[node name="Marker2" type="Marker2D" parent="." unique_id=318695222]
+position = Vector2(104, 0)
+
+[node name="Marker3" type="Marker2D" parent="." unique_id=63143689]
+position = Vector2(-104, 0)

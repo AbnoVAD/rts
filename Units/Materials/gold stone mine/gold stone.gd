@@ -24,6 +24,8 @@ const GOLD_Z_INDEX:=6
 @export var Mine_level:=1
 @export var min_gold=2
 @export var max_gold=4
+@export var source_type:="gold"
+var reserved_by:Node2D=null
 
 var max_life:=5
 var current_life:=max_life
@@ -39,6 +41,7 @@ var hit_cooldown_timer:Timer
 func _ready() -> void:
 	z_index=4
 	add_to_group("block_building")
+	add_to_group("resource_source")
 	setup_restore_timer()
 	setup_hit_cooldown()
 	health_bar.max_value=max_life
@@ -65,8 +68,46 @@ func setup_hit_cooldown()->void:
 func _on_mine_zone_area_entered(area: Area2D) -> void:
 	if not can_take_damage:
 		return
-	if area.is_in_group("attackeffect") and Global.pawn_tool=="pickaxe":
+	if area.is_in_group("attackeffect"):
+		var effect:=area.get_parent()
+		if effect==null or str(effect.get("tool_type"))!="pickaxe":
+			return
 		take_damage()
+
+func is_available_for_gathering() -> bool:
+	return current_life>0 and not is_regenerating
+
+func get_worker_target_position() -> Vector2:
+	if is_instance_valid(mine_zone):
+		return mine_zone.global_position
+	return global_position
+
+func can_be_reserved_by(worker:Node2D) -> bool:
+	return is_instance_valid(worker) and is_available_for_gathering() and (reserved_by==null or reserved_by==worker)
+
+func reserve_for(worker:Node2D) -> bool:
+	if not can_be_reserved_by(worker):
+		return false
+	reserved_by=worker
+	return true
+
+func release_reservation(worker:Node2D=null) -> void:
+	if worker==null or reserved_by==worker or not is_instance_valid(reserved_by):
+		reserved_by=null
+
+func is_reserved_by(worker:Node2D) -> bool:
+	return reserved_by!=null and reserved_by==worker
+
+func perform_auto_work(tool_name:String, worker:Node2D) -> bool:
+	if tool_name!="pickaxe":
+		return false
+	if not is_available_for_gathering():
+		return false
+	if reserved_by!=null and reserved_by!=worker:
+		return false
+
+	take_damage()
+	return true
 
 #------------------------------------------------
 #Damage system
@@ -94,6 +135,7 @@ func play_hit_feedback()->void:
 
 func handle_depletion():
 	is_regenerating=true
+	release_reservation()
 	health_bar.visible=true
 	
 	collision_shape_2d.disabled=true
@@ -113,8 +155,8 @@ func spawn_gold()->void:
 	for i in range(gold_count):
 		var gold=GOLD_SCENE.instantiate()
 		var offset:=Vector2(
-			randf_range(-35,35),
-			randf_range(75,105)
+			randf_range(-28,28),
+			randf_range(-24,24)
 		)
 		var spawn_position:=marker_2d.global_position+offset
 		var spawn_rotation:=randf_range(-PI,PI)

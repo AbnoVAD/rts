@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b0v4ld0fbhc0w"]
 
-[ext_resource type="Script" uid="uid://bsuf3y44ma6oa" path="res://Units/pawns/pawn.gd" id="1_sgt12"]
+[ext_resource type="Script" uid="uid://bsuf3y44ma6oa" path="res://Units/Pawns/pawn.gd" id="1_sgt12"]
 [ext_resource type="Texture2D" uid="uid://dhrpnf8bpf2ir" path="res://assets/Tiny Swords (Free Pack)/Units/Purple Units/Pawn/Pawn_Idle.png" id="2_sgt12"]
 [ext_resource type="Texture2D" uid="uid://b6xu8siugdvjf" path="res://assets/Tiny Swords (Free Pack)/Units/Purple Units/Pawn/Pawn_Idle Axe.png" id="3_ikipk"]
 [ext_resource type="Texture2D" uid="uid://c6r2h0pd7u0pa" path="res://assets/Tiny Swords (Free Pack)/Units/Purple Units/Pawn/Pawn_Idle Hammer.png" id="4_q8wx8"]

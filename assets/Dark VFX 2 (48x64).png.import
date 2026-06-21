@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxjdldbd35yo4"
-path="res://.godot/imported/House3.png-59127424dff26dda7460d706d40c6619.ctex"
+uid="uid://br6qdpxmqbg8p"
+path="res://.godot/imported/Dark VFX 2 (48x64).png-a8dfb26a1f0da852f9fb64bc18db17c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House3.png"
-dest_files=["res://.godot/imported/House3.png-59127424dff26dda7460d706d40c6619.ctex"]
+source_file="res://assets/Dark VFX 2 (48x64).png"
+dest_files=["res://.godot/imported/Dark VFX 2 (48x64).png-a8dfb26a1f0da852f9fb64bc18db17c6.ctex"]
 
 [params]
 

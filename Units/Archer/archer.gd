@@ -53,8 +53,8 @@ var avoiding:=false
 var avoid_dir:=Vector2.ZERO
 const AVOID_FORCE:=1.4
 
-const ALLY_PUSH_RADIUS:=20.0
-const ALLY_PUSH_FORCE:=950.0
+const ALLY_PUSH_RADIUS:=18.0
+const ALLY_PUSH_FORCE:=600.0
 const STUCK_PULSE_FORCE:=180.0
 
 #-------------------------------------------
@@ -126,11 +126,11 @@ func _ready() -> void:
 	last_position=global_position
 
 #avoidance prediction
-	nav.path_desired_distance=6.0
-	nav.target_desired_distance=stop_distance
+	nav.path_desired_distance=10.0
+	nav.target_desired_distance=stop_distance+6.0
 	nav.avoidance_enabled=true
-	nav.radius=10
-	nav.neighbor_distance=40
+	nav.radius=14
+	nav.neighbor_distance=48
 	nav.max_neighbors=20
 	
 #attack timer logic
@@ -271,6 +271,8 @@ func state_run(delta:float):
 				change_state(State.IDLE)
 				start_attack()
 				return
+	if is_instance_valid(target):
+		set_navigation_target(get_target_navigation_point(target,max(stop_distance,ATTACK_RANGE)))
 	if nav.distance_to_target()<=stop_distance:
 		velocity=Vector2.ZERO
 		manual_mode=false
@@ -378,11 +380,24 @@ func resume_navigation():
 	nav.avoidance_enabled=true
 
 func set_navigation_target(pos:Vector2) -> void:
-	var map:=nav.get_navigation_map()
+	var travel_distance:=global_position.distance_to(pos)
+	NavigationRouteHelper.tune_navigation_agent(nav,travel_distance,10.0,28.0,16.0,36.0,14.0,18.0)
+	var map:RID=nav.get_navigation_map()
 	if map.is_valid():
 		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
 	else:
 		nav.target_position=pos
+
+func get_target_navigation_point(target_node:Node2D,preferred_distance:float) -> Vector2:
+	if target_node==null or not is_instance_valid(target_node):
+		return global_position
+	return NavigationRouteHelper.get_best_approach_point(nav,global_position,target_node.global_position,preferred_distance)
+
+func get_closest_nav_point(pos:Vector2) -> Vector2:
+	var map:RID=nav.get_navigation_map()
+	if map.is_valid():
+		return NavigationServer2D.map_get_closest_point(map,pos)
+	return pos
 
 func get_formation_target(pos:Vector2) -> Vector2:
 	var selected_units:=get_selected_formation_units()
@@ -396,15 +411,15 @@ func get_formation_target(pos:Vector2) -> Vector2:
 	var rows:int=int(ceil(float(count)/float(columns)))
 	var col:int=index % columns
 	var row:int=index / columns
-	var spacing:float=34.0
-	var local_offset:=Vector2(
-		(float(col)-(float(columns)-1.0)*0.5)*spacing,
-		(float(row)-(float(rows)-1.0)*0.5)*spacing
-	)
 	var center:=Vector2.ZERO
 	for unit in selected_units:
 		center+=unit.global_position
 	center/=count
+	var base_spacing:float=lerp(34.0,12.0,clampf(center.distance_to(pos)/700.0,0.0,1.0))
+	var local_offset:=Vector2(
+		(float(col)-(float(columns)-1.0)*0.5)*base_spacing,
+		(float(row)-(float(rows)-1.0)*0.5)*base_spacing
+	)
 	var forward:=(pos-center).normalized()
 	if forward==Vector2.ZERO:
 		forward=Vector2.RIGHT
@@ -423,15 +438,15 @@ func get_selected_formation_units() -> Array:
 func _on_nav_velocity(v:Vector2):
 	if state!=State.RUN:
 		return
-	var final_velocity:=v
-#avoidance
+	var final_velocity:=v+apply_ally_separation()
 	if avoid_cast.is_colliding():
 		var normal:=avoid_cast.get_collision_normal(0)
-		var side:=Vector2(-normal.y,normal.x)
-		final_velocity+=side*speed*AVOID_FORCE
-
-#separation
-	final_velocity+=apply_ally_separation()
+		var redirected:=final_velocity.slide(normal)
+		if redirected.length()>0.1:
+			final_velocity=redirected
+		else:
+			var tangent:=Vector2(-normal.y,normal.x)
+			final_velocity=tangent*speed*0.75
 	velocity=final_velocity.limit_length(speed*1.2)
 	move_and_slide()
 
@@ -563,10 +578,20 @@ func resolve_stuck():
 	var path_dir:=(nav.get_next_path_position()-global_position).normalized()
 	if path_dir==Vector2.ZERO:
 		path_dir=(nav.target_position-global_position).normalized()
-	var side:=Vector2(-path_dir.y,path_dir.x)
-	velocity=(path_dir+side*0.35).normalized()*STUCK_PULSE_FORCE
+	var steering:=path_dir
+	if avoid_cast.is_colliding():
+		var normal:=avoid_cast.get_collision_normal(0)
+		steering=steering.slide(normal)
+		if steering.length()<=0.1:
+			steering=Vector2(-normal.y,normal.x)
+	if steering.length()<=0.1:
+		steering=path_dir
+	velocity=steering.normalized()*STUCK_PULSE_FORCE
 	move_and_slide()
-	set_navigation_target(nav.target_position)
+	if is_instance_valid(target):
+		set_navigation_target(get_target_navigation_point(target,max(stop_distance,ATTACK_RANGE)))
+	else:
+		set_navigation_target(nav.target_position)
 
 var movement_priority:=false
 func _on_detector_zone_area_entered(area: Area2D) -> void:
@@ -578,7 +603,7 @@ func _on_detector_zone_area_entered(area: Area2D) -> void:
 	if body.is_in_group("goblin") or body.is_in_group("goblinbuildings"):
 		target=body
 		manual_mode=false
-		set_navigation_target(body.global_position)
+		set_navigation_target(get_target_navigation_point(body,max(stop_distance,ATTACK_RANGE)))
 		change_state(State.RUN)
 
 func _on_detector_zone_body_entered(body: Node2D) -> void:
@@ -589,7 +614,7 @@ func _on_detector_zone_body_entered(body: Node2D) -> void:
 		manual_mode=false
 
 #start chasing the body
-		set_navigation_target(body.global_position)
+		set_navigation_target(get_target_navigation_point(body,max(stop_distance,ATTACK_RANGE)))
 		change_state(State.RUN)
 
 #------------------------------------------
