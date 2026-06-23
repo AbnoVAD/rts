@@ -977,6 +977,7 @@ tile_set = SubResource("TileSet_2u3nc")
 script = ExtResource("18_140bu")
 
 [node name="Decors" type="Node2D" parent="." unique_id=1213946829]
+visible = false
 
 [node name="trees" type="Node2D" parent="Decors" unique_id=511236668]
 z_index = 7
@@ -1014,19 +1015,17 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="music" type="Button" parent="UI/Root" unique_id=185437512]
 layout_mode = 1
-offset_left = 16.0
-offset_top = 24.0
-offset_right = 120.0
-offset_bottom = 84.0
+offset_left = 1600.0
+offset_top = 72.0
+offset_right = 1660.0
+offset_bottom = 127.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
@@ -1039,10 +1038,11 @@ flat = true
 
 [node name="quit" type="Button" parent="UI/Root" unique_id=958708180]
 layout_mode = 1
-offset_left = 1740.0
-offset_top = 98.0
-offset_right = 1844.0
-offset_bottom = 158.0
+offset_left = 1728.0
+offset_top = 88.0
+offset_right = 1787.9999
+offset_bottom = 152.0
+scale = Vector2(1.2, 1.2)
 theme_override_colors/font_color = Color(0.92549, 0.513726, 0.513726, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 48
@@ -1054,30 +1054,31 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
 text = "X"
 flat = true
 
-[node name="TitleRibbon" type="Panel" parent="UI/Root" unique_id=1700275441]
+[node name="Title" type="Panel" parent="UI/Root" unique_id=1700275441]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.507
-anchor_top = 0.093
-anchor_right = 0.507
-anchor_bottom = 0.093
-offset_left = -296.06403
-offset_top = -40.168
-offset_right = 287.93597
-offset_bottom = 39.832
+anchor_left = 0.5
+anchor_top = 0.273
+anchor_right = 0.5
+anchor_bottom = 0.273
+offset_left = -282.0
+offset_top = -39.904007
+offset_right = 302.0
+offset_bottom = 40.095993
 theme_override_styles/panel = SubResource("StyleBoxFlat_title_ribbon")
 
-[node name="select" type="Label" parent="UI/Root/TitleRibbon" unique_id=162740307]
+[node name="select" type="Label" parent="UI/Root/Title" unique_id=162740307]
 layout_mode = 0
 offset_left = 4.0
-offset_top = 6.0
+offset_top = 5.9039917
 offset_right = 572.0
-offset_bottom = 74.0
+offset_bottom = 73.90399
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 56
-text = "SELECT"
+text = "Select"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="MenuPanel" type="Panel" parent="UI/Root" unique_id=401193004]
 z_index = 1
@@ -1088,19 +1089,19 @@ anchor_top = 0.5
 anchor_right = 0.514
 anchor_bottom = 0.5
 offset_left = -280.128
-offset_top = -252.0
+offset_top = -184.0
 offset_right = 267.872
-offset_bottom = 356.0
+offset_bottom = 424.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_menu_panel")
 
 [node name="start" type="Button" parent="UI/Root/MenuPanel" unique_id=1107501467]
 z_index = 1
 layout_mode = 0
 offset_left = 120.0
-offset_top = 72.0
+offset_top = 37.0
 offset_right = 420.0
-offset_bottom = 154.0
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 44
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
@@ -1110,14 +1111,15 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pres
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
 text = "Start"
 flat = true
+metadata/_edit_lock_ = true
 
 [node name="practice" type="Button" parent="UI/Root/MenuPanel" unique_id=910172341]
 layout_mode = 0
 offset_left = 124.0
-offset_top = 184.0
+offset_top = 150.0
 offset_right = 424.0
-offset_bottom = 266.0
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+offset_bottom = 232.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
@@ -1127,14 +1129,15 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pres
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
 text = "Practice"
 flat = true
+metadata/_edit_lock_ = true
 
 [node name="load" type="Button" parent="UI/Root/MenuPanel" unique_id=483072866]
 layout_mode = 0
 offset_left = 124.0
-offset_top = 296.0
+offset_top = 270.0
 offset_right = 424.0
-offset_bottom = 378.0
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+offset_bottom = 352.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
@@ -1144,14 +1147,15 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pres
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
 text = "Load"
 flat = true
+metadata/_edit_lock_ = true
 
 [node name="info" type="Button" parent="UI/Root/MenuPanel" unique_id=732193541]
 layout_mode = 0
 offset_left = 124.0
-offset_top = 408.0
+offset_top = 382.0
 offset_right = 424.0
-offset_bottom = 490.0
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+offset_bottom = 464.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
@@ -1161,14 +1165,15 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pres
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
 text = "Info"
 flat = true
+metadata/_edit_lock_ = true
 
 [node name="setting" type="Button" parent="UI/Root/MenuPanel" unique_id=1320475859]
 layout_mode = 0
 offset_left = 124.0
-offset_top = 520.0
+offset_top = 494.0
 offset_right = 424.0
-offset_bottom = 602.0
-theme_override_colors/font_color = Color(0.247059, 0.231373, 0.196078, 1)
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("25_d7ulf")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_menu_button")
@@ -1178,6 +1183,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_menu_button_pres
 theme_override_styles/focus = SubResource("StyleBoxFlat_menu_button_hover")
 text = "Settings"
 flat = true
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="UI/Root/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="UI/Root/MenuPanel/start" to="." method="_on_start_pressed"]

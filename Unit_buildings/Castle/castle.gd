@@ -372,8 +372,6 @@ func enter_destroyed_state() -> void:
 		spawned_archer1.get_node("CollisionShape2D").disabled=true
 	if spawned_archer2 and spawned_archer2.has_node("CollisionShape2D"):
 		spawned_archer2.get_node("CollisionShape2D").disabled=true
-	#if spawned_pawn and spawned_pawn.has_node("CollisionShape2D"):
-		#spawned_pawn.get_node("CollisionShape2D").disabled=true
 
 #Kill the archers on top of the castle when it's destroyed
 	if spawned_archer1:

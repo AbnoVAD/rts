@@ -420,8 +420,8 @@ func _deposit_if_needed() -> bool:
 		returning_to_castle=false
 		return false
 
-	var castle:=get_tree().get_first_node_in_group("castle")
-	if castle==null or not is_instance_valid(castle):
+	var deposit_target:=_find_deposit_target()
+	if deposit_target==null:
 		if GlobalPlayer.castle_position!=Vector2.ZERO:
 			_move_toward(GlobalPlayer.castle_position, castle_deposit_distance)
 			return true
@@ -429,23 +429,17 @@ func _deposit_if_needed() -> bool:
 		Current_state=state.IDLE
 		return false
 
-	var castle_node:=castle as Node2D
-	if castle_node==null:
-		velocity=Vector2.ZERO
-		Current_state=state.IDLE
-		return false
-
-	var deposit_pos:=castle_node.global_position
-	if castle_node.has_method("get_worker_deposit_position"):
-		deposit_pos=castle_node.get_worker_deposit_position()
+	var deposit_pos:=deposit_target.global_position
+	if deposit_target.has_method("get_worker_deposit_position"):
+		deposit_pos=deposit_target.get_worker_deposit_position()
 
 	var distance:=global_position.distance_to(deposit_pos)
 	if distance>castle_deposit_distance:
 		_move_toward(deposit_pos, castle_deposit_distance)
 		return true
 
-	if castle_node.has_method("deposit_worker_resources"):
-		var deposited:bool=castle_node.deposit_worker_resources(collected)
+	if deposit_target.has_method("deposit_worker_resources"):
+		var deposited:bool=deposit_target.deposit_worker_resources(collected)
 		if deposited:
 			for key in collected.keys():
 				collected[key]=0
@@ -465,6 +459,33 @@ func _deposit_if_needed() -> bool:
 	returning_to_castle=false
 	_release_worker_target()
 	return true
+
+func _find_deposit_target() -> Node2D:
+	var best_target:Node2D=null
+	var best_distance:=INF
+
+	for group_name in ["castle","warehouse"]:
+		for node in get_tree().get_nodes_in_group(group_name):
+			if not (node is Node2D):
+				continue
+			if not is_instance_valid(node):
+				continue
+			if node.has_method("can_accept_deposit") and not node.can_accept_deposit():
+				continue
+			if not node.has_method("deposit_worker_resources"):
+				continue
+
+			var candidate:=node as Node2D
+			var deposit_pos:=candidate.global_position
+			if candidate.has_method("get_worker_deposit_position"):
+				deposit_pos=candidate.get_worker_deposit_position()
+
+			var distance:=global_position.distance_to(deposit_pos)
+			if distance<best_distance:
+				best_distance=distance
+				best_target=candidate
+
+	return best_target
 
 func _get_total_carry_amount() -> int:
 	var total:=0

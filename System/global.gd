@@ -10,7 +10,7 @@ var active_goblin_houses:int=0
 var active_goblin_units:int=0
 
 #-------------------------------------
-#Player state / Resources
+# Resources
 #-------------------------------------
 var pawn_tool:String="hand"
 var choosed_colour:String="black"

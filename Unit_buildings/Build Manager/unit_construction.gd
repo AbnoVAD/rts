@@ -5,6 +5,7 @@ extends Panel
 @onready var buttons=[
 	$BuildHouse1Button,
 	$BuildHouse2Button,
+	$BuildHouse3Button,
 	$BuildTowerButton,
 	$BuildBarrackButton,
 	$BuildMonasteryButton,
@@ -15,6 +16,7 @@ extends Panel
 @onready var markers=[
 	$BuildHouse1Button/Marker2D, 
 	$BuildHouse2Button/Marker2D, 
+	$BuildHouse3Button/Marker2D,
 	$BuildTowerButton/Marker2D, 
 	$BuildBarrackButton/Marker2D, 
 	$BuildMonasteryButton/Marker2D, 
@@ -25,6 +27,7 @@ extends Panel
 @onready var icons=[
 	$BuildHouse1Button/animation, 
 	$BuildHouse2Button/animation, 
+	$BuildHouse3Button/animation,
 	$BuildTowerButton/animation, 
 	$BuildBarrackButton/animation, 
 	$BuildMonasteryButton/animation, 
@@ -35,6 +38,7 @@ extends Panel
 var cost=[
 	{"gold":20,"wood":30},
 	{"gold":25,"wood":35},
+	{"gold":30,"wood":40},
 	{"gold":40,"wood":60},
 	{"gold":35,"wood":500},
 	{"gold":45,"wood":70},
@@ -52,9 +56,11 @@ func _on_any_button_pressed(index:int) -> void:
 
 	if Global.gold>0 or Global.wood>0:
 		if Global.gold>0 or Global.wood>0:
-			var building=buttons[index].name
-			Global.pawn_tool=building
-			emit_signal("build_requested",building)
+			var building_id:=str(buttons[index].get("building_id"))
+			if building_id=="":
+				building_id=buttons[index].name
+			Global.pawn_tool=building_id
+			emit_signal("build_requested",building_id)
 			
 			_flash_green(icon)
 		elif Global.gold<=0 or Global.wood<=0:

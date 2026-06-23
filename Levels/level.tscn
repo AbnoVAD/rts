@@ -67,12 +67,17 @@
 [ext_resource type="FontFile" uid="uid://dgsompp213qfa" path="res://assets/Text Font/ringbearer/RINGM___.TTF" id="67_1upps"]
 [ext_resource type="Texture2D" uid="uid://d3k88b86aqu3o" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_04.png" id="67_n2og4"]
 [ext_resource type="Texture2D" uid="uid://dvx83j7go3rhi" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Icons/Icon_02.png" id="68_0tv2o"]
+[ext_resource type="Texture2D" uid="uid://c3qghoeomysd2" path="res://assets/Tiny Swords (Free Pack)/Buildings/Black Buildings/House3.png" id="68_h3blk"]
+[ext_resource type="Texture2D" uid="uid://cqasrw074kpym" path="res://assets/Tiny Swords (Free Pack)/Buildings/Blue Buildings/House3.png" id="69_h3blu"]
 [ext_resource type="Texture2D" uid="uid://bwlijd6klmikw" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="70_03wqq"]
 [ext_resource type="Script" uid="uid://bfh8rrs2ja7y3" path="res://Unit_buildings/Build Manager/system_scripts/pause.gd" id="70_f0qdx"]
+[ext_resource type="Texture2D" uid="uid://br4vivymu53et" path="res://assets/Tiny Swords (Free Pack)/Buildings/Purple Buildings/House3.png" id="70_h3pur"]
 [ext_resource type="PackedScene" uid="uid://ca02atfk8jddq" path="res://Units/Materials/trees/tree1.tscn" id="70_sy5sx"]
 [ext_resource type="PackedScene" uid="uid://df4tu1jemgkuo" path="res://Units/Materials/trees/tree2.tscn" id="71_2h62v"]
 [ext_resource type="Texture2D" uid="uid://clkfhjhpt4487" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/SmallRibbons.png" id="71_f0qdx"]
+[ext_resource type="Texture2D" uid="uid://gtcor5oekp6p" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House3.png" id="71_h3red"]
 [ext_resource type="Texture2D" uid="uid://dxlvc7m5u7tom" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Swords/Swords.png" id="72_3mato"]
+[ext_resource type="Texture2D" uid="uid://dy7bkeqp0011i" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House3.png" id="72_h3ylw"]
 [ext_resource type="PackedScene" uid="uid://5j5bdvnr3jlv" path="res://Units/Materials/trees/tree3.tscn" id="72_oncvo"]
 [ext_resource type="PackedScene" uid="uid://kd3pdc2wo3hf" path="res://Units/Materials/trees/tree4.tscn" id="73_1upps"]
 [ext_resource type="PackedScene" uid="uid://burefv6vhb22u" path="res://Units/Materials/sheep/sheep.tscn" id="74_2h62v"]
@@ -1169,6 +1174,49 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_house3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("68_h3blk")
+}],
+"loop": 1,
+"name": &"black",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("69_h3blu")
+}],
+"loop": 1,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("70_h3pur")
+}],
+"loop": 1,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("71_h3red")
+}],
+"loop": 1,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("72_h3ylw")
+}],
+"loop": 1,
+"name": &"yellow",
+"speed": 5.0
+}]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6m1pe"]
 texture = ExtResource("26_bhg77")
 texture_region_size = Vector2i(64, 64)
@@ -1187,7 +1235,21 @@ tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_6m1pe")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03wqq"]
-bg_color = Color(0, 0, 0, 0.8039216)
+bg_color = Color(0.01, 0.01, 0.02, 0.76)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pause_card"]
+bg_color = Color(0.11, 0.09, 0.07, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.87, 0.72, 0.34, 0.95)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 16
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a1clg"]
 texture = ExtResource("70_03wqq")
@@ -1336,6 +1398,20 @@ tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_a1clg")
 sources/1 = SubResource("TileSetAtlasSource_qgi8s")
 sources/2 = SubResource("TileSetAtlasSource_oeejg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gameover_card"]
+bg_color = Color(0.14, 0.05, 0.05, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.86, 0.26, 0.22, 0.98)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_color = Color(0, 0, 0, 0.55)
+shadow_size = 16
 
 [node name="level" type="Node2D" unique_id=1022137402]
 script = ExtResource("1_oeejg")
@@ -1764,6 +1840,40 @@ autoplay = "black"
 script = ExtResource("33_mg73i")
 metadata/_edit_lock_ = true
 
+[node name="BuildHouse3Button" type="Button" parent="UI/ui/Panel/Player/Unit construction" unique_id=1430021719 node_paths=PackedStringArray("building_manager")]
+process_mode = 3
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 480.0
+offset_right = 1104.0
+offset_bottom = 560.0
+scale = Vector2(0.8, 0.8)
+theme_override_styles/normal = ExtResource("20_oeejg")
+theme_override_styles/pressed = ExtResource("20_oeejg")
+theme_override_styles/hover = ExtResource("20_oeejg")
+theme_override_styles/hover_pressed = ExtResource("20_oeejg")
+theme_override_styles/disabled = ExtResource("20_oeejg")
+theme_override_styles/focus = ExtResource("20_oeejg")
+script = ExtResource("27_md58l")
+building_id = "house3"
+building_manager = NodePath("../../../../../Building Manager")
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse3Button" unique_id=1527003933]
+position = Vector2(39.999996, 39.999996)
+metadata/_edit_lock_ = true
+
+[node name="animation" type="AnimatedSprite2D" parent="UI/ui/Panel/Player/Unit construction/BuildHouse3Button" unique_id=1873370024]
+modulate = Color(1, 1, 1, 0.8235294)
+z_index = 5
+position = Vector2(40, 40)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_house3")
+animation = &"black"
+autoplay = "black"
+script = ExtResource("33_mg73i")
+metadata/_edit_lock_ = true
+
 [node name="Selector" type="Sprite2D" parent="UI/ui/Panel/Player/Unit construction" unique_id=398064520]
 modulate = Color(1, 1, 1, 0.78431374)
 self_modulate = Color(1, 1, 1, 0.7058824)
@@ -1901,36 +2011,68 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_03wqq")
 script = ExtResource("70_f0qdx")
 metadata/_edit_lock_ = true
 
+[node name="Pause Card" type="Panel" parent="UI/ui/Panel/Pause" unique_id=1600518149]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -170.0
+offset_right = 360.0
+offset_bottom = 170.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pause_card")
+metadata/_edit_lock_ = true
+
 [node name="pause" type="Label" parent="UI/ui/Panel/Pause" unique_id=740541918]
+visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 456.0
-offset_top = 257.0
-offset_right = 728.0
-offset_bottom = 296.0
-theme_override_colors/font_color = Color(0.36862746, 0.43529412, 0.5254902, 1)
+offset_left = 448.0
+offset_top = 206.0
+offset_right = 704.0
+offset_bottom = 271.0
+theme_override_colors/font_color = Color(0.97, 0.94, 0.86, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
+theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 54
 text = "Paused"
 horizontal_alignment = 1
 
+[node name="Subtitle" type="Label" parent="UI/ui/Panel/Pause" unique_id=2103945358]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 336.0
+offset_top = 286.0
+offset_right = 816.0
+offset_bottom = 334.0
+theme_override_colors/font_color = Color(0.96, 0.92, 0.84, 0.88)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 18
+text = "Battle is on hold. Reorganize your forces and resume when ready."
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="resume" type="Label" parent="UI/ui/Panel/Pause" unique_id=577528312]
+visible = false
 z_index = 5
 layout_mode = 0
-offset_left = 528.0
-offset_top = 384.0
-offset_right = 669.0
-offset_bottom = 426.0
-theme_override_colors/font_color = Color(1, 0.98039216, 0.8352941, 1)
+offset_left = 496.0
+offset_top = 356.0
+offset_right = 658.0
+offset_bottom = 398.0
+theme_override_colors/font_color = Color(1, 0.95, 0.77, 1)
 theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 34
 text = "Resume"
 horizontal_alignment = 1
 
 [node name="resume btn" type="Button" parent="UI/ui/Panel/Pause/resume" unique_id=1554858249]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.49100003
@@ -1949,26 +2091,106 @@ theme_override_styles/disabled = ExtResource("20_oeejg")
 theme_override_styles/focus = ExtResource("20_oeejg")
 metadata/_edit_lock_ = true
 
-[node name="bonus" type="Label" parent="UI/ui/Panel/Pause" unique_id=1272734991]
+[node name="Hint" type="Label" parent="UI/ui/Panel/Pause" unique_id=1674213450]
+visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 400.0
-offset_top = 97.0
-offset_right = 768.0
-offset_bottom = 137.0
+offset_left = 480.0
+offset_top = 409.0
+offset_right = 672.0
+offset_bottom = 439.0
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 0.72)
 theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 20
-text = "Facultatea \"Vasile Alecsandri\" Bacau"
+theme_override_font_sizes/font_size = 13
+text = "Press P or click Resume"
 horizontal_alignment = 1
 
 [node name="pause_" type="TileMapLayer" parent="UI/ui/Panel/Pause" unique_id=948241189]
-position = Vector2(-74.99991, 116)
+position = Vector2(416, 130)
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAANAP//AAAAAAAAAAANAAAAAAAAAAEAAAAOAP//AAABAAAAAAAOAAAAAAABAAEAAAAPAP//AAADAAAAAAAPAAAAAAADAAEAAAAQAP//AAADAAAAAAAQAAAAAAADAAEAAAARAP//AAADAAAAAAARAAAAAAADAAEAAAASAP//AAADAAAAAAASAAAAAAADAAEAAAATAP//AAADAAAAAAATAAAAAAADAAEAAAAUAP//AAADAAAAAAAUAAAAAAADAAEAAAAVAP//AAADAAAAAAAVAAAAAAADAAEAAAAWAP//AAADAAAAAAAWAAAAAAADAAEAAAAXAP//AAADAAAAAAAXAAAAAAADAAEAAAAYAP//AAADAAAAAAAYAAAAAAADAAEAAAAZAP//AAADAAAAAAAZAAAAAAADAAEAAAAaAP//AAAFAAAAAAAaAAAAAAAFAAEAAAAbAP//AAAGAAAAAAAbAAAAAAAGAAEAAAARAAgAAAAAAAgAAAARAAkAAAAAAAkAAAASAAgAAAABAAgAAAASAAkAAAABAAkAAAATAAgAAAADAAgAAAATAAkAAAADAAkAAAAUAAgAAAADAAgAAAAUAAkAAAADAAkAAAAVAAgAAAADAAgAAAAVAAkAAAADAAkAAAAWAAgAAAADAAgAAAAWAAkAAAADAAkAAAAXAAgAAAAFAAgAAAAXAAkAAAAFAAkAAAAYAAgAAAAGAAgAAAAYAAkAAAAGAAkAAAAQAAQAAgABAAgAAAAQAAUAAgABAAkAAAARAAQAAgADAAgAAAARAAUAAgADAAkAAAASAAQAAgADAAgAAAASAAUAAgADAAkAAAATAAQAAgADAAgAAAATAAUAAgADAAkAAAAUAAQAAgADAAgAAAAUAAUAAgADAAkAAAAVAAQAAgADAAgAAAAVAAUAAgADAAkAAAAWAAQAAgADAAgAAAAWAAUAAgADAAkAAAAXAAQAAgADAAgAAAAXAAUAAgADAAkAAAAYAAQAAgAFAAgAAAAYAAUAAgAFAAkAAAAPAAQAAgAAAAgAAAAPAAUAAgAAAAkAAAAZAAQAAgAGAAgAAAAZAAUAAgAGAAkAAAA=")
 tile_set = SubResource("TileSet_luo2f")
 
+[node name="PauseUI" type="Control" parent="UI/ui/Panel/Pause/pause_" unique_id=1810461806]
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_right = -410.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="UI/ui/Panel/Pause/pause_/PauseUI" unique_id=1489613520]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Pause Card" type="Panel" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center" unique_id=1600518150]
+custom_minimum_size = Vector2(720, 320)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pause_card")
+
+[node name="ContentMargin" type="MarginContainer" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card" unique_id=1600518151]
+layout_mode = 0
+offset_right = 704.0
+offset_bottom = 300.0
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card/ContentMargin" unique_id=1600518152]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card/ContentMargin/Content" unique_id=1600518153]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.94, 0.86, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 58
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card/ContentMargin/Content" unique_id=1600518154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.84, 0.88)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 18
+text = "Battle is on hold. Reorganize your forces, then jump back in."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ResumeButton" type="Button" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card/ContentMargin/Content" unique_id=1600518155]
+process_mode = 3
+custom_minimum_size = Vector2(240, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.77, 1)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("20_oeejg")
+theme_override_styles/pressed = ExtResource("20_oeejg")
+theme_override_styles/hover = ExtResource("20_oeejg")
+theme_override_styles/hover_pressed = ExtResource("20_oeejg")
+theme_override_styles/disabled = ExtResource("20_oeejg")
+theme_override_styles/focus = ExtResource("20_oeejg")
+text = "Resume"
+metadata/_edit_lock_ = true
+
+[node name="Hint" type="Label" parent="UI/ui/Panel/Pause/pause_/PauseUI/Center/Pause Card/ContentMargin/Content" unique_id=1600518156]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.88, 0.83, 0.68, 0.72)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 13
+text = "Press P or click Resume"
+horizontal_alignment = 1
+
 [node name="Game Over" type="Panel" parent="UI/ui/Panel" unique_id=1383513934]
-visible = false
 z_index = 10
 layout_mode = 0
 offset_left = -8.0
@@ -1979,36 +2201,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_03wqq")
 script = ExtResource("74_3mato")
 metadata/_edit_lock_ = true
 
-[node name="Game Over" type="Label" parent="UI/ui/Panel/Game Over" unique_id=672926486]
-z_index = 1
-layout_mode = 0
-offset_left = 456.0
-offset_top = 257.0
-offset_right = 736.0
-offset_bottom = 296.0
-theme_override_colors/font_color = Color(0.36862746, 0.43529412, 0.5254902, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 30
-text = "Game Over"
-horizontal_alignment = 1
-
 [node name="Retry" type="Label" parent="UI/ui/Panel/Game Over" unique_id=1553339532]
+visible = false
 z_index = 5
 layout_mode = 0
-offset_left = 520.0
-offset_top = 384.0
-offset_right = 680.0
-offset_bottom = 426.0
-theme_override_colors/font_color = Color(1, 0.98039216, 0.8352941, 1)
+offset_left = 506.0
+offset_top = 374.0
+offset_right = 666.0
+offset_bottom = 416.0
+theme_override_colors/font_color = Color(1, 0.83, 0.8, 1)
 theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 34
 text = "Retry"
 horizontal_alignment = 1
 
 [node name="retry btn" type="Button" parent="UI/ui/Panel/Game Over/Retry" unique_id=148312015]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.49100003
@@ -2027,23 +2236,104 @@ theme_override_styles/disabled = ExtResource("20_oeejg")
 theme_override_styles/focus = ExtResource("20_oeejg")
 metadata/_edit_lock_ = true
 
-[node name="bonus" type="Label" parent="UI/ui/Panel/Game Over" unique_id=291672719]
+[node name="Hint" type="Label" parent="UI/ui/Panel/Game Over" unique_id=1779241142]
+visible = false
 z_index = 1
 layout_mode = 0
-offset_left = 400.0
-offset_top = 97.0
-offset_right = 768.0
-offset_bottom = 137.0
+offset_left = 318.0
+offset_top = 426.0
+offset_right = 834.0
+offset_bottom = 456.0
+theme_override_colors/font_color = Color(0.94, 0.78, 0.78, 0.72)
 theme_override_fonts/font = ExtResource("67_1upps")
-theme_override_font_sizes/font_size = 20
-text = "Facultatea \"Vasile Alecsandri\" Bacau"
+theme_override_font_sizes/font_size = 13
+text = "Press R or click Retry"
 horizontal_alignment = 1
 
 [node name="Gameover_" type="TileMapLayer" parent="UI/ui/Panel/Game Over" unique_id=873719924]
-position = Vector2(-74.99991, 116)
+position = Vector2(416, 130)
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAANAP//AAAAAAAAAAANAAAAAAAAAAEAAAAOAP//AAABAAAAAAAOAAAAAAABAAEAAAAPAP//AAADAAAAAAAPAAAAAAADAAEAAAAQAP//AAADAAAAAAAQAAAAAAADAAEAAAARAP//AAADAAAAAAARAAAAAAADAAEAAAASAP//AAADAAAAAAASAAAAAAADAAEAAAATAP//AAADAAAAAAATAAAAAAADAAEAAAAUAP//AAADAAAAAAAUAAAAAAADAAEAAAAVAP//AAADAAAAAAAVAAAAAAADAAEAAAAWAP//AAADAAAAAAAWAAAAAAADAAEAAAAXAP//AAADAAAAAAAXAAAAAAADAAEAAAAYAP//AAADAAAAAAAYAAAAAAADAAEAAAAZAP//AAADAAAAAAAZAAAAAAADAAEAAAAaAP//AAAFAAAAAAAaAAAAAAAFAAEAAAAbAP//AAAGAAAAAAAbAAAAAAAGAAEAAAAQAAQAAgABAAgAAAAQAAUAAgABAAkAAAARAAQAAgADAAgAAAARAAUAAgADAAkAAAASAAQAAgADAAgAAAASAAUAAgADAAkAAAATAAQAAgADAAgAAAATAAUAAgADAAkAAAAUAAQAAgADAAgAAAAUAAUAAgADAAkAAAAVAAQAAgADAAgAAAAVAAUAAgADAAkAAAAWAAQAAgADAAgAAAAWAAUAAgADAAkAAAAXAAQAAgADAAgAAAAXAAUAAgADAAkAAAAYAAQAAgADAAgAAAAYAAUAAgADAAkAAAAZAAQAAgABAAkAADAZAAUAAgABAAgAADAPAAQAAgAAAAgAAAAPAAUAAgAAAAkAAAARAAgAAAAAAAgAAAARAAkAAAAAAAkAAAASAAgAAAABAAgAAAASAAkAAAABAAkAAAATAAgAAAADAAgAAAATAAkAAAADAAkAAAAUAAgAAAADAAgAAAAUAAkAAAADAAkAAAAVAAgAAAADAAgAAAAVAAkAAAADAAkAAAAWAAgAAAADAAgAAAAWAAkAAAADAAkAAAAXAAgAAAAFAAgAAAAXAAkAAAAFAAkAAAAYAAgAAAAGAAgAAAAYAAkAAAAGAAkAAAAaAAQAAgAAAAkAADAaAAUAAgAAAAgAADA=")
 tile_set = SubResource("TileSet_luo2f")
+
+[node name="GameOverUI" type="Control" parent="UI/ui/Panel/Game Over/Gameover_" unique_id=1810461807]
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_right = -410.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="Center" type="CenterContainer" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI" unique_id=1489613521]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Game Over Card" type="Panel" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center" unique_id=1699842811]
+custom_minimum_size = Vector2(760, 340)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gameover_card")
+
+[node name="ContentMargin" type="MarginContainer" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card" unique_id=1699842812]
+layout_mode = 0
+offset_right = 757.0
+offset_bottom = 334.0
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="Content" type="VBoxContainer" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card/ContentMargin" unique_id=1699842813]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Title" type="Label" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card/ContentMargin/Content" unique_id=1699842814]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.88, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 58
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card/ContentMargin/Content" unique_id=1699842815]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.98, 0.9, 0.9, 0.88)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 18
+text = "Your kingdom has fallen. Learn the pattern, rebuild faster, and try again."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RetryButton" type="Button" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card/ContentMargin/Content" unique_id=1699842816]
+process_mode = 3
+custom_minimum_size = Vector2(240, 58)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.83, 0.8, 1)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("20_oeejg")
+theme_override_styles/pressed = ExtResource("20_oeejg")
+theme_override_styles/hover = ExtResource("20_oeejg")
+theme_override_styles/hover_pressed = ExtResource("20_oeejg")
+theme_override_styles/disabled = ExtResource("20_oeejg")
+theme_override_styles/focus = ExtResource("20_oeejg")
+text = "Retry"
+metadata/_edit_lock_ = true
+
+[node name="Hint" type="Label" parent="UI/ui/Panel/Game Over/Gameover_/GameOverUI/Center/Game Over Card/ContentMargin/Content" unique_id=1699842817]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.78, 0.78, 0.72)
+theme_override_fonts/font = ExtResource("67_1upps")
+theme_override_font_sizes/font_size = 13
+text = "Press R or click Retry"
+horizontal_alignment = 1
 
 [node name="Building Manager" type="Node2D" parent="UI" unique_id=137064823]
 position = Vector2(8, 0)
@@ -2052,9 +2342,11 @@ script = ExtResource("65_ttbie")
 [node name="Ghosts" type="Node2D" parent="." unique_id=1170067067]
 
 [node name="Decors" type="Node2D" parent="." unique_id=1213946829]
+metadata/_edit_lock_ = true
 
 [node name="trees" type="Node2D" parent="Decors" unique_id=511236668]
 z_index = 7
+metadata/_edit_lock_ = true
 
 [node name="tree1" parent="Decors/trees" unique_id=1415981528 instance=ExtResource("70_sy5sx")]
 position = Vector2(872, 248.00002)
@@ -2074,71 +2366,94 @@ metadata/_edit_lock_ = true
 
 [node name="tree5" parent="Decors/trees" unique_id=383833599 instance=ExtResource("70_sy5sx")]
 position = Vector2(3296, -56)
+metadata/_edit_lock_ = true
 
 [node name="tree6" parent="Decors/trees" unique_id=586101560 instance=ExtResource("73_1upps")]
 position = Vector2(3520, 472)
+metadata/_edit_lock_ = true
 
 [node name="tree7" parent="Decors/trees" unique_id=1501043204 instance=ExtResource("72_oncvo")]
 position = Vector2(2656, 872)
+metadata/_edit_lock_ = true
 
 [node name="tree8" parent="Decors/trees" unique_id=325094964 instance=ExtResource("71_2h62v")]
 position = Vector2(1592, 888)
+metadata/_edit_lock_ = true
 
 [node name="tree9" parent="Decors/trees" unique_id=32852567 instance=ExtResource("70_sy5sx")]
 position = Vector2(1712, 2200)
+metadata/_edit_lock_ = true
 
 [node name="tree10" parent="Decors/trees" unique_id=712042766 instance=ExtResource("73_1upps")]
 position = Vector2(2536, 1480)
+metadata/_edit_lock_ = true
 
 [node name="tree11" parent="Decors/trees" unique_id=1062431057 instance=ExtResource("72_oncvo")]
 position = Vector2(3104, 1832)
+metadata/_edit_lock_ = true
 
 [node name="tree12" parent="Decors/trees" unique_id=1115137339 instance=ExtResource("70_sy5sx")]
 position = Vector2(-64, 920)
+metadata/_edit_lock_ = true
 
 [node name="tree13" parent="Decors/trees" unique_id=2036761738 instance=ExtResource("71_2h62v")]
 position = Vector2(840, 1168)
+metadata/_edit_lock_ = true
 
 [node name="tree14" parent="Decors/trees" unique_id=196155491 instance=ExtResource("72_oncvo")]
 position = Vector2(1088, 1696)
+metadata/_edit_lock_ = true
 
 [node name="tree15" parent="Decors/trees" unique_id=1243761784 instance=ExtResource("73_1upps")]
 position = Vector2(80, 2184)
+metadata/_edit_lock_ = true
 
 [node name="tree16" parent="Decors/trees" unique_id=974935412 instance=ExtResource("72_oncvo")]
 position = Vector2(-832, 1216)
+metadata/_edit_lock_ = true
 
 [node name="tree17" parent="Decors/trees" unique_id=543589936 instance=ExtResource("71_2h62v")]
 position = Vector2(-568, 1656)
+metadata/_edit_lock_ = true
 
 [node name="tree18" parent="Decors/trees" unique_id=1277767591 instance=ExtResource("70_sy5sx")]
 position = Vector2(-672, 32)
+metadata/_edit_lock_ = true
 
 [node name="tree19" parent="Decors/trees" unique_id=221332446 instance=ExtResource("73_1upps")]
 position = Vector2(-496, 440)
+metadata/_edit_lock_ = true
 
 [node name="tree20" parent="Decors/trees" unique_id=1020409400 instance=ExtResource("71_2h62v")]
 position = Vector2(-192, 0)
+metadata/_edit_lock_ = true
 
 [node name="tree21" parent="Decors/trees" unique_id=1497607144 instance=ExtResource("70_sy5sx")]
 position = Vector2(-720, -568)
+metadata/_edit_lock_ = true
 
 [node name="tree22" parent="Decors/trees" unique_id=297244386 instance=ExtResource("72_oncvo")]
 position = Vector2(-568, -336)
+metadata/_edit_lock_ = true
 
 [node name="tree23" parent="Decors/trees" unique_id=1718861985 instance=ExtResource("72_oncvo")]
 position = Vector2(584, -336)
+metadata/_edit_lock_ = true
 
 [node name="tree24" parent="Decors/trees" unique_id=522351767 instance=ExtResource("73_1upps")]
 position = Vector2(136, -40)
+metadata/_edit_lock_ = true
 
 [node name="tree25" parent="Decors/trees" unique_id=1068435052 instance=ExtResource("73_1upps")]
 position = Vector2(3448, 168)
+metadata/_edit_lock_ = true
 
 [node name="tree26" parent="Decors/trees" unique_id=354549194 instance=ExtResource("71_2h62v")]
 position = Vector2(3056, 632)
+metadata/_edit_lock_ = true
 
 [node name="sheep" type="Node2D" parent="Decors" unique_id=324693285]
+metadata/_edit_lock_ = true
 
 [node name="sheep" parent="Decors/sheep" unique_id=238742770 instance=ExtResource("74_2h62v")]
 position = Vector2(2584, 1056)
@@ -2461,7 +2776,7 @@ pack_radius = null
 pack_pull_strength = null
 
 [node name="sheep21" parent="Decors/sheep" unique_id=622079748 instance=ExtResource("74_2h62v")]
-position = Vector2(512, 216)
+position = Vector2(400, 240)
 meat_scene = null
 baby_sheep_scene = null
 source_type = null

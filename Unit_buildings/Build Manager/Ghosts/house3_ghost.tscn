@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/Tiny Swords old/Tiny Swords (Update 010)/Factions/Knights/Buildings/House/House_Construction.png" id="1_hi0am"]
+[ext_resource type="Script" path="res://Unit_buildings/Build Manager/Ghosts/animation.gd" id="2_1oofl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ja7k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hi0am")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwwsc"]
+size = Vector2(64, 44)
+
+[node name="house3 ghost" type="Area2D"]
+scale = Vector2(0.8, 0.8)
+
+[node name="animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7ja7k")
+script = ExtResource("2_1oofl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 30)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_bwwsc")

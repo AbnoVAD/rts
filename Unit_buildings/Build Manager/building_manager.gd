@@ -13,6 +13,7 @@ var moving_original_position:Vector2
 @export var ghost_scenes={
 	"house1":preload("res://Unit_buildings/Build Manager/Ghosts/house1_ghost.tscn"),
 	"house2":preload("res://Unit_buildings/Build Manager/Ghosts/house2_ghost.tscn"),
+	"house3":preload("res://Unit_buildings/Build Manager/Ghosts/house3_ghost.tscn"),
 	"archery_tower":preload("res://Unit_buildings/Build Manager/Ghosts/archery_ghost.tscn"),
 	"barracks":preload("res://Unit_buildings/Build Manager/Ghosts/barrack_ghost.tscn"),
 	"tower":preload("res://Unit_buildings/Build Manager/Ghosts/tower_ghost.tscn"),
@@ -23,6 +24,7 @@ var moving_original_position:Vector2
 @export var building_scenes:={
 	"house1":preload("res://Unit_buildings/House1/house1.tscn"),
 	"house2":preload("res://Unit_buildings/House2/house2.tscn"),
+	"house3":preload("res://Unit_buildings/House3/house3.tscn"),
 	"archery_tower":preload("res://Unit_buildings/Archery/archery.tscn"),
 	"barracks":preload("res://Unit_buildings/Barrack/barrack.tscn"),
 	"tower":preload("res://Unit_buildings/Tower/tower.tscn"),
@@ -42,6 +44,7 @@ func _ready() -> void:
 var cost_map:={
 	"house1":{"wood":1,"gold":1},
 	"house2":{"wood":2,"gold":2},
+	"house3":{"wood":3,"gold":3},
 	"archery_tower":{"wood":10,"gold":6},
 	"barracks":{"wood":10,"gold":5},
 	"tower":{"wood":6,"gold":3},
