@@ -380,8 +380,6 @@ func hit_state()->void:
 	if health<=0:
 		pass
 
-
-
 #--------------------------------------------------
 #Separation between the barrels (distance)
 #--------------------------------------------------

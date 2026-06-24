@@ -124,10 +124,39 @@ func _ready() -> void:
 
 	enter_construct_state()
 
+func post_restore_saveable() -> void:
+	_relink_restored_units()
+
+func get_save_data() -> Dictionary:
+	return {
+		"state": state,
+		"life": life,
+		"is_dead": is_dead
+	}
+
+func apply_save_data(data:Dictionary) -> void:
+	var saved_state:int = int(data.get("state", STATE_IDLE))
+	life = int(data.get("life", max_life))
+	is_dead = bool(data.get("is_dead", false))
+	clear_timers_and_tweens()
+	construct_fx.stop()
+	if saved_state == STATE_DESTROYED:
+		state = STATE_DESTROYED
+		animation.play("destroyed")
+		shape.disabled = true
+		return
+	state = STATE_IDLE
+	scale = FINAL_SCALE
+	shape.disabled = false
+	animation.play("idle")
+	input_pickable = true
+
 #--------------------------------------------------
 #Process
 #--------------------------------------------------
 func _process(delta:float) -> void:
+	if Global.restoring_save_game:
+		return
 	if state==STATE_IDLE and spawned_knights.size()<knight_capacity and Global.can_spawn():
 		spawn_knights()
 	if is_hit:
@@ -361,6 +390,8 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring=false
 	if animation:
 		animation.modulate=Color.WHITE
+	if Global.restoring_save_game:
+		return
 	spawned_knights.clear()
 	spawn_knights()
 
@@ -535,6 +566,9 @@ func spawn_knights() -> void:
 func _spawn_knights_around_marker(center:Vector2,count:int,knight_scene:PackedScene) -> void:
 	for i in count:
 		var new_knight=knight_scene.instantiate()
+		new_knight.add_to_group("saveable_entity")
+		new_knight.set_meta("save_source_id", String(get_meta("save_id", "")))
+		new_knight.set_meta("save_source_path", String(get_path()))
 		get_parent().add_child(new_knight)
 		new_knight.z_index=4
 		new_knight.scale=Vector2(0.7,0.7)
@@ -562,6 +596,22 @@ func _spawn_knights_around_marker(center:Vector2,count:int,knight_scene:PackedSc
 
 		# consume meat
 		Global.consume_meat(1)
+
+func _relink_restored_units() -> void:
+	var saved_source_id := String(get_meta("save_id", ""))
+	var saved_source_path := String(get_path())
+	if saved_source_id == "":
+		saved_source_id = ""
+	spawned_knights.clear()
+	for node in get_tree().get_nodes_in_group("saveable_entity"):
+		if not is_instance_valid(node) or not (node is Node2D):
+			continue
+		var node_source_id := String(node.get_meta("save_source_id", ""))
+		var node_source_path := String(node.get_meta("save_source_path", ""))
+		if node_source_id != saved_source_id and node_source_path != saved_source_path:
+			continue
+		if node.scene_file_path.find("knight") != -1:
+			spawned_knights.append(node)
 
 var last_collision_state:bool=false
 func update_collision_logic():

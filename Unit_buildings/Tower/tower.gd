@@ -107,6 +107,39 @@ func _ready() -> void:
 	
 	enter_construct_state()
 
+func post_restore_saveable() -> void:
+	_relink_restored_unit()
+
+func get_save_data() -> Dictionary:
+	return {
+		"state": state,
+		"life": life,
+		"is_dead": is_dead,
+		"collision_disabled": collision_disabled
+	}
+
+func apply_save_data(data:Dictionary) -> void:
+	var saved_state:int = int(data.get("state", STATE_IDLE))
+	life = int(data.get("life", max_life))
+	is_dead = bool(data.get("is_dead", false))
+	collision_disabled = bool(data.get("collision_disabled", false))
+	clear_timers_and_tweens()
+	construct_fx.stop()
+	if saved_state == STATE_DESTROYED:
+		state = STATE_DESTROYED
+		animation.play("destroyed")
+		shape.disabled = true
+		remove_from_group("building")
+		remove_from_group("block_building")
+		add_to_group("damaged_buildings")
+		return
+	state = STATE_IDLE
+	scale = FINAL_SCALE
+	shape.disabled = false
+	animation.play("idle")
+	input_pickable = true
+	update_collision_logic()
+
 #--------------------------------------------------
 #Process
 #--------------------------------------------------
@@ -119,6 +152,17 @@ func _process(delta:float) -> void:
 	if is_moving:
 		global_position=get_global_mouse_position()-drag_offset
 		_update_movement_color()
+
+func clear_timers_and_tweens() -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween = null
+	if construct_timer:
+		construct_timer.queue_free()
+		construct_timer = null
+	if repair_timer:
+		repair_timer.queue_free()
+		repair_timer = null
 
 #--------------------------------------------------
 #Input from mouse
@@ -246,6 +290,8 @@ func enter_idle_state() -> void:
 	construct_fx.stop()
 	scale=FINAL_SCALE
 	shape.disabled=false
+	if Global.restoring_save_game:
+		return
 	spawn_archer()
 
 signal died(building:Node2D)
@@ -369,9 +415,32 @@ func spawn_archer() -> void:
 		_: return
 
 	spawned_archer=scene.instantiate()
+	spawned_archer.add_to_group("saveable_entity")
+	spawned_archer.set_meta("save_source_id", String(get_meta("save_id", "")))
+	spawned_archer.set_meta("save_source_path", String(get_path()))
 	add_child(spawned_archer)
 	spawned_archer.scale=Vector2(0.9,0.9)
 	spawned_archer.position=marker_2d.position
+	spawned_archer.z_index = z_index + 1
+
+func _relink_restored_unit() -> void:
+	var saved_source_id := String(get_meta("save_id", ""))
+	var saved_source_path := String(get_path())
+	if saved_source_id == "":
+		saved_source_id = ""
+	spawned_archer = null
+	for node in get_tree().get_nodes_in_group("saveable_entity"):
+		if not is_instance_valid(node) or not (node is Node2D):
+			continue
+		var node_source_id := String(node.get_meta("save_source_id", ""))
+		var node_source_path := String(node.get_meta("save_source_path", ""))
+		if node_source_id != saved_source_id and node_source_path != saved_source_path:
+			continue
+		if node.scene_file_path.find("archer") != -1:
+			spawned_archer = node
+			spawned_archer.position = marker_2d.position
+			spawned_archer.z_index = z_index + 1
+			break
 
 var last_collision_state:bool=false
 func update_collision_logic():

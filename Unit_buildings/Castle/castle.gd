@@ -40,6 +40,7 @@ var state:=STATE_CONSTRUCT
 #Life/Hit
 #--------------------------------------------------
 var life:int
+var is_dead:bool=false
 var is_hit:=false
 var hit_flash_timer:=0.0
 var hit_flah_time:=0.15
@@ -111,6 +112,34 @@ func _ready() -> void:
 	placement_checker.body_exited.connect(_on_placement_body_exited)
 
 	enter_construct_state()
+
+func post_restore_saveable() -> void:
+	_relink_restored_children()
+
+func get_save_data() -> Dictionary:
+	return {
+		"state": state,
+		"life": life,
+		"is_dead": is_dead,
+		"collision_disabled": false
+	}
+
+func apply_save_data(data:Dictionary) -> void:
+	var saved_state:int = int(data.get("state", STATE_IDLE))
+	life = int(data.get("life", max_life))
+	is_dead = bool(data.get("is_dead", false))
+	clear_timers_and_tweens()
+	construct_fx.stop()
+	if saved_state == STATE_DESTROYED:
+		state = STATE_DESTROYED
+		animation.play("destroyed")
+		shape.disabled = true
+		return
+	state = STATE_IDLE
+	shape.disabled = false
+	scale = FINAL_SCALE
+	animation.play("idle")
+	input_pickable = true
 
 #--------------------------------------------------
 #Process
@@ -331,6 +360,7 @@ func enter_idle_state() -> void:
 	clear_timers_and_tweens()
 	state=STATE_IDLE
 	life=max_life
+	is_dead=false
 	animation.play("idle")
 	construct_fx.stop()
 	scale=FINAL_SCALE
@@ -343,12 +373,15 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring=false
 	if animation:
 		animation.modulate=Color.WHITE
+	if Global.restoring_save_game:
+		return
 	spawn_archer()
 	spawn_pawn()
 
 func enter_destroyed_state() -> void:
 	if state==STATE_DESTROYED:
 		return
+	is_dead=true
 	Global.game_over=true
 	shape.set_deferred("disabled",true)
 	explosion_detector.set_deferred("monitoring",false)
@@ -426,12 +459,18 @@ func spawn_archer() -> void:
 
 	spawned_archer1=archer_scene.instantiate()
 	spawned_archer2=archer_scene.instantiate()
+	spawned_archer1.add_to_group("saveable_entity")
+	spawned_archer2.add_to_group("saveable_entity")
+	spawned_archer1.set_meta("save_source_id", String(get_meta("save_id", "")))
+	spawned_archer2.set_meta("save_source_id", String(get_meta("save_id", "")))
+	spawned_archer1.set_meta("save_source_path", String(get_path()))
+	spawned_archer2.set_meta("save_source_path", String(get_path()))
 	add_child(spawned_archer1)
 	add_child(spawned_archer2)
 	spawned_archer1.global_position=marker_1.global_position
 	spawned_archer2.global_position=marker_2.global_position
-	spawned_archer1.z_index=5
-	spawned_archer2.z_index=5
+	spawned_archer1.z_index=z_index + 1
+	spawned_archer2.z_index=z_index + 1
 	spawned_archer1.scale=Vector2(0.8,0.8)
 	spawned_archer2.scale=Vector2(0.8,0.8)
 
@@ -449,11 +488,44 @@ func spawn_pawn() -> void:
 		_: return
 
 	spawned_pawn=pawn_scene.instantiate()
+	spawned_pawn.add_to_group("saveable_entity")
+	spawned_pawn.set_meta("save_source_id", String(get_meta("save_id", "")))
+	spawned_pawn.set_meta("save_source_path", String(get_path()))
 	get_parent().add_child(spawned_pawn)
 	spawned_pawn.global_position=marker_3.global_position
 	spawned_pawn.z_index=4
 	spawned_pawn.scale=Vector2(0.7,0.7)
 	Global.consume_meat(1)
+
+func _relink_restored_children() -> void:
+	var saved_source_id := String(get_meta("save_id", ""))
+	var saved_source_path := String(get_path())
+	if saved_source_id == "":
+		saved_source_id = ""
+	var children := get_tree().get_nodes_in_group("saveable_entity")
+	var restored_archers:Array=[]
+	var restored_pawn:Node2D=null
+	for node in children:
+		if not is_instance_valid(node) or not (node is Node2D):
+			continue
+		var node_source_id := String(node.get_meta("save_source_id", ""))
+		var node_source_path := String(node.get_meta("save_source_path", ""))
+		if node_source_id != saved_source_id and node_source_path != saved_source_path:
+			continue
+		if node.scene_file_path.ends_with("pawn_blue.tscn") or node.scene_file_path.ends_with("pawn_black.tscn") or node.scene_file_path.ends_with("pawn_red.tscn") or node.scene_file_path.ends_with("pawn_purple.tscn") or node.scene_file_path.ends_with("pawn_yellow.tscn"):
+			restored_pawn = node
+		else:
+			restored_archers.append(node)
+	if restored_archers.size() > 0:
+		spawned_archer1 = restored_archers[0] as Node2D
+		spawned_archer1.global_position = marker_1.global_position
+		spawned_archer1.z_index = z_index + 1
+	if restored_archers.size() > 1:
+		spawned_archer2 = restored_archers[1] as Node2D
+		spawned_archer2.global_position = marker_2.global_position
+		spawned_archer2.z_index = z_index + 1
+	if restored_pawn != null:
+		spawned_pawn = restored_pawn
 
 func deposit_worker_resources(payload:Dictionary) -> bool:
 	if payload.is_empty():

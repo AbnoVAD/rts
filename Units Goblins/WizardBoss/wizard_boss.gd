@@ -56,13 +56,18 @@ var stuck_threshold:float=0.8
 var last_position:Vector2=Vector2.ZERO
 var detour_timer:float=0.0
 var detour_target:Vector2=Vector2.ZERO
+var registered_as_active:bool=false
 
 func _ready() -> void:
 	z_index=6
 	life=max_life
 	add_to_group("goblin")
 	add_to_group("goblinboss")
+	Global.register_goblin_boss()
+	registered_as_active=true
 	wizards.append(self)
+	if not tree_exited.is_connected(_on_tree_exited):
+		tree_exited.connect(_on_tree_exited)
 
 	hp_bar.max_value=max_life
 	hp_bar.value=life
@@ -102,6 +107,12 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	wizards.erase(self)
 	release_target()
+
+func _on_tree_exited() -> void:
+	if not registered_as_active:
+		return
+	registered_as_active=false
+	Global.unregister_goblin_boss()
 
 func _build_sprite_frames() -> void:
 	var frames:=SpriteFrames.new()

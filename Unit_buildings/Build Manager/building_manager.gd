@@ -147,6 +147,7 @@ func _place_building()->void:
 	else:
 		var building=building_scenes[current_id].instantiate()
 		building.global_position=ghost.global_position
+		building.add_to_group("saveable_entity")
 		building_parent.add_child(building)
 
 		if building.has_method("play_building_animation"):

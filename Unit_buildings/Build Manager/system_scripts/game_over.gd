@@ -14,6 +14,8 @@ extends Panel
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	if action_btn:
+		action_btn.process_mode = Node.PROCESS_MODE_ALWAYS
 	if action_btn and not action_btn.pressed.is_connected(_on_retry_btn_pressed):
 		action_btn.pressed.connect(_on_retry_btn_pressed)
 	_apply_text()
@@ -35,4 +37,5 @@ func _on_retry_btn_pressed() -> void:
 	if get_tree().paused:
 		get_tree().paused = false
 		Global.reset_game()
+		await get_tree().process_frame
 		get_tree().reload_current_scene()

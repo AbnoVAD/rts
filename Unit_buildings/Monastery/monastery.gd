@@ -120,10 +120,39 @@ func _ready() -> void:
 	repair_detector.area_entered.connect(_on_repair_detector_area_entered)
 	enter_construct_state()
 
+func post_restore_saveable() -> void:
+	_relink_restored_units()
+
+func get_save_data() -> Dictionary:
+	return {
+		"state": state,
+		"life": life,
+		"is_dead": is_dead
+	}
+
+func apply_save_data(data:Dictionary) -> void:
+	var saved_state:int = int(data.get("state", STATE_IDLE))
+	life = int(data.get("life", max_life))
+	is_dead = bool(data.get("is_dead", false))
+	clear_timers_and_tweens()
+	construct_fx.stop()
+	if saved_state == STATE_DESTROYED:
+		state = STATE_DESTROYED
+		animation.play("destroyed")
+		shape.disabled = true
+		return
+	state = STATE_IDLE
+	scale = FINAL_SCALE
+	shape.disabled = false
+	animation.play("idle")
+	input_pickable = true
+
 #--------------------------------------------------
 # Process
 #--------------------------------------------------
 func _process(delta: float) -> void:
+	if Global.restoring_save_game:
+		return
 	if state == STATE_IDLE and spawned_monks.size() < monk_capacity and Global.can_spawn():
 		spawn_monks()
 	
@@ -340,6 +369,8 @@ func enter_idle_state() -> void:
 	placement_checker.monitoring = false
 	if animation:
 		animation.modulate = Color.WHITE
+	if Global.restoring_save_game:
+		return
 	spawned_monks.clear()
 	spawn_monks()
 
@@ -502,6 +533,9 @@ func _spawn_monks_around_marker(center: Vector2, count: int, monk_scene: PackedS
 		if pos == Vector2.INF:
 			continue
 		var new_monk = monk_scene.instantiate()
+		new_monk.add_to_group("saveable_entity")
+		new_monk.set_meta("save_source_id", String(get_meta("save_id", "")))
+		new_monk.set_meta("save_source_path", String(get_path()))
 		get_parent().add_child(new_monk)
 		new_monk.z_index = 4
 		new_monk.scale = Vector2(0.7, 0.7)
@@ -509,6 +543,22 @@ func _spawn_monks_around_marker(center: Vector2, count: int, monk_scene: PackedS
 		spawned_monks.append(new_monk)
 		new_monk.died.connect(_on_monk_died)
 		Global.consume_meat(1)
+
+func _relink_restored_units() -> void:
+	var saved_source_id := String(get_meta("save_id", ""))
+	var saved_source_path := String(get_path())
+	if saved_source_id == "":
+		saved_source_id = ""
+	spawned_monks.clear()
+	for node in get_tree().get_nodes_in_group("saveable_entity"):
+		if not is_instance_valid(node) or not (node is Node2D):
+			continue
+		var node_source_id := String(node.get_meta("save_source_id", ""))
+		var node_source_path := String(node.get_meta("save_source_path", ""))
+		if node_source_id != saved_source_id and node_source_path != saved_source_path:
+			continue
+		if node.scene_file_path.find("monk") != -1:
+			spawned_monks.append(node)
 
 func _get_valid_spawn_position_around_center(center: Vector2) -> Vector2:
 	var world := get_world_2d()

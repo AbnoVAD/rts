@@ -9,7 +9,9 @@ var castle_position=Vector2.ZERO
 var camera_shake_func: Callable=Callable()
 
 func _is_valid_pawn(pawn:Variant) -> bool:
-	return pawn is Node and is_instance_valid(pawn)
+	if not is_instance_valid(pawn):
+		return false
+	return pawn is Node
 
 func _prune_invalid_pawns() -> void:
 	for i in range(pawns.size() - 1, -1, -1):

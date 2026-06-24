@@ -40,16 +40,12 @@ const MIN_RANDOM_SHIELD_TIME:=5.0
 const MAX_RANDOM_SHIELD_TIME:=10.0
 var random_shield_timer:=0.0
 var next_shield_time:=0.0
-
-#damage constant when the knight is using the shield
 const LOW_HP_SHIELD_THRESHOLD:=0.2
-
 #-------------------------------------------
 #State
 #-------------------------------------------
 enum State{IDLE,RUN,ATTACK,GUARD,DEAD}
 var state:State=State.IDLE
-
 const ATTACK_RANGE:=10.0
 
 #-------------------------------------------
@@ -80,14 +76,11 @@ const TARGET_LOCK_DURATION:=0.5
 #-------------------------------------------
 @export var max_life:=240
 @export var life:=240
-
 @export var max_guard:=150
 @export var guard_stamina:=150
-
 @export var speed:=400.0
 @export var attack_damage:=12
 @export var attack_cooldown:=0.9
-
 #-------------------------------------------
 #Control
 #-------------------------------------------
@@ -276,7 +269,6 @@ func start_attack():
 	facing_dir=(target.global_position-global_position).normalized()
 	update_facing(facing_dir)
 	attack_loop()
-
 func attack_loop()-> void:
 	if not (target.is_in_group("goblin") or target.is_in_group("goblinbuildings")):
 		return
@@ -286,7 +278,6 @@ func attack_loop()-> void:
 			break
 		var dir=(target.global_position-global_position).normalized()
 		update_facing(dir)
-		
 #animation
 		animation.play(pick_attack_animation())
 		if not sword_audio.playing:
@@ -348,7 +339,6 @@ func acquire_target(delta:=0.0):
 				closest=body
 	target=closest
 	target_lock_time=0.0
-
 func face_closest_goblin():
 	var closest:Node2D=null
 	var dist:=INF
