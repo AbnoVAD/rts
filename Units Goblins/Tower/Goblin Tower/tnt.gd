@@ -12,6 +12,8 @@ var stick_offset:Vector2=Vector2.ZERO
 
 #variables of group affected by dynamite
 @export var stick_groups:Array=["player","building","castle"]
+@export var unit_damage:int=12
+@export var building_damage:int=1
 
 #dynamite lifespan
 @export var lifespan:float=0.3
@@ -67,6 +69,8 @@ func _fade_and_die():
 func spawn_explosion():
 	await get_tree().create_timer(0.1).timeout
 	var explosion:=preload("res://Units/effect fx/explosion/explosion.tscn").instantiate()
+	if explosion.has_method("configure_damage"):
+		explosion.configure_damage(unit_damage,building_damage)
 	get_parent().add_child(explosion)
 	explosion.global_position=global_position
 	explosion.z_index=6

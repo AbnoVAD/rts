@@ -589,9 +589,7 @@ func try_spawn_final_boss() -> bool:
 	boss_spawned=true
 	return true
 
-func register_goblin_house() -> bool:
-	if active_goblin_houses>=3:
-		return false
+func register_goblin_house(_ignore_limit:bool=false) -> bool:
 	active_goblin_houses+=1
 	return true
 

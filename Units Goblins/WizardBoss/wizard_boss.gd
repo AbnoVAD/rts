@@ -13,7 +13,7 @@ const SKULL_SCENE:PackedScene = preload("res://materials_effects/skull/skull.tsc
 
 const SEPARATION_RADIUS:float=56.0
 const SEPARATION_FORCE:float=60.0
-const KNOCKBACK_FORCE:float=680.0
+const KNOCKBACK_FORCE:float=560.0
 const KNOCKBACK_DECAY:float=0.84
 const DETOUR_DISTANCE:float=24.0
 const STUCK_DETOUR_DISTANCE:float=72.0
@@ -33,14 +33,14 @@ enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 @onready var cast_audio: AudioStreamPlayer = $"sound fx/cast_audio"
 
 @export_group("Boss Stats")
-@export var max_life:int=850
-@export var speed:float=126.0
-@export var attack_damage:int=28
-@export var attack_range:float=320.0
-@export var preferred_range:float=220.0
-@export var attack_cooldown:float=1.5
+@export var max_life:int=340
+@export var speed:float=112.0
+@export var attack_damage:int=18
+@export var attack_range:float=260.0
+@export var preferred_range:float=180.0
+@export var attack_cooldown:float=1.9
 @export var attack_windup:float=0.38
-@export var spell_speed:float=460.0
+@export var spell_speed:float=400.0
 
 var life:int=0
 var state:State=State.IDLE

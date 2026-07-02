@@ -47,8 +47,8 @@ var state:State=State.IDLE
 #--------------------------------------------------
 #Variables
 #--------------------------------------------------
-@export var SPEED:float=185.0
-@export var health:int=7
+@export var SPEED:float=155.0
+@export var health:int=4
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 
@@ -449,6 +449,8 @@ func explode():
 	rebalance_pack()
 	
 	var e=preload("res://Units/effect fx/explosion/explosion.tscn").instantiate()
+	if e.has_method("configure_damage"):
+		e.configure_damage(12,1)
 	get_parent().add_child(e)
 	e.global_position=global_position
 	e.scale=Vector2(1.5,1.5)

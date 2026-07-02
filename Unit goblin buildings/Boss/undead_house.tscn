@@ -140,7 +140,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(96, 112)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
+size = Vector2(90, 104)
+
 [node name="Undead House" type="StaticBody2D" unique_id=1194012063 groups=["block_building", "goblinbuildings"]]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_3scx8")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=1242900264]
@@ -148,8 +152,17 @@ sprite_frames = SubResource("SpriteFrames_3xd07")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1081127087]
+visible = false
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_1")
+
+[node name="hitbox" type="Area2D" parent="." unique_id=1971110089]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1764468738]
+visible = false
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_hitbox")
+debug_color = Color(1, 0, 0.10470045, 0.41960785)
 
 [node name="Marker1" type="Marker2D" parent="." unique_id=812471565]
 position = Vector2(0, 96)
@@ -159,3 +172,5 @@ position = Vector2(104, 0)
 
 [node name="Marker3" type="Marker2D" parent="." unique_id=63143689]
 position = Vector2(-104, 0)
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -6,9 +6,9 @@ extends Node2D
 @onready var throw_audio: AudioStreamPlayer = $"sound fx/throw_audio"
 
 @export var tnt_scene:PackedScene=preload("res://Units Goblins/Tower/Goblin Tower/tnt.tscn")
-@export var tnt_speed:float=500.0
+@export var tnt_speed:float=400.0
 @export var tracking_interval:float=0.1
-@export var fire_cooldown:float=1.0
+@export var fire_cooldown:float=1.6
 
 var target:Node2D=null
 var candidates:Array[Node2D]=[]

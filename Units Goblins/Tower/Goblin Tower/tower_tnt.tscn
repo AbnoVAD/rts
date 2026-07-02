@@ -109,7 +109,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_attack_zone"]
-radius = 192.0
+radius = 128.0
 
 [node name="TowerTnt" type="Node2D" unique_id=921972574]
 script = ExtResource("1_7y2wr")

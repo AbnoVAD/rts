@@ -28,6 +28,10 @@ func _ready() -> void:
 	call_deferred("apply_initial_damage")
 	_start_cleanup_timer()
 
+func configure_damage(new_unit_damage:int,new_building_damage:int) -> void:
+	unit_damage=new_unit_damage
+	building_damage=new_building_damage
+
 func _on_animation_finished() -> void:
 	_cleanup()
 

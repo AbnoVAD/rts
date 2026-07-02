@@ -8,7 +8,7 @@ extends StaticBody2D
 
 @export var tower_tnt_scene:PackedScene=preload("res://Units Goblins/Tower/Goblin Tower/tower_tnt.tscn")
 @export var construction_time:float=2.0
-@export var max_life:int=180
+@export var max_life:int=100
 @export var final_scale:Vector2=Vector2.ONE
 @export var override_tnt_scale:bool=true
 @export var tnt_scale:Vector2=Vector2.ONE

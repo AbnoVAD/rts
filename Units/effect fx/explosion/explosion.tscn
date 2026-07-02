@@ -76,7 +76,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uhfwq"]
-radius = 60.166435
+radius = 42.0
 
 [node name="explosion" type="AnimatedSprite2D" unique_id=406959485]
 sprite_frames = SubResource("SpriteFrames_rpqji")

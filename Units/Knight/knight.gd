@@ -74,10 +74,10 @@ const TARGET_LOCK_DURATION:=0.5
 #-------------------------------------------
 #Stats
 #-------------------------------------------
-@export var max_life:=240
-@export var life:=240
-@export var max_guard:=150
-@export var guard_stamina:=150
+@export var max_life:=320
+@export var life:=320
+@export var max_guard:=200
+@export var guard_stamina:=200
 @export var speed:=400.0
 @export var attack_damage:=12
 @export var attack_cooldown:=0.9
@@ -101,7 +101,7 @@ const GUARD_DURATION:=2.5
 var guard_timer:=0.0
 var guard_locked:=false
 var knockback_force:=250.0
-var guard_knockback_multiplier:=0.4
+var guard_knockback_multiplier:=0.25
 var guard_cooldown:=false
 const GUARD_COOLDOWN_TIME:=2.5
 

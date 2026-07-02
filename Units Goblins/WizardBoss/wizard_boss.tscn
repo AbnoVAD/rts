@@ -203,7 +203,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wvsmv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Attack 1",
 "speed": 5.0
 }, {
@@ -232,7 +232,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qew0u")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Attack 2",
 "speed": 5.0
 }, {
@@ -258,7 +258,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_73n7i")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Death",
 "speed": 10.0
 }, {
@@ -287,7 +287,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i2km5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Idle",
 "speed": 10.0
 }, {
@@ -316,7 +316,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_72fgn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Run",
 "speed": 10.0
 }, {
@@ -330,7 +330,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2vvvf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Take hit",
 "speed": 10.0
 }]
@@ -342,19 +342,19 @@ radius = 11.0
 radius = 360.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hitbox"]
-radius = 9.0
+radius = 12.66667
 height = 54.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_predict"]
 radius = 18.0
 
 [node name="Wizard boss" type="CharacterBody2D" unique_id=1719882261 groups=["block_building", "goblin", "goblinboss"]]
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_script")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=783926409]
 sprite_frames = SubResource("SpriteFrames_7l05x")
-animation = &"Attack 2"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="shape" type="CollisionShape2D" parent="." unique_id=82806322]
@@ -373,6 +373,7 @@ debug_color = Color(0.06482514, 0.649749, 0.033422377, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" unique_id=1978081814]
 visible = false
+position = Vector2(-2.0000024, 14.666664)
 shape = SubResource("CapsuleShape2D_hitbox")
 debug_color = Color(0.9972494, 0, 0.17972064, 0.41960785)
 
@@ -397,6 +398,7 @@ max_results = 5
 collision_mask = 31
 
 [node name="sound fx" type="Node2D" parent="." unique_id=1711785080]
+position = Vector2(5.3333335, 0)
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=221782976]
 

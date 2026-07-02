@@ -7,7 +7,7 @@ const FIRE_SHEET:Texture2D = preload("res://assets/Tiny Swords old/Tiny Swords (
 const FIREBALL_AUDIO:AudioStream = preload("res://Audio/Explosion/Fireball 2.wav")
 
 @export var speed:float=420.0
-@export var damage:int=20
+@export var damage:int=14
 @export var lifespan:float=3.0
 
 var velocity:Vector2=Vector2.ZERO

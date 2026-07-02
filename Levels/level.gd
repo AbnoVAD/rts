@@ -28,14 +28,6 @@ var objective_label: Label
 @onready var waves_sea_fx: AudioStreamPlayer = $"Music and Fx/waves sea_fx"
 @onready var fight_theme_music: AudioStreamPlayer = $"Music and Fx/fight theme music"
 
-const TORCH_HOUSE_SCENE: PackedScene = preload("res://Unit goblin buildings/Torch/goblin_house_torch.tscn")
-const BARREL_HOUSE_SCENE: PackedScene = preload("res://Unit goblin buildings/Barrel/goblin_house_barrel.tscn")
-const TNT_HOUSE_SCENE: PackedScene = preload("res://Unit goblin buildings/Tnt/goblin_house_tnt.tscn")
-const UNDEAD_HOUSE_SCENE: PackedScene = preload("res://Unit goblin buildings/Boss/undead_house.tscn")
-
-const MAX_HOUSES_PER_WAVE: int = 2
-const MAX_NAV_DISTANCE_FROM_TILE: float = 5.0
-
 #-------------------------------
 #Game over system
 #-------------------------------
@@ -67,8 +59,8 @@ func _ready() -> void:
 	music.play()
 	waves_sea_fx.play()
 
-func _on_wave_started(wave_number:int) -> void:
-	_spawn_enemy_houses_for_wave(wave_number)
+func _on_wave_started(_wave_number:int) -> void:
+	pass
 
 var last_wave_state:=false
 func _process(_delta: float) -> void:
@@ -170,105 +162,6 @@ func _on_next_level_pressed() -> void:
 func _on_wave_ended(wave_number:int):
 	if wave_number==Global.max_waves:
 		timer_label.text="All waves completed"
-
-func _spawn_enemy_houses_for_wave(wave_number:int) -> void:
-	if winter_tilemap == null:
-		return
-
-	if wave_number>=Global.max_waves:
-		_spawn_house_on_winter_tile(UNDEAD_HOUSE_SCENE)
-		return
-
-	var house_pool:Array[PackedScene]=_get_goblin_house_pool(wave_number)
-	if house_pool.is_empty():
-		return
-
-	var active_house_slots:int=MAX_HOUSES_PER_WAVE-Global.active_goblin_houses
-	if active_house_slots<=0:
-		return
-
-	var available_cells:Array[Vector2i]=winter_tilemap.get_used_cells().duplicate()
-	if available_cells.is_empty():
-		return
-	var valid_cells:Array[Vector2i]=[]
-	for cell in available_cells:
-		if _is_valid_goblin_house_spawn_cell(cell):
-			valid_cells.append(cell)
-	available_cells=valid_cells
-	if available_cells.is_empty():
-		return
-
-	var desired_house_count:int=clamp(1+int(floor(float(wave_number - 1) / 4.0)),1,MAX_HOUSES_PER_WAVE)
-	var house_count:int=min(desired_house_count,active_house_slots)
-	for i in range(house_count):
-		if available_cells.is_empty():
-			break
-		var house_scene:PackedScene=house_pool[randi()%house_pool.size()]
-		_spawn_house_on_winter_tile(house_scene,available_cells)
-		await get_tree().create_timer(0.4).timeout
-
-func _get_goblin_house_pool(wave_number:int) -> Array[PackedScene]:
-	match wave_number:
-		1:
-			return [TORCH_HOUSE_SCENE, BARREL_HOUSE_SCENE]
-		2:
-			return [TORCH_HOUSE_SCENE, BARREL_HOUSE_SCENE, TNT_HOUSE_SCENE]
-		_:
-			return [TORCH_HOUSE_SCENE, BARREL_HOUSE_SCENE, TNT_HOUSE_SCENE]
-
-func _spawn_house_on_winter_tile(house_scene:PackedScene, available_cells:Array[Vector2i]=[]) -> void:
-	if house_scene==null or winter_tilemap==null:
-		return
-
-	var cells:Array[Vector2i]=available_cells.duplicate() if not available_cells.is_empty() else winter_tilemap.get_used_cells()
-	if cells.is_empty():
-		return
-
-	cells.shuffle()
-	for spawn_cell in cells:
-		if not _is_valid_goblin_house_spawn_cell(spawn_cell):
-			if not available_cells.is_empty():
-				available_cells.erase(spawn_cell)
-			continue
-
-		var spawn_position:=_winter_cell_to_world(spawn_cell)
-		var nav_position: Variant = _get_snapped_goblin_spawn_position(spawn_position)
-		if nav_position == null:
-			if not available_cells.is_empty():
-				available_cells.erase(spawn_cell)
-			continue
-
-		if not available_cells.is_empty():
-			available_cells.erase(spawn_cell)
-
-		var house:=house_scene.instantiate() as Node2D
-		house.global_position=nav_position
-		add_child(house)
-		return
-
-func _winter_cell_to_world(cell:Vector2i) -> Vector2:
-	var local_pos:Vector2=winter_tilemap.map_to_local(cell)
-	return winter_tilemap.to_global(local_pos)
-
-func _get_snapped_goblin_spawn_position(world_position:Vector2) -> Variant:
-	var world:=get_world_2d()
-	if world==null:
-		return world_position
-
-	var nav_map:RID=world.navigation_map
-	if not nav_map.is_valid():
-		return world_position
-
-	var closest_point:=NavigationServer2D.map_get_closest_point(nav_map,world_position)
-	if world_position.distance_to(closest_point)>MAX_NAV_DISTANCE_FROM_TILE:
-		return null
-	return closest_point
-
-func _is_valid_goblin_house_spawn_cell(cell:Vector2i) -> bool:
-	if winter_tilemap==null:
-		return false
-	var world_position:=_winter_cell_to_world(cell)
-	return _get_snapped_goblin_spawn_position(world_position) != null
 
 func _setup_hud_polish() -> void:
 	if ui_panel.has_node("TopStatusBar"):
