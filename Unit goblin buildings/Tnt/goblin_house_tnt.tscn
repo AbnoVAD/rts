@@ -17,7 +17,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_l3hn2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"destroyed",
 "speed": 5.0
 }, {
@@ -25,7 +25,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5c2to")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }]
@@ -83,17 +83,17 @@ position = Vector2(-104, 0)
 
 [node name="hit_with_sword_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1384988308]
 stream = ExtResource("4_p5c6t")
-volume_db = -5.0
+volume_db = -20.0
 pitch_scale = 1.5
 
 [node name="hit_with_arrow_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=36511699]
 stream = ExtResource("5_flabg")
-volume_db = -5.0
+volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="destroyed_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=995145150]
 stream = ExtResource("6_lfq3x")
-volume_db = -10.0
+volume_db = -35.0
 pitch_scale = 3.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

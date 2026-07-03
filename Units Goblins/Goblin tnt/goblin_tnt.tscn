@@ -103,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n7x6b")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -126,7 +126,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y4uuk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }, {
@@ -152,7 +152,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v4em6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shoot",
 "speed": 10.0
 }]
@@ -250,16 +250,17 @@ metadata/_edit_lock_ = true
 
 [node name="throw_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=98149450]
 stream = ExtResource("3_84ggp")
+volume_db = -20.0
 pitch_scale = 1.5
 
 [node name="hit_attack_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=653549850]
 stream = ExtResource("4_s2h7l")
-volume_db = -5.0
+volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=509114509]
 stream = ExtResource("5_6uvq5")
-volume_db = -10.0
+volume_db = -20.0
 pitch_scale = 1.5
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

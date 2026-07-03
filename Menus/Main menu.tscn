@@ -1061,24 +1061,6 @@ text = "Build, defend, and push back the waves."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="music" type="Button" parent="UI/Root" unique_id=185437512]
-layout_mode = 1
-offset_left = 1600.0
-offset_top = 72.0
-offset_right = 1660.0
-offset_bottom = 127.0
-scale = Vector2(2, 2)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("25_d7ulf")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_icon_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_icon_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_icon_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_icon_button")
-theme_override_styles/focus = SubResource("StyleBoxFlat_icon_button")
-text = "<"
-flat = true
-
 [node name="quit" type="Button" parent="UI/Root" unique_id=958708180]
 layout_mode = 1
 offset_left = 1728.0
@@ -1314,6 +1296,7 @@ text = "Back"
 flat = true
 
 [node name="SettingsPanel" type="Panel" parent="UI/Root" unique_id=2026144930]
+visible = false
 z_index = 6
 layout_mode = 1
 anchors_preset = -1
@@ -1422,7 +1405,6 @@ text = "Controls"
 flat = true
 
 [node name="SettingsDetailsPanel" type="Panel" parent="UI/Root/SettingsPanel/SettingsShell" unique_id=-1268822286]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1952,7 +1934,6 @@ text = "Use the arrow to return to the menu."
 horizontal_alignment = 1
 
 [node name="InfoContentMargin" type="MarginContainer" parent="UI/Root/InfoPanel" unique_id=2026144958]
-visible = false
 layout_mode = 0
 offset_left = 18.0
 offset_top = 16.0

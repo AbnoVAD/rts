@@ -93,9 +93,10 @@ position = Vector2(0, -44)
 
 [node name="throw_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1509189366]
 stream = ExtResource("3_3e7wj")
+volume_db = -20.0
 pitch_scale = 1.5
 
 [node name="hit_attack_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1281393401]
 stream = ExtResource("4_0m4tj")
-volume_db = -5.0
+volume_db = -20.0
 pitch_scale = 1.5

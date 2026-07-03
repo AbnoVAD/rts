@@ -134,6 +134,7 @@ debug_color = Color(0.092888124, 0.64892554, 3.85046e-07, 0.41960785)
 
 [node name="throw_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1532186692]
 stream = ExtResource("3_28yfb")
+volume_db = -20.0
 pitch_scale = 1.5
 
 [connection signal="animation_finished" from="animation" to="." method="_on_animation_finished"]
