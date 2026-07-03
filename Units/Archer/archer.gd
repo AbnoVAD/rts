@@ -19,7 +19,6 @@ extends CharacterBody2D
 #sound fx
 @onready var click_audio: AudioStreamPlayer = $"sound fx/click_audio"
 @onready var death_audio: AudioStreamPlayer = $"sound fx/death_audio"
-@onready var hit_audio: AudioStreamPlayer = $"sound fx/hit_audio"
 @onready var shoot_audio: AudioStreamPlayer = $"sound fx/shoot_audio"
 @onready var shield_audio: AudioStreamPlayer = $"sound fx/shield_audio"
 
@@ -522,8 +521,6 @@ func _on_button_pressed() -> void:
 func _on_hitbox_area_entered(area:Area2D) -> void:
 	if area.is_in_group("explosion"):
 		take_damage(30,area.global_position-global_position)
-		if not hit_audio.playing:
-			hit_audio.play()
 	if area.is_in_group("heal"):
 		life=max_life
 		show_combat_ui()

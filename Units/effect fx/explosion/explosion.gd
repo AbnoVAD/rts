@@ -5,7 +5,7 @@ extends AnimatedSprite2D
 @onready var shape: CollisionShape2D = $explo/shape
 @onready var explosion_audio: AudioStreamPlayer = $explosion_audio
 
-@export var unit_damage:=25
+@export var unit_damage:=12
 @export var building_damage:=1
 
 const FIRE_SCENE:=preload("res://Units/effect fx/fire/fire.tscn")

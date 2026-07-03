@@ -42,7 +42,6 @@ const INPUT_UP:="move_up"
 #-------------------------------------
 @onready var click_audio: AudioStreamPlayer2D = $soundfx/click_audio
 @onready var death_audio: AudioStreamPlayer2D = $soundfx/death_audio
-@onready var hit_audio: AudioStreamPlayer2D = $soundfx/hit_audio
 
 #-------------------------------------
 #State variables
@@ -200,7 +199,7 @@ func flip_sprite(dir:Vector2)->void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion"):
 		take_damage(10,area.global_position)
-		hit_audio.play()
+
 
 #-------------------------------------
 #Spawn attack effect

@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cub3hbpqqt58j" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Banners/Banner_Slots.png" id="17_db4l3"]
 [ext_resource type="Script" uid="uid://cfka4tff3iuy" path="res://Tiles/collider.gd" id="18_140bu"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="23_dahya"]
+[ext_resource type="AudioStream" uid="uid://cdfasvi3gy0yy" path="res://Audio/30. The Hidden Glade.wav" id="24_d7ulf"]
 [ext_resource type="FontFile" uid="uid://dgsompp213qfa" path="res://assets/Text Font/ringbearer/RINGM___.TTF" id="25_d7ulf"]
 [ext_resource type="PackedScene" uid="uid://ca02atfk8jddq" path="res://Units/Materials/trees/tree1.tscn" id="77_lrgj2"]
 [ext_resource type="PackedScene" uid="uid://df4tu1jemgkuo" path="res://Units/Materials/trees/tree2.tscn" id="78_c0nwo"]
@@ -1004,9 +1005,13 @@ position = Vector2(1144, 320)
 [node name="sound fx" type="Node2D" parent="." unique_id=235647721]
 
 [node name="music" type="AudioStreamPlayer" parent="sound fx" unique_id=1291013373]
+stream = ExtResource("24_d7ulf")
+volume_db = -20.0
+autoplay = true
 
 [node name="click" type="AudioStreamPlayer" parent="sound fx" unique_id=198196332]
 stream = ExtResource("23_dahya")
+volume_db = -20.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1996588881]
 
@@ -1190,7 +1195,7 @@ text = "Info"
 flat = true
 metadata/_edit_lock_ = true
 
-[node name="setting" type="Button" parent="UI/Root/MenuPanel" unique_id=1320475859]
+[node name="settings" type="Button" parent="UI/Root/MenuPanel" unique_id=1320475859]
 layout_mode = 0
 offset_left = 124.0
 offset_top = 380.0
@@ -1309,7 +1314,6 @@ text = "Back"
 flat = true
 
 [node name="SettingsPanel" type="Panel" parent="UI/Root" unique_id=2026144930]
-visible = false
 z_index = 6
 layout_mode = 1
 anchors_preset = -1
@@ -1319,7 +1323,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -340.0
 offset_top = -230.0
-offset_right = 340.0
+offset_right = 584.0
 offset_bottom = 230.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_menu_panel")
 
@@ -1501,10 +1505,10 @@ theme_override_constants/separation = 10
 
 [node name="SettingsContentMargin" type="MarginContainer" parent="UI/Root/SettingsPanel" unique_id=2026144931]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 41.0
-offset_right = 549.0
-offset_bottom = 484.0
+offset_left = 373.0
+offset_top = 12.0
+offset_right = 898.0
+offset_bottom = 455.0
 theme_override_constants/margin_left = 18
 theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 18
@@ -2098,7 +2102,7 @@ flat = true
 [connection signal="pressed" from="UI/Root/MenuPanel/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="UI/Root/MenuPanel/load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="UI/Root/MenuPanel/info" to="." method="_on_info_pressed"]
-[connection signal="pressed" from="UI/Root/MenuPanel/setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="UI/Root/MenuPanel/settings" to="." method="_on_setting_pressed"]
 [connection signal="pressed" from="UI/Root/LoadPanel/LoadContentMargin/LoadContent/ContinueButton" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="UI/Root/LoadPanel/LoadContentMargin/LoadContent/NewGameButton" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="UI/Root/LoadPanel/LoadContentMargin/LoadContent/BackButton" to="." method="_on_back_from_load_pressed"]

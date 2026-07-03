@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bfoni1oxoe07g" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Archer_Run.png" id="3_jas8l"]
 [ext_resource type="Texture2D" uid="uid://ctkw672uxocp4" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Archer_Shoot.png" id="4_em73h"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="4_qj60p"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="5_jas8l"]
 [ext_resource type="AudioStream" uid="uid://xbwks4wm77aa" path="res://Audio/Bow/Bow Attack 1.wav" id="6_em73h"]
 [ext_resource type="AudioStream" uid="uid://cenuwc7p4cjgg" path="res://Audio/Shield/Shield Block.mp3" id="7_kbddp"]
 
@@ -104,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0k8yy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -121,7 +120,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gpdl3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }, {
@@ -150,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_iig8j")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shoot",
 "speed": 10.0
 }]
@@ -306,19 +305,20 @@ collision_mask = 31
 
 [node name="click_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1664267070]
 stream = ExtResource("3_d63py")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1063705067]
 stream = ExtResource("4_qj60p")
-
-[node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=781227195]
-stream = ExtResource("5_jas8l")
+volume_db = -20.0
 
 [node name="shoot_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1738043621]
 stream = ExtResource("6_em73h")
+volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="shield_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2138918696]
 stream = ExtResource("7_kbddp")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="body_entered" from="detector zone" to="." method="_on_detector_zone_body_entered"]

@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="4_134io"]
 [ext_resource type="Texture2D" uid="uid://clhvhb7lx5icv" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Warrior/Warrior_Guard.png" id="4_dc1hy"]
 [ext_resource type="Texture2D" uid="uid://i4b1pusw4t1f" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Warrior/Warrior_Idle.png" id="5_4otpx"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="5_tdhhu"]
 [ext_resource type="AudioStream" uid="uid://5cudl4s5g32r" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Attack 2.wav" id="6_2am3j"]
 [ext_resource type="Texture2D" uid="uid://0tg6ervfsddd" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Warrior/Warrior_Run.png" id="6_vvdu4"]
 [ext_resource type="AudioStream" uid="uid://cenuwc7p4cjgg" path="res://Audio/Shield/Shield Block.mp3" id="7_mku2k"]
@@ -140,7 +139,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_at51w")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack1",
 "speed": 10.0
 }, {
@@ -157,7 +156,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aldjk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack2",
 "speed": 10.0
 }, {
@@ -180,7 +179,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_abuwt")
 }],
-"loop": true,
+"loop": 1,
 "name": &"guard",
 "speed": 10.0
 }, {
@@ -209,7 +208,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pwhyi")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -232,7 +231,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5jj4v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }]
@@ -387,18 +386,19 @@ collision_mask = 31
 
 [node name="click_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1664267070]
 stream = ExtResource("3_yo0ms")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1063705067]
 stream = ExtResource("4_134io")
-
-[node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=781227195]
-stream = ExtResource("5_tdhhu")
+volume_db = -20.0
 
 [node name="sword_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1738043621]
 stream = ExtResource("6_2am3j")
+volume_db = -20.0
 
 [node name="shield_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2138918696]
 stream = ExtResource("7_mku2k")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="body_entered" from="detector zone" to="." method="_on_detector_zone_body_entered"]

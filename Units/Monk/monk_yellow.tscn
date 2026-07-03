@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="3_wrvf4"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="4_wr5su"]
 [ext_resource type="Texture2D" uid="uid://ck1s0t0rtbn8o" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Monk/Run.png" id="4_xqqkt"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="8_wr5su"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_foclt"]
 atlas = ExtResource("2_wr5su")
@@ -129,7 +128,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hdmbj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"heal",
 "speed": 10.0
 }, {
@@ -152,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_12w35")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -169,7 +168,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3n85k")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }]
@@ -296,14 +295,12 @@ metadata/_edit_lock_ = true
 [node name="click_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1166978058]
 position = Vector2(0, 8)
 stream = ExtResource("3_wrvf4")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1515755214]
 position = Vector2(0, 16)
 stream = ExtResource("4_wr5su")
-
-[node name="hit_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1674699472]
-position = Vector2(0, 24)
-stream = ExtResource("8_wr5su")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

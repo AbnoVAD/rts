@@ -174,7 +174,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lno88")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level1",
 "speed": 10.0
 }, {
@@ -197,7 +197,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_68bk1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level2",
 "speed": 7.0
 }, {
@@ -220,7 +220,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h581y")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level3",
 "speed": 7.0
 }, {
@@ -243,7 +243,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l7p45")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level4",
 "speed": 7.0
 }, {
@@ -266,7 +266,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xq4bv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level5",
 "speed": 7.0
 }, {
@@ -289,7 +289,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3egyw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"level6",
 "speed": 7.0
 }]
@@ -338,6 +338,7 @@ metadata/_edit_lock_ = true
 
 [node name="rock_audio" type="AudioStreamPlayer" parent="." unique_id=2022988727]
 stream = ExtResource("8_ddmoo")
+volume_db = -20.0
 
 [node name="mine zone" type="Area2D" parent="." unique_id=688516407 groups=["mines"]]
 

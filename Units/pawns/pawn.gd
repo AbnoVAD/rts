@@ -61,7 +61,6 @@ const AUTO_NAV_RADIUS:=14.0
 @onready var equip_audio: AudioStreamPlayer2D = $soundfx/equip_audio
 @onready var click_audio: AudioStreamPlayer2D = $soundfx/click_audio
 @onready var death_audio: AudioStreamPlayer2D = $soundfx/death_audio
-@onready var hit_audio: AudioStreamPlayer2D = $soundfx/hit_audio
 
 #-------------------------------------
 #State variables
@@ -712,7 +711,9 @@ func set_navigation_target(pos:Vector2) -> void:
 	var travel_distance:=global_position.distance_to(pos)
 	NavigationRouteHelper.tune_navigation_agent(nav,travel_distance,10.0,28.0,26.0,40.0,14.0,18.0)
 	var map:RID=nav.get_navigation_map()
-	if map.is_valid():
+	if NavigationRouteHelper.should_use_direct_navigation(nav,global_position,pos,96.0):
+		nav.target_position=pos
+	elif map.is_valid():
 		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
 	else:
 		nav.target_position=pos
@@ -865,7 +866,6 @@ func set_active()->void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("explosion"):
 		take_damage(10,area.global_position)
-		hit_audio.play()
 
 #-------------------------------------
 #Spawn attack effect

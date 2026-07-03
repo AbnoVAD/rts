@@ -100,7 +100,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qmitk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"chop",
 "speed": 15.0
 }, {
@@ -108,7 +108,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_375n2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"chopped",
 "speed": 5.0
 }, {
@@ -137,7 +137,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2x2t8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }]
@@ -191,7 +191,7 @@ position = Vector2(1, 0)
 
 [node name="cut_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=539244587]
 stream = ExtResource("3_fkovb")
-volume_db = 5.0
+volume_db = -20.0
 pitch_scale = 2.0
 
 [connection signal="area_entered" from="tree_trunk" to="." method="_on_tree_trunk_area_entered"]

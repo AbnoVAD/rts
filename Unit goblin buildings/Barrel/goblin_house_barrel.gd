@@ -1,7 +1,7 @@
 extends StaticBody2D
 
 #-------------------------------------------
-# Goblin torch spawn house
+# Goblin barrel spawn house
 #-------------------------------------------
 
 #-------------------------------------------
@@ -23,7 +23,7 @@ extends StaticBody2D
 #-------------------------------------------
 # Scenes
 #-------------------------------------------
-const GOBLIN_SCENE: PackedScene = preload("res://Units Goblins/Goblin torch/goblin_torch.tscn")
+const GOBLIN_SCENE: PackedScene = preload("res://Units Goblins/Goblin barrel/goblin_barrel.tscn")
 const FIRE_SCENE: PackedScene = preload("res://Units/effect fx/fire/fire.tscn")
 const MAX_SPAWN_NAV_DISTANCE: float = 6.0
 

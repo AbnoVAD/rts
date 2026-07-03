@@ -19,7 +19,6 @@ extends CharacterBody2D
 #sound fx
 @onready var click_audio: AudioStreamPlayer = $"sound fx/click_audio"
 @onready var death_audio: AudioStreamPlayer = $"sound fx/death_audio"
-@onready var hit_audio: AudioStreamPlayer = $"sound fx/hit_audio"
 @onready var spear_audio: AudioStreamPlayer = $"sound fx/spear_audio"
 @onready var spear_audio_2: AudioStreamPlayer = $"sound fx/spear_audio2"
 @onready var shield_audio: AudioStreamPlayer = $"sound fx/shield_audio"
@@ -378,7 +377,9 @@ func set_navigation_target(pos:Vector2) -> void:
 	var travel_distance:=global_position.distance_to(pos)
 	NavigationRouteHelper.tune_navigation_agent(nav,travel_distance,10.0,28.0,16.0,36.0,14.0,18.0)
 	var map:RID=nav.get_navigation_map()
-	if map.is_valid():
+	if NavigationRouteHelper.should_use_direct_navigation(nav,global_position,pos,96.0):
+		nav.target_position=pos
+	elif map.is_valid():
 		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
 	else:
 		nav.target_position=pos
@@ -386,6 +387,8 @@ func set_navigation_target(pos:Vector2) -> void:
 func get_target_navigation_point(target_node:Node2D,preferred_distance:float) -> Vector2:
 	if target_node==null or not is_instance_valid(target_node):
 		return global_position
+	if NavigationRouteHelper.should_use_direct_navigation(nav,global_position,target_node.global_position,96.0):
+		return target_node.global_position
 	return NavigationRouteHelper.get_best_approach_point(nav,global_position,target_node.global_position,preferred_distance)
 
 func get_closest_nav_point(pos:Vector2) -> Vector2:
@@ -613,8 +616,6 @@ func _on_button_pressed() -> void:
 func _on_hitbox_area_entered(area:Area2D) -> void:
 	if area.is_in_group("explosion"):
 		take_damage(30,area.global_position-global_position)
-		if not hit_audio.playing:
-			hit_audio.play()
 	if area.is_in_group("heal"):
 		life=max_life
 		show_combat_ui()

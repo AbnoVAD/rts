@@ -33,14 +33,14 @@ enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 @onready var cast_audio: AudioStreamPlayer = $"sound fx/cast_audio"
 
 @export_group("Boss Stats")
-@export var max_life:int=340
-@export var speed:float=112.0
-@export var attack_damage:int=18
-@export var attack_range:float=260.0
-@export var preferred_range:float=180.0
-@export var attack_cooldown:float=1.9
-@export var attack_windup:float=0.38
-@export var spell_speed:float=400.0
+@export var max_life:int=140
+@export var speed:float=104.0
+@export var attack_damage:int=8
+@export var attack_range:float=230.0
+@export var preferred_range:float=155.0
+@export var attack_cooldown:float=2.6
+@export var attack_windup:float=0.45
+@export var spell_speed:float=340.0
 
 var life:int=0
 var state:State=State.IDLE
@@ -447,7 +447,9 @@ func set_navigation_target(pos:Vector2) -> void:
 	var travel_distance:=global_position.distance_to(pos)
 	NavigationRouteHelper.tune_navigation_agent(nav,travel_distance,10.0,28.0,16.0,36.0,16.0,20.0)
 	var map:RID=nav.get_navigation_map()
-	if map.is_valid():
+	if NavigationRouteHelper.should_use_direct_navigation(nav,global_position,pos,96.0):
+		nav.target_position=pos
+	elif map.is_valid():
 		nav.target_position=NavigationServer2D.map_get_closest_point(map,pos)
 	else:
 		nav.target_position=pos
@@ -455,6 +457,8 @@ func set_navigation_target(pos:Vector2) -> void:
 func get_target_navigation_point(target_node:Node2D,preferred_distance:float) -> Vector2:
 	if target_node==null or not is_instance_valid(target_node):
 		return global_position
+	if NavigationRouteHelper.should_use_direct_navigation(nav,global_position,target_node.global_position,96.0):
+		return target_node.global_position
 	return NavigationRouteHelper.get_best_approach_point(nav,global_position,target_node.global_position,preferred_distance)
 
 func get_closest_nav_point(pos:Vector2) -> Vector2:
@@ -511,7 +515,7 @@ func die() -> void:
 	var skull:=SKULL_SCENE.instantiate()
 	get_parent().add_child(skull)
 	skull.global_position=global_position
-	skull.scale=Vector2(0.7,0.7)
+	skull.scale=Vector2(0.9,0.9)
 	skull.z_index=7
 
 	var tween:=create_tween()

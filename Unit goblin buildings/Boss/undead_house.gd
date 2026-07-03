@@ -25,7 +25,7 @@ const BOSS_SCENE:PackedScene=preload("res://Units Goblins/WizardBoss/wizard_boss
 @export var spawn_offset:float=18.0
 @export var collision_size:Vector2=Vector2(96,112)
 @export var collision_offset:Vector2=Vector2(0,8)
-@export var max_life:int=220
+@export var max_life:int=120
 
 var spawned_boss:bool=false
 var life:int=0

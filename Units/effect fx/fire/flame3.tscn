@@ -91,7 +91,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pn3hc")
 }],
-"loop": true,
+"loop": 1,
 "name": &"sp",
 "speed": 12.0
 }]
@@ -116,5 +116,5 @@ metadata/_edit_lock_ = true
 
 [node name="fire_audio" type="AudioStreamPlayer" parent="." unique_id=139259467]
 stream = ExtResource("3_ult4w")
-volume_db = -15.0
+volume_db = -30.0
 pitch_scale = 2.0

@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="8_0j0ol"]
 [ext_resource type="AudioStream" uid="uid://xbwks4wm77aa" path="res://Audio/Bow/Bow Attack 1.wav" id="9_asrlh"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="9_wayih"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="10_k5pg8"]
 [ext_resource type="AudioStream" uid="uid://cenuwc7p4cjgg" path="res://Audio/Shield/Shield Block.mp3" id="12_bpe5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urhbf"]
@@ -104,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dsi1m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -121,7 +120,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3m2ij")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }, {
@@ -150,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2nn5v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shoot",
 "speed": 10.0
 }]
@@ -305,19 +304,20 @@ collision_mask = 31
 
 [node name="click_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1664267070]
 stream = ExtResource("8_0j0ol")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1063705067]
 stream = ExtResource("9_wayih")
-
-[node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=781227195]
-stream = ExtResource("10_k5pg8")
+volume_db = -20.0
 
 [node name="shoot_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1738043621]
 stream = ExtResource("9_asrlh")
+volume_db = -20.0
 pitch_scale = 2.0
 
 [node name="shield_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2138918696]
 stream = ExtResource("12_bpe5j")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="body_entered" from="detector zone" to="." method="_on_detector_zone_body_entered"]

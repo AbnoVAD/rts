@@ -56,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_neagr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"sp",
 "speed": 10.0
 }]
@@ -72,5 +72,5 @@ autoplay = "sp"
 
 [node name="fire_audio" type="AudioStreamPlayer" parent="." unique_id=2008559536]
 stream = ExtResource("3_akkl7")
-volume_db = -20.0
+volume_db = -30.0
 pitch_scale = 2.0

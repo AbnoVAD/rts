@@ -29,7 +29,6 @@
 [ext_resource type="AudioStream" uid="uid://dhwn0237h8t0d" path="res://Audio/Equip/SFX_Equip_02.wav" id="26_fvh75"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="27_3n6jh"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="28_hko65"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="30_ikipk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2iw56"]
 atlas = ExtResource("2_sgt12")
@@ -414,7 +413,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wcfbj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -443,7 +442,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1f8xr")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_axe",
 "speed": 10.0
 }, {
@@ -472,7 +471,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2v36f")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_hammer",
 "speed": 10.0
 }, {
@@ -501,7 +500,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2kkhx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_knife",
 "speed": 10.0
 }, {
@@ -530,7 +529,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cl68l")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_pickaxe",
 "speed": 10.0
 }, {
@@ -553,7 +552,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1n8gy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 10.0
 }, {
@@ -576,7 +575,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ymuva")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_axe",
 "speed": 10.0
 }, {
@@ -599,7 +598,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hbt1t")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_hammer",
 "speed": 10.0
 }, {
@@ -622,7 +621,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_doqj8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_knife",
 "speed": 10.0
 }, {
@@ -645,7 +644,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ttnru")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_pickaxe",
 "speed": 10.0
 }, {
@@ -668,7 +667,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xom4k")
 }],
-"loop": true,
+"loop": 1,
 "name": &"use_axe",
 "speed": 10.0
 }, {
@@ -682,7 +681,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8nkx0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"use_hammer",
 "speed": 10.0
 }, {
@@ -699,7 +698,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h3fmo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"use_knife",
 "speed": 10.0
 }, {
@@ -722,7 +721,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h2hjd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"use_pickaxe",
 "speed": 10.0
 }]
@@ -970,31 +969,34 @@ metadata/_edit_lock_ = true
 
 [node name="hammer_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1399465335]
 stream = ExtResource("22_wcfbj")
+volume_db = -20.0
 pitch_scale = 3.0
 
 [node name="knife_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1446829505]
 stream = ExtResource("23_4as38")
+volume_db = -20.0
 
 [node name="pickaxe_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=395298100]
 stream = ExtResource("24_rntf8")
+volume_db = -20.0
 
 [node name="axe_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1653773928]
 stream = ExtResource("25_km0ot")
+volume_db = -20.0
 
 [node name="equip_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1888199212]
 stream = ExtResource("26_fvh75")
+volume_db = -20.0
 
 [node name="click_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1166978058]
 position = Vector2(0, 8)
 stream = ExtResource("27_3n6jh")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1515755214]
 position = Vector2(0, 16)
 stream = ExtResource("28_hko65")
-
-[node name="hit_audio" type="AudioStreamPlayer2D" parent="soundfx" unique_id=1674699472]
-position = Vector2(0, 24)
-stream = ExtResource("30_ikipk")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector_zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

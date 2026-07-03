@@ -12,7 +12,6 @@
 [ext_resource type="StyleBox" uid="uid://bbe05boqas5yh" path="res://Units/Monk/activation_buttons.tres" id="7_46f4c"]
 [ext_resource type="AudioStream" uid="uid://dtk8g0sd70rx7" path="res://Audio/Click/Mouse Click Sound Effect.mp3" id="8_gjm4a"]
 [ext_resource type="AudioStream" uid="uid://ddsoug5o5ex7v" path="res://Audio/Death/14_human_death_spin.wav" id="9_q6n7h"]
-[ext_resource type="AudioStream" uid="uid://dn3qi1c78n6rl" path="res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3" id="10_toxnv"]
 [ext_resource type="AudioStream" uid="uid://5cudl4s5g32r" path="res://Audio/Attacks/Sword Attacks Hits and Blocks/Sword Attack 2.wav" id="11_mo8bj"]
 [ext_resource type="AudioStream" uid="uid://cenuwc7p4cjgg" path="res://Audio/Shield/Shield Block.mp3" id="12_qivg7"]
 
@@ -184,7 +183,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o5ucy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack down",
 "speed": 12.0
 }, {
@@ -198,7 +197,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_710bb")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack down side",
 "speed": 12.0
 }, {
@@ -212,7 +211,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tsqt8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack side",
 "speed": 12.0
 }, {
@@ -226,7 +225,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lbe2y")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack up",
 "speed": 12.0
 }, {
@@ -240,7 +239,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ymtfm")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack up side",
 "speed": 12.0
 }, {
@@ -263,7 +262,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7lvor")
 }],
-"loop": true,
+"loop": 1,
 "name": &"guard",
 "speed": 12.0
 }, {
@@ -304,7 +303,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_erolh")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle",
 "speed": 12.0
 }, {
@@ -327,7 +326,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vaemn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run",
 "speed": 12.0
 }]
@@ -481,21 +480,23 @@ collision_mask = 31
 
 [node name="click_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1664267070]
 stream = ExtResource("8_gjm4a")
+volume_db = -20.0
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1063705067]
 stream = ExtResource("9_q6n7h")
-
-[node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=781227195]
-stream = ExtResource("10_toxnv")
+volume_db = -20.0
 
 [node name="spear_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1738043621]
 stream = ExtResource("11_mo8bj")
+volume_db = -20.0
 
 [node name="spear_audio2" type="AudioStreamPlayer" parent="sound fx" unique_id=1289401738]
 stream = ExtResource("11_mo8bj")
+volume_db = -20.0
 
 [node name="shield_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2138918696]
 stream = ExtResource("12_qivg7")
+volume_db = -20.0
 
 [connection signal="area_entered" from="detector zone" to="." method="_on_detector_zone_area_entered"]
 [connection signal="body_entered" from="detector zone" to="." method="_on_detector_zone_body_entered"]

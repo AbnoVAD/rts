@@ -9,6 +9,26 @@ static func get_closest_nav_point(nav:NavigationAgent2D, pos:Vector2) -> Vector2
 		return NavigationServer2D.map_get_closest_point(map,pos)
 	return pos
 
+static func get_nav_distance(nav:NavigationAgent2D, pos:Vector2) -> float:
+	if nav==null or not is_instance_valid(nav):
+		return INF
+	var map:RID=nav.get_navigation_map()
+	if not map.is_valid():
+		return INF
+	return pos.distance_to(NavigationServer2D.map_get_closest_point(map,pos))
+
+static func has_navigation_coverage(nav:NavigationAgent2D, pos:Vector2, max_distance:float=96.0) -> bool:
+	return get_nav_distance(nav,pos)<=max_distance
+
+static func should_use_direct_navigation(nav:NavigationAgent2D, from_pos:Vector2, target_pos:Vector2, max_distance:float=96.0) -> bool:
+	if nav==null or not is_instance_valid(nav):
+		return true
+	if get_nav_distance(nav,from_pos)>max_distance:
+		return true
+	if get_nav_distance(nav,target_pos)>max_distance:
+		return true
+	return false
+
 static func get_path_length(nav:NavigationAgent2D, from_pos:Vector2, to_pos:Vector2) -> float:
 	if nav==null or not is_instance_valid(nav):
 		return INF
@@ -63,6 +83,8 @@ static func get_best_approach_point(nav:NavigationAgent2D, from_pos:Vector2, tar
 			best_score=score
 			best_point=nav_point
 
+	if best_score==INF:
+		return target_pos
 	return best_point
 
 static func get_path_advance_point(nav:NavigationAgent2D, from_pos:Vector2, target_pos:Vector2, advance_distance:float) -> Vector2:

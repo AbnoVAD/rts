@@ -134,7 +134,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t3130")
 }],
-"loop": true,
+"loop": 1,
 "name": &"grass",
 "speed": 7.0
 }, {
@@ -157,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xmw7v")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -174,7 +174,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gj4iw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move",
 "speed": 10.0
 }]
@@ -229,8 +229,10 @@ position = Vector2(0, -2)
 
 [node name="sheep_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1951721348]
 stream = ExtResource("4_kotsg")
+volume_db = -20.0
 
 [node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=839995629]
 stream = ExtResource("5_yab5p")
+volume_db = -20.0
 
 [connection signal="area_entered" from="zone" to="." method="_on_zone_area_entered"]
