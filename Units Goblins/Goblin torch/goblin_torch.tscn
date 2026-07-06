@@ -258,10 +258,10 @@ radius = 22.119135
 radius = 16.492422
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wysgj"]
-radius = 80.09994
+radius = 152.05263
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pwllj"]
-radius = 152.21039
+radius = 184.17383
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6fh2"]
 

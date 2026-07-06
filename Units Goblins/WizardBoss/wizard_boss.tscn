@@ -349,10 +349,11 @@ height = 54.0
 radius = 18.0
 
 [node name="Wizard boss" type="CharacterBody2D" unique_id=1719882261 groups=["block_building", "goblin", "goblinboss"]]
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 script = ExtResource("1_script")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=783926409]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_7l05x")
 animation = &"Idle"
 autoplay = "Idle"

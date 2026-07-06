@@ -32,7 +32,7 @@ const SEPARATION_FORCE:float=55.0
 #--------------------------------------------------
 const ATTACK_DISTANCE:float=40.0
 const CASTLE_ATTACK_DISTANCE:float=175.0
-const KNOCKBACK_FORCE:float=1000.0
+const KNOCKBACK_FORCE:float=300.0
 const KNOCKBACK_DECAY:float=0.85
 const DETOUR_DISTANCE:float=24.0
 const STUCK_DETOUR_DISTANCE:float=72.0
@@ -48,7 +48,7 @@ var state:State=State.IDLE
 #Variables
 #--------------------------------------------------
 @export var SPEED:float=148.0
-@export var health:int=3
+@export var health:int=6
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 

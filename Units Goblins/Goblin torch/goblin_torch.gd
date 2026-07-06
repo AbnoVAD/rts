@@ -41,7 +41,7 @@ const ATTACK_DELAY:=0.3
 #Constants
 #--------------------------------------------------
 const ATTACK_DISTANCE:float=50.0
-const KNOCKBACK_FORCE:float=1000.0
+const KNOCKBACK_FORCE:float=300.0
 const KNOCKBACK_DECAY:float=0.85
 const DETOUR_DISTANCE:float=24.0
 const STOP_DISTANCE:float=130.0
@@ -65,7 +65,7 @@ var is_attacking:float=false
 var last_mov_dir:Vector2=Vector2.ZERO
 var attack_sound_played:=false
 @export var SPEED:float=152.0
-@export var health:int=3
+@export var health:int=6
 var knockback_velocity:Vector2=Vector2.ZERO
 var is_flashing:bool=false
 

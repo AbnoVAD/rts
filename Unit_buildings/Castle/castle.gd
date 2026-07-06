@@ -19,7 +19,7 @@ extends StaticBody2D
 #Exports
 #--------------------------------------------------
 @export var construction_time:float
-@export var max_life:int=45
+@export var max_life:int=10
 
 #--------------------------------------------------
 #Constants

@@ -112,7 +112,7 @@ func perform_auto_work(tool_name:String, worker:Node2D) -> bool:
 #------------------------------------------------
 #Damage system
 #------------------------------------------------
-func take_damage():
+func take_damage(amount:int=1, _hit_data=null):
 	if current_life<=0 or is_regenerating:
 		return
 	can_take_damage=false

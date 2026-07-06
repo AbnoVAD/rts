@@ -29,6 +29,7 @@ enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 @onready var hp_bar: ProgressBar = $ProgressBar
 @onready var cast_marker: Marker2D = $Marker2D
 @onready var death_audio: AudioStreamPlayer = $"sound fx/death_audio"
+@onready var hit_audio: AudioStreamPlayer = $"sound fx/hit_audio"
 @onready var cast_audio: AudioStreamPlayer = $"sound fx/cast_audio"
 
 @export_group("Boss Stats")
@@ -40,6 +41,7 @@ enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 @export var attack_cooldown:float=2.6
 @export var attack_windup:float=0.45
 @export var spell_speed:float=340.0
+@export var visual_scale: Vector2 = Vector2(1.8, 1.8)
 
 var life:int=0
 var state:State=State.IDLE
@@ -73,6 +75,7 @@ func _ready() -> void:
 	hp_bar.visible=false
 
 	_build_sprite_frames()
+	animation.scale = visual_scale
 	animation.play("idle")
 	if not animation.animation_finished.is_connected(_on_animation_finished):
 		animation.animation_finished.connect(_on_animation_finished)
@@ -275,6 +278,7 @@ func take_damage(amount:int,source_pos:Vector2) -> void:
 	if life<=0:
 		die()
 		return
+
 	knockback_velocity=(global_position-source_pos).normalized()*KNOCKBACK_FORCE
 	attack_in_progress=false
 	state=State.HIT
