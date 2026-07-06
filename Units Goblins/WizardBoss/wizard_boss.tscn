@@ -349,7 +349,7 @@ height = 54.0
 radius = 18.0
 
 [node name="Wizard boss" type="CharacterBody2D" unique_id=1719882261 groups=["block_building", "goblin", "goblinboss"]]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(3, 3)
 script = ExtResource("1_script")
 
 [node name="animation" type="AnimatedSprite2D" parent="." unique_id=783926409]
@@ -401,8 +401,6 @@ collision_mask = 31
 position = Vector2(5.3333335, 0)
 
 [node name="death_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=221782976]
-
-[node name="hit_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=1747883140]
 
 [node name="cast_audio" type="AudioStreamPlayer" parent="sound fx" unique_id=2110757918]
 

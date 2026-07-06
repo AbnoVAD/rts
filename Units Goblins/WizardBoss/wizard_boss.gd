@@ -29,7 +29,6 @@ enum State{IDLE,CHASE,ATTACK,HIT,DEAD}
 @onready var hp_bar: ProgressBar = $ProgressBar
 @onready var cast_marker: Marker2D = $Marker2D
 @onready var death_audio: AudioStreamPlayer = $"sound fx/death_audio"
-@onready var hit_audio: AudioStreamPlayer = $"sound fx/hit_audio"
 @onready var cast_audio: AudioStreamPlayer = $"sound fx/cast_audio"
 
 @export_group("Boss Stats")
@@ -97,7 +96,6 @@ func _ready() -> void:
 		detector_zone.body_exited.connect(_on_detector_zone_body_exited)
 
 	death_audio.stream=preload("res://Audio/Death/14_human_death_spin.wav")
-	hit_audio.stream=preload("res://Audio/Hit Hurt/Hurt_Hit Sound effect.mp3")
 	cast_audio.stream=preload("res://Audio/Explosion/Fireball 2.wav")
 
 	last_position=global_position
@@ -277,8 +275,6 @@ func take_damage(amount:int,source_pos:Vector2) -> void:
 	if life<=0:
 		die()
 		return
-	if not hit_audio.playing:
-		hit_audio.play()
 	knockback_velocity=(global_position-source_pos).normalized()*KNOCKBACK_FORCE
 	attack_in_progress=false
 	state=State.HIT
